@@ -6,6 +6,8 @@ body {
   color: #1E1E1E;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
+  margin: 0;
+  padding: 0;
 }
 
 /* CARD */
@@ -101,4 +103,16 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+/* SEARCH */
+
+.search {
+  text-align: center;
+  background: #EFEFEF;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  outline: none;
 }
