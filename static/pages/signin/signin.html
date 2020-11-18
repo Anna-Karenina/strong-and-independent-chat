@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/common.css">
+  <link rel="stylesheet" href="./signin.css">
+  <title>Signin</title>
+</head>
+<body>
+  <main class="signin">
+    <div class="card">
+
+      <h2 class="card__title signin__title">Регистрация</h2>
+
+      <form action="/" class="signin-form">
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="text" class="field__input" value="">
+            <label class="field__label">Почта</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="text" class="field__input" value="">
+            <label class="field__label">Логин</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="text" class="field__input" value="">
+            <label class="field__label">Имя</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="text" class="field__input" value="">
+            <label class="field__label">Фамилия</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="tel" class="field__input" value="">
+            <label class="field__label">Телефон</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="password" class="field__input" autocomplete value="">
+            <label class="field__label">Пароль</label>
+          </div>
+        </div>
+
+        <div class="field signin-form__field">
+          <div class="field__input-wrapper">
+            <input type="password" class="field__input" autocomplete value="">
+            <label class="field__label">Пароль (ещё раз)</label>
+          </div>
+        </div>
+
+      </form>
+      
+      <div class="signin__action-buttons">
+        <button class="primary-button signin__primary-button">Зарегистрироваться</button>
+        <button class="empty-button signin__empty-button">Войти</button>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/reload/reload.js"></script>
+  <script src="./signin.js"></script>
+</body>
+</html>
