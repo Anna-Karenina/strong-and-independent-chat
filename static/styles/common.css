@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #1E1E1E;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* CARD */
+
+.card {
+  min-width: 340px;
+  padding: 50px 30px 30px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+}
+
+.card__title {
+  text-align: center;
+  margin: 0;
+}
+
+/* ERROR */
+
+.error {
+  color: #FF2F2F;
+  font-size: 8px;
+}
+
+/* FIELD */
+
+.field {
+  width: 100%;
+  padding-top: 9px;
+  position: relative;
+}
+
+.field__label {
+  font-size: 13px;
+  line-height: 13px;
+  color: #999999;
+  position: absolute;
+  bottom: 7px;
+  left: 0;
+  transition: all .2s;
+}
+
+.field__input:focus ~ .field__label,
+.field__input:not([value=""]) ~ .field__label {
+  transform: translateY(-20px);
+  font-size: 9px;
+}
+
+.field__input-wrapper {
+  position: relative;
+}
+
+.field__input {
+  width: 100%;
+  height: 27px;
+  border: none;
+  border-bottom: 1px solid #3369F3;
+  padding: 7px 0;
+  background-color: transparent;
+  outline: none;
+  font-weight: 500;
+  font-size: 13px;
+  color: #1E1E1E;
+  z-index: 2;
+  position: relative;
+}
+
+.field__error {
+  margin-top: 7px;
+}
+
+/* PRIMARY BUTTON */
+
+.primary-button {
+  padding: 12px;
+  font-size: 13px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #3369F3;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* EMPTY BUTTON */
+
+.empty-button {
+  padding: 0;
+  background-color: transparent;
+  color: #3369F3;
+  font-size: 11px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
