@@ -19,7 +19,7 @@
 
         <div class="field auth-form__field">
           <div class="field__input-wrapper">
-            <input type="text" class="field__input" value="">
+            <input type="text" class="field__input" name="login" value="">
             <label class="field__label">Логин</label>
           </div>
           <div class="error field__error">Неверный логин</div>
@@ -27,7 +27,7 @@
 
         <div class="field auth-form__field">
           <div class="field__input-wrapper">
-            <input type="password" class="field__input" autocomplete value="">
+            <input type="password" class="field__input" name="password" autocomplete value="">
             <label class="field__label">Пароль</label>
           </div>
         </div>
@@ -43,6 +43,6 @@
   </main>
 
   <script src="/reload/reload.js"></script>
-  <script src="./auth.js"></script>
+  <script type="module" src="./auth.js"></script>
 </body>
 </html>

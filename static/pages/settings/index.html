@@ -33,38 +33,38 @@
 
         <div class="settings-field">
           <label class="settings-field__label">Почта</label>
-          <input type="text" class="settings-field__input" value="pochta@yandex.ru">
+          <input type="text" class="settings-field__input" value="pochta@yandex.ru" name="mail">
         </div>
 
         <div class="settings-field">
           <label class="settings-field__label">Логин</label>
-          <input type="text" class="settings-field__input" value="">
+          <input type="text" class="settings-field__input" value="" name="login">
         </div>
 
         <div class="settings-field">
           <label class="settings-field__label">Имя</label>
-          <input type="text" class="settings-field__input" value="">
+          <input type="text" class="settings-field__input" value="" name="name">
         </div>
 
         <div class="settings-field">
           <label class="settings-field__label">Фамилия</label>
-          <input type="text" class="settings-field__input" value="">
+          <input type="text" class="settings-field__input" value="" name="surname">
         </div>
 
         <div class="settings-field">
           <label class="settings-field__label">Имя в чате</label>
-          <input type="text" class="settings-field__input" value="">
+          <input type="text" class="settings-field__input" value="" name="display_name">
         </div>
 
         <div class="settings-field">
           <label class="settings-field__label">Телефон</label>
-          <input type="text" class="settings-field__input" value="">
+          <input type="text" class="settings-field__input" value="" name="phone">
         </div>
 
       </from>
       
       <div class="settings__buttons">
-        <button class="settings__button empty-button">Изменить данные</button>
+        <button class="settings__button empty-button settings__submit">Изменить данные</button>
         <button class="settings__button empty-button">Изменить пароль</button>
         <button class="settings__button empty-button color-danger">Выйти</button>
       </div>
@@ -86,6 +86,6 @@
   </div>
 
   <script src="/reload/reload.js"></script>
-  <script src="./settings.js"></script>
+  <script type="module" src="./settings.js"></script>
 </body>
 </html>

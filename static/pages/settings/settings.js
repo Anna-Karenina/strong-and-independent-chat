@@ -1,17 +1,14 @@
-const modal = (selector) => {
-  const $modal = document.querySelector(selector);
-  if (!$modal) return { open: () => {} };
+import { inputBind, inputAgregate } from '../js/inputs.js';
+import { modal } from '../js/modal.js';
 
-  $modal.addEventListener('click', (e) => {
-    if (e.target === $modal) {
-      $modal.classList.remove('modal-show');
-    }
-  });
+inputBind('.settings-field__input');
 
-  return {
-    open: () => $modal.classList.add('modal-show'),
-  };
-};
+const submit = document.querySelector('.settings__submit');
+
+submit.addEventListener('click', () => {
+  const inputsData = inputAgregate('.settings-field__input');
+  console.log(inputsData);
+});
 
 const changeAvatarAction = document.querySelector('.change-avatar-action');
 if (changeAvatarAction) {

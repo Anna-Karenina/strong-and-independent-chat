@@ -1,7 +1,11 @@
 
-const inputs = document.querySelectorAll('.field__input');
-const inputSetter = (input) => (event) => {
-  input.setAttribute('value',  event.target.value);
-};
+import { inputBind, inputAgregate } from '../js/inputs.js';
 
-inputs.forEach((input) => input.addEventListener('input', inputSetter(input)));
+inputBind('.field__input');
+
+const submit = document.querySelector('.signin__primary-button');
+
+submit.addEventListener('click', () => {
+  const inputsData = inputAgregate('.field__input');
+  console.log(inputsData);
+});

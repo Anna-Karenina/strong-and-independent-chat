@@ -1,25 +1,15 @@
 
-const inputs = document.querySelectorAll('input');
-const inputSetter = (input) => (event) => {
-  input.setAttribute('value',  event.target.value);
-};
+import { inputBind, inputAgregate } from '../js/inputs.js';
+import { modal } from '../js/modal.js';
 
-inputs.forEach((input) => input.addEventListener('input', inputSetter(input)));
+inputBind('.search__input', '.send-message__input', '.field__input');
 
-const modal = (selector) => {
-  const $modal = document.querySelector(selector);
-  if (!$modal) return { open: () => {} };
+const submit = document.querySelector('.send-message__submit');
 
-  $modal.addEventListener('click', (e) => {
-    if (e.target === $modal) {
-      $modal.classList.remove('modal-show');
-    }
-  });
-
-  return {
-    open: () => $modal.classList.add('modal-show'),
-  };
-};
+submit.addEventListener('click', () => {
+  const inputsData = inputAgregate('.send-message__input');
+  console.log(inputsData);
+});
 
 const addUserAction = document.querySelector('.add-user-action');
 if (addUserAction) {

@@ -1,7 +1,10 @@
+import { inputBind, inputAgregate } from '../js/inputs.js';
 
-const inputs = document.querySelectorAll('.field__input');
-const inputSetter = (input) => (event) => {
-  input.setAttribute('value',  event.target.value);
-};
+inputBind('.field__input');
 
-inputs.forEach((input) => input.addEventListener('input', inputSetter(input)));
+const submit = document.querySelector('.auth__primary-button');
+
+submit.addEventListener('click', () => {
+  const inputsData = inputAgregate('.field__input');
+  console.log(inputsData);
+});
