@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1"
+  },
   "devDependencies": {
     "express": "^4.17.1",
     "reload": "^3.1.1"

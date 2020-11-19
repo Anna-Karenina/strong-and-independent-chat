@@ -6,6 +6,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static('./static'));
+app.use('/fontawesome', express.static(__dirname + '/../node_modules/@fortawesome/fontawesome-free/'));
 
 const liveReload = (path) => reload(app)
   .then(({ reload }) => {
