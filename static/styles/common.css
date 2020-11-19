@@ -226,6 +226,34 @@ body {
   cursor: pointer;
 }
 
+/* FALLBACK PAGES */
+
+.fallback {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.fallback__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.fallback__subtitle {
+  margin: 20px 0 0;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.fallback__action {
+  margin-top: 70px;
+}
+
 /* OTHERS */
 
 .color-danger {
