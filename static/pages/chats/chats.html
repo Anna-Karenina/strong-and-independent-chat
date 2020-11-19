@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fontawesome/css/all.css">
   <link rel="stylesheet" href="../../styles/common.css">
   <link rel="stylesheet" href="./chats.css">
   <title>Chats</title>
@@ -15,15 +16,22 @@
     <div class="chat-select">
 
       <div class="chat-select__navigation">
-        <button class="profile-button">Профиль</button>
-        <input type="text" class="search chat-select__search" placeholder="Поиск">
+        <button class="profile-button">
+          Профиль
+          <i class="fas fa-chevron-right profile-button__icon"></i>
+        </button>
+
+        <div class="search chat-select__search">
+          <input type="text" class="search__input" placeholder="Поиск" value="">
+          <i class="fas fa-search search__icon"></i>
+        </div>
       </div>
       
       <ul class="chat-list">
 
         <li class="chat-list__item">
           <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
+            <div class="avatar chat-list__avatar"></div>
             <div class="chat-list__info">
               <div class="chat-list__name">Андрей</div>
               <div class="chat-list__message">
@@ -38,10 +46,13 @@
 
         <li class="chat-list__item">
           <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
+            <div class="avatar chat-list__avatar"></div>
             <div class="chat-list__info">
               <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
+              <div class="chat-list__message">
+                <span class="chat-list__sender">Вы: </span>
+                Миллионы ежедневно проводят десятки часов свое
+              </div>
             </div>
             <span class="chat-list__sending-time">12:10</span>
             <span class="chat-list__count">3</span>
@@ -50,10 +61,13 @@
 
         <li class="chat-list__item">
           <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
+            <div class="avatar chat-list__avatar"></div>
             <div class="chat-list__info">
               <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
+              <div class="chat-list__message">
+                <span class="chat-list__sender">Вы: </span>
+                Миллионы ежедневно проводят десятки часов свое
+              </div>
             </div>
             <span class="chat-list__sending-time">12:10</span>
             <span class="chat-list__count">3</span>
@@ -62,10 +76,13 @@
 
         <li class="chat-list__item">
           <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
+            <div class="avatar chat-list__avatar"></div>
             <div class="chat-list__info">
               <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
+              <div class="chat-list__message">
+                <span class="chat-list__sender">Вы: </span>
+                Миллионы ежедневно проводят десятки часов свое
+              </div>
             </div>
             <span class="chat-list__sending-time">12:10</span>
             <span class="chat-list__count">3</span>
@@ -74,118 +91,13 @@
 
         <li class="chat-list__item">
           <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
+            <div class="avatar chat-list__avatar"></div>
             <div class="chat-list__info">
               <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
-            </div>
-            <span class="chat-list__sending-time">12:10</span>
-            <span class="chat-list__count">3</span>
-          </div>
-        </li>
-
-        <li class="chat-list__item">
-          <div class="chat-list__item-content">
-            <div class="chat-list__avatar"></div>
-            <div class="chat-list__info">
-              <div class="chat-list__name">Андрей</div>
-              <div class="chat-list__message">Изображение</div>
+              <div class="chat-list__message">
+                <span class="chat-list__sender">Вы: </span>
+                Миллионы ежедневно проводят десятки часов свое
+              </div>
             </div>
             <span class="chat-list__sending-time">12:10</span>
             <span class="chat-list__count">3</span>
@@ -197,6 +109,62 @@
     </div>
 
     <div class="chat">
+
+      <div class="user-bar">
+        <div class="user-bar__info">
+          <div class="avatar"></div>
+          <div class="user-bar__name">Андрей</div>
+        </div>
+
+        <button class="user-bar__option-button">
+          <i class="fas fa-ellipsis-v user-bar__option-icon"></i>
+        </button>
+      </div>
+
+      <div class="messages">
+        <div class="messages__datetime">19 июня</div>
+
+        <ul class="messages__list messages__list-sender-interlocutor">
+          <li class="message message-sender-interlocutor">
+            Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
+            <br><br>
+            Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+            <span class="message-meta">
+              <span class="message-meta__send-time">12:10</span>
+            </span>
+          </li>
+
+          <li class="message message-sender-interlocutor message-full-space">
+            <img src="/images/mock-chat-photo.jpg" class="message__photo" alt="photo">
+            <span class="message-meta">
+              <span class="message-meta__send-time">12:10</span>
+            </span>
+          </li>
+        </ul>
+
+        <ul class="messages__list messages__list-sender-me">
+          <li class="message message-sender-me">
+            Тест!
+            <span class="message-meta">
+              <i class="fas fa-check-double"></i>
+              <span class="message-meta__send-time">12:10</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="send-message">
+        <div class="send-message__attachments-button">
+          <i class="fas fa-paperclip"></i>
+        </div>
+
+        <input type="text" class="send-message__input" value="" placeholder="Сообщение">
+
+        <button class="send-message__submit">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
     </div>
 
   </main>

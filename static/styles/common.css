@@ -108,6 +108,10 @@ body {
 /* SEARCH */
 
 .search {
+  position: relative;
+}
+
+.search__input {
   text-align: center;
   background: #EFEFEF;
   width: 100%;
@@ -115,4 +119,30 @@ body {
   padding: 10px;
   border: none;
   outline: none;
+}
+
+.search__icon {
+  position: absolute;
+  color: #999999;
+  top: 9.5px;
+  left: 105px;
+}
+
+.search__input:focus ~ .search__icon,
+.search__input:not([value=""]) ~ .search__icon {
+  display: none;
+}
+
+.search__input:focus::placeholder,
+.search__input:not([value=""])::placeholder {
+  opacity: 0;
+}
+
+/* AVATAR */
+
+.avatar {
+  width: 47px;
+  height: 47px;
+  background: #EFEFEF;
+  border-radius: 50%;
 }

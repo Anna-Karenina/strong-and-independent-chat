@@ -1,5 +1,5 @@
 
-const inputs = document.querySelectorAll('.field__input');
+const inputs = document.querySelectorAll('input');
 const inputSetter = (input) => (event) => {
   input.setAttribute('value',  event.target.value);
 };
