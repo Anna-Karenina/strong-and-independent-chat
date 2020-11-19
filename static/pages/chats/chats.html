@@ -119,6 +119,17 @@
         <button class="user-bar__option-button">
           <i class="fas fa-ellipsis-v user-bar__option-icon"></i>
         </button>
+
+        <ul class="options user-bar__options">
+          <li class="options__item add-user-action">
+            <i class="fas fa-plus-circle options__icon"></i>
+            Добавить пользователя
+          </li>
+          <li class="options__item">
+            <i class="fas fa-minus-circle options__icon"></i>
+            Удалить пользователя
+          </li>
+        </ul>
       </div>
 
       <div class="messages">
@@ -163,11 +174,41 @@
         <button class="send-message__submit">
           <i class="fas fa-arrow-right"></i>
         </button>
+
+        <ul class="options send-message__options">
+          <li class="options__item">
+            <i class="fas fa-image options__icon"></i>
+            Фото или Видео
+          </li>
+          <li class="options__item">
+            <i class="fas fa-file options__icon"></i>
+            Файл
+          </li>
+          <li class="options__item">
+            <i class="fas fa-map-marker-alt options__icon"></i>
+            Локация
+          </li>
+        </ul>
       </div>
 
     </div>
 
   </main>
+
+  <div class="modal add-user-modal">
+    <div class="modal__content card">
+      <h2 class="card__title modal__title">Вход</h2>
+
+      <div class="field add-user-modal__field">
+        <div class="field__input-wrapper">
+          <input type="text" class="field__input" value="">
+          <label class="field__label">Логин</label>
+        </div>
+      </div>
+      
+      <button class="primary-button add-user-modal__submit">Добавить</button>
+    </div>
+  </div>
 
   <script src="/reload/reload.js"></script>
   <script src="./chats.js"></script>

@@ -156,6 +156,7 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #EAEAEA;
+  position: relative;
 }
 
 .user-bar__info {
@@ -187,12 +188,19 @@
   color: #3369F3;
 }
 
+.user-bar__options {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+}
+
 .send-message {
   width: 100%;
   padding: 11px 0;
   display: flex;
   align-items: center;
   border-top: 1px solid #EAEAEA;
+  position: relative;
 }
 
 .send-message__attachments-button {
@@ -231,9 +239,16 @@
   cursor: pointer;
 }
 
+.send-message__options {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+}
+
 .messages {
   flex-grow: 1;
   padding: 30px 0;
+  overflow-y: auto;
 }
 
 .messages__datetime {
@@ -320,4 +335,13 @@
 .message__photo {
   max-width: 100%;
   display: block;
+}
+
+.add-user-modal__field {
+  margin-top: 50px;
+}
+
+.add-user-modal__submit {
+  margin-top: 30px;
+  width: 100%;
 }
