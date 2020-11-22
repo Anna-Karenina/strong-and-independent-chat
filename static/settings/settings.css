@@ -17,7 +17,7 @@
 }
 
 .settings__back:hover {
-  background-color: #E4EDFD;
+  background-color: var(--primary-hover-color);
 }
 
 .settings__back-button {
@@ -28,7 +28,7 @@
   align-items: center;
   border-radius: 50%;
   color: #FFFFFF;
-  background-color: #3369F3;
+  background-color: var(--primary-color);
   outline: none;
   border: none;
   cursor: pointer;
@@ -111,7 +111,7 @@
   background-color: transparent;
   font-size: 13px;
   text-align: right;
-  color: #999999;
+  color: var(--secondary-text-color);
 }
 
 .settings__buttons {

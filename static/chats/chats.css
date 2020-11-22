@@ -27,7 +27,7 @@
 .profile-button {
   align-self: flex-end;
   font-size: 12px;
-  color: #999999;
+  color: var(--secondary-text-color);
   background-color: transparent;
   padding: 0;
   display: flex;
@@ -73,7 +73,7 @@
 }
 
 .chat-list__item:hover {
-  background-color: #E4EDFD;
+  background-color: var(--primary-hover-color);
 }
 
 .chat-list__item-content {
@@ -105,7 +105,7 @@
 .chat-list__message {
   margin-top: 4px;
   font-size: 12px;
-  color: #999999;
+  color: var(--secondary-text-color);
   max-width: 200px;
   max-height: 30px;
   overflow: hidden;
@@ -121,7 +121,7 @@
   top: 12px;
   right: 0;
   font-size: 9px;
-  color: #999999;
+  color: var(--secondary-text-color);
 }
 
 .chat-list__count {
@@ -131,7 +131,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #3369F3;
+  background-color: var(--primary-color);
   font-size: 11px;
   color: #FFFFFF;
   display: flex;
@@ -185,7 +185,7 @@
 }
 
 .user-bar__option-icon {
-  color: #3369F3;
+  color: var(--primary-color);
 }
 
 .user-bar__options {
@@ -207,7 +207,7 @@
   padding: 0;
   background-color: transparent;
   font-size: 25px;
-  color: #999999;
+  color: var(--secondary-text-color);
   border: none;
   cursor: pointer;
 }
@@ -220,7 +220,7 @@
   border-radius: 30px;
   font-weight: 500;
   font-size: 12px;
-  color: #999999;
+  color: var(--secondary-text-color);
   border: none;
   outline: none;
 }
@@ -233,7 +233,7 @@
   align-items: center;
   border-radius: 50%;
   color: #FFFFFF;
-  background-color: #3369F3;
+  background-color: var(--primary-color);
   outline: none;
   border: none;
   cursor: pointer;
@@ -256,7 +256,7 @@
   font-size: 12px;
   line-height: 12px;
   text-align: center;
-  color: #999999;
+  color: var(--secondary-text-color);
 }
 
 .messages__list {
@@ -290,7 +290,7 @@
 .message-meta {
   float: right;
   font-size: 9px;
-  color: #999999;
+  color: var(--secondary-text-color);
   margin-left: 14px;
   transform: translateY(4px);
 }
@@ -300,7 +300,7 @@
 }
 
 .message-sender-me {
-  background-color: #E4EDFD;
+  background-color: var(--primary-hover-color);
 }
 
 .message-sender-interlocutor {
@@ -312,7 +312,7 @@
 }
 
 .message-sender-me .message-meta {
-  color: #3369F3;
+  color: var(--primary-color);
 }
 
 .message-full-space {
