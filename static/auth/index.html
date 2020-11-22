@@ -15,7 +15,7 @@
 
       <h2 class="card__title auth__title">Вход</h2>
 
-      <form action="/" class="auth-form">
+      <form class="auth-form">
 
         <div class="field auth-form__field">
           <div class="field__input-wrapper">
@@ -32,16 +32,17 @@
           </div>
         </div>
 
+        <div class="auth__action-buttons">
+          <button class="primary-button auth__primary-button" type="submit">Авторизоваться</button>
+          <button class="empty-button auth__empty-button" type="button">Нет аккаунта?</button>
+        </div>
+
       </form>
-      
-      <div class="auth__action-buttons">
-        <button class="primary-button auth__primary-button">Авторизоваться</button>
-        <button class="empty-button auth__empty-button">Нет аккаунта?</button>
-      </div>
 
     </div>
   </main>
 
+  <script type="module" src="/js/field.js"></script>
   <script type="module" src="./auth.js"></script>
 </body>
 </html>

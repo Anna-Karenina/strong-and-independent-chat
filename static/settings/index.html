@@ -29,7 +29,7 @@
 
       <h3 class="settings__user-name">Иван</h3>
 
-      <from class="settings__form">
+      <form class="settings__form">
 
         <div class="settings-field">
           <label class="settings-field__label">Почта</label>
@@ -61,13 +61,13 @@
           <input type="text" class="settings-field__input" value="" name="phone">
         </div>
 
-      </from>
-      
-      <div class="settings__buttons">
-        <button class="settings__button empty-button settings__submit">Изменить данные</button>
-        <button class="settings__button empty-button">Изменить пароль</button>
-        <button class="settings__button empty-button color-danger">Выйти</button>
-      </div>
+        <div class="settings__buttons">
+          <button class="settings__button empty-button" type="submit">Изменить данные</button>
+          <button class="settings__button empty-button" type="button">Изменить пароль</button>
+          <button class="settings__button empty-button color-danger" type="button">Выйти</button>
+        </div>
+
+      </form>
     </div>
 
   </main>
