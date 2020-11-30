@@ -1,9 +1,10 @@
 import VElementNode from '../VNode/VElementNode.js';
 import VTextNode from '../VNode/VTextNode.js';
+import VComponentNode from '../VNode/VComponentNode.js';
 
-const OPEN_TAG_REGEXP = /<(\w*).*?>/;
+const OPEN_TAG_REGEXP = /<([\w-]*).*?>/;
 
-export const cutElementNode = (template) => {
+export const cutElementNode = (template, components) => {
   const openTag = OPEN_TAG_REGEXP.exec(template);
   const [tag, tagName] = openTag;
   
@@ -27,11 +28,12 @@ export const cutElementNode = (template) => {
     tagContent += match;
   }
 
-  const element = {
-    node: new VElementNode(tag),
-    content: tagContent.trim(),
-  };
+  const isComponent = !!components[tagName];
+  const node = isComponent 
+    ? new VComponentNode(tag, components[tagName])
+    : new VElementNode(tag);
 
+  const element = { node, content: tagContent.trim() };
   return [element, template];
 }
 

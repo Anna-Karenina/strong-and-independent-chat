@@ -3,8 +3,9 @@ const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
 
 export default class VNode {
   static NODE_TYPES = {
-    ELEMENT_NODE: 1,
-    TEXT_NODE: 3,
+    TEXT_NODE: 1,
+    ELEMENT_NODE: 2,
+    COMPONENT_NODE: 3,
   };
 
   meta = {};

@@ -5,7 +5,7 @@ export default class VTextNode extends VNode {
 
   constructor(text) {
     super(VNode.NODE_TYPES.TEXT_NODE);
-    this.meta = { text };
+    this.meta.text = text;
   }
 
   render(ctx = {}) {
