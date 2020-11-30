@@ -1,9 +1,13 @@
 import { cutTextNode, cutElementNode } from './utils/cut.js';
 
 export default class Templator {
+  _root = null;
+
   constructor(template) {
-    this.htmlNodes = this._buildHtmlNodes(template);
-    console.log(this.htmlNodes);
+    const [root, ...restNodes] = this._buildHtmlNodes(template);
+    if (restNodes.length) throw new Error('Шаблон должен иметь один корневой элемент');
+    
+    this._root = root;
   }
 
   _buildHtmlNodes (template) {
@@ -32,6 +36,6 @@ export default class Templator {
   };
 
   render(ctx = {}) {
-    return this.htmlNodes.map((node) => node.render(ctx));
+    return this._root.render(ctx);
   }
 }
