@@ -1,4 +1,5 @@
 import EventBus from '../bus/index.js';
+import { isEqual } from '/core/utils/index.js';
 
 export default class Component {
   static EVENTS = {
@@ -9,7 +10,6 @@ export default class Component {
   };
 
   _element = null;
-  _nodes = [];
 
   constructor(props = {}) {
     const eventBus = new EventBus();
@@ -28,13 +28,8 @@ export default class Component {
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  _createResources() {
-    this._element = this._createDocumentElement();
-  }
-
   init() {
-    this._createResources();
-    this.eventBus().emit(Component.EVENTS.FLOW_CDM);
+    this.eventBus().emit(Component.EVENTS.FLOW_CDM, this.props);
   }
 
   _componentDidMount() {
@@ -54,7 +49,7 @@ export default class Component {
 
 	// Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps, newProps) {
-    return true;
+    return !isEqual(oldProps, newProps);
   }
 
   setProps = nextProps => {
@@ -62,8 +57,9 @@ export default class Component {
       return;
     }
 
-    Object.assign(this.props, nextProps);
-    this.eventBus().emit(Component.EVENTS.FLOW_CDU);
+    const oldProps = this.props;
+    this.props = { ...oldProps, ...nextProps };
+    this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, nextProps);
   };
 
   get element() {
@@ -71,10 +67,15 @@ export default class Component {
   }
 
   _render() {
-    this._nodes = this.render();
+    const el = this.render();
 
-    this._element.innerHTML = '';
-    this._nodes.forEach((node) => this._element.appendChild(node));    
+    if (!this._element) {
+      this._element = el;
+      return;
+    }
+
+    this._element.parentNode.replaceChild(el, this._element);
+    this._element = el;
   }
 
 	// Может переопределять пользователь, необязательно трогать
@@ -92,19 +93,7 @@ export default class Component {
     });
   }
 
-  _createDocumentElement() {
-    return document.createDocumentFragment();
-  }
-
-  show() {
-    this._nodes.forEach((_node) => {
-      _node.style.display = '';
-    });
-  }
-
-  hide() {
-    this._nodes.forEach((_node) => {
-      _node.style.display = 'none';
-    });
-  }
+  //TODO: implement this methods in nodes & use them
+  show() {}
+  hide() {}
 }
