@@ -1,9 +1,16 @@
 import VNode from './VNode.js';
 import { getTagMeta } from '../utils/meta.js';
-import { get } from '../../utils/get.js';
+import { get, isEqual } from '/core/utils/index.js';
 
 export default class VElementNode extends VNode {
-  children = [];
+  _children = [];
+
+  _state = {
+    attributes: [],
+    classes: [],
+  };
+
+  _listeners = [];
 
   constructor(openTag) {
     super(VNode.NODE_TYPES.ELEMENT_NODE);
@@ -14,45 +21,69 @@ export default class VElementNode extends VNode {
     Object.assign(this.meta, getTagMeta(tag));
   }
 
-  _addClasses(ctx) {
-    if (!this.el || !this.meta.className) return;
-
+  _computeState(ctx) {
     const processedClassName = this._setValuesFromContext(this.meta.className, ctx);
-    processedClassName
-      .split(/\s+/)
-      .filter((v) => v)
-      .forEach((className) => {
-        this.el.classList.add(className)
-      });
+    const classes = processedClassName.split(/\s+/).filter((v) => v);
+
+    const attributes = this.meta.attributes.map(({ name, value }) => ({
+      name,
+      value: this._setValuesFromContext(value, ctx)
+    }));
+
+    return { attributes, classes };
   }
 
-  _setAttrs(ctx) {
+  _addClasses(newState) {
     if (!this.el) return;
+    if (isEqual(newState.classes, this._state.classes)) return;
 
-    this.meta.attributes.forEach(({ name, value }) => {
-      const processedAttrValue = this._setValuesFromContext(value, ctx);
-      this.el.setAttribute(name, processedAttrValue);
-    });
+    this._state.classes.forEach((className) => this.el.classList.remove(className));
+    newState.classes.forEach((className) => this.el.classList.add(className));
+  }
+
+  _setAttrs(newState) {
+    if (!this.el) return;
+    if (isEqual(newState.attributes, this._state.attributes)) return;
+
+    this._state.attributes.forEach(({ name }) => this.el.removeAttribute(name));
+    newState.attributes.forEach(({ name, value }) => this.el.setAttribute(name, value));
   }
 
   _setListeners(ctx) {
+    if (this._listeners.length) return;
+
     this.meta.listeners.forEach(({ event, handlerName }) => {
       const handler = get(ctx, handlerName);
       this.el.addEventListener(event, handler);
+      this._listeners.push({ event, handler });
     });
   }
 
   render(ctx) {
-    this.el = document.createElement(this.meta.tagName);
-    this._addClasses(ctx);
-    this._setAttrs(ctx);
+    let firstRender = false;
+    if (!this.el) {
+      this.el = document.createElement(this.meta.tagName);
+      firstRender = true;
+    }
+
+    const newState = this._computeState(ctx);
     this._setListeners(ctx);
 
-    this.children.forEach((child) => this.el.appendChild(child.render(ctx)));
+    this._addClasses(newState);
+    this._setAttrs(newState);
+
+    this._children.forEach((child) => {
+      const renderedChild = child.render(ctx);
+      if (firstRender) {
+        this.el.appendChild(renderedChild);
+      }
+    });
+
+    this._state = newState;
     return this.el;
   }
 
   setChildren(children = []) {
-    this.children = children;
+    this._children = children;
   }
 }

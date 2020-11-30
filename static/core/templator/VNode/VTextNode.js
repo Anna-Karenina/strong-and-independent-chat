@@ -5,13 +5,20 @@ export default class VTextNode extends VNode {
 
   constructor(text) {
     super(VNode.NODE_TYPES.TEXT_NODE);
-    this.text = text;
+    this.meta = { text };
   }
 
   render(ctx = {}) {
-    const processedText = this._setValuesFromContext(this.text, ctx);
-    this.el = document.createTextNode(processedText);
+    if (!this.el) {
+      this.el = document.createTextNode('');
+    }
 
+    const newText = this._setValuesFromContext(this.meta.text, ctx);
+    if (this.text !== newText) {
+      this.el.textContent = newText;
+    }
+
+    this.text = newText;
     return this.el;
   }
 }

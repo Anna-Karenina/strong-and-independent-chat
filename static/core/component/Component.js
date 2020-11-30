@@ -71,11 +71,7 @@ export default class Component {
 
     if (!this._element) {
       this._element = el;
-      return;
     }
-
-    this._element.parentNode.replaceChild(el, this._element);
-    this._element = el;
   }
 
 	// Может переопределять пользователь, необязательно трогать
