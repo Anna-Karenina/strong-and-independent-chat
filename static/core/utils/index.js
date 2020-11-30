@@ -4,6 +4,7 @@ import { get } from './get.js';
 import { isEmpty } from './isEmpty.js';
 import { last } from './last.js';
 import { range } from './range.js';
+import { isEqual } from './isEqual.js';
 
 export {
   first,
@@ -12,4 +13,5 @@ export {
   isEmpty,
   last,
   range,
+  isEqual,
 };
