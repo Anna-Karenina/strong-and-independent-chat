@@ -86,4 +86,14 @@ export default class VElementNode extends VNode {
   setChildren(children = []) {
     this._children = children;
   }
+
+  show() {
+    if (!this.el) return;
+    this.el.style.display = '';
+  }
+
+  hide() {
+    if (!this.el) return;
+    this.el.style.display = 'none';
+  }
 }

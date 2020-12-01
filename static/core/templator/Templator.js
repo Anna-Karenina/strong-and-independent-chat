@@ -41,4 +41,8 @@ export default class Templator {
   render(ctx = {}) {
     return this._root.render(ctx);
   }
+
+  getRoot() {
+    return this._root;
+  }
 }

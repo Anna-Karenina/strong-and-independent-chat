@@ -11,7 +11,10 @@ export default class Component {
 
   _element = null;
 
-  constructor(props = {}) {
+  constructor(props = {}, opts = {}) {
+    const { templator = null } = opts;
+    this._templator = templator;
+
     const eventBus = new EventBus();
     this.props = this._makePropsProxy(props);
 
@@ -19,6 +22,10 @@ export default class Component {
 
     this._registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
+  }
+
+  get _root() {
+    return this._templator && this._templator.getRoot();
   }
 
   _registerEvents(eventBus) {
@@ -89,7 +96,11 @@ export default class Component {
     });
   }
 
-  //TODO: implement this methods in nodes & use them
-  show() {}
-  hide() {}
+  show() {
+    this._root && this._root.show();
+  }
+
+  hide() {
+    this._root && this._root.hide();
+  }
 }
