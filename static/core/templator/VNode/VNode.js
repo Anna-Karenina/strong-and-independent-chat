@@ -17,14 +17,14 @@ export default class VNode {
 
   render() {}
 
-  _setValuesFromContext(str, ctx) {
+  _setValuesFromContext(str, ctx, defaultValue) {
     let result = str;
     let key = null;
 
     while ((key = TEMPLATE_REGEXP.exec(result))) {
       if (key[1]) {
         const tmplValue = key[1].trim();
-        const data = get(ctx, tmplValue);
+        const data = get(ctx, tmplValue, defaultValue);
         result = result.replace(new RegExp(key[0], "gi"), data);
       }
     }

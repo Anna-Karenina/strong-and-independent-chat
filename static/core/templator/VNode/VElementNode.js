@@ -22,12 +22,12 @@ export default class VElementNode extends VNode {
   }
 
   _computeState(ctx) {
-    const processedClassName = this._setValuesFromContext(this.meta.className, ctx);
+    const processedClassName = this._setValuesFromContext(this.meta.className, ctx, '');
     const classes = processedClassName.split(/\s+/).filter((v) => v);
 
     const attributes = this.meta.attributes.map(({ name, value }) => ({
       name,
-      value: this._setValuesFromContext(value, ctx)
+      value: this._setValuesFromContext(value, ctx, '')
     }));
 
     return { attributes, classes };
