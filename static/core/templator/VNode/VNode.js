@@ -31,8 +31,4 @@ export default class VNode {
 
     return result;
   }
-
-  show() {}
-  
-  hide() {}
 };

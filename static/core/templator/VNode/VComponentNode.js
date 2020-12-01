@@ -33,12 +33,4 @@ export default class VComponentNode extends VNode {
 
   //maybe later...
   setChildren() {}
-
-  show() {
-    this._instance && this._instance.show();
-  }
-
-  hide() {
-    this._instance && this._instance.hide();
-  }
 }
