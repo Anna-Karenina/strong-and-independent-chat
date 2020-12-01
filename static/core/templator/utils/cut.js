@@ -10,22 +10,26 @@ export const cutElementNode = (template, components) => {
   
   template = template.slice(openTag.index + tag.length);
   const beforeCloseTagRegExp = new RegExp(`(.*?)</${tagName}.*?>`);
-  const openSimilarTagRegExp = new RegExp(`<${tagName}.*?>`);
+  const openSimilarTagRegExp = new RegExp(`<${tagName}.*?>`, 'g');
+  const closeSimilarTagRegExp = new RegExp(`</${tagName}.*?>`, 'g');
 
   let tagContent = '';
+  let level = 1;
   let key = null;
 
   while((key = beforeCloseTagRegExp.exec(template))) {
-    const [match, matchWithoutCloseTag] = key;
-    const hasSimilarTag = openSimilarTagRegExp.test(match);
+    const [matched, matchedWithoutCloseTag] = key;
 
-    template = template.slice(key.index + match.length);
+    level += (matched.match(openSimilarTagRegExp) || []).length;
+    level -= (matched.match(closeSimilarTagRegExp) || []).length;
 
-    if (!hasSimilarTag) {
-      tagContent += matchWithoutCloseTag;
+    template = template.slice(key.index + matched.length);
+
+    if (level <= 0) {
+      tagContent += matchedWithoutCloseTag;
       break;
     }
-    tagContent += match;
+    tagContent += matched;
   }
 
   const isComponent = !!components[tagName];
