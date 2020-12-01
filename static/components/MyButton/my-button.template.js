@@ -1,3 +1,3 @@
 export const template = `
-  <button class="primary-button" type="submit">{{ text }}</button>
+  <button class="primary-button {{ className }}" type="{{ type }}">{{ text }}</button>
 `;

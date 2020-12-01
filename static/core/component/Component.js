@@ -1,4 +1,4 @@
-import EventBus from '../bus/index.js';
+import EventBus from '/core/bus/index.js';
 import { isEqual } from '/core/utils/index.js';
 
 export default class Component {

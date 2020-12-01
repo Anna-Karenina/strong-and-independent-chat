@@ -10,39 +10,8 @@
   <title>Auth</title>
 </head>
 <body>
-  <main class="auth">
-    <div class="card">
+  <div id="app"></div>
 
-      <h2 class="card__title auth__title">Вход</h2>
-
-      <form class="auth-form">
-
-        <div class="field auth-form__field">
-          <div class="field__input-wrapper">
-            <input type="text" class="field__input" name="login" value="">
-            <label class="field__label">Логин</label>
-          </div>
-          <div class="error field__error">Неверный логин</div>
-        </div>
-
-        <div class="field auth-form__field">
-          <div class="field__input-wrapper">
-            <input type="password" class="field__input" name="password" autocomplete value="">
-            <label class="field__label">Пароль</label>
-          </div>
-        </div>
-
-        <div class="auth__action-buttons">
-          <button class="primary-button auth__primary-button" type="submit">Авторизоваться</button>
-          <button class="empty-button auth__empty-button" type="button">Нет аккаунта?</button>
-        </div>
-
-      </form>
-
-    </div>
-  </main>
-
-  <script type="module" src="/js/field.js"></script>
   <script type="module" src="./auth.js"></script>
 </body>
 </html>

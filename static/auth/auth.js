@@ -1,3 +1,5 @@
-import { onFormSubmit } from '/js/formSubmit.js';
+import Auth from '/blocks/Auth/index.js';
+import { render } from '/core/templator/index.js'
 
-onFormSubmit('.auth-form', console.log);
+const auth = new Auth({});
+render('#app', auth);
