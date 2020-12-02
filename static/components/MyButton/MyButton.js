@@ -2,14 +2,16 @@ import Component from '/core/Component/Component.js';
 import Templator from '/core/templator/index.js'
 import { template } from './my-button.template.js';
 
-const templator = new Templator(template);
-
 export default class MyButton extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this._templator = new Templator(template);
+  }
+
   render() {
-    return templator.render(this.props);
+    return this._templator.render(this.props);
   }
 }

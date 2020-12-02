@@ -3,20 +3,21 @@ import Templator from '/core/templator/index.js';
 import MyButton from '/components/MyButton/index.js';
 import Field from '/components/Field/index.js';
 import { authTemplate } from './auth.template.js';
-
-const templator = new Templator(authTemplate, {
-  components: {
-    'my-button': MyButton,
-    'field': Field,
-  },
-});
-
 export default class Auth extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this._templator = new Templator(authTemplate, {
+      components: {
+        'my-button': MyButton,
+        'field': Field,
+      },
+    });
+  }
+
   render() {
-    return templator.render(this.props);
+    return this._templator.render(this.props);
   }
 };
