@@ -4,22 +4,11 @@ export const authTemplate = `
 
       <h2 class="card__title auth__title">Вход</h2>
 
-      <form class="auth-form">
+      <form class="auth-form" @submit="onSubmit">
 
-        <div class="field auth-form__field">
-          <div class="field__input-wrapper">
-            <input type="text" class="field__input" name="login" value="">
-            <label class="field__label">Логин</label>
-          </div>
-          <div class="error field__error">Неверный логин</div>
-        </div>
+        <field className="auth-form__field" type="text" label="Логин" name="login" />
 
-        <div class="field auth-form__field">
-          <div class="field__input-wrapper">
-            <input type="password" class="field__input" name="password" autocomplete value="">
-            <label class="field__label">Пароль</label>
-          </div>
-        </div>
+        <field className="auth-form__field" type="password" label="Пароль" name="password" />
 
         <div class="auth__action-buttons">
           <my-button className="auth__primary-button" type="submit" text="Авторизоваться" />
