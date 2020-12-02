@@ -1,6 +1,6 @@
 import Chats from '/blocks/Chats/index.js';
 import { render } from '/core/templator/index.js'
-import { modal } from '/js/modal.js';
+import { modal } from '/core/utils/index.js';
 
 const onSubmit = (e) => {
   e.preventDefault();

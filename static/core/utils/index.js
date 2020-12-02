@@ -5,6 +5,7 @@ import { isEmpty } from './isEmpty.js';
 import { last } from './last.js';
 import { range } from './range.js';
 import { isEqual } from './isEqual.js';
+import { modal } from './modal.js';
 
 export {
   first,
@@ -14,4 +15,5 @@ export {
   last,
   range,
   isEqual,
+  modal,
 };
