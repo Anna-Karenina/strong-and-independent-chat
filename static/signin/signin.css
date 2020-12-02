@@ -1,34 +1,3 @@
-.signin {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.signin__title {
-  font-size: 20px;
-}
-
-.signin-form {
-  margin-top: 40px;
-}
-
-.signin-form__field:not(:first-child) {
-  margin-top: 16px;
-}
-
-.signin__action-buttons {
-  margin-top: 50px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.signin__primary-button {
-  width: 100%;
-}
-
-.signin__empty-button {
-  margin-top: 14px;
-}
+@import "/components/MyButton/MyButton.css";
+@import "/components/Field/Field.css";
+@import "/blocks/Signin/Signin.css";
