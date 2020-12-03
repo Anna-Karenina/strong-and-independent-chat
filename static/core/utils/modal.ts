@@ -1,5 +1,9 @@
-export const modal = (selector) => {
-  const $modal = document.querySelector(selector);
+interface IModal {
+  open: () => void,
+};
+
+export const modal = (selector: string): IModal => {
+  const $modal: HTMLElement | null = document.querySelector(selector);
   if (!$modal) return { open: () => {} };
 
   $modal.addEventListener('click', (e) => {

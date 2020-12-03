@@ -1,7 +1,7 @@
-export const get = (obj, path, defaultValue) => {
+export const get = <T>(obj: T, path: string, defaultValue: any) => {
   const keys = path.split('.');
 
-  let result = obj;
+  let result: any = obj;
   for (let key of keys) {
     result = result[key];
 

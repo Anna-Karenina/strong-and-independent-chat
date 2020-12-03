@@ -1,4 +1,9 @@
-export function range(start, end = null, step = 1, isRight = false) {
+export const range = (
+  start: number,
+  end: number | null = null,
+  step = 1,
+  isRight = false
+): number[] => {
   if (end === null) {
     [start, end] = [0, start];
   }
@@ -10,6 +15,6 @@ export function range(start, end = null, step = 1, isRight = false) {
     step = -Math.abs(step);
   }
 
-  const result = new Array(rangeCount).fill().map((_, i) => start + step * i);
+  const result = new Array(rangeCount).fill('').map((_, i) => start + step * i);
   return isRight ? result.reverse() : result;
 }
