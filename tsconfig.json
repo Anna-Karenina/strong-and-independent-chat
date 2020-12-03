@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "rootDir": "./static",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "lib": ["ES6", "DOM"],
+    "baseUrl": "./static"
+  },
+  "include": ["static"],
+  "exclude": ["node_modules"]
+}

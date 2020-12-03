@@ -5,11 +5,16 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "typescript": "4.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./scripts/start.js"
+    "start": "npm run build:dist && node ./scripts/start.js",
+    "build": "npm i && npm run build:dist && npm run delete:ts",
+    "build:dist": "npm run create:dist && tsc",
+    "create:dist": "rm -rf ./dist && cp -r ./static ./dist",
+    "delete:ts": "find ./dist/ -type f -name '*.ts' -delete"
   },
   "repository": {
     "type": "git",
