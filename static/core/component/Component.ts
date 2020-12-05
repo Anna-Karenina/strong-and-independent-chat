@@ -1,7 +1,11 @@
-import EventBus from '/core/bus/index.js';
-import { isEqual } from '/core/utils/index.js';
+import EventBus from '../bus/index.js';
+import { isEqual } from '../../core/utils/index.js';
 
-export default class Component {
+export interface IProps {
+  [key: string]: any,
+};
+
+export default abstract class Component {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -9,50 +13,52 @@ export default class Component {
     FLOW_CDU: "flow:component-did-update",
   };
 
-  _element = null;
+  props: IProps;
 
-  constructor(props = {}, opts = {}) {
+  private eventBus: () => EventBus
+
+  private _element: HTMLElement | null = null;
+
+  constructor(props: IProps = {}) {
     const eventBus = new EventBus();
-    this.props = this._makePropsProxy(props);
+    this.props = this.makePropsProxy(props);
 
     this.eventBus = () => eventBus;
 
-    this._registerEvents(eventBus);
+    this.registerEvents(eventBus);
     eventBus.emit(Component.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus) {
+  private registerEvents(eventBus: EventBus) {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  init() {
+  private init() {
     this.eventBus().emit(Component.EVENTS.FLOW_CDM, this.props);
   }
 
-  _componentDidMount() {
-    this.componentDidMount();
+  private _componentDidMount() {
+    this.componentDidMount(this.props);
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps) {}
+  protected componentDidMount(oldProps: IProps) {};
 
-  _componentDidUpdate(oldProps, newProps) {
+  private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
     }
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  protected componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
     return !isEqual(oldProps, newProps);
   }
 
-  setProps = nextProps => {
+  setProps = (nextProps: IProps) => {
     if (!nextProps) {
       return;
     }
@@ -74,14 +80,13 @@ export default class Component {
     }
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  render() {}
+  abstract render(): HTMLElement | null;
 
   getContent() {
     return this.element;
   }
 
-  _makePropsProxy(props) {
+  private makePropsProxy(props: IProps) {
     return new Proxy(props, {
       deleteProperty() {
         throw new Error('нет доступа');
@@ -95,7 +100,6 @@ export default class Component {
   }
 
   hide() {
-
     if (!this._element) return;
     this._element.style.display = 'none';
   }

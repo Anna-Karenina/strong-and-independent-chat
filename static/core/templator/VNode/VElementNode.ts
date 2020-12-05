@@ -1,6 +1,6 @@
 import VNode, { NodeType } from './VNode.js';
 import { getTagMeta, IMetaAttribute, IMetaListener } from '../utils/meta.js';
-import { get, isEqual } from '/core/utils/index.js';
+import { get, isEqual } from '../../utils/index.js';
 
 interface IMeta {
   listeners: IMetaListener [],

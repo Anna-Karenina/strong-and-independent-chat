@@ -43,7 +43,7 @@ export default class Templator {
     return nodes;
   };
 
-  render(ctx = {}) {
+  render(ctx: object = {}): HTMLElement | null {
     return (this._root && this._root.render(ctx));
   }
 
