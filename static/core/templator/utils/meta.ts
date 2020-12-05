@@ -1,13 +1,30 @@
 const TAG_NAME_REGEXP = /(?<=<)\w*/;
 const ATTRIBUTES_REGEXP = /(\S*?)="(.*?)"/;
 
-export const getTagName = (tag) => {
+export interface IMetaAttribute {
+  name: string,
+  value: string,
+};
+
+export interface IMetaListener {
+  event: string,
+  handlerName: string,
+};
+
+interface ITagMeta {
+  attributes: IMetaAttribute[],
+  listeners: IMetaListener[],
+  className: string,
+  tagName: string,
+};
+
+export const getTagName = (tag: string): string => {
   const match = TAG_NAME_REGEXP.exec(tag);
 
   return match && match[0] || '';
 };
 
-export const getAllAttributesFromTag = (tag) => {
+export const getAllAttributesFromTag = (tag: string): IMetaAttribute[] => {
   const attrs = [];
   let key = null;
 
@@ -20,11 +37,11 @@ export const getAllAttributesFromTag = (tag) => {
   return attrs;
 };
 
-export const getTagMeta = (tag) => {
+export const getTagMeta = (tag: string): ITagMeta => {
   const tagName = getTagName(tag);
   const allAttrs = getAllAttributesFromTag(tag);
 
-  const meta = allAttrs.reduce((acc, attr) => {
+  const meta = allAttrs.reduce((acc: ITagMeta, attr) => {
     const { name, value } = attr;
     if (name === 'class') {
       acc.className = value;
@@ -37,7 +54,7 @@ export const getTagMeta = (tag) => {
 
     acc.attributes.push(attr);
     return acc;
-  }, { attributes: [], listeners: [], className: '' });
+  }, { attributes: [], listeners: [], className: '', tagName });
 
-  return { ...meta, tagName };
+  return meta;
 };

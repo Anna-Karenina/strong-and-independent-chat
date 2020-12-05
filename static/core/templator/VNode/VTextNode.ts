@@ -1,19 +1,19 @@
-import VNode from './VNode.js';
+import VNode, { NodeType } from './VNode.js';
 
 export default class VTextNode extends VNode {
   text = '';
 
-  constructor(text) {
-    super(VNode.NODE_TYPES.TEXT_NODE);
+  constructor(text: string) {
+    super(NodeType.TextNode);
     this.meta.text = text;
   }
 
-  render(ctx = {}) {
+  render(ctx: object) {
     if (!this.el) {
       this.el = document.createTextNode('');
     }
 
-    const newText = this._setValuesFromContext(this.meta.text, ctx);
+    const newText = this.setValuesFromContext(this.meta.text, ctx);
     if (this.text !== newText) {
       this.el.textContent = newText;
     }

@@ -2,10 +2,27 @@ import VElementNode from '../VNode/VElementNode.js';
 import VTextNode from '../VNode/VTextNode.js';
 import VComponentNode from '../VNode/VComponentNode.js';
 
+type TCutTextNodeResult = [
+  { node: VTextNode },
+  string,
+];
+
+type TCutElementNodeResult = [
+  { node: VElementNode | VComponentNode, content: string },
+  string,
+];
+
 const OPEN_TAG_REGEXP = /<([\w-]*).*?>/;
 
-export const cutElementNode = (template, components) => {
+const generateParsingTemplateError = (template: string): Error => {
+  return new Error(`Ошибка при парсинге шаблона: ${template}`);
+};
+
+export const cutElementNode = (template: string, components: { [key: string]: any }): TCutElementNodeResult => {
   const openTag = OPEN_TAG_REGEXP.exec(template);
+  if (!openTag) {
+    throw generateParsingTemplateError(template);
+  }
   const [tag, tagName] = openTag;
   
   template = template.slice(openTag.index + tag.length);
@@ -41,9 +58,13 @@ export const cutElementNode = (template, components) => {
   return [element, template];
 }
 
-export const cutTextNode = (template) => {
+export const cutTextNode = (template: string): TCutTextNodeResult => {
   const textRegExp = /[^<]*/;
   const textMatch = textRegExp.exec(template);
+  if (!textMatch) {
+    throw generateParsingTemplateError(template);
+  }
+  
   const [ text ] = textMatch;
   const element = {
     node: new VTextNode(text),

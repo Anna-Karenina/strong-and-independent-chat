@@ -1,23 +1,27 @@
 import { get } from '../../utils/get.js';
 const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
 
-export default class VNode {
-  static NODE_TYPES = {
-    TEXT_NODE: 1,
-    ELEMENT_NODE: 2,
-    COMPONENT_NODE: 3,
-  };
+interface IMeta {
+  [key: string]: any,
+};
 
-  meta = {};
-  el = null;
+export enum NodeType {
+  TextNode = 1,
+  ElementNode = 2,
+  ComponentNode = 3,
+};
 
-  constructor(nodeType) {
+export default abstract class VNode {
+  meta: IMeta = {};
+  el: HTMLElement | Text | null = null;
+
+  constructor(nodeType: NodeType) {
     this.meta.nodeType = nodeType;
   }
 
-  render() {}
+  abstract render(ctx: object): any;
 
-  _setValuesFromContext(str, ctx, defaultValue) {
+  protected setValuesFromContext(str: string, ctx: object, defaultValue?: any) {
     let result = str;
     let key = null;
 
