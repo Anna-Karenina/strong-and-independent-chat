@@ -1,4 +1,4 @@
-import Component, { IProps } from '../../core/Component/Component.js';
+import Component, { IProps } from '../../core/Component/index.js';
 import Templator from '../../core/templator/index.js'
 import { template } from './field.template.js';
 

@@ -1,9 +1,6 @@
 import VNode, { NodeType } from './VNode.js';
+import { IProps, ComponentConstructor } from '../../component/index.js';
 import { getTagMeta, IMetaAttribute } from '../utils/meta.js';
-
-interface IProps {
-  [key: string]: any,
-};
 
 interface IMeta {
   props: IMetaAttribute [],
@@ -12,10 +9,12 @@ interface IMeta {
 
 export default class VComponentNode extends VNode {
   meta: IMeta;
-  _Component: any = null;
-  _instance: any = null;
 
-  constructor(openTag: string, Component: any) {
+  private _Component: ComponentConstructor;
+
+  private _instance: any = null;
+
+  constructor(openTag: string, Component: ComponentConstructor) {
     super(NodeType.ComponentNode);
 
     this.getMetaFromTag(openTag);

@@ -12,7 +12,8 @@ export enum NodeType {
 };
 
 export default abstract class VNode {
-  meta: IMeta = {};
+  protected meta: IMeta = {};
+  
   el: HTMLElement | Text | null = null;
 
   constructor(nodeType: NodeType) {

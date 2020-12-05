@@ -1,12 +1,17 @@
-import { cutTextNode, cutElementNode } from './utils/cut.js';
 import VNode from './VNode/VNode.js';
+import { cutTextNode, cutElementNode } from './utils/cut.js';
+import { ComponentConstructor } from '../component/index.js';
 
+
+interface IComponents {
+  [key: string]: ComponentConstructor,
+};
 interface IOptions {
-  components?: { [key: string]: any },
-}
+  components?: IComponents,
+};
 
 export default class Templator {
-  _root: VNode | null = null;
+  private _root: VNode | null = null;
 
   constructor(template: string, opts: IOptions = {}) {
     const { components = {} } = opts;
@@ -17,7 +22,7 @@ export default class Templator {
     console.log(root);
   }
 
-  _buildHtmlNodes (template: string, components: { [key: string]: any }) {
+  private _buildHtmlNodes (template: string, components: IComponents) {
     let rowTemplate = template.replace(/[\n\r]/g, '').trim();
     if (!rowTemplate) return [];
   

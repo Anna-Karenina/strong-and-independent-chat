@@ -1,6 +1,7 @@
 import VElementNode from '../VNode/VElementNode.js';
 import VTextNode from '../VNode/VTextNode.js';
 import VComponentNode from '../VNode/VComponentNode.js';
+import { ComponentConstructor } from '../../component/index.js';
 
 type TCutTextNodeResult = [
   { node: VTextNode },
@@ -18,7 +19,7 @@ const generateParsingTemplateError = (template: string): Error => {
   return new Error(`Ошибка при парсинге шаблона: ${template}`);
 };
 
-export const cutElementNode = (template: string, components: { [key: string]: any }): TCutElementNodeResult => {
+export const cutElementNode = (template: string, components: { [key: string]: ComponentConstructor }): TCutElementNodeResult => {
   const openTag = OPEN_TAG_REGEXP.exec(template);
   if (!openTag) {
     throw generateParsingTemplateError(template);
