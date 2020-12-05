@@ -1,14 +1,17 @@
-import Component from '/core/Component/Component.js';
-import Templator from '/core/templator/index.js'
+import Component, { IProps } from '../../core/Component/Component.js';
+import Templator from '../../core/templator/index.js'
 import { template } from './field.template.js';
 
 export default class Field extends Component {
-  constructor(props) {
+  private _templator: Templator;
+
+  constructor(props: IProps) {
     super(props);
   }
 
-  inputHandler(e) {
-    e.target.setAttribute('value', e.target.value);
+  inputHandler(e: InputEvent) {
+    const target = e.target as HTMLInputElement;
+    target.setAttribute('value', target.value);
   };
 
   componentDidMount() {
