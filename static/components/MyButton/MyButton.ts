@@ -1,9 +1,11 @@
-import Component from '/core/Component/Component.js';
-import Templator from '/core/templator/index.js'
+import Component, { IProps } from '../../core/Component/Component.js';
+import Templator from '../../core/templator/index.js'
 import { template } from './my-button.template.js';
 
 export default class MyButton extends Component {
-  constructor(props) {
+  private _templator: Templator;
+
+  constructor(props: IProps) {
     super(props);
   }
 

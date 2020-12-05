@@ -41,11 +41,11 @@ export default abstract class Component {
   }
 
   private _componentDidMount() {
-    this.componentDidMount(this.props);
+    this.componentDidMount();
     this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
-  protected componentDidMount(oldProps: IProps) {};
+  protected componentDidMount() {};
 
   private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
