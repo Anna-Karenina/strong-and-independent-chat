@@ -12,7 +12,7 @@
     "noUnusedParameters": true,
     "alwaysStrict": true,
     "strictNullChecks": true,
-    "lib": ["ES6", "DOM"],
+    "lib": ["DOM", "ESNext", "DOM.Iterable"],
     "baseUrl": "./static"
   },
   "include": ["static"],
