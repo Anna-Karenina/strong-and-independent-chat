@@ -1,11 +1,15 @@
-import Component, { IProps } from '../../core/Component/index.js';
+import Component from '../../core/Component/index.js';
 import Templator from '../../core/templator/index.js'
 import { template } from './field.template.js';
 
+interface IFieldProps {
+  onBlur?: (e: Event) => any,
+  error?: string | null,
+};
 export default class Field extends Component {
-  private _templator: Templator;
+  private templator: Templator;
 
-  constructor(props: IProps) {
+  constructor(props: IFieldProps) {
     super(props);
   }
 
@@ -15,12 +19,20 @@ export default class Field extends Component {
   };
 
   componentDidMount() {
-    this._templator = new Templator(template);
+    this.templator = new Templator(template);
   }
 
   render() {
-    return this._templator.render({
+    const errorClasses = ['error', 'field__error'];
+    const errorText: string = this.props.error || '';
+    if (!errorText) {
+      errorClasses.push('hidden');
+    }
+
+    return this.templator.render({
       ...this.props,
+      errorText,
+      errorClassName: errorClasses.join(' '),
       inputHandler: this.inputHandler,
     });
   }
