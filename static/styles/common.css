@@ -37,6 +37,7 @@ body {
 .error {
   color: #FF2F2F;
   font-size: 8px;
+  height: 10px;
 }
 
 /* EMPTY BUTTON */
@@ -204,4 +205,8 @@ body {
 
 .color-danger {
   color: #FF0000;
+}
+
+.hidden {
+  visibility: hidden;
 }
