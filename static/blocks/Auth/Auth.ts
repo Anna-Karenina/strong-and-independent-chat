@@ -2,10 +2,13 @@ import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Field from '../../components/Field/index.js';
+import { IFormState } from '../../core/validation/index.js';
 import { authTemplate } from './auth.template.js';
 
 interface IProps {
   onSubmit: (e: Event) => any,
+  onBlur: (e: Event) => any,
+  formState: IFormState,
 };
 
 export default class Auth extends Component {
@@ -25,6 +28,8 @@ export default class Auth extends Component {
   }
 
   render() {
-    return this.templator.render(this.props);
+    return this.templator.render({
+      ...this.props,
+    });
   }
 };

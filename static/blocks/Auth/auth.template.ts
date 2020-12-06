@@ -6,9 +6,23 @@ export const authTemplate = `
 
       <form class="auth-form" @submit="onSubmit">
 
-        <field className="auth-form__field" type="text" label="Логин" name="login" />
+        <field
+          onBlur="{{ onBlur }}"
+          className="auth-form__field"
+          type="text"
+          label="Логин"
+          name="login"
+          error="{{ formState.login.error }}"
+        />
 
-        <field className="auth-form__field" type="password" label="Пароль" name="password" />
+        <field
+          onBlur="{{ onBlur }}"
+          className="auth-form__field"
+          type="password"
+          label="Пароль"
+          name="password"
+          error="{{ formState.password.error }}"
+        />
 
         <div class="auth__action-buttons">
           <my-button className="auth__primary-button" type="submit" text="Авторизоваться" />
