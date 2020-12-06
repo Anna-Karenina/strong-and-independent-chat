@@ -2,12 +2,12 @@ const REQUIRED_ERROR  = 'Обязательно';
 const MIN_LENGTH_ERROR  = 'Минимальная длина';
 const MAX_LENGTH_ERROR  = 'Максимальная длина';
 
-interface IValidatorResult {
+export interface IValidatorResult {
   valid: boolean,
   error: null | string,
 };
 
-type TValidator = (value: string, ...restArgs: any[]) => IValidatorResult;
+type TValidator = (value: string, ...additionalArgs: any[]) => IValidatorResult;
 
 export default class ValidationScheme {
   private validators: TValidator[];
@@ -50,9 +50,9 @@ export default class ValidationScheme {
     return new ValidationScheme([...this.validators, validator]);
   }
 
-  custom(predicate: (value: string, ...restArgs: any []) => boolean, error: string): ValidationScheme {
-    const validator = (value: string, ...restArgs: any[]): IValidatorResult => {
-      return this.createValidationResult(predicate(value, ...restArgs), error);
+  custom(predicate: (value: string, ...additionalArgs: any []) => boolean, error: string): ValidationScheme {
+    const validator = (value: string, ...additionalArgs: any[]): IValidatorResult => {
+      return this.createValidationResult(predicate(value, ...additionalArgs), error);
     };
 
     return new ValidationScheme([...this.validators, validator]);
@@ -66,9 +66,9 @@ export default class ValidationScheme {
     return new ValidationScheme([...this.validators, validator]);
   }
 
-  validate(value: string, ...restArgs: any []): IValidatorResult {
+  validate(value: string, ...additionalArgs: any []): IValidatorResult {
     for (const validator of this.validators) {
-      const result = validator(value, ...restArgs);
+      const result = validator(value, ...additionalArgs);
       if (!result.valid) return result;
     }
 
