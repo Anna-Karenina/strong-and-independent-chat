@@ -48,7 +48,7 @@ export default class VElementNode extends VNode {
 
   private computeState(ctx: object): IState {
     const processedClassName = this.setValuesFromContext(this.meta.className, ctx, '');
-    const classes = processedClassName.split(/\s+/).filter((v) => v);
+    const classes = processedClassName.split(/\s+/).filter((v: string) => v);
 
     const attributes = this.meta.attributes.map(({ name, value }) => ({
       name,
@@ -61,7 +61,7 @@ export default class VElementNode extends VNode {
   private addClasses(newState: IState) {
     if (!this.el) return;
     if (isEqual(newState.classes, this.state.classes)) return;
-
+    
     this.state.classes.forEach((className) => this.el && this.el.classList.remove(className));
     newState.classes.forEach((className) => this.el && this.el.classList.add(className));
   }

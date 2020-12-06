@@ -1,5 +1,4 @@
 import { get } from '../../utils/get.js';
-const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
 
 interface IMeta {
   [key: string]: any,
@@ -23,6 +22,7 @@ export default abstract class VNode {
   abstract render(ctx: object): any;
 
   protected setValuesFromContext(str: string, ctx: object, defaultValue?: any) {
+    const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
     let result = str;
     let key = null;
 
