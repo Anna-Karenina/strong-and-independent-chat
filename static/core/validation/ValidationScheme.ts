@@ -7,7 +7,7 @@ interface IValidatorResult {
   error: null | string,
 };
 
-type TValidator = (value: string) => IValidatorResult;
+type TValidator = (value: string, ...restArgs: any[]) => IValidatorResult;
 
 export default class ValidationScheme {
   private validators: TValidator[];
@@ -50,9 +50,9 @@ export default class ValidationScheme {
     return new ValidationScheme([...this.validators, validator]);
   }
 
-  custom(predicate: (value: string) => boolean, error: string): ValidationScheme {
-    const validator = (value: string): IValidatorResult => {
-      return this.createValidationResult(predicate(value), error);
+  custom(predicate: (value: string, ...restArgs: any []) => boolean, error: string): ValidationScheme {
+    const validator = (value: string, ...restArgs: any[]): IValidatorResult => {
+      return this.createValidationResult(predicate(value, ...restArgs), error);
     };
 
     return new ValidationScheme([...this.validators, validator]);
@@ -66,9 +66,9 @@ export default class ValidationScheme {
     return new ValidationScheme([...this.validators, validator]);
   }
 
-  validate(value: string): IValidatorResult {
+  validate(value: string, ...restArgs: any []): IValidatorResult {
     for (const validator of this.validators) {
-      const result = validator(value);
+      const result = validator(value, ...restArgs);
       if (!result.valid) return result;
     }
 
