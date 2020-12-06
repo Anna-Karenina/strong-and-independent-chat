@@ -30,6 +30,9 @@ export default abstract class VNode {
       if (key[1]) {
         const tmplValue = key[1].trim();
         const data = get(ctx, tmplValue, defaultValue);
+        if (typeof data !== 'string') {
+          return data;
+        }
         result = result.replace(new RegExp(key[0], "gi"), data);
       }
     }
