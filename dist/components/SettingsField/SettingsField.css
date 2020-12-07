@@ -1,0 +1,28 @@
+.settings-field {
+  width: 100%;
+}
+
+.settings-field-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.settings-field:not(:last-child) {
+  border-bottom: 1px solid #EAEAEA;
+}
+
+.settings-field__label {
+  font-size: 13px;
+}
+
+.settings-field__input {
+  flex-grow: 1;
+  padding: 10px 0 10px 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 13px;
+  text-align: right;
+  color: var(--secondary-text-color);
+}

@@ -1,0 +1,34 @@
+.auth {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth__title {
+  font-size: 20px;
+}
+
+.auth-form {
+  margin-top: 40px;
+}
+
+.auth-form__field:not(:first-child) {
+  margin-top: 16px;
+}
+
+.auth__action-buttons {
+  margin-top: 170px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.auth__primary-button {
+  width: 100%;
+}
+
+.auth__empty-button {
+  margin-top: 14px;
+}
