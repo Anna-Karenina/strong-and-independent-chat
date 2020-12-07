@@ -1,12 +1,12 @@
-import Signin from '../blocks/Signin/index.js';
+import Signin from '../../blocks/Signin/index.js';
 import {
   FormValidator,
   textFiledScheme,
   emailScheme,
   phoneScheme,
   passwordDuplicateScheme,
-} from '../core/validation/index.js';
-import { render } from '../core/templator/index.js'
+} from '../../core/validation/index.js';
+import { render } from '../../core/templator/index.js'
 
 let fields = {
   mail: '',

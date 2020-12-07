@@ -1,6 +1,6 @@
-import Chats from '../blocks/Chats/index.js';
-import { render } from '../core/templator/index.js'
-import { modal } from '../core/utils/index.js';
+import Chats from '../../blocks/Chats/index.js';
+import { render } from '../../core/templator/index.js'
+import { modal } from '../../core/utils/index.js';
 
 let search = '';
 let newUserLogin = '';

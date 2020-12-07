@@ -1,6 +1,6 @@
-import Auth from '../blocks/Auth/index.js';
-import { FormValidator, textFiledScheme } from '../core/validation/index.js';
-import { render } from '../core/templator/index.js'
+import Auth from '../../blocks/Auth/index.js';
+import { FormValidator, textFiledScheme } from '../../core/validation/index.js';
+import { render } from '../../core/templator/index.js'
 
 let fields = {
   login: '',

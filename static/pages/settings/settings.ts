@@ -1,12 +1,12 @@
-import Settings from '../blocks/Settings/index.js';
-import { render } from '../core/templator/index.js'
+import Settings from '../../blocks/Settings/index.js';
+import { render } from '../../core/templator/index.js'
 import {
   FormValidator,
   textFiledScheme,
   emailScheme,
   phoneScheme,
-} from '../core/validation/index.js';
-import { modal } from '../core/utils/index.js';
+} from '../../core/validation/index.js';
+import { modal } from '../../core/utils/index.js';
 
 let fields = {
   mail: '',
