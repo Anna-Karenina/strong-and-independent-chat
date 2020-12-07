@@ -18,37 +18,55 @@ export const settingsTemplate = `
 
         <h3 class="settings__user-name">Иван</h3>
 
-        <form class="settings__form" @submit="onSubmit">
+        <form class="settings__form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
 
-          <div class="settings-field">
-            <label class="settings-field__label">Почта</label>
-            <input type="text" class="settings-field__input" value="pochta@yandex.ru" name="mail">
-          </div>
+          <settings-field
+            type="text"
+            label="Почта"
+            name="mail"
+            error="{{ formState.mail.error }}"
+            value="{{ fields.mail }}"
+          />
 
-          <div class="settings-field">
-            <label class="settings-field__label">Логин</label>
-            <input type="text" class="settings-field__input" value="" name="login">
-          </div>
+          <settings-field
+            type="text"
+            label="Логин"
+            name="login"
+            error="{{ formState.login.error }}"
+            value="{{ fields.login }}"
+          />
 
-          <div class="settings-field">
-            <label class="settings-field__label">Имя</label>
-            <input type="text" class="settings-field__input" value="" name="name">
-          </div>
+          <settings-field
+            type="text"
+            label="Имя"
+            name="name"
+            error="{{ formState.name.error }}"
+            value="{{ fields.name }}"
+          />
 
-          <div class="settings-field">
-            <label class="settings-field__label">Фамилия</label>
-            <input type="text" class="settings-field__input" value="" name="surname">
-          </div>
+          <settings-field
+            type="text"
+            label="Фамилия"
+            name="surname"
+            error="{{ formState.surname.error }}"
+            value="{{ fields.surname }}"
+          />
 
-          <div class="settings-field">
-            <label class="settings-field__label">Имя в чате</label>
-            <input type="text" class="settings-field__input" value="" name="display_name">
-          </div>
+          <settings-field
+            type="text"
+            label="Имя в чате"
+            name="display_name"
+            error="{{ formState.display_name.error }}"
+            value="{{ fields.display_name }}"
+          />
 
-          <div class="settings-field">
-            <label class="settings-field__label">Телефон</label>
-            <input type="text" class="settings-field__input" value="" name="phone">
-          </div>
+          <settings-field
+            type="text"
+            label="Телефон"
+            name="phone"
+            error="{{ formState.phone.error }}"
+            value="{{ fields.phone }}"
+          />
 
           <div class="settings__buttons">
             <button class="settings__button empty-button" type="submit">Изменить данные</button>
