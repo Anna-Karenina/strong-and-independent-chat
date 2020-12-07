@@ -12,9 +12,9 @@
 
 На данный момент доступно 6 статических страниц:
 
-- [/auth](https://angry-lumiere-c6bdd3.netlify.app/auth/)
-- [/signin](https://angry-lumiere-c6bdd3.netlify.app/signin/)
-- [/chats](https://angry-lumiere-c6bdd3.netlify.app/chats/)
-- [/settings](https://angry-lumiere-c6bdd3.netlify.app/settings/)
-- [/404](https://angry-lumiere-c6bdd3.netlify.app/404/)
-- [/500](https://angry-lumiere-c6bdd3.netlify.app/500/)
+- [/auth](https://angry-lumiere-c6bdd3.netlify.app/pages/auth/)
+- [/signin](https://angry-lumiere-c6bdd3.netlify.app/pages/signin/)
+- [/chats](https://angry-lumiere-c6bdd3.netlify.app/pages/chats/)
+- [/settings](https://angry-lumiere-c6bdd3.netlify.app/pages/settings/)
+- [/404](https://angry-lumiere-c6bdd3.netlify.app/pages/404/)
+- [/500](https://angry-lumiere-c6bdd3.netlify.app/pages/500/)
