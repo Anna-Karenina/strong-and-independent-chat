@@ -7,8 +7,10 @@ import { authTemplate } from './auth.template.js';
 
 interface IProps {
   onSubmit: (e: Event) => any,
-  onBlur: (e: Event) => any,
+  onFocusout: (e: Event) => any,
+  onInput: (e: Event) => any,
   formState: IFormState,
+  fields: { [key: string]: string },
 };
 
 export default class Auth extends Component {
@@ -28,8 +30,6 @@ export default class Auth extends Component {
   }
 
   render() {
-    return this.templator.render({
-      ...this.props,
-    });
+    return this.templator.render(this.props);
   }
 };

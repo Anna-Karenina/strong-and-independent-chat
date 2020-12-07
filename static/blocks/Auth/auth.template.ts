@@ -4,24 +4,24 @@ export const authTemplate = `
 
       <h2 class="card__title auth__title">Вход</h2>
 
-      <form class="auth-form" @submit="onSubmit">
+      <form class="auth-form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
 
         <field
-          onBlur="{{ onBlur }}"
           className="auth-form__field"
           type="text"
           label="Логин"
           name="login"
           error="{{ formState.login.error }}"
+          value="{{ fields.login }}"
         />
 
         <field
-          onBlur="{{ onBlur }}"
           className="auth-form__field"
           type="password"
           label="Пароль"
           name="password"
           error="{{ formState.password.error }}"
+          value="{{ fields.password }}"
         />
 
         <div class="auth__action-buttons">
