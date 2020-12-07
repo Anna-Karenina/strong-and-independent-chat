@@ -4,6 +4,7 @@ import {
   textFiledScheme,
   emailScheme,
   passwordDuplicateScheme,
+  phoneScheme,
 } from './schemes/schemes.js';
 
 export {
@@ -12,5 +13,6 @@ export {
   textFiledScheme,
   emailScheme,
   passwordDuplicateScheme,
+  phoneScheme,
   IFormState,
 };
