@@ -2,13 +2,11 @@ export const template = `
   <div class="field {{ className }}">
     <div class="field__input-wrapper">
       <input
-        type="{{ type }}"
         class="field__input"
+        type="{{ type }}"
         name="{{ name }}"
+        value="{{ value }}"
         autocomplete="on"
-        value=""
-        @input="inputHandler"
-        @blur="onBlur"
       >
       <label class="field__label">{{ label }}</label>
     </div>

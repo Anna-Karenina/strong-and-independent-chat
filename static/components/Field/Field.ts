@@ -3,7 +3,11 @@ import Templator from '../../core/templator/index.js'
 import { template } from './field.template.js';
 
 interface IFieldProps {
-  onBlur?: (e: Event) => any,
+  value: string,
+  type: string,
+  className: string,
+  name: string,
+  label: string,
   error?: string | null,
 };
 export default class Field extends Component {
@@ -12,11 +16,6 @@ export default class Field extends Component {
   constructor(props: IFieldProps) {
     super(props);
   }
-
-  inputHandler(e: InputEvent) {
-    const target = e.target as HTMLInputElement;
-    target.setAttribute('value', target.value);
-  };
 
   componentDidMount() {
     this.templator = new Templator(template);
@@ -33,7 +32,6 @@ export default class Field extends Component {
       ...this.props,
       errorText,
       errorClassName: errorClasses.join(' '),
-      inputHandler: this.inputHandler,
     });
   }
 }
