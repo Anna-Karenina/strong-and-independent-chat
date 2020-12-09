@@ -9,7 +9,7 @@
 }
 
 .settings-field:not(:last-child) {
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .settings-field__label {
