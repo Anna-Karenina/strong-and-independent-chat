@@ -8,13 +8,30 @@
 - `npm install`
 - `npm start`
 
+Для сборки проета необходимо запустить команду:
+- `npm run build`
+
 ## Демонстрация
 
-На данный момент доступно 6 статических страниц:
+Страницы проекта:
 
-- [/auth](https://angry-lumiere-c6bdd3.netlify.app/auth/)
-- [/signin](https://angry-lumiere-c6bdd3.netlify.app/signin/)
-- [/chats](https://angry-lumiere-c6bdd3.netlify.app/chats/)
-- [/settings](https://angry-lumiere-c6bdd3.netlify.app/settings/)
-- [/404](https://angry-lumiere-c6bdd3.netlify.app/404/)
-- [/500](https://angry-lumiere-c6bdd3.netlify.app/500/)
+- [/pages/auth](https://angry-lumiere-c6bdd3.netlify.app/pages/auth/)
+- [/pages/signin](https://angry-lumiere-c6bdd3.netlify.app/pages/signin/)
+- [/pages/chats](https://angry-lumiere-c6bdd3.netlify.app/pages/chats/)
+- [/pages/settings](https://angry-lumiere-c6bdd3.netlify.app/pages/settings/)
+- [/pages/404](https://angry-lumiere-c6bdd3.netlify.app/pages/404/)
+- [/pages/500](https://angry-lumiere-c6bdd3.netlify.app/pages/500/)
+
+## Шаблонизатор
+
+В проекте используется собственный шаблонизатор (немного схожий по синтаксису с шаблонизатором vue). Основной функционал:
+
+1. Парсить строку html, выделяя теги, текстовые узлы и компоненты
+2. Подставлять значения из контекста в конструкцию вида: {{ some.data.from.ctx }}
+3. Добавлять слушатели из контекста в конструцию вида: @input="someHandlerFromCtx"
+4. Отрисовывать компоненты и прокидывать в них props
+5. Вносить изменения в DOM при изменении данных
+
+Необходимо реализовать:
+1. Сравнение старого и нового виртуального дома, для более точного контроля изменений. Это позволит удалять/заменять элементы и рендерить списки
+2. Рендеринг списоков элементов/компонентов
