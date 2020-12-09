@@ -1,5 +1,5 @@
 import EventBus from '../bus/index.js';
-import { isEqual } from '../../core/utils/index.js';
+import { isEqual, deepClone } from '../../core/utils/index.js';
 
 export interface IProps {
   [key: string]: any,
@@ -64,7 +64,7 @@ export default abstract class Component {
     }
 
     const oldProps = this.props;
-    this.props = { ...oldProps, ...nextProps };
+    this.props = deepClone<IProps>({...oldProps, ...nextProps});
     this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, nextProps);
   };
 
