@@ -1,6 +1,6 @@
 import VNode from './VNode/VNode.js';
-import { cutTextNode, cutElementNode } from './utils/cut.js';
-import { ComponentConstructor } from '../component/index.js';
+import {cutTextNode, cutElementNode} from './utils/cut.js';
+import {ComponentConstructor} from '../component/index.js';
 
 
 interface IComponents {
@@ -14,7 +14,7 @@ export default class Templator {
   private _root: VNode | null = null;
 
   constructor(template: string, opts: IOptions = {}) {
-    const { components = {} } = opts;
+    const {components = {}} = opts;
     const root = this.buildHtmlNodes(template, components) as VNode;
     
     this._root = root;
@@ -39,7 +39,7 @@ export default class Templator {
       }
   
       const [element, restTemplate] = cutElementNode(rowTemplate, components);
-      const { node, content = '' } = element;
+      const {node, content = ''} = element;
 
       node.setChildren(this.buildHtmlNodes(content, components, false) as VNode[]);
       if (root) return node;

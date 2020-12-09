@@ -1,6 +1,6 @@
 import Component from '../../core/Component/index.js';
 import Templator from '../../core/templator/index.js'
-import { template } from './field.template.js';
+import {template} from './field.template.js';
 
 interface IFieldProps {
   value: string,

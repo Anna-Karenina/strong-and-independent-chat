@@ -17,7 +17,7 @@ export default class ValidationScheme {
   }
 
   private createValidationResult(valid: boolean, error: string): IValidatorResult {
-    return valid ? { valid, error: null } : { valid, error };
+    return valid ? {valid, error: null} : {valid, error};
   }
 
   required(error: string = REQUIRED_ERROR): ValidationScheme {
@@ -72,6 +72,6 @@ export default class ValidationScheme {
       if (!result.valid) return result;
     }
 
-    return { valid: true, error: null };
+    return {valid: true, error: null};
   }
 };

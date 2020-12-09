@@ -1,6 +1,6 @@
 import Chats from '../../blocks/Chats/index.js';
-import { render } from '../../core/templator/index.js'
-import { modal } from '../../core/utils/index.js';
+import {render} from '../../core/templator/index.js'
+import {modal} from '../../core/utils/index.js';
 
 let search = '';
 let newUserLogin = '';
@@ -8,7 +8,7 @@ let newUserLogin = '';
 const onNewUserLoginInput = (e: Event) => {
   const target = e.target as HTMLFormElement;
   newUserLogin = target.value;
-  chats.setProps({ newUserLogin });
+  chats.setProps({newUserLogin});
 };
 
 const onSubmit = (e: Event) => {
@@ -21,7 +21,7 @@ const onSubmit = (e: Event) => {
 const onSearch = (e: Event) => {
   const target = e.target as HTMLFormElement;
   search = target.value;
-  chats.setProps({ search });
+  chats.setProps({search});
 };
 
 const chats = new Chats({

@@ -6,7 +6,7 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
 } from '../../core/validation/index.js';
-import { render } from '../../core/templator/index.js'
+import {render} from '../../core/templator/index.js'
 
 let fields = {
   mail: '',
@@ -31,9 +31,9 @@ const signinFormValidator = new FormValidator({
 
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  fields = { ...fields, [target.name]: target.value };
+  fields = {...fields, [target.name]: target.value};
 
-  signin.setProps({ fields });
+  signin.setProps({fields});
 };
 
 const onFocusout = (e: Event) => {
@@ -41,7 +41,7 @@ const onFocusout = (e: Event) => {
   if (target.tagName !== 'INPUT') return;
 
   signinFormValidator.validate(target.name, target.value, fields.password);
-  signin.setProps({ formState: signinFormValidator.formState });
+  signin.setProps({formState: signinFormValidator.formState});
 };
 
 const onSubmit = (e: Event) => {
@@ -49,15 +49,15 @@ const onSubmit = (e: Event) => {
   const formData = new FormData(e.target as HTMLFormElement);
   const aggregatedFormData = Object.fromEntries(formData.entries());
 
-  signinFormValidator.validateAll(aggregatedFormData, { password_twice: [fields.password] });
-  signin.setProps({ formState: signinFormValidator.formState });
+  signinFormValidator.validateAll(aggregatedFormData, {password_twice: [fields.password]});
+  signin.setProps({formState: signinFormValidator.formState});
   
   if (signinFormValidator.valid) {
     tryToSignin(aggregatedFormData);
   }
 };
 
-const tryToSignin = (aggregatedFormData: { [key: string]: any }) => {
+const tryToSignin = (aggregatedFormData: {[key: string]: any}) => {
   console.log(aggregatedFormData);
 };
 

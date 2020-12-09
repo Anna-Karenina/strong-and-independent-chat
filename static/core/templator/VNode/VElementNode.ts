@@ -1,6 +1,6 @@
-import VNode, { NodeType } from './VNode.js';
-import { getTagMeta, IMetaAttribute, IMetaListener } from '../utils/meta.js';
-import { get, isEqual } from '../../utils/index.js';
+import VNode, {NodeType} from './VNode.js';
+import {getTagMeta, IMetaAttribute, IMetaListener} from '../utils/meta.js';
+import {get, isEqual} from '../../utils/index.js';
 
 interface IMeta {
   listeners: IMetaListener [],
@@ -50,12 +50,12 @@ export default class VElementNode extends VNode {
     const processedClassName = this.setValuesFromContext(this.meta.className, ctx, '');
     const classes = processedClassName.split(/\s+/).filter((v: string) => v);
 
-    const attributes = this.meta.attributes.map(({ name, value }) => ({
+    const attributes = this.meta.attributes.map(({name, value}) => ({
       name,
       value: this.setValuesFromContext(value, ctx, '')
     }));
 
-    return { attributes, classes };
+    return {attributes, classes};
   }
 
   private addClasses(newState: IState) {
@@ -70,17 +70,17 @@ export default class VElementNode extends VNode {
     if (!this.el) return;
     if (isEqual(newState.attributes, this.state.attributes)) return;
 
-    this.state.attributes.forEach(({ name }) => this.el && this.el.removeAttribute(name));
-    newState.attributes.forEach(({ name, value }) => this.el && this.el.setAttribute(name, value));
+    this.state.attributes.forEach(({name}) => this.el && this.el.removeAttribute(name));
+    newState.attributes.forEach(({name, value}) => this.el && this.el.setAttribute(name, value));
   }
 
   private setListeners(ctx: object) {
     if (this.listeners.length) return;
 
-    this.meta.listeners.forEach(({ event, handlerName }) => {
+    this.meta.listeners.forEach(({event, handlerName}) => {
       const handler = get(ctx, handlerName) as Function;
       this.el && this.el.addEventListener(event, handler as EventListener);
-      this.listeners.push({ event, handler });
+      this.listeners.push({event, handler});
     });
   }
 

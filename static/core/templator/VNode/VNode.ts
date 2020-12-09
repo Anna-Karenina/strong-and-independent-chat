@@ -1,4 +1,4 @@
-import { get } from '../../utils/get.js';
+import {get} from '../../utils/get.js';
 
 interface IMeta {
   [key: string]: any,

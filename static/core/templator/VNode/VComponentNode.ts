@@ -1,6 +1,6 @@
-import VNode, { NodeType } from './VNode.js';
-import { IProps, ComponentConstructor } from '../../component/index.js';
-import { getTagMeta, IMetaAttribute } from '../utils/meta.js';
+import VNode, {NodeType} from './VNode.js';
+import {IProps, ComponentConstructor} from '../../component/index.js';
+import {getTagMeta, IMetaAttribute} from '../utils/meta.js';
 
 interface IMeta {
   props: IMetaAttribute [],
@@ -22,13 +22,13 @@ export default class VComponentNode extends VNode {
   }
 
   private getMetaFromTag(tag: string) {
-    const { attributes: props } = getTagMeta(tag);
+    const {attributes: props} = getTagMeta(tag);
     this.meta.props = props;
   }
 
   render(ctx: object) {
-    const props: IProps = this.meta.props.reduce((acc: IProps, { name, value }) => {
-      return { ...acc, [name]: this.setValuesFromContext(value, ctx) };
+    const props: IProps = this.meta.props.reduce((acc: IProps, {name, value}) => {
+      return {...acc, [name]: this.setValuesFromContext(value, ctx)};
     }, {});
 
     if (!this._instance) {

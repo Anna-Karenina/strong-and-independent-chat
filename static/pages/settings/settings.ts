@@ -1,12 +1,12 @@
 import Settings from '../../blocks/Settings/index.js';
-import { render } from '../../core/templator/index.js'
+import {render} from '../../core/templator/index.js'
 import {
   FormValidator,
   textFiledScheme,
   emailScheme,
   phoneScheme,
 } from '../../core/validation/index.js';
-import { modal } from '../../core/utils/index.js';
+import {modal} from '../../core/utils/index.js';
 
 let fields = {
   mail: '',
@@ -28,8 +28,8 @@ const settingsFormValidator = new FormValidator({
 
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  fields = { ...fields, [target.name]: target.value };
-  settings.setProps({ fields });
+  fields = {...fields, [target.name]: target.value};
+  settings.setProps({fields});
 };
 
 const onFocusout = (e: Event) => {
@@ -37,7 +37,7 @@ const onFocusout = (e: Event) => {
   if (target.tagName !== 'INPUT') return;
   
   settingsFormValidator.validate(target.name, target.value);
-  settings.setProps({ formState: settingsFormValidator.formState });
+  settings.setProps({formState: settingsFormValidator.formState});
 };
 
 const onSubmit = (e: Event) => {
@@ -46,14 +46,14 @@ const onSubmit = (e: Event) => {
   const aggregatedFormData = Object.fromEntries(formData.entries());
 
   settingsFormValidator.validateAll(aggregatedFormData);
-  settings.setProps({ formState: settingsFormValidator.formState });
+  settings.setProps({formState: settingsFormValidator.formState});
   
   if (settingsFormValidator.valid) {
     tryToAuthorize(aggregatedFormData);
   }
 };
 
-const tryToAuthorize = (aggregatedFormData: { [key: string]: any }) => {
+const tryToAuthorize = (aggregatedFormData: {[key: string]: any}) => {
   console.log(aggregatedFormData);
 };
 

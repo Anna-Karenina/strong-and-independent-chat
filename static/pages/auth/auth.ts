@@ -1,6 +1,6 @@
 import Auth from '../../blocks/Auth/index.js';
-import { FormValidator, textFiledScheme } from '../../core/validation/index.js';
-import { render } from '../../core/templator/index.js'
+import {FormValidator, textFiledScheme} from '../../core/validation/index.js';
+import {render} from '../../core/templator/index.js'
 
 let fields = {
   login: '',
@@ -14,8 +14,8 @@ const authFormValidator = new FormValidator({
 
 const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  fields = { ...fields, [target.name]: target.value };
-  auth.setProps({ fields });
+  fields = {...fields, [target.name]: target.value};
+  auth.setProps({fields});
 };
 
 const onFocusout = (e: Event) => {
@@ -23,7 +23,7 @@ const onFocusout = (e: Event) => {
   if (target.tagName !== 'INPUT') return;
   
   authFormValidator.validate(target.name, target.value);
-  auth.setProps({ formState: authFormValidator.formState });
+  auth.setProps({formState: authFormValidator.formState});
 };
 
 const onSubmit = (e: Event) => {
@@ -32,14 +32,14 @@ const onSubmit = (e: Event) => {
   const aggregatedFormData = Object.fromEntries(formData.entries());
 
   authFormValidator.validateAll(aggregatedFormData);
-  auth.setProps({ formState: authFormValidator.formState });
+  auth.setProps({formState: authFormValidator.formState});
   
   if (authFormValidator.valid) {
     tryToAuthorize(aggregatedFormData);
   }
 };
 
-const tryToAuthorize = (aggregatedFormData: { [key: string]: any }) => {
+const tryToAuthorize = (aggregatedFormData: {[key: string]: any}) => {
   console.log(aggregatedFormData);
 };
 

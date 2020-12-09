@@ -1,5 +1,5 @@
 import EventBus from '../bus/index.js';
-import { isEqual, deepClone } from '../../core/utils/index.js';
+import {isEqual, deepClone} from '../../core/utils/index.js';
 
 export interface IProps {
   [key: string]: any,

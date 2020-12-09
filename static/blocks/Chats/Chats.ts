@@ -2,7 +2,7 @@ import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Field from '../../components/Field/index.js';
-import { chatsTemplate } from './chats.template.js';
+import {chatsTemplate} from './chats.template.js';
 
 interface IChatsProps {
   newUserLogin: string,

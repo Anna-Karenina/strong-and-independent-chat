@@ -1,4 +1,4 @@
-import VNode, { NodeType } from './VNode.js';
+import VNode, {NodeType} from './VNode.js';
 
 export default class VTextNode extends VNode {
   text = '';

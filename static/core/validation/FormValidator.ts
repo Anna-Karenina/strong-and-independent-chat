@@ -1,4 +1,4 @@
-import ValidationScheme, { IValidatorResult } from './ValidationScheme.js';
+import ValidationScheme, {IValidatorResult} from './ValidationScheme.js';
 
 interface IValidatorsMap {
   [fieldName: string]: ValidationScheme,
@@ -22,7 +22,7 @@ export default class FormValidator {
     this.formState = Object
       .keys(this.validatorsMap)
       .reduce((acc: IFormState, fieldName: string) => {
-        return { ...acc, [fieldName]: { valid: true, error: null } };
+        return {...acc, [fieldName]: {valid: true, error: null}};
       }, {});
   }
 
@@ -41,10 +41,10 @@ export default class FormValidator {
     }
 
     const result = scheme.validate(value, ...additionalArgs);
-    this.formState = { ...this.formState, [fieldName]: result };
+    this.formState = {...this.formState, [fieldName]: result};
   }
 
-  validateAll(fieldsMap: { [key: string]: any }, additionalArgsMap: { [key: string]: any[] } = {}) {
+  validateAll(fieldsMap: {[key: string]: any}, additionalArgsMap: {[key: string]: any[]} = {}) {
     Object.entries(fieldsMap).forEach(([field, value]) => {
       const additionalArgs = additionalArgsMap[field] || [];
       this.validate(field, String(value), ...additionalArgs);
