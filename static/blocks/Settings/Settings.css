@@ -29,9 +29,12 @@
   border-radius: 50%;
   color: #FFFFFF;
   background-color: var(--primary-color);
-  outline: none;
   border: none;
   cursor: pointer;
+}
+
+.settings__back-button:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .settings__content {

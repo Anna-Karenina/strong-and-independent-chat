@@ -20,9 +20,12 @@
   flex-grow: 1;
   padding: 10px 0 10px 20px;
   border: none;
-  outline: none;
   background-color: transparent;
   font-size: 13px;
   text-align: right;
   color: var(--secondary-text-color);
+}
+
+.settings-field__input:focus {
+  outline: 2px solid var(--primary-outline-color);
 }

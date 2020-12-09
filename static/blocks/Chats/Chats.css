@@ -33,8 +33,11 @@
   display: flex;
   align-items: center;
   border: none;
-  outline: none;
   cursor: pointer;
+}
+
+.profile-button:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .profile-button__icon {
@@ -176,8 +179,11 @@
   border-radius: 50%;
   background-color: transparent;
   border: none;
-  outline: none;
   cursor: pointer;
+}
+
+.user-bar__option-button:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .user-bar__option-button:hover {
@@ -222,7 +228,10 @@
   font-size: 12px;
   color: var(--secondary-text-color);
   border: none;
-  outline: none;
+}
+
+.send-message__input:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .send-message__submit {
@@ -234,9 +243,12 @@
   border-radius: 50%;
   color: #FFFFFF;
   background-color: var(--primary-color);
-  outline: none;
   border: none;
   cursor: pointer;
+}
+
+.send-message__submit:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .send-message__options {
