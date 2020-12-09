@@ -96,11 +96,11 @@ export default abstract class Component {
 
   show() {
     if (!this._element) return;
-    this._element.style.display = '';
+    this._element.classList.remove('hidden');
   }
 
   hide() {
     if (!this._element) return;
-    this._element.style.display = 'none';
+    this._element.classList.add('hidden');
   }
 }
