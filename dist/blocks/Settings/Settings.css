@@ -1,3 +1,6 @@
+@import "/components/MyButton/MyButton.css";
+@import "/components/SettingsField/SettingsField.css";
+
 .settings {
   width: 100%;
   height: 100vh;
@@ -11,7 +14,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: 1px solid #EAEAEA;
+  border-right: 1px solid var(--primary-border-color);
   cursor: pointer;
   transition: background .3s;
 }
@@ -29,9 +32,12 @@
   border-radius: 50%;
   color: #FFFFFF;
   background-color: var(--primary-color);
-  outline: none;
   border: none;
   cursor: pointer;
+}
+
+.settings__back-button:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .settings__content {
@@ -89,7 +95,7 @@
 }
 
 .settings__button:not(:last-child) {
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .settings__buttons {

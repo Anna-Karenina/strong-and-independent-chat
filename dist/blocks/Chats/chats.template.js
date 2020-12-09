@@ -75,7 +75,7 @@ export const chatsTemplate = `
             </li>
 
             <li class="message message-sender-interlocutor message-full-space">
-              <img src="/images/mock-chat-photo.jpg" class="message__photo" alt="photo">
+              <img src="/static/images/mock-chat-photo.jpg" class="message__photo" alt="photo">
               <span class="message-meta">
                 <span class="message-meta__send-time">12:10</span>
               </span>

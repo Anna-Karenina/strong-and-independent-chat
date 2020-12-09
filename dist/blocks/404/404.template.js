@@ -4,4 +4,5 @@ export const template404 = `
     <h2 class="fallback__subtitle">Не туда попали</h2>
     <button class="empty-button fallback__action">Назад к чатам</button>
   </main>
-`; 
+`;
+//# sourceMappingURL=404.template.js.map

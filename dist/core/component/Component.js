@@ -1,5 +1,5 @@
 import EventBus from '../bus/index.js';
-import { isEqual } from '../../core/utils/index.js';
+import { isEqual, deepClone } from '../../core/utils/index.js';
 ;
 export default class Component {
     constructor(props = {}) {
@@ -9,7 +9,7 @@ export default class Component {
                 return;
             }
             const oldProps = this.props;
-            this.props = { ...oldProps, ...nextProps };
+            this.props = deepClone({ ...oldProps, ...nextProps });
             this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, nextProps);
         };
         const eventBus = new EventBus();
@@ -64,12 +64,12 @@ export default class Component {
     show() {
         if (!this._element)
             return;
-        this._element.style.display = '';
+        this._element.classList.remove('hidden');
     }
     hide() {
         if (!this._element)
             return;
-        this._element.style.display = 'none';
+        this._element.classList.add('hidden');
     }
 }
 Component.EVENTS = {

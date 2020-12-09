@@ -6,23 +6,24 @@ const generateParsingTemplateError = (template) => {
     return new Error(`Ошибка при парсинге шаблона: ${template}`);
 };
 export const cutElementNode = (template, components) => {
-    const openTag = OPEN_TAG_REGEXP.exec(template);
+    let _template = template;
+    const openTag = OPEN_TAG_REGEXP.exec(_template);
     if (!openTag) {
-        throw generateParsingTemplateError(template);
+        throw generateParsingTemplateError(_template);
     }
     const [tag, tagName] = openTag;
-    template = template.slice(openTag.index + tag.length);
+    _template = _template.slice(openTag.index + tag.length);
     const beforeCloseTagRegExp = new RegExp(`(.*?)</${tagName}.*?>`);
     const openSimilarTagRegExp = new RegExp(`<${tagName}.*?>`, 'g');
     const closeSimilarTagRegExp = new RegExp(`</${tagName}.*?>`, 'g');
     let tagContent = '';
     let level = 1;
     let key = null;
-    while ((key = beforeCloseTagRegExp.exec(template))) {
+    while ((key = beforeCloseTagRegExp.exec(_template))) {
         const [matched, matchedWithoutCloseTag] = key;
         level += (matched.match(openSimilarTagRegExp) || []).length;
         level -= (matched.match(closeSimilarTagRegExp) || []).length;
-        template = template.slice(key.index + matched.length);
+        _template = _template.slice(key.index + matched.length);
         if (level <= 0) {
             tagContent += matchedWithoutCloseTag;
             break;
@@ -34,7 +35,7 @@ export const cutElementNode = (template, components) => {
         ? new VComponentNode(tag, components[tagName])
         : new VElementNode(tag);
     const element = { node, content: tagContent.trim() };
-    return [element, template];
+    return [element, _template];
 };
 export const cutTextNode = (template) => {
     const textRegExp = /[^<]*/;

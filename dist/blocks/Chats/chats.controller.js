@@ -1,4 +1,4 @@
-import Chats from '../../blocks/Chats/index.js';
+import Chats from './Chats.js';
 import { render } from '../../core/templator/index.js';
 import { modal } from '../../core/utils/index.js';
 let search = '';
@@ -32,4 +32,4 @@ if (addUserAction) {
     const addUserModal = modal('.add-user-modal');
     addUserAction.addEventListener('click', addUserModal.open);
 }
-//# sourceMappingURL=chats.js.map
+//# sourceMappingURL=chats.controller.js.map

@@ -1,4 +1,4 @@
-import Settings from '../../blocks/Settings/index.js';
+import Settings from './Settings.js';
 import { render } from '../../core/templator/index.js';
 import { FormValidator, textFiledScheme, emailScheme, phoneScheme, } from '../../core/validation/index.js';
 import { modal } from '../../core/utils/index.js';
@@ -56,4 +56,4 @@ if (changeAvatarAction) {
     const changeAvatarModal = modal('.change-avatar-modal');
     changeAvatarAction.addEventListener('click', changeAvatarModal.open);
 }
-//# sourceMappingURL=settings.js.map
+//# sourceMappingURL=settings.controller.js.map

@@ -1,4 +1,4 @@
-import Signin from '../../blocks/Signin/index.js';
+import Signin from './Signin.js';
 import { FormValidator, textFiledScheme, emailScheme, phoneScheme, passwordDuplicateScheme, } from '../../core/validation/index.js';
 import { render } from '../../core/templator/index.js';
 let fields = {
@@ -52,4 +52,4 @@ const signin = new Signin({
     onInput,
 });
 render('#app', signin);
-//# sourceMappingURL=signin.js.map
+//# sourceMappingURL=signin.controller.js.map

@@ -5,13 +5,11 @@ export default class Templator {
     constructor(template, opts = {}) {
         this._root = null;
         const { components = {} } = opts;
-        const [root, ...restNodes] = this._buildHtmlNodes(template, components);
-        if (restNodes.length)
-            throw new Error('Шаблон должен иметь один корневой элемент');
+        const root = this.buildHtmlNodes(template, components);
         this._root = root;
         console.log(root);
     }
-    _buildHtmlNodes(template, components) {
+    buildHtmlNodes(template, components, root = true) {
         let rowTemplate = template.replace(/[\n\r]/g, '').trim();
         if (!rowTemplate)
             return [];
@@ -19,13 +17,18 @@ export default class Templator {
         while (rowTemplate) {
             if (!rowTemplate.startsWith('<')) {
                 const [element, restTemplate] = cutTextNode(rowTemplate);
+                if (root) {
+                    return element.node;
+                }
                 nodes.push(element.node);
                 rowTemplate = restTemplate.trim();
                 continue;
             }
             const [element, restTemplate] = cutElementNode(rowTemplate, components);
             const { node, content = '' } = element;
-            node.setChildren(this._buildHtmlNodes(content, components));
+            node.setChildren(this.buildHtmlNodes(content, components, false));
+            if (root)
+                return node;
             nodes.push(node);
             rowTemplate = restTemplate.trim();
         }

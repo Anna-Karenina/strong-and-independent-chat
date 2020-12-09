@@ -5,3 +5,4 @@ export const template500 = `
     <button class="empty-button fallback__action">Назад к чатам</button>
   </main>
 `;
+//# sourceMappingURL=500.template.js.map

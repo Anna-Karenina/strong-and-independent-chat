@@ -6,6 +6,9 @@
   background-color: var(--primary-color);
   border-radius: 8px;
   border: none;
-  outline: none;
   cursor: pointer;
+}
+
+.primary-button:focus {
+  outline: 2px solid var(--primary-outline-color);
 }

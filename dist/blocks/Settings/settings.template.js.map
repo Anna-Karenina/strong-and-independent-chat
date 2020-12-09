@@ -1,1 +1,1 @@
-{"version":3,"file":"settings.template.js","sourceRoot":"","sources":["../../../static/blocks/Settings/settings.template.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,gBAAgB,GAAG;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CA8F/B,CAAC"}
+{"version":3,"file":"settings.template.js","sourceRoot":"","sources":["../../../src/blocks/Settings/settings.template.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,gBAAgB,GAAG;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CA8F/B,CAAC"}

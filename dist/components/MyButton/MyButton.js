@@ -6,10 +6,10 @@ export default class MyButton extends Component {
         super(props);
     }
     componentDidMount() {
-        this._templator = new Templator(template);
+        this.templator = new Templator(template);
     }
     render() {
-        return this._templator.render(this.props);
+        return this.templator.render(this.props);
     }
 }
 //# sourceMappingURL=MyButton.js.map

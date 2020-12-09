@@ -1,1 +1,1 @@
-{"version":3,"file":"my-button.template.js","sourceRoot":"","sources":["../../../static/components/MyButton/my-button.template.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,QAAQ,GAAG;;CAEvB,CAAC"}
+{"version":3,"file":"my-button.template.js","sourceRoot":"","sources":["../../../src/components/MyButton/my-button.template.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,QAAQ,GAAG;;CAEvB,CAAC"}

@@ -31,12 +31,15 @@
   border-bottom: 1px solid var(--primary-color);
   padding: 7px 0;
   background-color: transparent;
-  outline: none;
   font-weight: 500;
   font-size: 13px;
   color: var(--primary-text-color);
   z-index: 2;
   position: relative;
+}
+
+.field__input:focus {
+  outline: 2px solid var(--primary-outline-color);
 }
 
 .field__error {

@@ -1,4 +1,4 @@
-import Auth from '../../blocks/Auth/index.js';
+import Auth from './Auth.js';
 import { FormValidator, textFiledScheme } from '../../core/validation/index.js';
 import { render } from '../../core/templator/index.js';
 let fields = {
@@ -42,4 +42,4 @@ const auth = new Auth({
     onInput,
 });
 render('#app', auth);
-//# sourceMappingURL=auth.js.map
+//# sourceMappingURL=auth.controller.js.map
