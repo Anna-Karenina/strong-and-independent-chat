@@ -15,12 +15,12 @@
 
 Страницы проекта:
 
-- [/pages/auth](https://angry-lumiere-c6bdd3.netlify.app/pages/auth/)
-- [/pages/signin](https://angry-lumiere-c6bdd3.netlify.app/pages/signin/)
-- [/pages/chats](https://angry-lumiere-c6bdd3.netlify.app/pages/chats/)
-- [/pages/settings](https://angry-lumiere-c6bdd3.netlify.app/pages/settings/)
-- [/pages/404](https://angry-lumiere-c6bdd3.netlify.app/pages/404/)
-- [/pages/500](https://angry-lumiere-c6bdd3.netlify.app/pages/500/)
+- [/pages/auth](https://angry-lumiere-c6bdd3.netlify.app/static/pages/auth/)
+- [/pages/signin](https://angry-lumiere-c6bdd3.netlify.app/static/pages/signin/)
+- [/pages/chats](https://angry-lumiere-c6bdd3.netlify.app/static/pages/chats/)
+- [/pages/settings](https://angry-lumiere-c6bdd3.netlify.app/static/pages/settings/)
+- [/pages/404](https://angry-lumiere-c6bdd3.netlify.app/static/pages/404/)
+- [/pages/500](https://angry-lumiere-c6bdd3.netlify.app/static/pages/500/)
 
 ## Шаблонизатор
 
