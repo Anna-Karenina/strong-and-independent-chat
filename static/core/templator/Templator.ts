@@ -15,14 +15,13 @@ export default class Templator {
 
   constructor(template: string, opts: IOptions = {}) {
     const { components = {} } = opts;
-    const [root, ...restNodes] = this._buildHtmlNodes(template, components);
-    if (restNodes.length) throw new Error('Шаблон должен иметь один корневой элемент');
+    const root = this.buildHtmlNodes(template, components) as VNode;
     
     this._root = root;
     console.log(root);
   }
 
-  private _buildHtmlNodes (template: string, components: IComponents) {
+  private buildHtmlNodes (template: string, components: IComponents, root = true) {
     let rowTemplate = template.replace(/[\n\r]/g, '').trim();
     if (!rowTemplate) return [];
   
@@ -31,6 +30,9 @@ export default class Templator {
     while(rowTemplate) {
       if (!rowTemplate.startsWith('<')) {
         const [element, restTemplate] = cutTextNode(rowTemplate);
+        if (root) {
+          return element.node;
+        }
         nodes.push(element.node);
         rowTemplate = restTemplate.trim();
         continue;
@@ -39,7 +41,8 @@ export default class Templator {
       const [element, restTemplate] = cutElementNode(rowTemplate, components);
       const { node, content = '' } = element;
 
-      node.setChildren(this._buildHtmlNodes(content, components));
+      node.setChildren(this.buildHtmlNodes(content, components, false) as VNode[]);
+      if (root) return node;
       nodes.push(node);
 
       rowTemplate = restTemplate.trim();
