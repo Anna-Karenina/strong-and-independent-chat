@@ -5,7 +5,7 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "rootDir": "./static",
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true,
     "noUnusedLocals": true,
@@ -13,8 +13,8 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "lib": ["DOM", "ESNext", "DOM.Iterable"],
-    "baseUrl": "./static"
+    "baseUrl": "./src"
   },
-  "include": ["static"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
