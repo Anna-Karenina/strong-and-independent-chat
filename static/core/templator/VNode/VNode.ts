@@ -27,7 +27,7 @@ export default abstract class VNode {
     let key = null;
 
     while ((key = TEMPLATE_REGEXP.exec(result))) {
-      if (key[1]) {
+      if (key && key[1]) {
         const tmplValue = key[1].trim();
         const data = get(ctx, tmplValue, defaultValue);
         if (typeof data !== 'string') {
