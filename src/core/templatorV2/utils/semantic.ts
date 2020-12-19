@@ -1,5 +1,6 @@
-import {TTemplatorComponents, TSemanticNode} from '../types/index.js';
+import {TTemplatorComponents, TSemanticNode, TAttrs} from '../types/index.js';
 import {IProps} from '../../component/index.js';
+import {getAttrs} from './attrs.js';
 
 type TCutResult = [TSemanticNode, string];
 
@@ -13,7 +14,7 @@ const generateParsingTemplateError = (template: string): Error => {
 
 const createSemanticNode = (
   type: string,
-  attrs = {},
+  attrs: TAttrs = {},
   children: TSemanticNode[] = []
 ): TSemanticNode => ({type, attrs, children});
 
@@ -49,9 +50,10 @@ const cutElement = (template: string, components: TTemplatorComponents): TCutRes
     tagContent += matched;
   }
 
+  const attrs = getAttrs(tag);
   const children = buildSemanticTree(tagContent, components, false) as TSemanticNode[];
-  const node = createSemanticNode(tagName, {}, children);
-  
+  const node = createSemanticNode(tagName, attrs, children);
+
   const componentClass = components[tagName];
   if (componentClass) {
     node.attrs.__instantiate = (props: IProps) => new componentClass(props);
