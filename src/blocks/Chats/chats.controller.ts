@@ -1,5 +1,5 @@
 import Chats from './Chats.js';
-import {render} from '../../core/templator/index.js'
+import {render} from '../../core/templatorV2/index.js'
 import {modal} from '../../core/utils/index.js';
 
 let search = '';
