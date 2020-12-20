@@ -24,3 +24,16 @@ export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode 
       return new VElementNode(semanticNode, ctx, children);
   }
 };
+
+export const renderVirtualTree = (virtualNode: VNode): HTMLElement | Text => {
+  const $el = virtualNode.render();
+
+  const children = virtualNode.children || [];
+  const $children = children.map((child) => renderVirtualTree(child));
+
+  $children.forEach(($child) => {
+    $el?.appendChild($child as HTMLElement | Text);
+  });
+
+  return $el as HTMLElement | Text;
+};

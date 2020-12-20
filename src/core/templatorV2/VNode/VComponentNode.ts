@@ -1,7 +1,8 @@
 import VNode, {NodeType} from './VNode.js';
-import Component from '../../component/index.js';
+import Component from '../../componentV2/index.js';
 import {TSemanticNode, TAttrs, TCtx} from '../types/index.js';
 import {parseAttributes} from '../utils/attrs.js';
+import {renderComponent} from '../utils/render.js';
 
 export default class VComponentNode extends VNode {
   private instantiate: Function;
@@ -17,6 +18,6 @@ export default class VComponentNode extends VNode {
 
   render() {
     this.instance = this.instantiate(this.props);
-    return this.instance?.getContent() || null;
+    return renderComponent(this.instance as Component);
   }
 }

@@ -1,4 +1,4 @@
-import {ComponentConstructor} from '../../component/index.js';
+import {ComponentConstructor} from '../../componentV2/index.js';
 
 export type TTemplatorComponents = Record<string, ComponentConstructor>;
 

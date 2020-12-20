@@ -20,6 +20,14 @@ export default class VElementNode extends VNode {
   render() {
     const $el = document.createElement(this.tagName);
 
+    Object.entries(this.attributes).forEach(([attr, value]) => {
+      $el.setAttribute(attr, String(value));
+    });
+
+    Object.entries(this.listeners).forEach(([eventName, listener]) => {
+      $el.addEventListener(eventName, listener as EventListener);
+    });
+
     return $el;
   }
 };

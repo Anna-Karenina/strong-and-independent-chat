@@ -7,6 +7,8 @@ export enum NodeType {
 export default abstract class VNode {
   nodeType: NodeType;
 
+  children?: VNode [];
+
   constructor(nodeType: NodeType) {
     this.nodeType = nodeType; 
   }
