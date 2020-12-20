@@ -12,5 +12,6 @@ export const renderComponent = (component: Component) => {
   const $el = renderVirtualTree(virtualNode);
 
   component.element = $el;
+  component.virtualNode = virtualNode;
   return $el;
 };

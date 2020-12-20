@@ -1,6 +1,6 @@
 import VNode, {NodeType} from './VNode.js';
 import Component from '../../componentV2/index.js';
-import {TSemanticNode, TAttrs, TCtx} from '../types/index.js';
+import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types/index.js';
 import {parseAttributes} from '../utils/attrs.js';
 import {renderComponent} from '../utils/render.js';
 
@@ -19,5 +19,12 @@ export default class VComponentNode extends VNode {
   render() {
     this.instance = this.instantiate(this.props);
     return renderComponent(this.instance as Component);
+  }
+
+  diff(newVNode: VComponentNode): TPatch {
+    return ($el) => {
+      console.log(newVNode);
+      return $el;
+    };
   }
 }

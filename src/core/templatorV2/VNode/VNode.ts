@@ -1,3 +1,5 @@
+import {TPatch} from '../types/index.js';
+
 export enum NodeType {
   TextNode = 1,
   ElementNode = 2,
@@ -14,4 +16,6 @@ export default abstract class VNode {
   }
 
   abstract render(): Element | Text | null;
+
+  abstract diff(newVNode: VNode): TPatch;
 }

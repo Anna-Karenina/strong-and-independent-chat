@@ -1,5 +1,5 @@
 import {TTemplatorComponents, TSemanticNode, TAttrs} from '../types/index.js';
-import {IProps} from '../../component/index.js';
+import {IProps} from '../../componentV2/index.js';
 import {getAttrs} from './attrs.js';
 
 type TCutResult = [TSemanticNode, string];

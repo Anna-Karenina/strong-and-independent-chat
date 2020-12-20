@@ -1,5 +1,5 @@
 import VNode, {NodeType} from './VNode.js';
-import {TSemanticNode, TAttrs, TListeners, TCtx} from '../types/index.js';
+import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types/index.js';
 import {parseAttributes, parseListeners} from '../utils/attrs.js';
 
 export default class VElementNode extends VNode {
@@ -29,5 +29,72 @@ export default class VElementNode extends VNode {
     });
 
     return $el;
+  }
+
+  diff(newVNode: VElementNode): TPatch {
+    return ($el) => {
+      const attrsPatch = this.patchAttributes(newVNode.attributes);
+      const listenersPatch = this.patchListeners(newVNode.listeners);
+
+      attrsPatch($el as HTMLElement);
+      listenersPatch($el as HTMLElement);
+      return $el;
+    };
+  }
+
+  patchAttributes(newAttributes: TAttrs) {
+    const patches: TPatch[] = [];
+
+    Object.keys(this.attributes).forEach((attr) => {
+      if (!newAttributes.hasOwnProperty(attr)) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeAttribute(attr);
+        });
+      }
+    });
+
+    Object.keys(newAttributes).forEach((attr) => {
+      if (newAttributes[attr] !== this.attributes[attr]) {
+        patches.push(($el: HTMLElement) => {
+          $el.setAttribute(attr, String(newAttributes[attr]));
+        });
+      }
+    });
+
+
+    return ($el: HTMLElement) => {
+      patches.forEach((patch) => patch($el));
+    };
+  }
+
+  patchListeners(newListeners: TListeners) {
+    const patches: TPatch[] = [];
+
+    Object.keys(this.listeners).forEach((eventName) => {
+      if (!newListeners.hasOwnProperty(eventName)) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeEventListener(eventName, this.listeners[eventName] as EventListener);
+        });
+      }
+    });
+
+    Object.keys(newListeners).forEach((eventName) => {
+      if (!this.listeners.hasOwnProperty(eventName)) {
+        patches.push(($el: HTMLElement) => {
+          $el.addEventListener(eventName, newListeners[eventName] as EventListener);
+        });
+      }
+      else if (newListeners[eventName] !== this.listeners[eventName]) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeEventListener(eventName, this.listeners[eventName] as EventListener);
+          $el.addEventListener(eventName, newListeners[eventName] as EventListener);
+        });
+      }
+    });
+
+
+    return ($el: HTMLElement) => {
+      patches.forEach((patch) => patch($el));
+    };
   }
 };

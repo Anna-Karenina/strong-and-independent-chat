@@ -20,9 +20,11 @@ class MyButton extends Component {
 const testTemplate = `
   <main class="auth">
     <div class="card">
-    <input :type="inputType">
+      <input :type="inputType" :value="value">
+      <h2>{{ title }}</h2>
       <button @click="onClick">Click me!</button>
       <my-button :text="buttonText" />
+      <my-button :text="secondButtonText" />
     </div>
   </main>
 `;
@@ -34,8 +36,11 @@ const testTemplator = Templator.compile(testTemplate, {
 });
 
 interface ITestProps {
+  title: string,
+  value: string,
   inputType: string,
   buttonText: string,
+  secondButtonText: string,
   onClick: Function,
 };
 class Test extends Component {
@@ -44,15 +49,24 @@ class Test extends Component {
   }
 
   render() {
-    return testTemplator(this.props);
+    const vDom = testTemplator(this.props);
+    console.log(vDom);
+    return vDom
   }
 }
 
 const test = new Test({
+  title: 'Title',
+  value: '',
   inputType: 'password',
   buttonText: 'Text!',
+  secondButtonText: 'secondButtonText!',
   onClick: () => console.log('click!'),
 });
 
 console.log(test);
 render('#app', test);
+
+setTimeout(() => {
+  test.setProps({ title: 'MEGA NEW TITLE', value: 'input value :)', onClick: () => console.log('other click!'), });
+}, 3000)

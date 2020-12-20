@@ -1,5 +1,6 @@
 import EventBus from '../bus/index.js';
 import VNode from '../templatorV2/VNode/VNode.js';
+import {diff} from '../templatorV2/index.js';
 import {isEqual, deepClone} from '../../core/utils/index.js';
 
 export interface IProps {
@@ -19,6 +20,8 @@ export default abstract class Component {
   private eventBus: () => EventBus
 
   private _element: HTMLElement | Text | null = null;
+
+  private _virtualNode: VNode | null = null;
 
   constructor(props: IProps = {}) {
     const eventBus = new EventBus();
@@ -49,8 +52,11 @@ export default abstract class Component {
 
   private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
+    if (response && this.virtualNode && this.element) {
+      const newVirtualNode = this.render();
+      const patch = diff(this.virtualNode, newVirtualNode);
 
+      this.element = patch(this.element) as HTMLElement;
     }
   }
 
@@ -78,6 +84,14 @@ export default abstract class Component {
     }
 
     this._element = el;
+  }
+
+  get virtualNode() {
+    return this._virtualNode;
+  }
+
+  set virtualNode(virtualNode) {
+    this._virtualNode = virtualNode;
   }
 
   _render() {}

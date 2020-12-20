@@ -1,6 +1,6 @@
 import {get} from '../../utils/get.js';
 import VNode, {NodeType} from './VNode.js';
-import {TSemanticNode, TCtx} from '../types/index.js';
+import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
 
 export default class VTextNode extends VNode {
   textContent: string = '';
@@ -33,5 +33,14 @@ export default class VTextNode extends VNode {
     const $el = document.createTextNode(this.textContent);
 
     return $el;
+  }
+
+  diff(newVNode: VTextNode): TPatch {
+    return ($el) => {
+      if (newVNode.textContent !== this.textContent) {
+        $el.textContent = newVNode.textContent;
+      }
+      return $el;
+    };
   }
 }
