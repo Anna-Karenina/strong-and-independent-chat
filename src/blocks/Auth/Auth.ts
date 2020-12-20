@@ -1,7 +1,7 @@
-import Component from '../../core/componentV2/index.js';
-import Templator from '../../core/templatorV2/index.js';
-import MyButton from '../../components/MyButtonV2/index.js';
-import Field from '../../components/FieldV2/index.js';
+import Component from '../../core/component/index.js';
+import Templator from '../../core/templator/index.js';
+import MyButton from '../../components/MyButton/index.js';
+import Field from '../../components/Field/index.js';
 import {IFormState} from '../../core/validation/index.js';
 import {authTemplate} from './auth.template.js';
 

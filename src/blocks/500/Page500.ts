@@ -1,5 +1,5 @@
-import Component from '../../core/componentV2/index.js';
-import Templator from '../../core/templatorV2/index.js';
+import Component from '../../core/component/index.js';
+import Templator from '../../core/templator/index.js';
 import {template500} from './500.template.js';
 
 interface IPage500Props {};

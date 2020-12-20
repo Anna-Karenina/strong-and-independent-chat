@@ -1,114 +1,104 @@
 import VNode, {NodeType} from './VNode.js';
-import {getTagMeta, IMetaAttribute, IMetaListener} from '../utils/meta.js';
-import {get, isEqual} from '../../utils/index.js';
-
-interface IMeta {
-  listeners: IMetaListener [],
-  attributes: IMetaAttribute [],
-  [key: string]: any,
-};
-
-interface IAttribute {
-  name: string,
-  value: any,
-};
-
-interface IListener {
-  event: string,
-  handler: Function,
-};
-
-interface IState {
-  attributes: IAttribute [],
-  classes: string [],
-};
+import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types/index.js';
+import {parseAttributes, parseListeners} from '../utils/attrs.js';
 
 export default class VElementNode extends VNode {
-  el: HTMLElement | null;
+  tagName: string;
+  children: VNode[]
+  attributes: TAttrs;
+  listeners: TListeners;
 
-  children: VNode[] = [];
-
-  meta: IMeta;
-
-  state: IState = {
-    attributes: [],
-    classes: [],
-  };
-
-  listeners: IListener[] = [];
-
-  constructor(openTag: string) {
+  constructor(semanticNode: TSemanticNode, ctx: TCtx, children: VNode[] = []) {
     super(NodeType.ElementNode);
-    this.getMetaFromTag(openTag);
+    this.tagName = semanticNode.type;
+    this.children = children;
+
+    this.attributes = parseAttributes(semanticNode.attrs, ctx);
+    this.listeners = parseListeners(semanticNode.attrs, ctx);
   }
 
-  private getMetaFromTag(tag: string) {
-    Object.assign(this.meta, getTagMeta(tag));
-  }
+  render() {
+    const $el = document.createElement(this.tagName);
 
-  private computeState(ctx: object): IState {
-    const processedClassName = this.setValuesFromContext(this.meta.className, ctx, '');
-    const classes = processedClassName.split(/\s+/).filter((v: string) => v);
-
-    const attributes = this.meta.attributes.map(({name, value}) => ({
-      name,
-      value: this.setValuesFromContext(value, ctx, '')
-    }));
-
-    return {attributes, classes};
-  }
-
-  private addClasses(newState: IState) {
-    if (!this.el) return;
-    if (isEqual(newState.classes, this.state.classes)) return;
-    
-    this.state.classes.forEach((className) => this.el && this.el.classList.remove(className));
-    newState.classes.forEach((className) => this.el && this.el.classList.add(className));
-  }
-
-  private setAttrs(newState: IState) {
-    if (!this.el) return;
-    if (isEqual(newState.attributes, this.state.attributes)) return;
-
-    this.state.attributes.forEach(({name}) => this.el && this.el.removeAttribute(name));
-    newState.attributes.forEach(({name, value}) => this.el && this.el.setAttribute(name, value));
-  }
-
-  private setListeners(ctx: object) {
-    if (this.listeners.length) return;
-
-    this.meta.listeners.forEach(({event, handlerName}) => {
-      const handler = get(ctx, handlerName) as Function;
-      this.el && this.el.addEventListener(event, handler as EventListener);
-      this.listeners.push({event, handler});
+    Object.entries(this.attributes).forEach(([attr, value]) => {
+      $el.setAttribute(attr, String(value));
     });
+
+    Object.entries(this.listeners).forEach(([eventName, listener]) => {
+      $el.addEventListener(eventName, listener as EventListener);
+    });
+
+    return $el;
   }
 
-  render(ctx: object) {
-    let firstRender = false;
-    if (!this.el) {
-      this.el = document.createElement(this.meta.tagName);
-      firstRender = true;
-    }
+  diff(newVNode: VElementNode): TPatch {
+    return ($el) => {
+      const attrsPatch = this.patchAttributes(newVNode.attributes);
+      const listenersPatch = this.patchListeners(newVNode.listeners);
 
-    const newState = this.computeState(ctx);
-    this.setListeners(ctx);
+      attrsPatch($el as HTMLElement);
+      listenersPatch($el as HTMLElement);
+      return $el;
+    };
+  }
 
-    this.addClasses(newState);
-    this.setAttrs(newState);
+  isSimilar(newVNode: VElementNode) {
+    return this.tagName === newVNode.tagName;
+  }
 
-    this.children.forEach((child) => {
-      const renderedChild = child.render(ctx);
-      if (firstRender && this.el) {
-        this.el.appendChild(renderedChild);
+  patchAttributes(newAttributes: TAttrs) {
+    const patches: TPatch[] = [];
+
+    Object.keys(this.attributes).forEach((attr) => {
+      if (!newAttributes.hasOwnProperty(attr)) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeAttribute(attr);
+        });
       }
     });
 
-    this.state = newState;
-    return this.el;
+    Object.keys(newAttributes).forEach((attr) => {
+      if (newAttributes[attr] !== this.attributes[attr]) {
+        patches.push(($el: HTMLElement) => {
+          $el.setAttribute(attr, String(newAttributes[attr]));
+        });
+      }
+    });
+
+
+    return ($el: HTMLElement) => {
+      patches.forEach((patch) => patch($el));
+    };
   }
 
-  setChildren(children: VNode [] = []) {
-    this.children = children;
+  patchListeners(newListeners: TListeners) {
+    const patches: TPatch[] = [];
+
+    Object.keys(this.listeners).forEach((eventName) => {
+      if (!newListeners.hasOwnProperty(eventName)) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeEventListener(eventName, this.listeners[eventName] as EventListener);
+        });
+      }
+    });
+
+    Object.keys(newListeners).forEach((eventName) => {
+      if (!this.listeners.hasOwnProperty(eventName)) {
+        patches.push(($el: HTMLElement) => {
+          $el.addEventListener(eventName, newListeners[eventName] as EventListener);
+        });
+      }
+      else if (newListeners[eventName] !== this.listeners[eventName]) {
+        patches.push(($el: HTMLElement) => {
+          $el.removeEventListener(eventName, this.listeners[eventName] as EventListener);
+          $el.addEventListener(eventName, newListeners[eventName] as EventListener);
+        });
+      }
+    });
+
+
+    return ($el: HTMLElement) => {
+      patches.forEach((patch) => patch($el));
+    };
   }
 };

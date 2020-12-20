@@ -1,24 +1,50 @@
+import {get} from '../../utils/get.js';
 import VNode, {NodeType} from './VNode.js';
+import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
 
 export default class VTextNode extends VNode {
-  text = '';
+  textContent: string = '';
 
-  constructor(text: string) {
+  constructor(semanticNode: TSemanticNode, ctx: TCtx) {
     super(NodeType.TextNode);
-    this.meta.text = text;
+
+    const textContent = String(semanticNode.attrs.textContent);
+    this.buildTextContentFromCtx(textContent, ctx)
   }
 
-  render(ctx: object) {
-    if (!this.el) {
-      this.el = document.createTextNode('');
+  private buildTextContentFromCtx(str: string, ctx: TCtx) {
+    const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
+    let result = str;
+    let key = null;
+
+    while ((key = TEMPLATE_REGEXP.exec(result))) {
+      if (key && key[1]) {
+        const tmplValue = key[1].trim();
+        const data = get(ctx, tmplValue, '');
+        
+        result = result.replace(new RegExp(key[0], "gi"), String(data));
+      }
     }
 
-    const newText = this.setValuesFromContext(this.meta.text, ctx);
-    if (this.text !== newText) {
-      this.el.textContent = newText;
-    }
+    this.textContent = result;
+  }
 
-    this.text = newText;
-    return this.el;
+  render() {
+    const $el = document.createTextNode(this.textContent);
+
+    return $el;
+  }
+
+  diff(newVNode: VTextNode): TPatch {
+    return ($el) => {
+      if (newVNode.textContent !== this.textContent) {
+        $el.textContent = newVNode.textContent;
+      }
+      return $el;
+    };
+  }
+
+  isSimilar() {
+    return true;
   }
 }

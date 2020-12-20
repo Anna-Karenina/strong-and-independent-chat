@@ -1,8 +1,4 @@
-import {get} from '../../utils/get.js';
-
-interface IMeta {
-  [key: string]: any,
-};
+import {TPatch} from '../types/index.js';
 
 export enum NodeType {
   TextNode = 1,
@@ -11,32 +7,17 @@ export enum NodeType {
 };
 
 export default abstract class VNode {
-  protected meta: IMeta = {};
-  
-  el: HTMLElement | Text | null = null;
+  nodeType: NodeType;
+
+  children?: VNode [];
 
   constructor(nodeType: NodeType) {
-    this.meta.nodeType = nodeType;
+    this.nodeType = nodeType; 
   }
 
-  abstract render(ctx: object): any;
+  abstract render(): Element | Text | null;
 
-  protected setValuesFromContext(str: string, ctx: object, defaultValue?: any) {
-    const TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
-    let result = str;
-    let key = null;
+  abstract diff(newVNode: VNode): TPatch;
 
-    while ((key = TEMPLATE_REGEXP.exec(result))) {
-      if (key && key[1]) {
-        const tmplValue = key[1].trim();
-        const data = get(ctx, tmplValue, defaultValue);
-        if (typeof data !== 'string') {
-          return data;
-        }
-        result = result.replace(new RegExp(key[0], "gi"), data);
-      }
-    }
-
-    return result;
-  }
-};
+  abstract isSimilar(newVNode: VNode): boolean;
+}
