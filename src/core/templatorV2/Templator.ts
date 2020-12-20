@@ -1,6 +1,7 @@
 import {buildSemanticTree} from './utils/semantic.js';
+import {buildVirtualTree} from './utils/virtual.js';
 import {ComponentConstructor} from '../component/index.js';
-import {TSemanticNode} from './types/index.js';
+import {TSemanticNode, TCtx} from './types/index.js';
 
 interface IComponents {
   [key: string]: ComponentConstructor,
@@ -17,5 +18,11 @@ export default class Templator {
     this.semanticRoot = buildSemanticTree(template, components) as TSemanticNode;
 
     console.log(this.semanticRoot);
+  }
+
+  render(ctx: TCtx) {
+    if (!this.semanticRoot) return;
+    const virtualRoot = buildVirtualTree(this.semanticRoot, ctx);
+    console.log(virtualRoot);
   }
 }

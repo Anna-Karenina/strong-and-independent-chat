@@ -1,13 +1,20 @@
 import Templator from './core/templatorV2/index.js';
-import MyButton from './components/MyButton/index.js';
-import Field from './components/Field/index.js';
-import {authTemplate} from './blocks/Auth/auth.template.js';
+export const template = `
+  <main class="auth">
+    <div class="card">
+    <input :type="inputType">
+      <button @click="onClick">Click me!</button>
+      <button>{{ buttonText }}</button>
+    </div>
+  </main>
+`; 
 
-const templator = new Templator(authTemplate, {
-  components: {
-    'my-button': MyButton,
-    'field': Field,
-  },
-});
+const templator = new Templator(template);
+
+templator.render({
+  inputType: 'password',
+  buttonText: 'Text!',
+  onClick: () => console.log('click!'),
+})
 
 console.log(templator);
