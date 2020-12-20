@@ -1,5 +1,4 @@
 import {TTemplatorComponents, TSemanticNode, TAttrs} from '../types/index.js';
-import {IProps} from '../../componentV2/index.js';
 import {getAttrs} from './attrs.js';
 
 type TCutResult = [TSemanticNode, string];
@@ -56,7 +55,7 @@ const cutElement = (template: string, components: TTemplatorComponents): TCutRes
 
   const componentClass = components[tagName];
   if (componentClass) {
-    node.attrs.__instantiate = (props: IProps) => new componentClass(props);
+    node.attrs.__componentClass = componentClass;
   }
 
   return [node, _template];

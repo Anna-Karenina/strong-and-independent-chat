@@ -18,4 +18,6 @@ export default abstract class VNode {
   abstract render(): Element | Text | null;
 
   abstract diff(newVNode: VNode): TPatch;
+
+  abstract isSimilar(newVNode: VNode): boolean;
 }

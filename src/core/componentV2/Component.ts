@@ -57,6 +57,7 @@ export default abstract class Component {
       const patch = diff(this.virtualNode, newVirtualNode);
 
       this.element = patch(this.element) as HTMLElement;
+      this.virtualNode = newVirtualNode;
     }
   }
 

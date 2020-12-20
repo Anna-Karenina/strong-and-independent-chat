@@ -43,4 +43,8 @@ export default class VTextNode extends VNode {
       return $el;
     };
   }
+
+  isSimilar() {
+    return true;
+  }
 }

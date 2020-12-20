@@ -42,6 +42,10 @@ export default class VElementNode extends VNode {
     };
   }
 
+  isSimilar(newVNode: VElementNode) {
+    return this.tagName === newVNode.tagName;
+  }
+
   patchAttributes(newAttributes: TAttrs) {
     const patches: TPatch[] = [];
 

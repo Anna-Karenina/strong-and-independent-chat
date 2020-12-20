@@ -8,7 +8,7 @@ import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
 
 const isComponentNode = (semanticNode: TSemanticNode) => {
-  return semanticNode.attrs.hasOwnProperty('__instantiate');
+  return semanticNode.attrs.hasOwnProperty('__componentClass');
 }
 
 export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode => {
@@ -77,7 +77,7 @@ export const diff = (oldVNode: VNode, newVNode: VNode | undefined): TPatch => {
     };
   }
 
-  if (oldVNode.nodeType !== newVNode.nodeType) {
+  if (oldVNode.nodeType !== newVNode.nodeType || !oldVNode.isSimilar(newVNode)) {
     return ($node: HTMLElement | Text) => {
       const $newNode = renderVirtualTree(newVNode);
       $node.replaceWith($newNode);

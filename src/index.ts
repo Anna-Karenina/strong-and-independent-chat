@@ -68,5 +68,9 @@ console.log(test);
 render('#app', test);
 
 setTimeout(() => {
-  test.setProps({ title: 'MEGA NEW TITLE', value: 'input value :)', onClick: () => console.log('other click!'), });
+  test.setProps({ title: 'MEGA NEW TITLE', value: 'input value :)', buttonText: 'new button text!!!!' });
+}, 1500)
+
+setTimeout(() => {
+  test.setProps({ inputType: 'text' });
 }, 3000)
