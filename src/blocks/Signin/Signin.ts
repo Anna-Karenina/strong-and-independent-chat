@@ -1,7 +1,7 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import MyButton from '../../components/MyButton/index.js';
-import Field from '../../components/Field/index.js';
+import Component from '../../core/componentV2/index.js';
+import Templator from '../../core/templatorV2/index.js';
+import MyButton from '../../components/MyButtonV2/index.js';
+import Field from '../../components/FieldV2/index.js';
 import {IFormState} from '../../core/validation/index.js';
 import {signinTemplate} from './signin.template.js';
 
@@ -13,23 +13,19 @@ interface IProps {
   fields: {[key: string]: string},
 };
 
-export default class Signin extends Component {
-  private templator: Templator;
+const templator = Templator.compile(signinTemplate, {
+  components: {
+    'my-button': MyButton,
+    'field': Field,
+  },
+});
 
+export default class Signin extends Component {
   constructor(props: IProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(signinTemplate, {
-      components: {
-        'my-button': MyButton,
-        'field': Field,
-      },
-    });
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

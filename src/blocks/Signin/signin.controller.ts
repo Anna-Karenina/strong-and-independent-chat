@@ -6,7 +6,7 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
 } from '../../core/validation/index.js';
-import {render} from '../../core/templator/index.js'
+import {render} from '../../core/templatorV2/index.js'
 
 let fields = {
   mail: '',
