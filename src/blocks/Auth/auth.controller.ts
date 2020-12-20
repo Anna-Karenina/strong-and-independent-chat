@@ -1,6 +1,6 @@
 import Auth from './Auth.js';
 import {FormValidator, textFiledScheme} from '../../core/validation/index.js';
-import {render} from '../../core/templator/index.js'
+import {render} from '../../core/templatorV2/index.js'
 
 let fields = {
   login: '',
