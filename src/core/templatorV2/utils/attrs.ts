@@ -21,6 +21,13 @@ export const getAttrs = (tag: string): TAttrs => {
   return attrs;
 };
 
+export const pickServiceAttrs = (attrs: TAttrs): TAttrs => {
+  return Object
+    .keys(attrs)
+    .filter((attr) => attr.startsWith('$'))
+    .reduce((acc, attr) => ({...acc, [attr.slice(1)]: attrs[attr]}), {});
+};
+
 export const parseAttributes = (attrs: TAttrs, ctx:TCtx) => {
   const parsedAttrs: TAttrs = {};
   const attrsEntries = Object.entries(attrs);

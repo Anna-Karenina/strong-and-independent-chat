@@ -4,6 +4,9 @@ import VComponentNode from '../VNode/VComponentNode.js';
 import VNode from '../VNode/VNode.js';
 import {TEXT_NODE_TYPE} from './semantic.js';
 import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
+import {pickServiceAttrs} from './attrs.js';
+import {each} from './each.js';
+import {zip} from '../../utils/index.js';
 
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
 
@@ -11,7 +14,17 @@ const isComponentNode = (semanticNode: TSemanticNode) => {
   return semanticNode.attrs.hasOwnProperty('__componentClass');
 }
 
-export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode => {
+export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode[] => {
+  const serviceAttrs = pickServiceAttrs(semanticNode.attrs);
+
+  if (!serviceAttrs.each) {
+    return [createVirtualNode(semanticNode, ctx)];
+  }
+
+  return each(String(serviceAttrs.each), ctx).map((newCtx: TCtx) => createVirtualNode(semanticNode, newCtx))
+};
+
+export const createVirtualNode = (semanticNode: TSemanticNode, ctx: TCtx): VNode => {
   switch(true) {
     case isTextNode(semanticNode):
       return new VTextNode(semanticNode, ctx);
@@ -20,7 +33,7 @@ export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode 
       return new VComponentNode(semanticNode, ctx);
 
     default: 
-      const children = semanticNode.children.map((child) => buildVirtualTree(child, ctx));
+      const children = semanticNode.children.flatMap((child) => buildVirtualTree(child, ctx));
       return new VElementNode(semanticNode, ctx, children);
   }
 };
@@ -44,28 +57,28 @@ const diffChildren = (oldVChildren: VNode[], newVChildren: VNode[]): TPatch => {
     childPatches.push(diff(oldVChild, newVChildren[i]));
   });
 
-  const additionalPatches: TPatch[] = [];
-  for (const additionalVChild of newVChildren.slice(oldVChildren.length)) {
-    additionalPatches.push(($node) => {
-      $node.appendChild(renderVirtualTree(additionalVChild));
-      return $node;
-    });
-  }
+  const additionalPatch: TPatch = ($node) => {
+    const additionalVChildren = newVChildren.slice(oldVChildren.length);
+    if (!additionalVChildren.length) return $node;
+
+    const fragment = document.createDocumentFragment();
+    for (const additionalVChild of additionalVChildren) {
+      fragment.appendChild(renderVirtualTree(additionalVChild));
+    }
+
+    $node.appendChild(fragment);
+    return $node;
+  };
 
   return ($parent) => {
-    const $children = $parent.childNodes;
-
-    for (let i = 0; i < childPatches.length; i++) {
-      const $child = $children[i];
-      const patch = childPatches[i];
-
-      patch($child as HTMLElement);
+    const $children = [...$parent.childNodes];
+    for (const [patch, $child] of zip<TPatch, ChildNode>(childPatches, $children)) {
+      if (patch && $child) {
+        patch($child as HTMLElement);
+      }
     }
 
-    for (const patch of additionalPatches) {
-      patch($parent);
-    }
-
+    additionalPatch($parent);
     return $parent;
   };
 };

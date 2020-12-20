@@ -3,9 +3,10 @@ import Component from './core/componentV2/index.js';
 
 interface IMyButtonProps {
   text: string,
+  onClick?: Function,
 };
 
-const buttonTemplate = `<button>{{ text }}</button>`;
+const buttonTemplate = `<button @click="onClick">{{ text }}</button>`;
 const buttonTemplator = Templator.compile(buttonTemplate);
 class MyButton extends Component {
   constructor(props: IMyButtonProps) {
@@ -13,20 +14,22 @@ class MyButton extends Component {
   }
 
   render() {
-    return buttonTemplator(this.props);
+    const {
+      onClick = () => {},
+      text,
+    } = this.props;
+
+    return buttonTemplator({text, onClick});
   }
 }
 
 const testTemplate = `
-  <main class="auth">
-    <div class="card">
-      <input :type="inputType" :value="value">
-      <h2>{{ title }}</h2>
-      <button @click="onClick">Click me!</button>
-      <my-button :text="buttonText" />
-      <my-button :text="secondButtonText" />
+  <div class="parent">
+    <div class="card" $each="card in cards">
+      <h3>{{ card.title }}</h3>
+      <my-button :text="card.button" :onClick="card.onClick" />
     </div>
-  </main>
+  </div>
 `;
 
 const testTemplator = Templator.compile(testTemplate, {
@@ -36,12 +39,7 @@ const testTemplator = Templator.compile(testTemplate, {
 });
 
 interface ITestProps {
-  title: string,
-  value: string,
-  inputType: string,
-  buttonText: string,
-  secondButtonText: string,
-  onClick: Function,
+  cards: {title: string, button: string, onClick: Function} [];
 };
 class Test extends Component {
   constructor(props: ITestProps) {
@@ -56,21 +54,32 @@ class Test extends Component {
 }
 
 const test = new Test({
-  title: 'Title',
-  value: '',
-  inputType: 'password',
-  buttonText: 'Text!',
-  secondButtonText: 'secondButtonText!',
-  onClick: () => console.log('click!'),
+  cards: [
+    {title: 'Title 1', button: 'button text 1', onClick: () => console.log('1')},
+    {title: 'Title 2', button: 'button text 2', onClick: () => console.log('2')},
+    {title: 'Title 3', button: 'button text 3', onClick: () => console.log('3')},
+  ]
 });
 
 console.log(test);
 render('#app', test);
 
 setTimeout(() => {
-  test.setProps({ title: 'MEGA NEW TITLE', value: 'input value :)', buttonText: 'new button text!!!!' });
-}, 1500)
+  test.setProps({
+    cards: [
+      {title: 'Title 1', button: 'button text 1', onClick: () => console.log('1')},
+    ],
+  });
+}, 3000);
 
 setTimeout(() => {
-  test.setProps({ inputType: 'text' });
-}, 3000)
+  test.setProps({
+    cards: [
+      {title: 'Title 1', button: 'button text 1', onClick: () => console.log('1')},
+      {title: 'Title 2', button: 'button text 2', onClick: () => console.log('2')},
+      {title: 'Title 3', button: 'button text 3', onClick: () => console.log('3')},
+      {title: 'Title 4', button: 'button text 4', onClick: () => console.log('4')},
+      {title: 'Title 5', button: 'button text 5', onClick: () => console.log('5')},
+    ],
+  });
+}, 5000);

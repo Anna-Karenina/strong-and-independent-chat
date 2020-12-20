@@ -14,7 +14,11 @@ export default class Templator {
   static compile(template: string, opts: IOptions = {}) {
     const {components = {}} = opts;
     const semanticRoot = buildSemanticTree(template, components) as TSemanticNode;
+    console.log(semanticRoot);
 
-    return (ctx: TCtx) => buildVirtualTree(semanticRoot, ctx);
+    return (ctx: TCtx) => {
+      const [virtualNode] = buildVirtualTree(semanticRoot, ctx);
+      return virtualNode;
+    };
   }
 }
