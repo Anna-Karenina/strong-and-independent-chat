@@ -1,38 +1,47 @@
-import Component from '../../core/Component/index.js';
-import Templator from '../../core/templator/index.js'
+import Component from '../../core/componentV2/index.js';
+import Templator from '../../core/templatorV2/index.js'
 import {template} from './settings-field.template.js';
 
 interface ISettingsFieldProps {
   value: string,
-  type: string,
-  className: string,
-  name: string,
-  label: string,
+  type?: string,
+  className?: string,
+  name?: string,
+  label?: string,
   error?: string | null,
 };
 
-export default class SettingsField extends Component {
-  private templator: Templator;
+const templator = Templator.compile(template)
 
+export default class SettingsField extends Component {
   constructor(props: ISettingsFieldProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(template);
-  }
-
   render() {
+    const {
+      type = 'text',
+      className = '',
+      name = '',
+      label = '',
+      error,
+      value,
+    } = this.props;
+    
     const errorClasses = ['error'];
-    const errorText: string = this.props.error || '';
+    const errorText: string = error || '';
     if (!errorText) {
       errorClasses.push('hidden');
     }
 
-    return this.templator.render({
-      ...this.props,
+    return templator({
+      value,
+      type,
+      name,
+      label,
       errorText,
       errorClassName: errorClasses.join(' '),
+      className: ['settings-field', className]
     });
   }
 }

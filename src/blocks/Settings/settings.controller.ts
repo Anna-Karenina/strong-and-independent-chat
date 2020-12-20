@@ -1,5 +1,5 @@
 import Settings from './Settings.js';
-import {render} from '../../core/templator/index.js'
+import {render} from '../../core/templatorV2/index.js'
 import {
   FormValidator,
   textFiledScheme,
