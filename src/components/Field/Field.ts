@@ -1,37 +1,46 @@
-import Component from '../../core/Component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js'
 import {template} from './field.template.js';
 
 interface IFieldProps {
   value: string,
-  type: string,
-  className: string,
-  name: string,
-  label: string,
+  type?: string,
+  className?: string,
+  name?: string,
+  label?: string,
   error?: string | null,
 };
-export default class Field extends Component {
-  private templator: Templator;
 
+const templator = Templator.compile(template);
+
+export default class Field extends Component {
   constructor(props: IFieldProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(template);
-  }
-
   render() {
+    const {
+      value,
+      type = 'text',
+      className = '',
+      name = '',
+      label = '',
+      error,
+    } = this.props;
     const errorClasses = ['error', 'field__error'];
-    const errorText: string = this.props.error || '';
+    const errorText: string = error || '';
     if (!errorText) {
       errorClasses.push('hidden');
     }
 
-    return this.templator.render({
-      ...this.props,
+    return templator({
+      value,
+      name,
+      type,
+      label,
       errorText,
       errorClassName: errorClasses.join(' '),
+      className: ['field', className].join(' '),
     });
   }
 }

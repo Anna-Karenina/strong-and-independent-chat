@@ -9,8 +9,8 @@ export const signinTemplate = `
           type="text"
           label="Почта"
           name="mail"
-          error="{{ formState.mail.error }}"
-          value="{{ fields.mail }}"
+          :error="formState.mail.error"
+          :value="fields.mail"
         />
 
         <field
@@ -18,8 +18,8 @@ export const signinTemplate = `
           type="text"
           label="Логин"
           name="login"
-          error="{{ formState.login.error }}"
-          value="{{ fields.login }}"
+          :error="formState.login.error"
+          :value="fields.login"
         />
 
         <field
@@ -27,8 +27,8 @@ export const signinTemplate = `
           type="text"
           label="Имя"
           name="name"
-          error="{{ formState.name.error }}"
-          value="{{ fields.name }}"
+          :error="formState.name.error"
+          :value="fields.name"
         />
 
         <field
@@ -36,8 +36,8 @@ export const signinTemplate = `
           type="text"
           label="Фамилия"
           name="surname"
-          error="{{ formState.surname.error }}"
-          value="{{ fields.surname }}"
+          :error="formState.surname.error"
+          :value="fields.surname"
         />
 
         <field
@@ -45,8 +45,8 @@ export const signinTemplate = `
           type="tel"
           label="Телефон"
           name="phone"
-          error="{{ formState.phone.error }}"
-          value="{{ fields.phone }}"
+          :error="formState.phone.error"
+          :value="fields.phone"
         />
 
         <field
@@ -54,8 +54,8 @@ export const signinTemplate = `
           type="password"
           label="Пароль"
           name="password"
-          error="{{ formState.password.error }}"
-          value="{{ fields.password }}"
+          :error="formState.password.error"
+          :value="fields.password"
         />
 
         <field
@@ -63,8 +63,8 @@ export const signinTemplate = `
           type="password"
           label="Пароль (ещё раз)"
           name="password_twice"
-          error="{{ formState.password_twice.error }}"
-          value="{{ fields.password_twice }}"
+          :error="formState.password_twice.error"
+          :value="fields.password_twice"
         />
 
         <div class="signin__action-buttons">

@@ -11,8 +11,8 @@ export const authTemplate = `
           type="text"
           label="Логин"
           name="login"
-          error="{{ formState.login.error }}"
-          value="{{ fields.login }}"
+          :error="formState.login.error"
+          :value="fields.login"
         />
 
         <field
@@ -20,8 +20,8 @@ export const authTemplate = `
           type="password"
           label="Пароль"
           name="password"
-          error="{{ formState.password.error }}"
-          value="{{ fields.password }}"
+          :error="formState.password.error"
+          :value="fields.password"
         />
 
         <div class="auth__action-buttons">

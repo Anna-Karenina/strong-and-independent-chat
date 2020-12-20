@@ -4,18 +4,14 @@ import {template500} from './500.template.js';
 
 interface IPage500Props {};
 
-export default class Page500 extends Component {
-  private templator: Templator;
+const templator = Templator.compile(template500);
 
+export default class Page500 extends Component {
   constructor(props: IPage500Props) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(template500);
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

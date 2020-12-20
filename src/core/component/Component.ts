@@ -1,5 +1,7 @@
 import EventBus from '../bus/index.js';
-import {isEqual, deepClone} from '../../core/utils/index.js';
+import VNode from '../templator/VNode/VNode.js';
+import {diff} from '../templator/index.js';
+import {isEqual, deepClone} from '../utils/index.js';
 
 export interface IProps {
   [key: string]: any,
@@ -17,7 +19,9 @@ export default abstract class Component {
 
   private eventBus: () => EventBus
 
-  private _element: HTMLElement | null = null;
+  private _element: HTMLElement | Text | null = null;
+
+  private _virtualNode: VNode | null = null;
 
   constructor(props: IProps = {}) {
     const eventBus = new EventBus();
@@ -42,15 +46,18 @@ export default abstract class Component {
 
   private _componentDidMount() {
     this.componentDidMount();
-    this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
   }
 
   protected componentDidMount() {};
 
   private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
-      this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+    if (response && this.virtualNode && this.element) {
+      const newVirtualNode = this.render();
+      const patch = diff(this.virtualNode, newVirtualNode);
+
+      this.element = patch(this.element) as HTMLElement;
+      this.virtualNode = newVirtualNode;
     }
   }
 
@@ -72,19 +79,25 @@ export default abstract class Component {
     return this._element;
   }
 
-  _render() {
-    const el = this.render();
-
+  set element(el) {
     if (!this._element) {
-      this._element = el;
+      this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
     }
+
+    this._element = el;
   }
 
-  abstract render(): HTMLElement | null;
-
-  getContent() {
-    return this.element;
+  get virtualNode() {
+    return this._virtualNode;
   }
+
+  set virtualNode(virtualNode) {
+    this._virtualNode = virtualNode;
+  }
+
+  _render() {}
+
+  abstract render(): VNode;
 
   private makePropsProxy(props: IProps) {
     return new Proxy(props, {
@@ -96,11 +109,11 @@ export default abstract class Component {
 
   show() {
     if (!this._element) return;
-    this._element.classList.remove('hidden');
+    // this._element.classList.remove('hidden');
   }
 
   hide() {
     if (!this._element) return;
-    this._element.classList.add('hidden');
+    // this._element.classList.add('hidden');
   }
 }

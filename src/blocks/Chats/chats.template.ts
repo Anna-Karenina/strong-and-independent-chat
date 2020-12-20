@@ -11,7 +11,7 @@ export const chatsTemplate = `
           </button>
 
           <div class="search chat-select__search">
-            <input type="text" class="search__input" placeholder="Поиск" value="{{ search }}" @input="onSearch">
+            <input type="text" class="search__input" placeholder="Поиск" :value="search" @input="onSearch">
             <i class="fas fa-search search__icon"></i>
           </div>
         </div>
@@ -129,7 +129,7 @@ export const chatsTemplate = `
         <h2 class="card__title modal__title">Добавить пользователя</h2>
 
         <form @input="onNewUserLoginInput">
-          <field className="add-user-modal__field" type="text" label="Логин" name="login" value="{{ newUserLogin }}" />
+          <field className="add-user-modal__field" type="text" label="Логин" name="login" :value="newUserLogin" />
           <my-button className="add-user-modal__submit" type="button" text="Добавить" />
         </form>
       </div>

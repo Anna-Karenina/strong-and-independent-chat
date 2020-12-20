@@ -12,23 +12,18 @@ interface IChatsProps {
   onSearch: (e: Event) => any,
 };
 
+const templator = Templator.compile(chatsTemplate, {
+  components: {
+    'my-button': MyButton,
+    'field': Field,
+  },
+});
 export default class Chats extends Component {
-  private templator: Templator;
-
   constructor(props: IChatsProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(chatsTemplate, {
-      components: {
-        'my-button': MyButton,
-        'field': Field,
-      },
-    });
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

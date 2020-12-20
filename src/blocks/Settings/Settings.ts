@@ -13,23 +13,19 @@ interface ISettingsProps {
   fields: {[key: string]: string},
 };
 
-export default class Settings extends Component {
-  private templator: Templator;
+const templator = Templator.compile(settingsTemplate, {
+  components: {
+    'my-button': MyButton,
+    'settings-field': SettingsField,
+  },
+})
 
+export default class Settings extends Component {
   constructor(props: ISettingsProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(settingsTemplate, {
-      components: {
-        'my-button': MyButton,
-        'settings-field': SettingsField,
-      },
-    });
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

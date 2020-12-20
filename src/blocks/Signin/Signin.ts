@@ -13,23 +13,19 @@ interface IProps {
   fields: {[key: string]: string},
 };
 
-export default class Signin extends Component {
-  private templator: Templator;
+const templator = Templator.compile(signinTemplate, {
+  components: {
+    'my-button': MyButton,
+    'field': Field,
+  },
+});
 
+export default class Signin extends Component {
   constructor(props: IProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(signinTemplate, {
-      components: {
-        'my-button': MyButton,
-        'field': Field,
-      },
-    });
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

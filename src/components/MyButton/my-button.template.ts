@@ -1,3 +1,3 @@
 export const template = `
-  <button class="primary-button {{ className }}" type="{{ type }}">{{ text }}</button>
+  <button :class="className" :type="type" @click="onClick">{{ text }}</button>
 `;

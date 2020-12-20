@@ -13,23 +13,19 @@ interface IProps {
   fields: {[key: string]: string},
 };
 
-export default class Auth extends Component {
-  private templator: Templator;
+const templator = Templator.compile(authTemplate, {
+  components: {
+    'my-button': MyButton,
+    'field': Field,
+  },
+});
 
+export default class Auth extends Component {
   constructor(props: IProps) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(authTemplate, {
-      components: {
-        'my-button': MyButton,
-        'field': Field,
-      },
-    });
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };

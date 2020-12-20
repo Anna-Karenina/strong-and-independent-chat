@@ -4,18 +4,14 @@ import {template404} from './404.template.js';
 
 interface IPage404Props {};
 
-export default class Page404 extends Component {
-  private templator: Templator;
+const templator = Templator.compile(template404);
 
+export default class Page404 extends Component {
   constructor(props: IPage404Props) {
     super(props);
   }
 
-  componentDidMount() {
-    this.templator = new Templator(template404);
-  }
-
   render() {
-    return this.templator.render(this.props);
+    return templator(this.props);
   }
 };
