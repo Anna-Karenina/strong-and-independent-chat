@@ -1,3 +1,4 @@
+import Router from '../../core/router/index.js';
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
@@ -19,11 +20,22 @@ const templator = Templator.compile(chatsTemplate, {
   },
 });
 export default class Chats extends Component {
+  private router: Router;
+
   constructor(props: IChatsProps) {
     super(props);
+
+    this.router = new Router();
+  }
+
+  goToProfile = () => {
+    this.router.go('/settings');
   }
 
   render() {
-    return templator(this.props);
+    return templator({
+      ...this.props,
+      goToProfile: this.goToProfile,
+    });
   }
 };

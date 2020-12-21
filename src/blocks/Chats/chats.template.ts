@@ -5,7 +5,7 @@ export const chatsTemplate = `
       <div class="chat-select">
 
         <div class="chat-select__navigation">
-          <button class="profile-button">
+          <button class="profile-button" @click="goToProfile">
             Профиль
             <i class="fas fa-chevron-right profile-button__icon"></i>
           </button>

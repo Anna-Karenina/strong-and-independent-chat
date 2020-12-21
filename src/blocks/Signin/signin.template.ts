@@ -69,7 +69,7 @@ export const signinTemplate = `
 
         <div class="signin__action-buttons">
           <my-button className="signin__primary-button" type="submit" text="Зарегистрироваться" />
-          <button class="empty-button signin__empty-button" type="button">Войти</button>
+          <button @click="goToAuth" class="empty-button signin__empty-button" type="button">Войти</button>
         </div>
 
       </form>

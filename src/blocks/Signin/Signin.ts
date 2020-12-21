@@ -1,3 +1,4 @@
+import Router from '../../core/router/index.js';
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
@@ -21,11 +22,22 @@ const templator = Templator.compile(signinTemplate, {
 });
 
 export default class Signin extends Component {
+  private router: Router;
+
   constructor(props: IProps) {
     super(props);
+
+    this.router = new Router();
+  }
+
+  goToAuth = () => {
+    this.router.go('/auth');
   }
 
   render() {
-    return templator(this.props);
+    return templator({
+      ...this.props,
+      goToAuth: this.goToAuth,
+    });
   }
 };

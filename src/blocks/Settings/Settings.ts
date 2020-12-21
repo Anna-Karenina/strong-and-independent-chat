@@ -1,3 +1,4 @@
+import Router from '../../core/router/index.js';
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
@@ -21,11 +22,22 @@ const templator = Templator.compile(settingsTemplate, {
 })
 
 export default class Settings extends Component {
+  private router: Router;
+
   constructor(props: ISettingsProps) {
     super(props);
+
+    this.router = new Router();
+  }
+
+  goBack = () => {
+    this.router.back();
   }
 
   render() {
-    return templator(this.props);
+    return templator({
+      ...this.props,
+      goBack: this.goBack,
+    });
   }
 };

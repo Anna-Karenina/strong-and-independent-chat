@@ -2,7 +2,7 @@ export const settingsTemplate = `
   <div>
     <main class="settings">
 
-      <div class="settings__back">
+      <div class="settings__back" @click="goBack">
         <button class="settings__back-button">
           <i class="fas fa-arrow-left"></i>
         </button>

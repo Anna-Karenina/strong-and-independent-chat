@@ -26,7 +26,7 @@ export const authTemplate = `
 
         <div class="auth__action-buttons">
           <my-button className="auth__primary-button" type="submit" text="Авторизоваться" />
-          <button class="empty-button auth__empty-button" type="button">Нет аккаунта?</button>
+          <button @click="goToRegistration" class="empty-button auth__empty-button" type="button">Нет аккаунта?</button>
         </div>
 
       </form>
