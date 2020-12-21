@@ -41,7 +41,7 @@ export default class SettingsField extends Component {
       label,
       errorText,
       errorClassName: errorClasses.join(' '),
-      className: ['settings-field', className]
+      className: ['settings-field', className].join(' ')
     });
   }
 }
