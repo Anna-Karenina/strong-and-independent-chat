@@ -1,6 +1,6 @@
 import EventBus from '../bus/index.js';
 import VNode from '../templator/VNode/VNode.js';
-import {diff} from '../templator/index.js';
+import {diff, cleanerDom} from '../templator/index.js';
 import {isEqual, deepClone} from '../utils/index.js';
 
 export interface IProps {
@@ -135,6 +135,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
   }
 
   destroy() {
-    
+    const clean = cleanerDom(this.virtualNode as VNode);
+    clean(this.element as HTMLElement);
   }
 }

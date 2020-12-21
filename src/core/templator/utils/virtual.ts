@@ -51,6 +51,25 @@ export const renderVirtualTree = (virtualNode: VNode): HTMLElement | Text => {
   return $el as HTMLElement | Text;
 };
 
+export const cleanerDom = (virtualNode: VNode): TPatch => {
+  const parentClean = virtualNode.destroy();
+
+  const children = virtualNode.children || [];
+  const childrenCleaners = children.map((child) => cleanerDom(child));
+
+  return ($node) => {
+    parentClean($node);
+    const $children = [...$node.childNodes];
+
+    for (const [clean, $child] of zip<TPatch, ChildNode>(childrenCleaners, $children)) {
+      if (clean && $child) {
+        clean($child as HTMLElement);
+      }
+    }
+    return $node;
+  };
+};
+
 const diffChildren = (oldVChildren: VNode[], newVChildren: VNode[]): TPatch => {
   const childPatches: TPatch[] = [];
   oldVChildren.forEach((oldVChild, i) => {

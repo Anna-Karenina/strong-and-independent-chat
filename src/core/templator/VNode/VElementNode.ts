@@ -46,6 +46,15 @@ export default class VElementNode extends VNode {
     return this.tagName === newVNode.tagName;
   }
 
+  destroy() {
+    return ($el: HTMLElement) => {
+      Object.keys(this.listeners).forEach((eventName) => {
+        $el.removeEventListener(eventName, this.listeners[eventName] as EventListener);
+      });
+      return $el;
+    };
+  }
+
   patchAttributes(newAttributes: TAttrs) {
     const patches: TPatch[] = [];
 

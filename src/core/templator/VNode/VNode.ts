@@ -20,4 +20,8 @@ export default abstract class VNode {
   abstract diff(newVNode: VNode): TPatch;
 
   abstract isSimilar(newVNode: VNode): boolean;
+
+  destroy() {
+    return ($el: HTMLElement | Text) => $el;
+  }
 }

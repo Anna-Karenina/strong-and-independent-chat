@@ -9,7 +9,7 @@ export default class Router {
   currentRoute: Route | null;
 
 
-  constructor(rootQuery: string) {
+  constructor(rootQuery?: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -17,7 +17,7 @@ export default class Router {
     this.routes = [];
     this.history = window.history;
     this.currentRoute = null;
-    this.rootQuery = rootQuery;
+    this.rootQuery = rootQuery || '';
 
     Router.__instance = this;
   }

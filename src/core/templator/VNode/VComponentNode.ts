@@ -32,4 +32,11 @@ export default class VComponentNode extends VNode {
   isSimilar(newVNode: VComponentNode) {
     return this.componentClass === newVNode.componentClass;
   }
+
+  destroy() {
+    return ($el: HTMLElement) => {
+      this.instance?.destroy();
+      return $el;
+    };
+  }
 }

@@ -3,7 +3,11 @@ import {renderVirtualTree} from './virtual.js';
 
 export const render = (query: string, component: Component): Element | null => {
   const root = document.querySelector(query);
-  root && root.appendChild(renderComponent(component));
+  if (!root) return root;
+
+  root.lastChild
+    ? root.replaceChild(renderComponent(component), root.lastChild)
+    : root.appendChild(renderComponent(component));
   return root;
 };
 
