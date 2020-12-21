@@ -1,3 +1,3 @@
-import Chats from './Chats.js';
+import ChatsController from './ChatsController.js';
 
-export default Chats;
+export default ChatsController;
