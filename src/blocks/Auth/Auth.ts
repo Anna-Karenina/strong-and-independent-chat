@@ -5,12 +5,18 @@ import Field from '../../components/Field/index.js';
 import {IFormState} from '../../core/validation/index.js';
 import {authTemplate} from './auth.template.js';
 
+
+export interface IAuthFields {
+  login: string,
+  password: string,
+}
+
 interface IProps {
   onSubmit: (e: Event) => any,
   onFocusout: (e: Event) => any,
   onInput: (e: Event) => any,
   formState: IFormState,
-  fields: {[key: string]: string},
+  fields: IAuthFields,
 };
 
 const templator = Templator.compile(authTemplate, {
