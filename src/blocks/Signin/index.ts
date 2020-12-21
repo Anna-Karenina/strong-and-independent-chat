@@ -1,3 +1,3 @@
-import Signin from './Signin.js';
+import SigninController from './SigninController.js';
 
-export default Signin;
+export default SigninController;
