@@ -7,7 +7,11 @@ export interface IProps {
   [key: string]: any,
 };
 
-export default abstract class Component {
+export interface IState {
+  [key: string]: unknown,
+};
+
+export default abstract class Component<P extends IProps = IProps, S extends IState = IState> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -15,7 +19,9 @@ export default abstract class Component {
     FLOW_CDU: "flow:component-did-update",
   };
 
-  props: IProps;
+  props: P;
+
+  state: S = {} as S;
 
   private eventBus: () => EventBus
 
@@ -23,7 +29,7 @@ export default abstract class Component {
 
   private _virtualNode: VNode | null = null;
 
-  constructor(props: IProps = {}) {
+  constructor(props: P) {
     const eventBus = new EventBus();
     this.props = this.makePropsProxy(props);
 
@@ -50,8 +56,9 @@ export default abstract class Component {
 
   protected componentDidMount() {};
 
-  private _componentDidUpdate(oldProps: IProps, newProps: IProps) {
-    const response = this.componentDidUpdate(oldProps, newProps);
+  private _componentDidUpdate(oldProps: P, oldState: S) {
+    const response = this.componentDidUpdate(oldProps, oldState);
+
     if (response && this.virtualNode && this.element) {
       const newVirtualNode = this.render();
       const patch = diff(this.virtualNode, newVirtualNode);
@@ -61,18 +68,28 @@ export default abstract class Component {
     }
   }
 
-  protected componentDidUpdate(oldProps: IProps, newProps: IProps): boolean {
-    return !isEqual(oldProps, newProps);
+  protected componentDidUpdate(oldProps: P, oldState: S): boolean {
+    return !isEqual(oldProps, this.props) || !isEqual(oldState, this.state);
   }
 
-  setProps = (nextProps: IProps) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }
 
     const oldProps = this.props;
-    this.props = deepClone<IProps>({...oldProps, ...nextProps});
-    this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, nextProps);
+    this.props = deepClone<P>({...oldProps, ...nextProps});
+    this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, this.state);
+  };
+
+  setState = (nextState: Partial<S>) => {
+    if (!nextState) {
+      return;
+    }
+
+    const oldState = this.state;
+    this.state = deepClone<S>({...oldState, ...nextState});
+    this.eventBus().emit(Component.EVENTS.FLOW_CDU, this.props, nextState);
   };
 
   get element() {
@@ -99,7 +116,7 @@ export default abstract class Component {
 
   abstract render(): VNode;
 
-  private makePropsProxy(props: IProps) {
+  private makePropsProxy(props: P) {
     return new Proxy(props, {
       deleteProperty() {
         throw new Error('нет доступа');
@@ -115,5 +132,9 @@ export default abstract class Component {
   hide() {
     if (!this._element) return;
     // this._element.classList.add('hidden');
+  }
+
+  destroy() {
+    
   }
 }
