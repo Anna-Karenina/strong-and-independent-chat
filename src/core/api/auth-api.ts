@@ -34,6 +34,14 @@ export default class AuthAPI extends BaseAPI {
     });
   }
 
+  getUser() {
+    return http.get('/auth/user', {
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+  }
+
   logout() {
     return http.post('/auth/logout');
   }
