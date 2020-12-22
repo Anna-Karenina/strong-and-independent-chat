@@ -5,4 +5,4 @@ export enum METHODS {
 	DELETE = 'DELETE',
 };
 
-export const HOST = 'ya-praktikum.tech';
+export const HOST = 'https://ya-praktikum.tech';

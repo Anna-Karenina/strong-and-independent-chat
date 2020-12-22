@@ -3,17 +3,17 @@ import {METHODS} from './constants.js';
 
 type TRequestHeaders = Record<string, string>;
 
-type IRequestData = Record<string, unknown>;
+type IRequestData = Record<string, any>;
 
-interface IRequestOptions {
+interface IRequestOptions<T extends IRequestData> {
   method: METHODS,
   headers?: TRequestHeaders,
-  data?: IRequestData,
+  data?: T,
   timeout?: number,
   withCredentials?: boolean,
 };
 
-type PartialRequestOptions = Partial<IRequestOptions>;
+type PartialRequestOptions<T extends IRequestData> = Partial<IRequestOptions<T>>;
 
 export default class HTTPTransport {
   root: string;
@@ -30,23 +30,23 @@ export default class HTTPTransport {
     return this.root + path;
   }
 
-  get = (url: string, options: PartialRequestOptions = {}) => {
+  get = <T>(url: string, options: PartialRequestOptions<T> = {}) => {
     return this.request(url, {...options, method: METHODS.GET}, options.timeout);
   };
   
-  post = (url: string, options: PartialRequestOptions = {}) => {
+  post = <T>(url: string, options: PartialRequestOptions<T> = {}) => {
     return this.request(url, {...options, method: METHODS.POST}, options.timeout);
   };
   
-  put = (url: string, options: PartialRequestOptions = {}) => {
+  put = <T>(url: string, options: PartialRequestOptions<T> = {}) => {
     return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
   };
   
-  delete = (url: string, options: PartialRequestOptions = {}) => {
+  delete = <T>(url: string, options: PartialRequestOptions<T> = {}) => {
     return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
   };
 
-  request = (url: string, options: IRequestOptions, timeout = 5000) => {
+  request = <T>(url: string, options: IRequestOptions<T>, timeout = 5000) => {
     let requestPath = this.createPath(url);
     const {method, headers = {}, data = {}, withCredentials = true} = options;
     const xhr = new XMLHttpRequest();
@@ -61,13 +61,17 @@ export default class HTTPTransport {
     Object.entries(headers).forEach(([key, val]) => xhr.setRequestHeader(key, val));
 
     return new Promise((resolve, reject) => {
-      xhr.onload = function() {
-        resolve(xhr);
-      };
-  
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
+
+      xhr.onload = function() {
+        const response = JSON.parse(xhr.response);
+        if (xhr.status !== 200) {
+          reject(response);
+        }
+        resolve(response);
+      };
 
       if (method === METHODS.GET) {
         xhr.send();
