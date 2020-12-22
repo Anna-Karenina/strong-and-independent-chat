@@ -10,6 +10,7 @@ interface ISettingsProps {
   onSubmit: (e: Event) => any,
   onFocusout: (e: Event) => any,
   onInput: (e: Event) => any,
+  onLogout: (e: Event) => any,
   formState: IFormState,
   fields: {[key: string]: string},
 };
@@ -21,7 +22,7 @@ const templator = Templator.compile(settingsTemplate, {
   },
 })
 
-export default class Settings extends Component {
+export default class Settings extends Component<ISettingsProps> {
   private router: Router;
 
   constructor(props: ISettingsProps) {

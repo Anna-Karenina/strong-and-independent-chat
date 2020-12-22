@@ -71,7 +71,7 @@ export const settingsTemplate = `
           <div class="settings__buttons">
             <button class="settings__button empty-button" type="submit">Изменить данные</button>
             <button class="settings__button empty-button" type="button">Изменить пароль</button>
-            <button class="settings__button empty-button color-danger" type="button">Выйти</button>
+            <button class="settings__button empty-button color-danger" type="button" @click="onLogout">Выйти</button>
           </div>
 
         </form>

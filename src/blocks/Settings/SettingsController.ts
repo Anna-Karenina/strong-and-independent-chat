@@ -8,6 +8,8 @@ import {
   IFormState,
 } from '../../core/validation/index.js';
 import Settings from './Settings.js';
+import {bus} from '../../core/bus/index.js';
+import {authAPI} from '../../core/api/index.js';
 
 interface ISettingsControllerProps {};
 
@@ -23,6 +25,7 @@ const templator = Templator.compile(
     :onSubmit="onSubmit"
     :onFocusout="onFocusout"
     :onInput="onInput"
+    :onLogout="onLogout"
   />`,
   {
     components: {settings: Settings},
@@ -88,6 +91,12 @@ export default class SettingsController extends Component<ISettingsControllerPro
     console.log(aggregatedFormData);
   };
 
+  onLogout = () => {
+    authAPI
+      .logout()
+      .then(() => bus.emit('auth:logout'));
+  };
+
   render() {
     const ctx = {
       formState: this.state.formState,
@@ -95,6 +104,7 @@ export default class SettingsController extends Component<ISettingsControllerPro
       onSubmit: this.onSubmit,
       onFocusout: this.onFocusout,
       onInput: this.onInput,
+      onLogout: this.onLogout,
     };
 
     return templator(ctx);
