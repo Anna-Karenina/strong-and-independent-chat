@@ -7,12 +7,21 @@ interface IAuthEventOpts {
 }
 
 class AuthEvent extends Event {
+  private router: Router;
+
   init(opts: IAuthEventOpts) {
-    const {router} = opts;
+    this.router = opts.router;
     
-    bus.on('auth:logout', () => {
-      router.go('/auth');
-    })
+    bus.on('auth:logout', this.onLogout);
+    bus.on('auth:login', this.onLogin);
+  }
+
+  onLogout = () => {
+    this.router.go('/auth');
+  }
+
+  onLogin = () => {
+    this.router.go('/chats');
   }
 }
 

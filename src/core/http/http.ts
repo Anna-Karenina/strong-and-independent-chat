@@ -55,9 +55,12 @@ export default class HTTPTransport {
       requestPath += queryString(data);
     }
 
-    xhr.open(method, requestPath)
+    xhr.open(method, requestPath);
+
     xhr.timeout = timeout;
     xhr.withCredentials = withCredentials;
+    xhr.responseType = 'json';
+    
     Object.entries(headers).forEach(([key, val]) => xhr.setRequestHeader(key, val));
 
     return new Promise((resolve, reject) => {
@@ -66,11 +69,10 @@ export default class HTTPTransport {
       xhr.ontimeout = reject;
 
       xhr.onload = function() {
-        const response = JSON.parse(xhr.response);
         if (xhr.status !== 200) {
-          reject(response);
+          reject(xhr.response);
         }
-        resolve(response);
+        resolve(xhr.response);
       };
 
       if (method === METHODS.GET) {

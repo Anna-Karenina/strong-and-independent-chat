@@ -8,9 +8,9 @@ export const signinTemplate = `
           className="signin-form__field"
           type="text"
           label="Почта"
-          name="mail"
-          :error="formState.mail.error"
-          :value="fields.mail"
+          name="email"
+          :error="formState.email.error"
+          :value="fields.email"
         />
 
         <field
@@ -26,18 +26,18 @@ export const signinTemplate = `
           className="signin-form__field"
           type="text"
           label="Имя"
-          name="name"
-          :error="formState.name.error"
-          :value="fields.name"
+          name="first_name"
+          :error="formState.first_name.error"
+          :value="fields.first_name"
         />
 
         <field
           className="signin-form__field"
           type="text"
           label="Фамилия"
-          name="surname"
-          :error="formState.surname.error"
-          :value="fields.surname"
+          name="second_name"
+          :error="formState.second_name.error"
+          :value="fields.second_name"
         />
 
         <field

@@ -9,11 +9,21 @@ import {
   IFormState,
 } from '../../core/validation/index.js';
 import Signin from './Signin.js';
+import {authAPI} from '../../core/api/index.js';
+import {bus} from '../../core/bus/index.js';
 
 interface ISigninControllerProps {};
-
+interface ISigninFields {
+  email: string,
+  login: string,
+  first_name: string,
+  second_name: string,
+  phone: string,
+  password: string,
+  password_twice: string,
+}
 interface ISigninControllerState extends IState {
-  fields: Record<string, string>,
+  fields: ISigninFields,
   formState: IFormState,
 };
 
@@ -37,10 +47,10 @@ export default class SigninController extends Component<ISigninControllerProps, 
     super(props);
 
     this.formValidator = new FormValidator({
-      mail: emailScheme,
+      email: emailScheme,
       login: textFiledScheme,
-      name: textFiledScheme,
-      surname: textFiledScheme,
+      first_name: textFiledScheme,
+      second_name: textFiledScheme,
       phone: phoneScheme,
       password: textFiledScheme,
       password_twice: passwordDuplicateScheme,
@@ -48,10 +58,10 @@ export default class SigninController extends Component<ISigninControllerProps, 
 
     this.state = {
       fields: {
-        mail: '',
+        email: '',
         login: '',
-        name: '',
-        surname: '',
+        first_name: '',
+        second_name: '',
         phone: '',
         password: '',
         password_twice: '',
@@ -77,19 +87,18 @@ export default class SigninController extends Component<ISigninControllerProps, 
   
   onSubmit = (e: Event) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const aggregatedFormData = Object.fromEntries(formData.entries());
   
-    this.formValidator.validateAll(aggregatedFormData, {password_twice: [this.state.fields.password]});
+    this.formValidator.validateAll(this.state.fields, {password_twice: [this.state.fields.password]});
     this.setState({formState: this.formValidator.formState});
     
     if (this.formValidator.valid) {
-      this.tryToSignin(aggregatedFormData);
+      this.tryToSignup();
     }
   };
   
-  tryToSignin = (aggregatedFormData: {[key: string]: any}) => {
-    console.log(aggregatedFormData);
+  tryToSignup = () => {
+    authAPI.signup(this.state.fields)
+      .then(() => bus.emit('auth:login'));
   };
 
   render() {

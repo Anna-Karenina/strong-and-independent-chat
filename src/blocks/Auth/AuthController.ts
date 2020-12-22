@@ -2,6 +2,8 @@ import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import {FormValidator, textFiledScheme, IFormState} from '../../core/validation/index.js';
 import Auth, {IAuthFields} from './Auth.js';
+import {authAPI} from '../../core/api/index.js';
+import {bus} from '../../core/bus/index.js';
 
 interface IAuthControllerProps {};
 
@@ -60,19 +62,18 @@ export default class AuthController extends Component<IAuthControllerProps, IAut
   
   onSubmit = (e: Event) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const aggregatedFormData = Object.fromEntries(formData.entries());
   
-    this.authFormValidator.validateAll(aggregatedFormData);
+    this.authFormValidator.validateAll(this.state.fields);
     this.setState({formState: this.authFormValidator.formState});
     
     if (this.authFormValidator.valid) {
-      this.tryToAuthorize(aggregatedFormData);
+      this.tryToAuthorize();
     }
   };
   
-  tryToAuthorize = (aggregatedFormData: {[key: string]: any}) => {
-    console.log(aggregatedFormData);
+  tryToAuthorize = () => {
+    authAPI.signin(this.state.fields)
+      .then(() => bus.emit('auth:login'))
   };
 
   render() {
