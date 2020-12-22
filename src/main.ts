@@ -5,8 +5,11 @@ import ChatsController from './blocks/Chats/index.js';
 import SettingsController from './blocks/Settings/index.js';
 import FallbackPage from './blocks/404/Page404.js';
 import ErrorPage from './blocks/500/Page500.js';
+import {authEvent} from './core/events/index.js';
 
 const router = new Router("#app");
+
+authEvent.init({router});
 
 router
   .use("/auth", AuthController)
