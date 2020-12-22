@@ -8,6 +8,8 @@ import {isEqual} from './isEqual.js';
 import {deepClone} from './deepClone.js';
 import {modal} from './modal.js';
 import {zip} from './zip.js';
+import {isPlainObject, PlainObject} from './isPlainObject';
+import {queryString} from './queryString';
 
 export {
   first,
@@ -20,4 +22,7 @@ export {
   deepClone,
   modal,
   zip,
+  isPlainObject,
+  queryString,
+  PlainObject,
 };
