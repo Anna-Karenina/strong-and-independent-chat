@@ -6,14 +6,7 @@ import SettingsController from './blocks/Settings/index.js';
 import FallbackPage from './blocks/404/Page404.js';
 import ErrorPage from './blocks/500/Page500.js';
 
-declare global {
-  interface Window {
-    router:any;
-  }
-}
-
 const router = new Router("#app");
-window.router = router;
 
 router
   .use("/auth", AuthController)
