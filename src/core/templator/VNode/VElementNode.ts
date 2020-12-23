@@ -21,7 +21,12 @@ export default class VElementNode extends VNode {
     const $el = document.createElement(this.tagName);
 
     Object.entries(this.attributes).forEach(([attr, value]) => {
-      $el.setAttribute(attr, String(value));
+      if (typeof value !== 'boolean') {
+        $el.setAttribute(attr, String(value));
+        return;
+      }
+
+      value && $el.setAttribute(attr, '');
     });
 
     Object.entries(this.listeners).forEach(([eventName, listener]) => {
@@ -69,7 +74,14 @@ export default class VElementNode extends VNode {
     Object.keys(newAttributes).forEach((attr) => {
       if (newAttributes[attr] !== this.attributes[attr]) {
         patches.push(($el: HTMLElement) => {
-          $el.setAttribute(attr, String(newAttributes[attr]));
+          const value = newAttributes[attr];
+
+          if (typeof value !== 'boolean') {
+            $el.setAttribute(attr, String(value));
+            return;
+          }
+
+          value ? $el.setAttribute(attr, '') : $el.removeAttribute(attr);
         });
       }
     });
