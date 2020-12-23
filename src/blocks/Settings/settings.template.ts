@@ -18,7 +18,12 @@ export const settingsTemplate = `
 
         <h3 class="settings__user-name">Иван</h3>
 
-        <settings-form :user="user" :onLogout="onLogout" />
+        <settings-form
+          :user="user"
+          :editTarget="editTarget"
+          :setEditTarget="setEditTarget"
+          :onLogout="onLogout"
+        />
       </div>
 
     </main>

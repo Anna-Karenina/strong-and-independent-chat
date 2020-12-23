@@ -8,15 +8,31 @@ interface ISettingsFieldProps {
   className?: string,
   name?: string,
   label?: string,
-  readonly?: string,
+  readonly?: boolean,
   error?: string | null,
 };
 
 const templator = Templator.compile(template)
 
 export default class SettingsField extends Component {
+  private inputRef: HTMLInputElement | null;
+
   constructor(props: ISettingsFieldProps) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.inputRef = (this.element as HTMLElement).querySelector('input');
+
+    if (this.inputRef) {
+      this.inputRef.value = this.props.value
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.inputRef) {
+      this.inputRef.value = this.props.value
+    }
   }
 
   render() {
@@ -25,7 +41,7 @@ export default class SettingsField extends Component {
       className = '',
       name = '',
       label = '',
-      readonly = 'off',
+      readonly = false,
       error,
       value,
     } = this.props;

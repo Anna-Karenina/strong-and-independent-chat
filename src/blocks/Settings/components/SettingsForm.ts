@@ -3,9 +3,15 @@ import Templator from '../../../core/templator/index.js';
 import MyButton from '../../../components/MyButton/index.js';
 import SettingsField from '../../../components/SettingsField/index.js';
 import {settingsPreviewTemplate} from './settings-preview.template.js';
+import {settingsProfileTemplate} from './settings-profile.template.js';
+import {settingsPasswordTemplate} from './settings-password.template.js';
+import {EDIT_TARGET, TSettingsEditTarget} from '../types/index.js';
+import {isEqual} from '../../../core/utils/index.js';
 
 interface ISettingsFormProps {
   onLogout: Function,
+  editTarget: TSettingsEditTarget,
+  setEditTarget: (editTarget: TSettingsEditTarget) => void,
   user: null | Record<string, string | null>,
 };
 
@@ -22,12 +28,25 @@ interface ISettingsFormState extends IState {
   profileFields: IProfileFields,
 };
 
-const templator = Templator.compile(settingsPreviewTemplate, {
+const previewTemplator = Templator.compile(settingsPreviewTemplate, {
+  components: {
+    'settings-field': SettingsField,
+  },
+});
+
+const profileTemplator = Templator.compile(settingsProfileTemplate, {
   components: {
     'my-button': MyButton,
     'settings-field': SettingsField,
   },
-})
+});
+
+const passwordTemplator = Templator.compile(settingsPasswordTemplate, {
+  components: {
+    'my-button': MyButton,
+    'settings-field': SettingsField,
+  },
+});
 
 export default class SettingsForm extends Component<ISettingsFormProps, ISettingsFormState> {
   constructor(props: ISettingsFormProps) {
@@ -43,6 +62,16 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     };
 
     this.state = {profileFields};
+    this.setProfileFieldsFromUser();
+  }
+
+  componentDidUpdate(oldProps: ISettingsFormProps) {
+    if (!isEqual(oldProps.user, this.props.user)) {
+      this.setProfileFieldsFromUser();
+    } 
+    if (oldProps.editTarget !== this.props.editTarget) {
+      this.setProfileFieldsFromUser();
+    }
   }
 
   setProfileFieldsFromUser() {
@@ -58,17 +87,41 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({profileFields});
   }
 
-  componentDidUpdate(oldProps: ISettingsFormProps) {
-    if (oldProps.user !== this.props.user) {
-      this.setProfileFieldsFromUser();
-    }
+  editProfile = () => {
+    this.props.setEditTarget(EDIT_TARGET.PROFILE);
   }
 
+  editPassword = () => {
+    this.props.setEditTarget(EDIT_TARGET.PASSWORD);
+  }
+
+  onProfileFieldInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const profileFields = {...this.state.profileFields, [target.name]: target.value};
+
+    this.setState({profileFields});
+  };
+
   render() {
-    return templator({
-      user: this.props.user,
-      onLogout: this.props.onLogout,
-      fields: this.state.profileFields,
-    });
+    if (!this.props.editTarget) {
+      return previewTemplator({
+        onLogout: this.props.onLogout,
+        fields: this.state.profileFields,
+        readonly: true,
+        editProfile: this.editProfile,
+        editPassword: this.editPassword,
+      });
+    }
+
+    return this.props.editTarget === EDIT_TARGET.PROFILE
+      ? profileTemplator({
+        fields: this.state.profileFields,
+        onInput: this.onProfileFieldInput,
+        readonly: false,
+      })
+      : passwordTemplator({
+        fields: this.state.profileFields,
+        readonly: false,
+      });
   }
 };
