@@ -8,6 +8,7 @@ interface ISettingsFieldProps {
   className?: string,
   name?: string,
   label?: string,
+  readonly?: string,
   error?: string | null,
 };
 
@@ -24,6 +25,7 @@ export default class SettingsField extends Component {
       className = '',
       name = '',
       label = '',
+      readonly = 'off',
       error,
       value,
     } = this.props;
@@ -39,6 +41,7 @@ export default class SettingsField extends Component {
       type,
       name,
       label,
+      readonly,
       errorText,
       errorClassName: errorClasses.join(' '),
       className: ['settings-field', className].join(' ')

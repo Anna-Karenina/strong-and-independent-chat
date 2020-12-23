@@ -2,23 +2,18 @@ import Router from '../../core/router/index.js';
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
-import SettingsField from '../../components/SettingsField/index.js';
-import {IFormState} from '../../core/validation/index.js';
+import SettingsForm from './components/SettingsForm.js';
 import {settingsTemplate} from './settings.template.js';
 
 interface ISettingsProps {
-  onSubmit: (e: Event) => any,
-  onFocusout: (e: Event) => any,
-  onInput: (e: Event) => any,
-  onLogout: (e: Event) => any,
-  formState: IFormState,
-  fields: {[key: string]: string},
+  onLogout: Function,
+  user: any,
 };
 
 const templator = Templator.compile(settingsTemplate, {
   components: {
     'my-button': MyButton,
-    'settings-field': SettingsField,
+    'settings-form': SettingsForm,
   },
 })
 
@@ -37,7 +32,8 @@ export default class Settings extends Component<ISettingsProps> {
 
   render() {
     return templator({
-      ...this.props,
+      onLogout: this.props.onLogout,
+      user: this.props.user,
       goBack: this.goBack,
     });
   }

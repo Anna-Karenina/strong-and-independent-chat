@@ -8,6 +8,7 @@ export const template = `
         :type="type"
         :value="value"
         :name="name"
+        :readonly="readonly"
         autocomplete="on"
       >
     </div>
