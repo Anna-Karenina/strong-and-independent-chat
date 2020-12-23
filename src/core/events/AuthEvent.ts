@@ -16,11 +16,11 @@ class AuthEvent extends Event {
     bus.on('auth:login', this.onLogin);
   }
 
-  onLogout = () => {
+  private onLogout = () => {
     this.router.go('/auth');
   }
 
-  onLogin = () => {
+  private onLogin = () => {
     this.router.go('/chats');
   }
 }

@@ -7,10 +7,11 @@ import FallbackPage from './blocks/404/Page404.js';
 import ErrorPage from './blocks/500/Page500.js';
 import {authEvent} from './core/events/index.js';
 import {authService} from './core/services/index.js';
+import {store} from './store.js';
 
 const router = new Router("#app");
 
-authService.connect();
+authService.connect({store});
 
 authEvent.init({router});
 
@@ -22,3 +23,4 @@ router
   .use("/404", FallbackPage)
   .use("/500", ErrorPage)
   .start();
+
