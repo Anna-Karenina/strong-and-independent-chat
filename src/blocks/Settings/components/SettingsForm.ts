@@ -24,8 +24,15 @@ interface IProfileFields {
   phone: string,
 }
 
+interface IPasswordFields {
+  oldPassword: string,
+  newPassword: string,
+  newPasswordTwice: string,
+}
+
 interface ISettingsFormState extends IState {
   profileFields: IProfileFields,
+  passwordFields: IPasswordFields,
 };
 
 const previewTemplator = Templator.compile(settingsPreviewTemplate, {
@@ -61,7 +68,13 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       phone: '',
     };
 
-    this.state = {profileFields};
+    const passwordFields = {
+      oldPassword: '',
+      newPassword: '',
+      newPasswordTwice: '',
+    };
+
+    this.state = {profileFields, passwordFields};
     this.setProfileFieldsFromUser();
   }
 
@@ -71,6 +84,7 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     } 
     if (oldProps.editTarget !== this.props.editTarget) {
       this.setProfileFieldsFromUser();
+      this.clearPasswordFields();
     }
   }
 
@@ -85,6 +99,14 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       }, {}) as IProfileFields;
 
     this.setState({profileFields});
+  }
+
+  clearPasswordFields() {
+    const passwordFields = Object
+      .keys(this.state.passwordFields)
+      .reduce((acc, field) =>  ({...acc, [field]: ''}), {}) as IPasswordFields;
+
+    this.setState({passwordFields});
   }
 
   editProfile = () => {
@@ -102,6 +124,13 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({profileFields});
   };
 
+  onPasswordFieldInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const passwordFields = {...this.state.passwordFields, [target.name]: target.value};
+
+    this.setState({passwordFields});
+  };
+
   render() {
     if (!this.props.editTarget) {
       return previewTemplator({
@@ -116,12 +145,13 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     return this.props.editTarget === EDIT_TARGET.PROFILE
       ? profileTemplator({
         fields: this.state.profileFields,
-        onInput: this.onProfileFieldInput,
         readonly: false,
+        onInput: this.onProfileFieldInput,
       })
       : passwordTemplator({
-        fields: this.state.profileFields,
+        fields: this.state.passwordFields,
         readonly: false,
+        onInput: this.onPasswordFieldInput,
       });
   }
 };

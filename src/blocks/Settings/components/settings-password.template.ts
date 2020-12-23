@@ -1,9 +1,9 @@
 export const settingsPasswordTemplate = `
-<form class="settings__form">
+<form class="settings__form" @input="onInput">
   <settings-field
     type="password"
     label="Старый пароль"
-    name="email"
+    name="oldPassword"
     :readonly="readonly"
     :value="fields.oldPassword"
   />
@@ -11,7 +11,7 @@ export const settingsPasswordTemplate = `
   <settings-field
     type="password"
     label="Новый пароль"
-    name="login"
+    name="newPassword"
     :readonly="readonly"
     :value="fields.newPassword"
   />
@@ -19,7 +19,7 @@ export const settingsPasswordTemplate = `
   <settings-field
     type="password"
     label="Повторите новый пароль"
-    name="first_name"
+    name="newPasswordTwice"
     :readonly="readonly"
     :value="fields.newPasswordTwice"
   />
