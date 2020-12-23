@@ -57,7 +57,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
   protected componentDidMount() {};
 
   private _componentDidUpdate(oldProps: P, oldState: S) {
-    const response = this.componentDidUpdate(oldProps, oldState);
+    const response = this.componentShouldUpdate(oldProps, oldState);
 
     if (response && this.virtualNode && this.element) {
       const newVirtualNode = this.render();
@@ -65,10 +65,14 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
 
       this.element = patch(this.element) as HTMLElement;
       this.virtualNode = newVirtualNode;
+
+      this.componentDidUpdate(oldProps, oldState);
     }
   }
+  
+  protected componentDidUpdate(_oldProps: P, _oldState: S) {};
 
-  protected componentDidUpdate(oldProps: P, oldState: S): boolean {
+  protected componentShouldUpdate(oldProps: P, oldState: S): boolean {
     return !isEqual(oldProps, this.props) || !isEqual(oldState, this.state);
   }
 
@@ -89,7 +93,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
 
     const oldState = this.state;
     this.state = deepClone<S>({...oldState, ...nextState});
-    this.eventBus().emit(Component.EVENTS.FLOW_CDU, this.props, nextState);
+    this.eventBus().emit(Component.EVENTS.FLOW_CDU, this.props, oldState);
   };
 
   get element() {
