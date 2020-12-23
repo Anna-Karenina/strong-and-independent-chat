@@ -47,7 +47,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
   }
 
   private init() {
-    this.eventBus().emit(Component.EVENTS.FLOW_CDM, this.props);
+    
   }
 
   private _componentDidMount() {
@@ -102,10 +102,11 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
 
   set element(el) {
     if (!this._element) {
-      this.eventBus().emit(Component.EVENTS.FLOW_RENDER);
+      this._element = el;
+      this.eventBus().emit(Component.EVENTS.FLOW_CDM);
+    } else {
+      this._element = el;
     }
-
-    this._element = el;
   }
 
   get virtualNode() {
