@@ -65,22 +65,20 @@ export default class Store<T extends Record<string, any>> {
     }
     
     this.status = StoreStatus.MUTATION;
-    
-    let newState = this.mutations[mutationKey](this.state, payload);
-    this.state = Object.assign(this.state, newState);
+    this.mutations[mutationKey](this.state, payload);
 
     return true;
   }
 
-  subscribe(fn: Function) {
+  subscribe(fn: (state: T) => any) {
     this.storeBus().on('update$state', fn);
+
+    return () => {
+      this.storeBus().off('update$state', fn);
+    };
   }
 
-  unsubscribe(fn: Function) {
-    this.storeBus().off('update$state', fn);
-  }
-
-  select(fields: string[], fn: Function): ISelectResult<T> {
+  select(fields: string[], fn: (field: string, value: any) => any): ISelectResult<T> {
     const partialState = fields.reduce(
       (acc, field) => ({...acc, [field]: this.state[field]}),
       {}
@@ -112,8 +110,13 @@ export default class Store<T extends Record<string, any>> {
         
         (state as any)[String(key)] = value;
         
-        this.storeBus().emit(`update:${String(key)}`, value);
-        this.storeBus().emit(`update$state}`, state);
+        if (this.storeBus().listeners[`update:${String(key)}`]) {
+          this.storeBus().emit(`update:${String(key)}`, value);
+        }
+
+        if (this.storeBus().listeners['update$state']) {
+          this.storeBus().emit(`update$state`, state);
+        }
         
         if(this.status !== StoreStatus.MUTATION) {
           console.warn(`You should use a mutation to set ${String(key)}`);
