@@ -7,6 +7,14 @@ import {settingsProfileTemplate} from './settings-profile.template.js';
 import {settingsPasswordTemplate} from './settings-password.template.js';
 import {EDIT_TARGET, TSettingsEditTarget} from '../types/index.js';
 import {isEqual} from '../../../core/utils/index.js';
+import {
+  FormValidator,
+  textFiledScheme,
+  emailScheme,
+  phoneScheme,
+  passwordDuplicateScheme,
+  IFormState,
+} from '../../../core/validation/index.js';
 
 interface ISettingsFormProps {
   onLogout: Function,
@@ -33,6 +41,7 @@ interface IPasswordFields {
 interface ISettingsFormState extends IState {
   profileFields: IProfileFields,
   passwordFields: IPasswordFields,
+  formState: IFormState,
 };
 
 const previewTemplator = Templator.compile(settingsPreviewTemplate, {
@@ -56,6 +65,10 @@ const passwordTemplator = Templator.compile(settingsPasswordTemplate, {
 });
 
 export default class SettingsForm extends Component<ISettingsFormProps, ISettingsFormState> {
+  private profileValidator: FormValidator;
+
+  private passwordValidator: FormValidator;
+
   constructor(props: ISettingsFormProps) {
     super(props);
 
@@ -74,8 +87,29 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       newPasswordTwice: '',
     };
 
-    this.state = {profileFields, passwordFields};
+    this.profileValidator = new FormValidator({
+      email: emailScheme,
+      login: textFiledScheme,
+      first_name: textFiledScheme,
+      second_name: textFiledScheme,
+      display_name: textFiledScheme,
+      phone: phoneScheme,
+    });
+
+    this.passwordValidator = new FormValidator({
+      oldPassword: textFiledScheme,
+      newPassword: textFiledScheme,
+      newPasswordTwice: passwordDuplicateScheme,
+    });
+
+    this.state = {profileFields, passwordFields, formState: this.validator.formState};
     this.setProfileFieldsFromUser();
+  }
+
+  private get validator() {
+    return this.props.editTarget === EDIT_TARGET.PROFILE
+      ? this.profileValidator
+      : this.passwordValidator;
   }
 
   componentDidUpdate(oldProps: ISettingsFormProps) {
@@ -85,6 +119,7 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     if (oldProps.editTarget !== this.props.editTarget) {
       this.setProfileFieldsFromUser();
       this.clearPasswordFields();
+      this.setFormState();
     }
   }
 
@@ -109,6 +144,11 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({passwordFields});
   }
 
+  setFormState() {
+    this.validator.clearState();
+    this.setState({formState: this.validator.formState});
+  }
+
   editProfile = () => {
     this.props.setEditTarget(EDIT_TARGET.PROFILE);
   }
@@ -131,6 +171,28 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({passwordFields});
   };
 
+  onFocusout = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    if (target.tagName !== 'INPUT') return;
+    
+    this.validator.validate(target.name, target.value, this.state.passwordFields.newPassword);
+    this.setState({formState: this.validator.formState});
+  };
+
+  onSubmit = (e: Event) => {
+    e.preventDefault();
+    const fields = this.props.editTarget === EDIT_TARGET.PASSWORD
+      ? this.state.passwordFields
+      : this.state.profileFields;
+
+    this.validator.validateAll(fields, {newPasswordTwice: [this.state.passwordFields.newPassword]});
+    this.setState({formState: this.validator.formState});
+    
+    if (this.validator.valid) {
+      console.log('action');
+    }
+  };
+
   render() {
     if (!this.props.editTarget) {
       return previewTemplator({
@@ -146,12 +208,18 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       ? profileTemplator({
         fields: this.state.profileFields,
         readonly: false,
+        formState: this.validator.formState,
         onInput: this.onProfileFieldInput,
+        onFocusout: this.onFocusout,
+        onSubmit: this.onSubmit,
       })
       : passwordTemplator({
         fields: this.state.passwordFields,
         readonly: false,
+        formState: this.validator.formState,
         onInput: this.onPasswordFieldInput,
+        onFocusout: this.onFocusout,
+        onSubmit: this.onSubmit,
       });
   }
 };

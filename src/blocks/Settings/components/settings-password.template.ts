@@ -1,11 +1,12 @@
 export const settingsPasswordTemplate = `
-<form class="settings__form" @input="onInput">
+<form class="settings__form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
   <settings-field
     type="password"
     label="Старый пароль"
     name="oldPassword"
     :readonly="readonly"
     :value="fields.oldPassword"
+    :error="formState.oldPassword.error"
   />
 
   <settings-field
@@ -14,6 +15,7 @@ export const settingsPasswordTemplate = `
     name="newPassword"
     :readonly="readonly"
     :value="fields.newPassword"
+    :error="formState.newPassword.error"
   />
 
   <settings-field
@@ -22,10 +24,11 @@ export const settingsPasswordTemplate = `
     name="newPasswordTwice"
     :readonly="readonly"
     :value="fields.newPasswordTwice"
+    :error="formState.newPasswordTwice.error"
   />
 
   <div class="settings__buttons">
-    <my-button className="auth__primary-button" type="button" text="Сохранить" />
+    <my-button className="auth__primary-button" type="submit" text="Сохранить" />
   </div>
 
 </form>

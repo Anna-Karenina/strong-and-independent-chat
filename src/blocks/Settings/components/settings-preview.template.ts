@@ -6,6 +6,7 @@ export const settingsPreviewTemplate = `
     name="email"
     :readonly="readonly"
     :value="fields.email"
+    error=""
   />
 
   <settings-field
@@ -14,6 +15,7 @@ export const settingsPreviewTemplate = `
     name="login"
     :readonly="readonly"
     :value="fields.login"
+    error=""
   />
 
   <settings-field
@@ -22,6 +24,7 @@ export const settingsPreviewTemplate = `
     name="first_name"
     :readonly="readonly"
     :value="fields.first_name"
+    error=""
   />
 
   <settings-field
@@ -30,6 +33,7 @@ export const settingsPreviewTemplate = `
     name="second_name"
     :readonly="readonly"
     :value="fields.second_name"
+    error=""
   />
 
   <settings-field
@@ -38,6 +42,7 @@ export const settingsPreviewTemplate = `
     name="display_name"
     :readonly="readonly"
     :value="fields.display_name"
+    error=""
   />
 
   <settings-field
@@ -46,6 +51,7 @@ export const settingsPreviewTemplate = `
     name="phone"
     :readonly="readonly"
     :value="fields.phone"
+    error=""
   />
 
   <div class="settings__buttons">

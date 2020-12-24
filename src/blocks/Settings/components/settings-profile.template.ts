@@ -1,11 +1,12 @@
 export const settingsProfileTemplate = `
-<form class="settings__form" @input="onInput">
+<form class="settings__form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
   <settings-field
     type="text"
     label="Почта"
     name="email"
     :readonly="readonly"
     :value="fields.email"
+    :error="formState.email.error"
   />
 
   <settings-field
@@ -14,6 +15,7 @@ export const settingsProfileTemplate = `
     name="login"
     :readonly="readonly"
     :value="fields.login"
+    :error="formState.login.error"
   />
 
   <settings-field
@@ -22,6 +24,7 @@ export const settingsProfileTemplate = `
     name="first_name"
     :readonly="readonly"
     :value="fields.first_name"
+    :error="formState.first_name.error"
   />
 
   <settings-field
@@ -30,6 +33,7 @@ export const settingsProfileTemplate = `
     name="second_name"
     :readonly="readonly"
     :value="fields.second_name"
+    :error="formState.second_name.error"
   />
 
   <settings-field
@@ -38,6 +42,7 @@ export const settingsProfileTemplate = `
     name="display_name"
     :readonly="readonly"
     :value="fields.display_name"
+    :error="formState.display_name.error"
   />
 
   <settings-field
@@ -46,10 +51,11 @@ export const settingsProfileTemplate = `
     name="phone"
     :readonly="readonly"
     :value="fields.phone"
+    :error="formState.phone.error"
   />
 
   <div class="settings__buttons">
-    <my-button className="auth__primary-button" type="button" text="Сохранить" />
+    <my-button className="auth__primary-button" type="submit" text="Сохранить" />
   </div>
 
 </form>
