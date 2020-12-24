@@ -23,6 +23,8 @@ export const settingsTemplate = `
           :editTarget="editTarget"
           :setEditTarget="setEditTarget"
           :onLogout="onLogout"
+          :updateProfile="updateProfile"
+          :updatePassword="updatePassword"
         />
       </div>
 

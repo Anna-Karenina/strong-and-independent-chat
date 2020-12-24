@@ -1,7 +1,7 @@
 import {http} from '../http/index.js';
 import BaseAPI from './BaseAPI.js';
 
-interface IProfileUpdateData {
+export interface IProfileUpdateData {
   first_name: string,
   second_name: string,
   display_name: string,
@@ -10,7 +10,7 @@ interface IProfileUpdateData {
   phone: string,
 }
 
-interface IPasswordUpdateData {
+export interface IPasswordUpdateData {
   oldPassword: string,
   newPassword: string,
 }

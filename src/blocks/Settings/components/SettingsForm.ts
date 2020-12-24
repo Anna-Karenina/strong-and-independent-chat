@@ -20,6 +20,8 @@ interface ISettingsFormProps {
   onLogout: Function,
   editTarget: TSettingsEditTarget,
   setEditTarget: (editTarget: TSettingsEditTarget) => void,
+  updateProfile: (profile: IProfileFields) => any,
+  updatePassword: (passwordDate: Omit<IPasswordFields, 'newPasswordTwice'>) => any,
   user: null | Record<string, string | null>,
 };
 
@@ -189,9 +191,24 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({formState: this.validator.formState});
     
     if (this.validator.valid) {
-      console.log('action');
+      this.updateProfileOrPassword();
     }
   };
+
+  updateProfileOrPassword() {
+    if (!this.props.editTarget) return;
+
+    const updateMap = {
+      [EDIT_TARGET.PROFILE]: () => this.props.updateProfile(this.state.profileFields),
+      [EDIT_TARGET.PASSWORD]: () => this.props.updatePassword({
+        newPassword: this.state.passwordFields.newPassword,
+        oldPassword: this.state.passwordFields.oldPassword,
+      }),
+    }
+    
+    const update = updateMap[this.props.editTarget];
+    return update && update().then(() => this.props.setEditTarget(null));
+  }
 
   render() {
     if (!this.props.editTarget) {

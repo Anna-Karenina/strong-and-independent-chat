@@ -8,6 +8,8 @@ import {TSettingsEditTarget} from './types/index.js';
 
 interface ISettingsProps {
   onLogout: Function,
+  updateProfile: Function, 
+  updatePassword: Function, 
   user: any,
 };
 
@@ -52,6 +54,8 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
       editTarget: this.state.editTarget,
       user: this.props.user,
       onLogout: this.props.onLogout,
+      updateProfile: this.props.updateProfile,
+      updatePassword: this.props.updatePassword,
       setEditTarget: this.setEditTarget,
       goBack: this.goBack,
     });
