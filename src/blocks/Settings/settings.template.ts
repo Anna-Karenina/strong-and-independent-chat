@@ -9,7 +9,7 @@ export const settingsTemplate = `
       </div>
 
       <div class="settings__content">
-        <div class="avatar settings__avatar change-avatar-action">
+        <div class="avatar settings__avatar" @click="openAvatarModal">
           <i class="fas fa-image"></i>
           <div class="settings__avatar-change">
             Поменять<br>аватар
@@ -30,7 +30,7 @@ export const settingsTemplate = `
 
     </main>
 
-    <div class="modal change-avatar-modal">
+    <modal :show="showAvatarModal" :onClose="closeAvatarModal">
       <div class="modal__content card">
         <h2 class="card__title modal__title">Файл загружен</h2>
 
@@ -41,6 +41,6 @@ export const settingsTemplate = `
         
         <my-button className="change-avatar-modal__submit" type="button" text="Поменять" />
       </div>
-    </div>
+    </modal>
   </div>
 `; 
