@@ -7,24 +7,26 @@ import {renderComponent} from '../utils/render.js';
 export default class VComponentNode extends VNode {
   private componentClass: ComponentConstructor;
   instance: Component | null = null;
+  $children: VNode[];
   props: TAttrs;
 
-  constructor(semanticNode: TSemanticNode, ctx: TCtx) {
+  constructor(semanticNode: TSemanticNode, ctx: TCtx, children: VNode[] = []) {
     super(NodeType.ComponentNode);
     this.componentClass = semanticNode.attrs.__componentClass as ComponentConstructor;
 
+    this.$children = children;
     this.props = parseAttributes(semanticNode.attrs, ctx);
   }
 
   render() {
-    this.instance = new this.componentClass(this.props);
+    this.instance = new this.componentClass({...this.props, $children: this.$children});
     return renderComponent(this.instance as Component);
   }
 
   diff(newVNode: VComponentNode): TPatch {
     return ($el) => {
       newVNode.instance = this.instance;
-      newVNode.instance?.setProps(newVNode.props);
+      newVNode.instance?.setProps({...newVNode.props, $children: newVNode.$children});
       return $el;
     };
   }

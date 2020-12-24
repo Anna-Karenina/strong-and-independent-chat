@@ -1,7 +1,7 @@
 import VTextNode from '../VNode/VTextNode.js';
 import VElementNode from '../VNode/VElementNode.js';
 import VComponentNode from '../VNode/VComponentNode.js';
-import VNode from '../VNode/VNode.js';
+import VNode, {NodeType} from '../VNode/VNode.js';
 import {TEXT_NODE_TYPE} from './semantic.js';
 import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
 import {pickServiceAttrs} from './attrs.js';
@@ -9,6 +9,11 @@ import {each} from './each.js';
 import {zip} from '../../utils/index.js';
 
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
+
+const isChildrenNode = (semanticNode: TSemanticNode) => {
+  const {textContent = ''} = semanticNode.attrs;
+  return isTextNode(semanticNode) && String(textContent).trim() === '$children$';
+}
 
 const isComponentNode = (semanticNode: TSemanticNode) => {
   return semanticNode.attrs.hasOwnProperty('__componentClass');
@@ -18,28 +23,40 @@ export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode[
   const serviceAttrs = pickServiceAttrs(semanticNode.attrs);
 
   if (!serviceAttrs.each) {
-    return [createVirtualNode(semanticNode, ctx)];
+    const node = createVirtualNode(semanticNode, ctx);
+    return node ? [node] : [];
   }
 
-  return each(String(serviceAttrs.each), ctx).map((newCtx: TCtx) => createVirtualNode(semanticNode, newCtx))
+  return each(String(serviceAttrs.each), ctx)
+    .map((newCtx: TCtx) => createVirtualNode(semanticNode, newCtx))
+    .filter((node: VNode | null) => node);
 };
 
-export const createVirtualNode = (semanticNode: TSemanticNode, ctx: TCtx): VNode => {
+export const createVirtualNode = (semanticNode: TSemanticNode, ctx: TCtx): VNode | null => {
+  const children = semanticNode.children.flatMap((child) => buildVirtualTree(child, ctx));
+
   switch(true) {
+    case isChildrenNode(semanticNode):
+      const [$child] = ctx.$children as VNode[] || []
+      return $child || null;
+
     case isTextNode(semanticNode):
       return new VTextNode(semanticNode, ctx);
 
     case isComponentNode(semanticNode):
-      return new VComponentNode(semanticNode, ctx);
+      return new VComponentNode(semanticNode, ctx, children);
 
     default: 
-      const children = semanticNode.children.flatMap((child) => buildVirtualTree(child, ctx));
       return new VElementNode(semanticNode, ctx, children);
   }
 };
 
 export const renderVirtualTree = (virtualNode: VNode): HTMLElement | Text => {
   const $el = virtualNode.render();
+
+  if (virtualNode.nodeType !== NodeType.ElementNode) {
+    return $el as HTMLElement | Text;
+  }
 
   const children = virtualNode.children || [];
   const $children = children.map((child) => renderVirtualTree(child));

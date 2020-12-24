@@ -4,7 +4,7 @@ import {parseAttributes, parseListeners} from '../utils/attrs.js';
 
 export default class VElementNode extends VNode {
   tagName: string;
-  children: VNode[]
+  children: VNode[];
   attributes: TAttrs;
   listeners: TListeners;
 
