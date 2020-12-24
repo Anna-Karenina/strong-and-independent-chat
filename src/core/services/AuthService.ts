@@ -1,7 +1,7 @@
 import Service from './Service.js';
 import {Store} from '../store/index.js';
 import {IStoreState} from '../../store.js';
-import {authAPI} from '../api/auth-api.js'
+import {authAPI} from '../api/index.js'
 import {bus} from '../bus/index.js';
 
 interface IConnectOptions {

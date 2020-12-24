@@ -1,5 +1,5 @@
 import {http} from '../http/index.js';
-import BaseAPI from './base-api.js';
+import BaseAPI from './BaseAPI.js';
 
 interface ISignupData {
   first_name: string,
