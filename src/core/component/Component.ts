@@ -140,7 +140,11 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     // this._element.classList.add('hidden');
   }
 
+  beforeDestroy() {}
+
   destroy() {
+    this.beforeDestroy();
+    
     const clean = cleanerDom(this.virtualNode as VNode);
     clean(this.element as HTMLElement);
   }
