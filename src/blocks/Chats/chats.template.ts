@@ -35,8 +35,21 @@ export const chatsTemplate = `
         <h2 class="card__title modal__title">Добавить пользователя</h2>
 
         <form>
-          <field className="add-user-modal__field" type="text" label="Логин" name="login" />
-          <my-button className="add-user-modal__submit" type="button" text="Добавить" />
+          <div class="search chat-select__search">
+            <input type="text" class="search__input" placeholder="Поиск" :value="search" @input="onSearch">
+            <i class="fas fa-search search__icon"></i>
+          </div>
+
+          <div class="user-modal__user-list">
+            <div class="user-modal__user-list-item" $each="user in users">
+              <div class="user-modal__user-info">
+                <div class="avatar"></div>
+                <div class="user-modal__user-name">{{ user.login }}</div>
+              </div>
+
+              <i class="fas fa-plus-circle options__icon user-modal__add-icon" @click="user.add"></i>
+            </div>
+          </div>
         </form>
       </div>
     </modal>

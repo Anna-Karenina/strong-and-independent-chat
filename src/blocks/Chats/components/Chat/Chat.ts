@@ -44,8 +44,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
   }
 
   get chatClass() {
-    // return this.props.chat ? 'chat' : 'chat hidden';
-    return this.props.chat ? 'chat' : 'chat';
+    return this.props.chat ? 'chat' : 'chat hidden';
   }
 
   get title() {

@@ -352,11 +352,30 @@
   display: block;
 }
 
-.add-user-modal__field {
-  margin-top: 50px;
+.user-modal__user-list {
+  margin-top: 20px;
+  max-height: 140px;
+  overflow-y: auto;
 }
 
-.add-user-modal__submit {
-  margin-top: 30px;
-  width: 100%;
+.user-modal__user-list-item {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-modal__user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-modal__user-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: 15px;
+}
+
+.user-modal__add-icon {
+  cursor: pointer;
 }

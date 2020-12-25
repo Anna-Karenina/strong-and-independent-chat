@@ -2,7 +2,7 @@ import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import Chats from './Chats.js';
 import {store, IChat} from '../../store.js';
-import {chatsAPI} from '../../core/api/index.js';
+import {chatsAPI, userAPI, ISearchData} from '../../core/api/index.js';
 
 interface IChatsControllerProps {};
 
@@ -12,8 +12,10 @@ interface IChatsControllerState extends IState {
 
 const templator = Templator.compile(
   `<chats
-    :sendMessage="sendMessage",
     :chats="chats"
+    :sendMessage="sendMessage",
+    :searchUser="searchUser",
+    :addNewUserInChat="addNewUserInChat",
   />`,
   {
     components: {chats: Chats},
@@ -51,10 +53,23 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     console.log(aggregatedFormData);
   };
 
+  searchUser = (data: ISearchData) => {
+    return userAPI.search(data);
+  }
+
+  addNewUserInChat(userId: number, chatId: number,) {
+    return chatsAPI.addUsers({
+      users: [userId],
+      chatId,
+    });
+  }
+
   render() {
     return templator({
       chats: this.state.chats,
       sendMessage: this.sendMessage,
+      searchUser: this.searchUser,
+      addNewUserInChat: this.addNewUserInChat,
     });
   }
 };
