@@ -76,13 +76,14 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     return !isEqual(oldProps, this.props) || !isEqual(oldState, this.state);
   }
 
-  setProps = (nextProps: Partial<P>) => {
+  //метод setProps вызывается только шаблонизатором. Поэтому он полностью перезатирает пропсы, чтобы не осталось прошлых
+  setProps = (nextProps: P) => {
     if (!nextProps) {
       return;
     }
 
     const oldProps = this.props;
-    this.props = deepClone<P>({...oldProps, ...nextProps});
+    this.props = nextProps;
     this.eventBus().emit(Component.EVENTS.FLOW_CDU, oldProps, this.state);
   };
 
