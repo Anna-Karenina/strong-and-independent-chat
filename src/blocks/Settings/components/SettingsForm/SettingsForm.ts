@@ -1,12 +1,12 @@
-import Component, {IState} from '../../../core/component/index.js';
-import Templator from '../../../core/templator/index.js';
-import MyButton from '../../../components/MyButton/index.js';
-import SettingsField from '../../../components/SettingsField/index.js';
+import Component, {IState} from '../../../../core/component/index.js';
+import Templator from '../../../../core/templator/index.js';
+import MyButton from '../../../../components/MyButton/index.js';
+import SettingsField from '../../../../components/SettingsField/index.js';
 import {settingsPreviewTemplate} from './settings-preview.template.js';
 import {settingsProfileTemplate} from './settings-profile.template.js';
 import {settingsPasswordTemplate} from './settings-password.template.js';
-import {EDIT_TARGET, TSettingsEditTarget} from '../types/index.js';
-import {isEqual} from '../../../core/utils/index.js';
+import {EDIT_TARGET, TSettingsEditTarget} from '../../types/index.js';
+import {isEqual} from '../../../../core/utils/index.js';
 import {
   FormValidator,
   textFiledScheme,
@@ -14,7 +14,7 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
   IFormState,
-} from '../../../core/validation/index.js';
+} from '../../../../core/validation/index.js';
 
 interface ISettingsFormProps {
   onLogout: Function,

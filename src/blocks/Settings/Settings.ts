@@ -3,7 +3,7 @@ import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Modal from '../../components/Modal/index.js';
-import SettingsForm from './components/SettingsForm.js';
+import SettingsForm from './components/SettingsForm/SettingsForm.js';
 import {settingsTemplate} from './settings.template.js';
 import {TSettingsEditTarget} from './types/index.js';
 
