@@ -14,11 +14,14 @@ interface IChatsProps {
   sendMessage: (e: Event) => any,
   searchUser: (data: ISearchData) => any,
   addNewUserInChat: (userId: number, chatId: number) => any,
+  deleteUserFromChat: (userId: number, chatId: number) => any,
+  fetchChatUsers: (chatId: number) => any,
 };
 
 interface IChatsState extends IState {
   selectedChat: IChat | null,
   showAddUserModal: boolean,
+  showDeleteUserModal: boolean,
   search: string,
   users: Record<string, unknown>[],
 };
@@ -42,6 +45,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     this.state = {
       selectedChat: null,
       showAddUserModal: false,
+      showDeleteUserModal: false,
       search: '',
       users: [],
     };
@@ -59,6 +63,18 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     if (this.searchRef) {
       this.searchRef.value = this.state.search;
     }
+
+    if (this.state.selectedChat) {
+      const isExist = !!this.props.chats.find((chat) => chat.id === this.selectedChatId);
+
+      if (!isExist) {
+        this.setState({selectedChat: null});
+      }
+    }
+  }
+
+  get selectedChatId() {
+    return this.state.selectedChat?.id || 0;
   }
 
   get chats() {
@@ -72,6 +88,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     return this.state.users.map((user) => ({
       ...user,
       add: this.createAddUserHandler(user.id as number),
+      remove: this.createRemoveUserHandler(user.id as number),
     }));
   }
 
@@ -80,10 +97,15 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   }
 
   createAddUserHandler(userId: number) {
-    const chatId = this.state.selectedChat?.id;
-    if (!chatId) return () => {};
+    if (!this.selectedChatId) return () => {};
 
-    return () => this.props.addNewUserInChat(userId, chatId).then(this.closeAddUserModal);
+    return () => this.props.addNewUserInChat(userId, this.selectedChatId).then(this.closeAddUserModal);
+  }
+
+  createRemoveUserHandler(userId: number) {
+    if (!this.selectedChatId) return () => {};
+
+    return () => this.props.deleteUserFromChat(userId, this.selectedChatId).then(this.closeDeleteUserModal);
   }
 
   closeAddUserModal = () => {
@@ -92,6 +114,18 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
 
   openAddUserModal = () => {
     this.setState({showAddUserModal: true});
+  }
+
+  closeDeleteUserModal = () => {
+    this.setState({showDeleteUserModal: false, users: []});
+  }
+
+  openDeleteUserModal = () => {
+    this.setState({showDeleteUserModal: true});
+
+    this.props.fetchChatUsers(this.selectedChatId).then((users: any[]) => {
+      this.setState({users});
+    });
   }
 
   onSearch = async (e: Event) => {
@@ -107,10 +141,13 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       chats: this.chats,
       selectedChat: this.state.selectedChat,
       showAddUserModal: this.state.showAddUserModal,
+      showDeleteUserModal: this.state.showDeleteUserModal,
       search: this.state.search,
       users: this.users,
       closeAddUserModal: this.closeAddUserModal,
       openAddUserModal: this.openAddUserModal,
+      closeDeleteUserModal: this.closeDeleteUserModal,
+      openDeleteUserModal: this.openDeleteUserModal,
       sendMessage: this.props.sendMessage,
       goToProfile: this.goToProfile,
       onSearch: this.onSearch,

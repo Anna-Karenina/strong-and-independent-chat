@@ -26,7 +26,12 @@ export const chatsTemplate = `
 
       </div>
 
-      <chat :chat="selectedChat" :sendMessage="sendMessage" :openAddUserModal="openAddUserModal" />
+      <chat
+        :chat="selectedChat"
+        :sendMessage="sendMessage"
+        :openAddUserModal="openAddUserModal"
+        :openDeleteUserModal="openDeleteUserModal"
+      />
 
     </main>
 
@@ -51,6 +56,24 @@ export const chatsTemplate = `
             </div>
           </div>
         </form>
+      </div>
+    </modal>
+
+    <modal :show="showDeleteUserModal" :onClose="closeDeleteUserModal">
+      <div class="modal__content card">
+        <h2 class="card__title modal__title">Удалить пользователя</h2>
+
+          <div class="user-modal__user-list">
+            <div class="user-modal__user-list-item" $each="user in users">
+              <div class="user-modal__user-info">
+                <div class="avatar"></div>
+                <div class="user-modal__user-name">{{ user.login }}</div>
+              </div>
+
+              <i class="fas fa-minus-circle options__icon user-modal__remove-icon" @click="user.remove"></i>
+            </div>
+          </div>
+
       </div>
     </modal>
   </div>

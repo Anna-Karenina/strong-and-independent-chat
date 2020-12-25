@@ -16,6 +16,8 @@ const templator = Templator.compile(
     :sendMessage="sendMessage",
     :searchUser="searchUser",
     :addNewUserInChat="addNewUserInChat",
+    :deleteUserFromChat="deleteUserFromChat",
+    :fetchChatUsers="fetchChatUsers",
   />`,
   {
     components: {chats: Chats},
@@ -35,9 +37,13 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     };
   }
 
-  async componentDidMount() {
-    const chats = await chatsAPI.getChats();
-    store.dispatch('setChats', chats);
+  componentDidMount() {
+    this.fetchChats();
+  }
+
+  fetchChats() {
+    chatsAPI.getChats()
+      .then((chats) => store.dispatch('setChats', chats))
   }
 
   onNewUserLoginInput = (e: Event) => {
@@ -57,11 +63,22 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     return userAPI.search(data);
   }
 
-  addNewUserInChat(userId: number, chatId: number,) {
+  addNewUserInChat = (userId: number, chatId: number) => {
     return chatsAPI.addUsers({
       users: [userId],
       chatId,
     });
+  }
+
+  deleteUserFromChat = (userId: number, chatId: number) => {
+    return chatsAPI.deleteUsers({
+      users: [userId],
+      chatId,
+    }).then(this.fetchChats);
+  }
+
+  fetchChatUsers = (chatId: number) => {
+    return chatsAPI.getChatUsers(chatId);
   }
 
   render() {
@@ -70,6 +87,8 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
       sendMessage: this.sendMessage,
       searchUser: this.searchUser,
       addNewUserInChat: this.addNewUserInChat,
+      deleteUserFromChat: this.deleteUserFromChat,
+      fetchChatUsers: this.fetchChatUsers,
     });
   }
 };

@@ -12,11 +12,11 @@ export const chatTemplate = `
       </button>
 
       <ul :class="userOptionsClass" data-click="ignore">
-        <li class="options__item add-user-action" @click="openAddUserModal">
+        <li class="options__item add-user-action" @click="tryToAddUser">
           <i class="fas fa-plus-circle options__icon"></i>
           Добавить пользователя
         </li>
-        <li class="options__item">
+        <li class="options__item" @click="tryToDeleteUser">
           <i class="fas fa-minus-circle options__icon"></i>
           Удалить пользователя
         </li>

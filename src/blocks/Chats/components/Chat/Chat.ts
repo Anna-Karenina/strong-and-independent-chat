@@ -7,6 +7,7 @@ interface IChatProps {
   chat: IChat | null,
   sendMessage: (e: Event) => any,
   openAddUserModal: Function,
+  openDeleteUserModal: Function,
 };
 
 interface IChatState extends IState {
@@ -62,12 +63,23 @@ export default class Chat extends Component<IChatProps, IChatState> {
     this.setState({showUserOptions: true});
   }
 
+  tryToAddUser = () => {
+    this.props.openAddUserModal();
+    this.setState({showUserOptions: false});
+  }
+
+  tryToDeleteUser = () => {
+    this.props.openDeleteUserModal();
+    this.setState({showUserOptions: false});
+  }
+
   render() {
     return templator({
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,
-      openAddUserModal: this.props.openAddUserModal,
+      tryToAddUser: this.tryToAddUser,
+      tryToDeleteUser: this.tryToDeleteUser,
       openUserOptions: this.openUserOptions,
       sendMessage: this.props.sendMessage,
     });

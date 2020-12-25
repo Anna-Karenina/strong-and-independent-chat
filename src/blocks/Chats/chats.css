@@ -376,6 +376,11 @@
   margin-left: 15px;
 }
 
-.user-modal__add-icon {
+.user-modal__add-icon,
+.user-modal__remove-icon {
   cursor: pointer;
+}
+
+.user-modal__remove-icon {
+  color: #FF0000;
 }
