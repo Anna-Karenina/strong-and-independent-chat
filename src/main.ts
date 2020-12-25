@@ -5,9 +5,14 @@ import ChatsController from './blocks/Chats/index.js';
 import SettingsController from './blocks/Settings/index.js';
 import FallbackPage from './blocks/404/Page404.js';
 import ErrorPage from './blocks/500/Page500.js';
+import {deepClone} from './core/utils/index.js';
 import {authEvent} from './core/events/index.js';
 import {authService} from './core/services/index.js';
 import {store} from './store.js';
+
+store.subscribe((newState) => {
+  console.log('storeUpdate', deepClone(newState));
+});
 
 const router = new Router("#app");
 
