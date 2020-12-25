@@ -7,11 +7,11 @@ export const chatTemplate = `
         <div class="user-bar__name">{{ title }}</div>
       </div>
 
-      <button class="user-bar__option-button">
+      <button class="user-bar__option-button" @click="openUserOptions" data-click="ignore">
         <i class="fas fa-ellipsis-v user-bar__option-icon"></i>
       </button>
 
-      <ul class="options user-bar__options">
+      <ul :class="userOptionsClass" data-click="ignore">
         <li class="options__item add-user-action">
           <i class="fas fa-plus-circle options__icon"></i>
           Добавить пользователя
