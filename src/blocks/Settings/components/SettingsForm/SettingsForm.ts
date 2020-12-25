@@ -215,7 +215,6 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       return previewTemplator({
         onLogout: this.props.onLogout,
         fields: this.state.profileFields,
-        readonly: true,
         editProfile: this.editProfile,
         editPassword: this.editPassword,
       });
@@ -224,7 +223,6 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     return this.props.editTarget === EDIT_TARGET.PROFILE
       ? profileTemplator({
         fields: this.state.profileFields,
-        readonly: false,
         formState: this.validator.formState,
         onInput: this.onProfileFieldInput,
         onFocusout: this.onFocusout,
@@ -232,7 +230,6 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       })
       : passwordTemplator({
         fields: this.state.passwordFields,
-        readonly: false,
         formState: this.validator.formState,
         onInput: this.onPasswordFieldInput,
         onFocusout: this.onFocusout,

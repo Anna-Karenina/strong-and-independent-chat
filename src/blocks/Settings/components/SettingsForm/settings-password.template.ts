@@ -4,7 +4,6 @@ export const settingsPasswordTemplate = `
     type="password"
     label="Старый пароль"
     name="oldPassword"
-    :readonly="readonly"
     :value="fields.oldPassword"
     :error="formState.oldPassword.error"
   />
@@ -13,7 +12,6 @@ export const settingsPasswordTemplate = `
     type="password"
     label="Новый пароль"
     name="newPassword"
-    :readonly="readonly"
     :value="fields.newPassword"
     :error="formState.newPassword.error"
   />
@@ -22,7 +20,6 @@ export const settingsPasswordTemplate = `
     type="password"
     label="Повторите новый пароль"
     name="newPasswordTwice"
-    :readonly="readonly"
     :value="fields.newPasswordTwice"
     :error="formState.newPasswordTwice.error"
   />
