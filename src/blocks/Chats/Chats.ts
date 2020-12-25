@@ -3,14 +3,12 @@ import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Field from '../../components/Field/index.js';
+import {IChat} from '../../store.js';
 import {chatsTemplate} from './chats.template.js';
 
 interface IChatsProps {
-  newUserLogin: string,
-  search: string,
+  chats: IChat[],
   onSubmit: (e: Event) => any,
-  onNewUserLoginInput: (e: Event) => any,
-  onSearch: (e: Event) => any,
 };
 
 const templator = Templator.compile(chatsTemplate, {
@@ -34,7 +32,8 @@ export default class Chats extends Component {
 
   render() {
     return templator({
-      ...this.props,
+      chats: this.props.chats,
+      onSubmit: this.props.onSubmit,
       goToProfile: this.goToProfile,
     });
   }

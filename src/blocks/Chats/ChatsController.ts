@@ -1,21 +1,19 @@
 import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import Chats from './Chats.js';
+import {store, IChat} from '../../store.js';
+import {chatsAPI} from '../../core/api/index.js';
 
 interface IChatsControllerProps {};
 
 interface IChatsControllerState extends IState {
-  newUserLogin: '',
-  search: '',
+  chats: IChat[]
 };
 
 const templator = Templator.compile(
   `<chats
-    :newUserLogin="newUserLogin",
-    :search="search",
     :onSubmit="onSubmit",
-    :onSearch="onSearch",
-    :onNewUserLoginInput="onNewUserLoginInput",
+    :chats="chats"
   />`,
   {
     components: {chats: Chats},
@@ -26,10 +24,18 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
   constructor(props: IChatsControllerProps) {
     super(props);
 
+    const {state} = store.select(['chats'], (field, value) => {
+      this.setState({[field]: value});
+    });
+
     this.state = {
-      newUserLogin: '',
-      search: '',
+      chats: state.chats as IChat[],
     };
+  }
+
+  async componentDidMount() {
+    const chats = await chatsAPI.getChats();
+    store.dispatch('setChats', chats);
   }
 
   onNewUserLoginInput = (e: Event) => {
@@ -44,21 +50,11 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     const aggregatedFormData = Object.fromEntries(formData.entries());
     console.log(aggregatedFormData);
   };
-  
-  onSearch = (e: Event) => {
-    const target = e.target as HTMLFormElement;
-    this.setState({search: target.value});
-  };
 
   render() {
-    const ctx = {
-      newUserLogin: this.state.newUserLogin,
-      search: this.state.search,
+    return templator({
+      chats: this.state.chats,
       onSubmit: this.onSubmit,
-      onSearch: this.onSearch,
-      onNewUserLoginInput: this.onNewUserLoginInput,
-    };
-
-    return templator(ctx);
+    });
   }
 };
