@@ -10,13 +10,14 @@ export const settingsTemplate = `
 
       <div class="settings__content">
         <div class="avatar settings__avatar" @click="openAvatarModal">
-          <i class="fas fa-image"></i>
+          <img :src="avatar" alt="avatar" :class="avatarImageClasses">
+          <i :class="avatarIconClasses"></i>
           <div class="settings__avatar-change">
             Поменять<br>аватар
           </div>
         </div>
 
-        <h3 class="settings__user-name">Иван</h3>
+        <h3 class="settings__user-name">{{ name }}</h3>
 
         <settings-form
           :user="user"

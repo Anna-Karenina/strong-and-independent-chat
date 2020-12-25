@@ -4,6 +4,7 @@ import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import AvatarModal from './components/AvatarModal/AvatarModal.js';
 import SettingsForm from './components/SettingsForm/SettingsForm.js';
+import {HOST} from '../../core/http/index.js'
 import {settingsTemplate} from './settings.template.js';
 import {TSettingsEditTarget} from './types/index.js';
 
@@ -41,6 +42,32 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
     }
   }
 
+  get avatar() {
+    const {user} = this.props;
+    const avatar = user && user.avatar || '';
+
+    return avatar ? `${HOST}${avatar}` : avatar;
+  }
+
+  get name() {
+    const {user} = this.props;
+    return user && user.first_name || 'User';
+  }
+
+  get classes() {
+    const avatarImageClasses = ['settings__avatar-image'];
+    const avatarIconClasses = ['fas', 'fa-image'];
+
+    this.avatar
+      ? avatarIconClasses.push('hidden')
+      : avatarImageClasses.push('hidden');
+
+    return {
+      avatarImageClasses: avatarImageClasses.join(' '),
+      avatarIconClasses: avatarIconClasses.join(' '),
+    }
+  }
+
   goBack = () => {
     if (this.state.editTarget) {
       this.setEditTarget(null);
@@ -64,9 +91,12 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
 
   render() {
     return templator({
+      ...this.classes,
       editTarget: this.state.editTarget,
       showAvatarModal: this.state.showAvatarModal,
       user: this.props.user,
+      name: this.name,
+      avatar: this.avatar,
       onLogout: this.props.onLogout,
       updateProfile: this.props.updateProfile,
       updatePassword: this.props.updatePassword,

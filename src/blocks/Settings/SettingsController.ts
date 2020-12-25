@@ -60,7 +60,10 @@ export default class SettingsController extends Component<ISettingsControllerPro
 
   updateAvatar = (formData: FormData) => {
     return userProfileAPI
-      .updateAvatar(formData);
+      .updateAvatar(formData)
+      .then((newUser) => {
+        store.dispatch('setUser', newUser);
+      });
   }
 
   render() {

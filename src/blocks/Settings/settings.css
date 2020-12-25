@@ -62,6 +62,10 @@
   cursor: pointer;
 }
 
+.settings__avatar-image {
+  width: 100%;
+}
+
 .settings__avatar:hover .settings__avatar-change {
   opacity: 1;
 }
