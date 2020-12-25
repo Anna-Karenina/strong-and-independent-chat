@@ -12,7 +12,7 @@ interface IChatsControllerState extends IState {
 
 const templator = Templator.compile(
   `<chats
-    :onSubmit="onSubmit",
+    :sendMessage="sendMessage",
     :chats="chats"
   />`,
   {
@@ -44,7 +44,7 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     this.setState({newUserLogin: target.value});
   };
   
-  onSubmit = (e: Event) => {
+  sendMessage = (e: Event) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const aggregatedFormData = Object.fromEntries(formData.entries());
@@ -54,7 +54,7 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
   render() {
     return templator({
       chats: this.state.chats,
-      onSubmit: this.onSubmit,
+      sendMessage: this.sendMessage,
     });
   }
 };
