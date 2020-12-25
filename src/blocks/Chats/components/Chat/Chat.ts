@@ -6,6 +6,7 @@ import {chatTemplate} from './chat.template.js';
 interface IChatProps {
   chat: IChat | null,
   sendMessage: (e: Event) => any,
+  openAddUserModal: Function,
 };
 
 interface IChatState extends IState {
@@ -43,7 +44,8 @@ export default class Chat extends Component<IChatProps, IChatState> {
   }
 
   get chatClass() {
-    return this.props.chat ? 'chat' : 'chat hidden';
+    // return this.props.chat ? 'chat' : 'chat hidden';
+    return this.props.chat ? 'chat' : 'chat';
   }
 
   get title() {
@@ -53,7 +55,6 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
   userOptionsOutsideClick = (e: Event) => {
     if (!(e.target as HTMLElement).closest('[data-click="ignore"]')) {
-      console.log('catch!');
       this.setState({showUserOptions: false});
     }
   }
@@ -67,6 +68,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,
+      openAddUserModal: this.props.openAddUserModal,
       openUserOptions: this.openUserOptions,
       sendMessage: this.props.sendMessage,
     });

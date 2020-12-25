@@ -2,6 +2,7 @@ import Router from '../../core/router/index.js';
 import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
+import Modal from '../../components/Modal/index.js';
 import Field from '../../components/Field/index.js';
 import Chat from './components/Chat/Chat.js';
 import {IChat} from '../../store.js';
@@ -14,6 +15,7 @@ interface IChatsProps {
 
 interface IChatsState extends IState {
   selectedChat: IChat | null,
+  showAddUserModal: boolean,
 };
 
 const templator = Templator.compile(chatsTemplate, {
@@ -21,6 +23,7 @@ const templator = Templator.compile(chatsTemplate, {
     'my-button': MyButton,
     'field': Field,
     'chat': Chat,
+    'modal': Modal,
   },
 });
 export default class Chats extends Component<IChatsProps, IChatsState> {
@@ -32,6 +35,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     this.router = new Router();
     this.state = {
       selectedChat: null,
+      showAddUserModal: false,
     };
   }
 
@@ -46,10 +50,21 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     this.router.go('/settings');
   }
 
+  closeAddUserModal = () => {
+    this.setState({showAddUserModal: false});
+  }
+
+  openAddUserModal = () => {
+    this.setState({showAddUserModal: true});
+  }
+
   render() {
     return templator({
       chats: this.chats,
       selectedChat: this.state.selectedChat,
+      showAddUserModal: this.state.showAddUserModal,
+      closeAddUserModal: this.closeAddUserModal,
+      openAddUserModal: this.openAddUserModal,
       sendMessage: this.props.sendMessage,
       goToProfile: this.goToProfile,
     });

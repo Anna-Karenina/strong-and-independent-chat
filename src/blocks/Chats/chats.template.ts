@@ -26,11 +26,11 @@ export const chatsTemplate = `
 
       </div>
 
-      <chat :chat="selectedChat" :sendMessage="sendMessage" />
+      <chat :chat="selectedChat" :sendMessage="sendMessage" :openAddUserModal="openAddUserModal" />
 
     </main>
 
-    <div class="modal add-user-modal">
+    <modal :show="showAddUserModal" :onClose="closeAddUserModal">
       <div class="modal__content card">
         <h2 class="card__title modal__title">Добавить пользователя</h2>
 
@@ -39,6 +39,6 @@ export const chatsTemplate = `
           <my-button className="add-user-modal__submit" type="button" text="Добавить" />
         </form>
       </div>
-    </div>
+    </modal>
   </div>
 `; 
