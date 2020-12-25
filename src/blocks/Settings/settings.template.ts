@@ -30,17 +30,6 @@ export const settingsTemplate = `
 
     </main>
 
-    <modal :show="showAvatarModal" :onClose="closeAvatarModal">
-      <div class="modal__content card">
-        <h2 class="card__title modal__title">Файл загружен</h2>
-
-        <div class="change-avatar-modal__input-file">
-          <input type="file" id="avatar" class="input-file">
-          <label for="avatar" class="input-file__label">Выбрать файл на<br>компьютере</label>
-        </div>
-        
-        <my-button className="change-avatar-modal__submit" type="button" text="Поменять" />
-      </div>
-    </modal>
+    <avatar-modal :show="showAvatarModal" :onClose="closeAvatarModal" :updateAvatar="updateAvatar" />
   </div>
 `; 

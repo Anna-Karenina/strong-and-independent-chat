@@ -19,6 +19,7 @@ const templator = Templator.compile(
     :onLogout="onLogout"
     :updateProfile="updateProfile"
     :updatePassword="updatePassword"
+    :updateAvatar="updateAvatar"
   />`,
   {
     components: {settings: Settings},
@@ -54,7 +55,12 @@ export default class SettingsController extends Component<ISettingsControllerPro
 
   updatePassword = (passwordData: IPasswordUpdateData) => {
     return userProfileAPI
-      .updatePassword(passwordData)
+      .updatePassword(passwordData);
+  }
+
+  updateAvatar = (formData: FormData) => {
+    return userProfileAPI
+      .updateAvatar(formData);
   }
 
   render() {
@@ -63,6 +69,7 @@ export default class SettingsController extends Component<ISettingsControllerPro
       onLogout: this.onLogout,
       updateProfile: this.updateProfile,
       updatePassword: this.updatePassword,
+      updateAvatar: this.updateAvatar,
     });
   }
 };

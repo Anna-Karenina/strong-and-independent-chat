@@ -11,7 +11,7 @@ interface IModalProps {
 
 const templator = Templator.compile(modalTemplate);
 
-export default class MyButton extends Component<IModalProps> {
+export default class Modal extends Component<IModalProps> {
   constructor(props: IModalProps) {
     super(props);
   }

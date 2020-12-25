@@ -2,7 +2,7 @@ import Router from '../../core/router/index.js';
 import Component, {IState} from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
-import Modal from '../../components/Modal/index.js';
+import AvatarModal from './components/AvatarModal/AvatarModal.js';
 import SettingsForm from './components/SettingsForm/SettingsForm.js';
 import {settingsTemplate} from './settings.template.js';
 import {TSettingsEditTarget} from './types/index.js';
@@ -11,6 +11,7 @@ interface ISettingsProps {
   onLogout: Function,
   updateProfile: Function, 
   updatePassword: Function, 
+  updateAvatar: Function, 
   user: any,
 };
 
@@ -23,7 +24,7 @@ const templator = Templator.compile(settingsTemplate, {
   components: {
     'my-button': MyButton,
     'settings-form': SettingsForm,
-    'modal': Modal,
+    'avatar-modal': AvatarModal,
   },
 })
 
@@ -69,6 +70,7 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
       onLogout: this.props.onLogout,
       updateProfile: this.props.updateProfile,
       updatePassword: this.props.updatePassword,
+      updateAvatar: this.props.updateAvatar,
       closeAvatarModal: this.closeAvatarModal,
       openAvatarModal: this.openAvatarModal,
       setEditTarget: this.setEditTarget,

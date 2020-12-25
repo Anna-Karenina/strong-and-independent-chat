@@ -1,4 +1,4 @@
-import {queryString} from '../utils/queryString.js';
+import {queryString, isPlainObject} from '../utils/index.js';
 import {METHODS} from './constants.js';
 
 type TRequestHeaders = Record<string, string>;
@@ -78,7 +78,8 @@ export default class HTTPTransport {
       if (method === METHODS.GET) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        const processedData = isPlainObject(data) ? JSON.stringify(data) : data;
+        xhr.send(processedData);
       }
     });
   };
