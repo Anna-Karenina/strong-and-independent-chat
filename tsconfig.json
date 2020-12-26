@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "target": "ESNext",
+    "module": "commonjs",
+    "target": "ES2019",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
@@ -12,9 +12,9 @@
     "noUnusedParameters": true,
     "alwaysStrict": true,
     "strictNullChecks": true,
-    "lib": ["DOM", "ESNext", "DOM.Iterable"],
+    "lib": ["DOM", "ES2019", "DOM.Iterable"],
     "baseUrl": "./src"
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
