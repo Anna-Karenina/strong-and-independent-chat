@@ -15,7 +15,7 @@ export const chatsTemplate = `
 
           <li $each="chat in chats" class="chat-list__item" @click="chat.onClick">
             <div class="chat-list__item-content">
-              <div class="avatar chat-list__avatar"></div>
+              <avatar :img="chat.avatar" className="chat-list__avatar" />
               <div class="chat-list__info">
                 <div class="chat-list__name">{{ chat.title }}</div>
               </div>
@@ -48,7 +48,7 @@ export const chatsTemplate = `
           <div class="user-modal__user-list">
             <div class="user-modal__user-list-item" $each="user in users">
               <div class="user-modal__user-info">
-                <div class="avatar"></div>
+                <avatar :img="user.avatar" />
                 <div class="user-modal__user-name">{{ user.login }}</div>
               </div>
 
@@ -66,7 +66,7 @@ export const chatsTemplate = `
           <div class="user-modal__user-list">
             <div class="user-modal__user-list-item" $each="user in users">
               <div class="user-modal__user-info">
-                <div class="avatar"></div>
+                <avatar :img="user.avatar" />
                 <div class="user-modal__user-name">{{ user.login }}</div>
               </div>
 

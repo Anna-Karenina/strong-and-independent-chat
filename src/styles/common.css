@@ -93,15 +93,6 @@ body {
   opacity: 0;
 }
 
-/* AVATAR */
-
-.avatar {
-  width: 47px;
-  height: 47px;
-  background: var(--secondary-bg-color);
-  border-radius: 50%;
-}
-
 /* OPTIONS */
 
 .options {

@@ -3,7 +3,7 @@ export const chatTemplate = `
 
     <div class="user-bar">
       <div class="user-bar__info">
-        <div class="avatar"></div>
+        <avatar :img="avatar" />
         <div class="user-bar__name">{{ title }}</div>
       </div>
 

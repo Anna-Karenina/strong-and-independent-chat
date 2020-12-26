@@ -4,6 +4,7 @@ import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Modal from '../../components/Modal/index.js';
 import Field from '../../components/Field/index.js';
+import Avatar from '../../components/Avatar/index.js';
 import Chat from './components/Chat/Chat.js';
 import {IChat} from '../../store.js';
 import {chatsTemplate} from './chats.template.js';
@@ -32,6 +33,7 @@ const templator = Templator.compile(chatsTemplate, {
     'field': Field,
     'chat': Chat,
     'modal': Modal,
+    'avatar': Avatar,
   },
 });
 export default class Chats extends Component<IChatsProps, IChatsState> {

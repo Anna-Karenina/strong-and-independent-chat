@@ -49,23 +49,19 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
     return avatar ? `${HOST}${avatar}` : avatar;
   }
 
+  get avatarStyle() {
+    if (!this.avatar) return '';
+    return `background-image: url("${this.avatar}")`;
+  }
+
+  get avatarIconClass() {
+    const defaultClass = 'fas fa-image';
+    return this.avatar ? `${defaultClass} hidden` : defaultClass;
+  }
+
   get name() {
     const {user} = this.props;
     return user && user.first_name || 'User';
-  }
-
-  get classes() {
-    const avatarImageClasses = ['settings__avatar-image'];
-    const avatarIconClasses = ['fas', 'fa-image'];
-
-    this.avatar
-      ? avatarIconClasses.push('hidden')
-      : avatarImageClasses.push('hidden');
-
-    return {
-      avatarImageClasses: avatarImageClasses.join(' '),
-      avatarIconClasses: avatarIconClasses.join(' '),
-    }
   }
 
   goBack = () => {
@@ -91,12 +87,12 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
 
   render() {
     return templator({
-      ...this.classes,
       editTarget: this.state.editTarget,
       showAvatarModal: this.state.showAvatarModal,
       user: this.props.user,
       name: this.name,
-      avatar: this.avatar,
+      avatarStyle: this.avatarStyle,
+      avatarIconClass: this.avatarIconClass,
       onLogout: this.props.onLogout,
       updateProfile: this.props.updateProfile,
       updatePassword: this.props.updatePassword,

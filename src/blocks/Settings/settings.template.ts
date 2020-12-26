@@ -9,9 +9,8 @@ export const settingsTemplate = `
       </div>
 
       <div class="settings__content">
-        <div class="avatar settings__avatar" @click="openAvatarModal">
-          <img :src="avatar" alt="avatar" :class="avatarImageClasses">
-          <i :class="avatarIconClasses"></i>
+        <div class="avatar settings__avatar" :style="avatarStyle" @click="openAvatarModal">
+          <i :class="avatarIconClass"></i>
           <div class="settings__avatar-change">
             Поменять<br>аватар
           </div>

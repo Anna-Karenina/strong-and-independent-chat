@@ -1,5 +1,6 @@
 @import "/components/MyButton/MyButton.css";
 @import "/components/Field/Field.css";
+@import "/components/Avatar/Avatar.css";
 
 .chats {
   display: flex;

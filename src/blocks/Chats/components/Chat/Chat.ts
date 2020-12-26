@@ -1,5 +1,6 @@
 import Component, {IState} from '../../../../core/component/index.js';
 import Templator from '../../../../core/templator/index.js';
+import Avatar from '../../../../components/Avatar/index.js';
 import {IChat} from '../../../../store.js';
 import {chatTemplate} from './chat.template.js';
 
@@ -19,7 +20,11 @@ interface IChatProps {
   sendMessage: (e: Event) => any,
 };
 
-const templator = Templator.compile(chatTemplate);
+const templator = Templator.compile(chatTemplate, {
+  components: {
+    'avatar': Avatar,
+  }
+});
 
 export default class Chat extends Component<IChatProps, IChatState> {
 
@@ -53,6 +58,10 @@ export default class Chat extends Component<IChatProps, IChatState> {
     return chat && chat.title || '';
   }
 
+  get avatar() {
+    return this.props.chat?.avatar;
+  }
+
   userOptionsOutsideClick = (e: Event) => {
     if (!(e.target as HTMLElement).closest('[data-click="ignore"]')) {
       this.setState({showUserOptions: false});
@@ -78,6 +87,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,
+      avatar: this.avatar,
       tryToAddUser: this.tryToAddUser,
       tryToDeleteUser: this.tryToDeleteUser,
       openUserOptions: this.openUserOptions,
