@@ -5,8 +5,17 @@ export const avatarModalTemplate = `
 
       <form @submit="onSubmit">
         <div class="change-avatar-modal__input-file">
-          <input type="file" name="avatar" id="avatar" accept="image/*" class="input-file">
-          <label for="avatar" class="input-file__label">Выбрать файл на<br>компьютере</label>
+          <input
+            type="file"
+            name="avatar"
+            id="avatar"
+            accept="image/*"
+            class="input-file"
+            :value="file"
+            @input="onInput"
+          >
+          <label for="avatar" :class="labelClass">Выбрать файл на<br>компьютере</label>
+          <div class="input-file__name">{{ fileName }}</div>
         </div>
         
         <my-button className="change-avatar-modal__submit" type="submit" text="Поменять" />

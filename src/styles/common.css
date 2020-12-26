@@ -172,6 +172,17 @@ body {
   cursor: pointer;
 }
 
+.input-file__name {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: #8D8D8D;
+  max-width: 200px;
+  margin: 0 auto;
+  word-break: break-all;
+}
+
 /* FALLBACK PAGES */
 
 .fallback {

@@ -11,7 +11,7 @@ interface IAvatarModalProps {
 };
 
 interface IAvatarModalState {
-  file: null,
+  file: File | null,
 };
 
 const templator = Templator.compile(avatarModalTemplate, {
@@ -24,6 +24,19 @@ const templator = Templator.compile(avatarModalTemplate, {
 export default class AvatarModal extends Component<IAvatarModalProps, IAvatarModalState> {
   constructor(props: IAvatarModalProps) {
     super(props);
+
+    this.state = {
+      file: null,
+    };
+  }
+
+  get fileName() {
+    return this.state.file?.name || '';
+  }
+
+  get labelClass() {
+    const defaultClass = 'input-file__label';
+    return this.state.file ? `${defaultClass} hidden` : defaultClass; 
   }
 
   onSubmit = (e: Event) => {
@@ -32,14 +45,31 @@ export default class AvatarModal extends Component<IAvatarModalProps, IAvatarMod
     const avatar: File = formData.get('avatar') as File;
 
     if (!avatar.size) return;
-    this.props.updateAvatar(formData).then(this.props.onClose);
+    this.props.updateAvatar(formData).then(this.onClose);
   };
+
+  onInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    if (!target.files) return;
+
+    const [file] = [...target.files]
+    this.setState({file});
+  }
+
+  onClose = () => {
+    this.setState({file: null});
+    this.props.onClose();
+  }
 
   render() {
     return templator({
       show: this.props.show,
-      onClose: this.props.onClose,
+      onClose: this.onClose,
+      file: this.state.file,
+      fileName: this.fileName,
+      labelClass: this.labelClass,
       onSubmit: this.onSubmit,
+      onInput: this.onInput,
     });
   }
 }
