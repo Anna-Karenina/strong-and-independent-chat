@@ -29,6 +29,7 @@ interface IChatsState {
   showAddChatModal: boolean,
   search: string,
   users: Record<string, unknown>[],
+  fetching: boolean,
 };
 
 const templator = Templator.compile(chatsTemplate, {
@@ -56,6 +57,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       showAddChatModal: false,
       search: '',
       users: [],
+      fetching: false,
     };
   }
 
@@ -107,13 +109,27 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   createAddUserHandler(userId: number) {
     if (!this.selectedChatId) return () => {};
 
-    return () => this.props.addNewUserInChat(userId, this.selectedChatId).then(this.closeAddUserModal);
+    return () => {
+      if (this.state.fetching) return;
+      this.setState({fetching: true});
+
+      this.props.addNewUserInChat(userId, this.selectedChatId)
+        .then(this.closeAddUserModal)
+        .finally(() => this.setState({fetching: false}));
+    }
   }
 
   createRemoveUserHandler(userId: number) {
     if (!this.selectedChatId) return () => {};
 
-    return () => this.props.deleteUserFromChat(userId, this.selectedChatId).then(this.closeDeleteUserModal);
+    return () => {
+      if (this.state.fetching) return;
+      this.setState({fetching: true});
+      
+      this.props.deleteUserFromChat(userId, this.selectedChatId)
+        .then(this.closeDeleteUserModal)
+        .finally(() => this.setState({fetching: false}));
+    }
   }
 
   closeAddUserModal = () => {

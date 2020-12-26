@@ -12,6 +12,7 @@ interface IAvatarModalProps {
 
 interface IAvatarModalState {
   file: File | null,
+  fetching: boolean,
 };
 
 const templator = Templator.compile(avatarModalTemplate, {
@@ -27,6 +28,7 @@ export default class AvatarModal extends Component<IAvatarModalProps, IAvatarMod
 
     this.state = {
       file: null,
+      fetching: false,
     };
   }
 
@@ -41,11 +43,16 @@ export default class AvatarModal extends Component<IAvatarModalProps, IAvatarMod
 
   onSubmit = (e: Event) => {
     e.preventDefault();
+
     const formData = new FormData(e.target as HTMLFormElement);
     const avatar: File = formData.get('avatar') as File;
 
-    if (!avatar.size) return;
-    this.props.updateAvatar(formData).then(this.onClose);
+    if (!avatar.size || this.state.fetching) return;
+
+    this.setState({fetching: true});
+    this.props.updateAvatar(formData)
+      .then(this.onClose)
+      .finally(() => this.setState({fetching: false}));
   };
 
   onInput = (e: Event) => {

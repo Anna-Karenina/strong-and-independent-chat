@@ -10,6 +10,7 @@ interface IAuthControllerProps {};
 interface IAuthControllerState {
   fields: IAuthFields,
   formState: IFormState,
+  fetching: boolean,
 };
 
 const templator = Templator.compile(
@@ -42,6 +43,7 @@ export default class AuthController extends Component<IAuthControllerProps, IAut
         password: '',
       },
       formState: this.authFormValidator.formState,
+      fetching: false,
     };
   }
   
@@ -72,8 +74,13 @@ export default class AuthController extends Component<IAuthControllerProps, IAut
   };
   
   tryToAuthorize = () => {
+    if (this.state.fetching) return;
+
+    this.setState({fetching: true});
+
     authAPI.signin(this.state.fields)
       .then(() => bus.emit('auth:login'))
+      .finally(() => this.setState({fetching: false}));
   };
 
   render() {

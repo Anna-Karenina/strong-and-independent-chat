@@ -14,6 +14,7 @@ interface IChatProps {
 
 interface IChatState {
   showUserOptions: boolean,
+  fetching: boolean,
 };
 
 interface IChatProps {
@@ -34,6 +35,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
     this.state = {
       showUserOptions: false,
+      fetching: false,
     }
   }
 
@@ -84,7 +86,11 @@ export default class Chat extends Component<IChatProps, IChatState> {
   }
 
   deleteChat = () => {
-    this.props.deleteChat(this.props.chat?.id as number);
+    if (this.state.fetching) return;
+    this.setState({fetching: true});
+
+    this.props.deleteChat(this.props.chat?.id as number)
+      .finally(() => this.setState({fetching: false}));
   }
 
   render() {

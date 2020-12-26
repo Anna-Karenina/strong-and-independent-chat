@@ -44,6 +44,7 @@ interface ISettingsFormState {
   profileFields: IProfileFields,
   passwordFields: IPasswordFields,
   formState: IFormState,
+  fetching: boolean,
 };
 
 const previewTemplator = Templator.compile(settingsPreviewTemplate, {
@@ -104,7 +105,12 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
       newPasswordTwice: passwordDuplicateScheme,
     });
 
-    this.state = {profileFields, passwordFields, formState: this.validator.formState};
+    this.state = {
+      profileFields,
+      passwordFields,
+      formState: this.validator.formState,
+      fetching: false,
+    };
     this.setProfileFieldsFromUser();
   }
 
@@ -196,7 +202,8 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
   };
 
   updateProfileOrPassword() {
-    if (!this.props.editTarget) return;
+    if (!this.props.editTarget || this.state.fetching) return;
+    this.setState({fetching: true});
 
     const updateMap = {
       [EDIT_TARGET.PROFILE]: () => this.props.updateProfile(this.state.profileFields),
@@ -207,7 +214,9 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     }
     
     const update = updateMap[this.props.editTarget];
-    return update && update().then(() => this.props.setEditTarget(null));
+    return update()
+      .then(() => this.props.setEditTarget(null))
+      .finally(() => this.setState({fetching: false}));
   }
 
   render() {

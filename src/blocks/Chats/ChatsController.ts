@@ -47,12 +47,6 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     chatsAPI.getChats()
       .then((chats) => store.dispatch('setChats', chats))
   }
-
-  onNewUserLoginInput = (e: Event) => {
-    const target = e.target as HTMLFormElement;
-
-    this.setState({newUserLogin: target.value});
-  };
   
   sendMessage = (e: Event) => {
     e.preventDefault();

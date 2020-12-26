@@ -25,6 +25,7 @@ interface ISigninFields {
 interface ISigninControllerState {
   fields: ISigninFields,
   formState: IFormState,
+  fetching: boolean,
 };
 
 const templator = Templator.compile(
@@ -67,6 +68,7 @@ export default class SigninController extends Component<ISigninControllerProps, 
         password_twice: '',
       },
       formState: this.formValidator.formState,
+      fetching: false,
     };
   }
   
@@ -97,8 +99,13 @@ export default class SigninController extends Component<ISigninControllerProps, 
   };
   
   tryToSignup = () => {
+    if (this.state.fetching) return;
+
+    this.setState({fetching: true});
+
     authAPI.signup(this.state.fields)
-      .then(() => bus.emit('auth:login'));
+      .then(() => bus.emit('auth:login'))
+      .finally(() => this.setState({fetching: false}));
   };
 
   render() {

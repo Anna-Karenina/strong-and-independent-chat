@@ -19,6 +19,7 @@ interface IAddChatModalProps {
 interface IAddChatModalState {
   title: string,
   formState: IFormState,
+  fetching: boolean,
 };
 
 const templator = Templator.compile(addChatModalTemplate, {
@@ -39,7 +40,11 @@ export default class AddChatModal extends Component<IAddChatModalProps, IAddChat
       title: textFiledScheme,
     });
 
-    this.state = {title: '', formState: this.addChatValidator.formState};
+    this.state = {
+      title: '',
+      formState: this.addChatValidator.formState,
+      fetching: false
+    };
   }
 
   clearFormState() {
@@ -70,8 +75,12 @@ export default class AddChatModal extends Component<IAddChatModalProps, IAddChat
     
     this.validateTitle(this.state.title); 
     
-    if (this.addChatValidator.valid) {
-      this.props.addChat(this.state.title).then(this.onClose);
+    if (this.addChatValidator.valid && !this.state.fetching) {
+      this.setState({fetching: true});
+
+      this.props.addChat(this.state.title)
+        .then(this.onClose)
+        .finally(() => this.setState({fetching: false}));
     }
   }
 
