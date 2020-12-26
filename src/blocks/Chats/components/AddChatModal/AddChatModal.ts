@@ -1,4 +1,4 @@
-import Component, {IState} from '../../../../core/component/index.js';
+import Component from '../../../../core/component/index.js';
 import MyButton from '../../../../components/MyButton/index.js';
 import Field from '../../../../components/Field/index.js';
 import Modal from '../../../../components/Modal/index.js';
@@ -16,7 +16,7 @@ interface IAddChatModalProps {
   addChat: (title: string) => any,
 };
 
-interface IAddChatModalState extends IState {
+interface IAddChatModalState {
   title: string,
   formState: IFormState,
 };

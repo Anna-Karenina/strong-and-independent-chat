@@ -1,5 +1,5 @@
 import Router from '../../core/router/index.js';
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import AvatarModal from './components/AvatarModal/AvatarModal.js';
@@ -16,7 +16,7 @@ interface ISettingsProps {
   user: any,
 };
 
-interface ISettingsState extends IState {
+interface ISettingsState {
   editTarget: TSettingsEditTarget,
   showAvatarModal: boolean,
 };

@@ -1,4 +1,4 @@
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import Settings from './Settings.js';
 import {bus} from '../../core/bus/index.js';
@@ -9,7 +9,7 @@ interface ISettingsControllerProps {};
 
 type TUser = null | Record<string, string | null>;
 
-interface ISettingsControllerState extends IState {
+interface ISettingsControllerState {
   user: TUser,
 };
 

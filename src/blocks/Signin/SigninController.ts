@@ -1,4 +1,4 @@
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import {
   FormValidator,
@@ -22,7 +22,7 @@ interface ISigninFields {
   password: string,
   password_twice: string,
 }
-interface ISigninControllerState extends IState {
+interface ISigninControllerState {
   fields: ISigninFields,
   formState: IFormState,
 };

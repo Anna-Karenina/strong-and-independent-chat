@@ -1,4 +1,4 @@
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import {FormValidator, textFiledScheme, IFormState} from '../../core/validation/index.js';
 import Auth, {IAuthFields} from './Auth.js';
@@ -7,7 +7,7 @@ import {bus} from '../../core/bus/index.js';
 
 interface IAuthControllerProps {};
 
-interface IAuthControllerState extends IState {
+interface IAuthControllerState {
   fields: IAuthFields,
   formState: IFormState,
 };

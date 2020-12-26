@@ -10,6 +10,10 @@ interface IAvatarModalProps {
   updateAvatar: (formData: FormData) => any,
 };
 
+interface IAvatarModalState {
+  file: null,
+};
+
 const templator = Templator.compile(avatarModalTemplate, {
   components: {
     'my-button': MyButton,
@@ -17,7 +21,7 @@ const templator = Templator.compile(avatarModalTemplate, {
   }
 });
 
-export default class AvatarModal extends Component<IAvatarModalProps> {
+export default class AvatarModal extends Component<IAvatarModalProps, IAvatarModalState> {
   constructor(props: IAvatarModalProps) {
     super(props);
   }

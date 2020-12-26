@@ -1,4 +1,4 @@
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import Chats from './Chats.js';
 import {store, IChat} from '../../store.js';
@@ -6,7 +6,7 @@ import {chatsAPI, userAPI, ISearchData} from '../../core/api/index.js';
 
 interface IChatsControllerProps {};
 
-interface IChatsControllerState extends IState {
+interface IChatsControllerState {
   chats: IChat[]
 };
 

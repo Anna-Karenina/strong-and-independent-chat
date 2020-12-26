@@ -8,7 +8,7 @@ export interface IProps {
 };
 
 export interface IState {
-  [key: string]: unknown,
+  [key: string]: any,
 };
 
 export default abstract class Component<P extends IProps = IProps, S extends IState = IState> {

@@ -1,5 +1,5 @@
 import Router from '../../core/router/index.js';
-import Component, {IState} from '../../core/component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import MyButton from '../../components/MyButton/index.js';
 import Modal from '../../components/Modal/index.js';
@@ -22,7 +22,7 @@ interface IChatsProps {
   deleteChat: (chatId: number) => any,
 };
 
-interface IChatsState extends IState {
+interface IChatsState {
   selectedChat: IChat | null,
   showAddUserModal: boolean,
   showDeleteUserModal: boolean,

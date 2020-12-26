@@ -1,4 +1,4 @@
-import Component, {IState} from '../../../../core/component/index.js';
+import Component from '../../../../core/component/index.js';
 import Templator from '../../../../core/templator/index.js';
 import MyButton from '../../../../components/MyButton/index.js';
 import SettingsField from '../../../../components/SettingsField/index.js';
@@ -40,7 +40,7 @@ interface IPasswordFields {
   newPasswordTwice: string,
 }
 
-interface ISettingsFormState extends IState {
+interface ISettingsFormState {
   profileFields: IProfileFields,
   passwordFields: IPasswordFields,
   formState: IFormState,
