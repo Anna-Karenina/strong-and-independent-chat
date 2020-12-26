@@ -17,6 +17,7 @@ interface IChatsProps {
   addNewUserInChat: (userId: number, chatId: number) => any,
   deleteUserFromChat: (userId: number, chatId: number) => any,
   fetchChatUsers: (chatId: number) => any,
+  deleteChat: (chatId: number) => any,
 };
 
 interface IChatsState extends IState {
@@ -151,6 +152,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       closeDeleteUserModal: this.closeDeleteUserModal,
       openDeleteUserModal: this.openDeleteUserModal,
       sendMessage: this.props.sendMessage,
+      deleteChat: this.props.deleteChat,
       goToProfile: this.goToProfile,
       onSearch: this.onSearch,
     });

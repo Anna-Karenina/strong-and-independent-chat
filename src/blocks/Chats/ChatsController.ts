@@ -18,6 +18,7 @@ const templator = Templator.compile(
     :addNewUserInChat="addNewUserInChat",
     :deleteUserFromChat="deleteUserFromChat",
     :fetchChatUsers="fetchChatUsers",
+    :deleteChat="deleteChat",
   />`,
   {
     components: {chats: Chats},
@@ -81,6 +82,10 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     return chatsAPI.getChatUsers(chatId);
   }
 
+  deleteChat = (chatId: number) => {
+    return chatsAPI.deleteChat(chatId).then(this.fetchChats);
+  }
+
   render() {
     return templator({
       chats: this.state.chats,
@@ -89,6 +94,7 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
       addNewUserInChat: this.addNewUserInChat,
       deleteUserFromChat: this.deleteUserFromChat,
       fetchChatUsers: this.fetchChatUsers,
+      deleteChat: this.deleteChat,
     });
   }
 };

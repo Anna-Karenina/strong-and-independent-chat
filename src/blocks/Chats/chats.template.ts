@@ -29,6 +29,7 @@ export const chatsTemplate = `
       <chat
         :chat="selectedChat"
         :sendMessage="sendMessage"
+        :deleteChat="deleteChat"
         :openAddUserModal="openAddUserModal"
         :openDeleteUserModal="openDeleteUserModal"
       />

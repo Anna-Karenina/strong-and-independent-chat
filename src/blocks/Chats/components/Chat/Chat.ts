@@ -7,8 +7,9 @@ import {chatTemplate} from './chat.template.js';
 interface IChatProps {
   chat: IChat | null,
   sendMessage: (e: Event) => any,
-  openAddUserModal: Function,
-  openDeleteUserModal: Function,
+  openAddUserModal: () => void,
+  openDeleteUserModal: () => void,
+  deleteChat: (chatId: number) => any,
 };
 
 interface IChatState extends IState {
@@ -72,14 +73,18 @@ export default class Chat extends Component<IChatProps, IChatState> {
     this.setState({showUserOptions: true});
   }
 
-  tryToAddUser = () => {
+  openAddUserModal = () => {
     this.props.openAddUserModal();
     this.setState({showUserOptions: false});
   }
 
-  tryToDeleteUser = () => {
+  openDeleteUserModal = () => {
     this.props.openDeleteUserModal();
     this.setState({showUserOptions: false});
+  }
+
+  deleteChat = () => {
+    this.props.deleteChat(this.props.chat?.id as number);
   }
 
   render() {
@@ -88,8 +93,9 @@ export default class Chat extends Component<IChatProps, IChatState> {
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,
       avatar: this.avatar,
-      tryToAddUser: this.tryToAddUser,
-      tryToDeleteUser: this.tryToDeleteUser,
+      deleteChat: this.deleteChat,
+      openAddUserModal: this.openAddUserModal,
+      openDeleteUserModal: this.openDeleteUserModal,
       openUserOptions: this.openUserOptions,
       sendMessage: this.props.sendMessage,
     });

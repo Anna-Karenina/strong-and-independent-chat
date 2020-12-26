@@ -15,6 +15,15 @@ export default class ChatsAPI extends BaseAPI {
     });
   }
 
+  deleteChat(chatId: number) {
+    return http.delete<{chatId: number}>('/chats', {
+      data: {chatId},
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+  }
+
   getChatUsers(chatId: number) {
     return http.get(`chats/${chatId}/users`, {
       headers: {
