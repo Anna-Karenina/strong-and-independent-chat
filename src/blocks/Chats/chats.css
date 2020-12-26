@@ -146,6 +146,11 @@
   align-items: center;
 }
 
+.chat-select__add-button {
+  margin-bottom: 20px;
+  width: 90%;
+}
+
 /* RIGHT */
 
 .chat {
@@ -384,4 +389,13 @@
 
 .user-modal__remove-icon {
   color: #FF0000;
+}
+
+.add-chat-modal__field {
+  margin-top: 20px;
+}
+
+.add-chat-modal__submit {
+  margin-top: 20px;
+  width: 100%;
 }

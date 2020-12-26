@@ -24,6 +24,13 @@ export const chatsTemplate = `
 
         </ul>
 
+        <my-button
+          className="chat-select__add-button"
+          type="button"
+          text="Добавить чат"
+          :onClick="openAddChatModal"
+        />
+
       </div>
 
       <chat
@@ -35,6 +42,8 @@ export const chatsTemplate = `
       />
 
     </main>
+
+    <add-chat-modal :show="showAddChatModal" :onClose="closeAddChatModal" :addChat="addChat" />
 
     <modal :show="showAddUserModal" :onClose="closeAddUserModal">
       <div class="modal__content card">

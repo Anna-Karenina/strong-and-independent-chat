@@ -6,6 +6,7 @@ import Modal from '../../components/Modal/index.js';
 import Field from '../../components/Field/index.js';
 import Avatar from '../../components/Avatar/index.js';
 import Chat from './components/Chat/Chat.js';
+import AddChatModal from './components/AddChatModal/AddChatModal.js';
 import {IChat} from '../../store.js';
 import {chatsTemplate} from './chats.template.js';
 import {ISearchData} from '../../core/api/index.js';
@@ -17,6 +18,7 @@ interface IChatsProps {
   addNewUserInChat: (userId: number, chatId: number) => any,
   deleteUserFromChat: (userId: number, chatId: number) => any,
   fetchChatUsers: (chatId: number) => any,
+  addChat: (title: string) => any,
   deleteChat: (chatId: number) => any,
 };
 
@@ -24,6 +26,7 @@ interface IChatsState extends IState {
   selectedChat: IChat | null,
   showAddUserModal: boolean,
   showDeleteUserModal: boolean,
+  showAddChatModal: boolean,
   search: string,
   users: Record<string, unknown>[],
 };
@@ -35,6 +38,7 @@ const templator = Templator.compile(chatsTemplate, {
     'chat': Chat,
     'modal': Modal,
     'avatar': Avatar,
+    'add-chat-modal': AddChatModal,
   },
 });
 export default class Chats extends Component<IChatsProps, IChatsState> {
@@ -49,6 +53,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       selectedChat: null,
       showAddUserModal: false,
       showDeleteUserModal: false,
+      showAddChatModal: false,
       search: '',
       users: [],
     };
@@ -131,6 +136,14 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     });
   }
 
+  closeAddChatModal = () => {
+    this.setState({showAddChatModal: false});
+  }
+
+  openAddChatModal = () => {
+    this.setState({showAddChatModal: true});
+  }
+
   onSearch = async (e: Event) => {
     const search = (e.target as HTMLInputElement).value;
     this.setState({search});
@@ -143,16 +156,26 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
     return templator({
       chats: this.chats,
       selectedChat: this.state.selectedChat,
+
       showAddUserModal: this.state.showAddUserModal,
       showDeleteUserModal: this.state.showDeleteUserModal,
+      showAddChatModal: this.state.showAddChatModal,
+
       search: this.state.search,
       users: this.users,
+
       closeAddUserModal: this.closeAddUserModal,
       openAddUserModal: this.openAddUserModal,
+
       closeDeleteUserModal: this.closeDeleteUserModal,
       openDeleteUserModal: this.openDeleteUserModal,
+
+      closeAddChatModal: this.closeAddChatModal,
+      openAddChatModal: this.openAddChatModal,
+      
       sendMessage: this.props.sendMessage,
       deleteChat: this.props.deleteChat,
+      addChat: this.props.addChat,
       goToProfile: this.goToProfile,
       onSearch: this.onSearch,
     });

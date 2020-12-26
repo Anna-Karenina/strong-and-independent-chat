@@ -14,8 +14,24 @@ interface IFieldProps {
 const templator = Templator.compile(template);
 
 export default class Field extends Component {
+  private inputRef: HTMLInputElement | null;
+  
   constructor(props: IFieldProps) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.inputRef = (this.element as HTMLElement).querySelector('input');
+
+    if (this.inputRef) {
+      this.inputRef.value = this.props.value
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.inputRef) {
+      this.inputRef.value = this.props.value
+    }
   }
 
   render() {

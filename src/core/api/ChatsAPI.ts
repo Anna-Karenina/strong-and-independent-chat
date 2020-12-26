@@ -4,7 +4,15 @@ import BaseAPI from './BaseAPI.js';
 export interface IUsersData {
   users: number[],
   chatId: number,
-}
+};
+
+export interface IDeleteChatData {
+  chatId: number,
+};
+
+export interface ICreateChatData {
+  title: string,
+};
 
 export default class ChatsAPI extends BaseAPI {
   getChats() {
@@ -15,8 +23,17 @@ export default class ChatsAPI extends BaseAPI {
     });
   }
 
+  createChat(title: string) {
+    return http.post<ICreateChatData>('/chats', {
+      data: {title},
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+  }
+
   deleteChat(chatId: number) {
-    return http.delete<{chatId: number}>('/chats', {
+    return http.delete<IDeleteChatData>('/chats', {
       data: {chatId},
       headers: {
         'content-type': 'application/json',
