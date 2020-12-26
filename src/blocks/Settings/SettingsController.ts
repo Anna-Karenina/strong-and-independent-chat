@@ -27,16 +27,24 @@ const templator = Templator.compile(
 );
 
 export default class SettingsController extends Component<ISettingsControllerProps, ISettingsControllerState> {
+  private unsubscribeStore: () => void;
+
   constructor(props: ISettingsControllerProps) {
     super(props);
 
-    const {state} = store.select(['user'], (field, value) => {
+    const {state, unsubscribe} = store.select(['user'], (field, value) => {
       this.setState({[field]: value});
     });
+
+    this.unsubscribeStore = unsubscribe;
 
     this.state = {
       user: state.user as TUser,
     };
+  }
+
+  beforeDestroy() {
+    this.unsubscribeStore();
   }
 
   onLogout = () => {

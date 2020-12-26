@@ -20,7 +20,7 @@ interface IStore<T extends Record<string, any>> {
 
 interface ISelectResult<T> {
   state: Partial<T>,
-  unsubscribe: Function,
+  unsubscribe: () => void,
 };
 
 export default class Store<T extends Record<string, any>> {

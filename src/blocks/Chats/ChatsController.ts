@@ -27,12 +27,16 @@ const templator = Templator.compile(
 );
 
 export default class ChatsController extends Component<IChatsControllerProps, IChatsControllerState> {
+  private unsubscribeStore: () => void;
+
   constructor(props: IChatsControllerProps) {
     super(props);
 
-    const {state} = store.select(['chats'], (field, value) => {
+    const {state, unsubscribe} = store.select(['chats'], (field, value) => {
       this.setState({[field]: value});
     });
+
+    this.unsubscribeStore = unsubscribe;
 
     this.state = {
       chats: state.chats as IChat[],
@@ -41,6 +45,10 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
 
   componentDidMount() {
     this.fetchChats();
+  }
+
+  beforeDestroy() {
+    this.unsubscribeStore();
   }
 
   fetchChats() {
