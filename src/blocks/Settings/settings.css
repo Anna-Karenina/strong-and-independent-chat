@@ -1,3 +1,6 @@
+@import "./components/SettingsForm/SettingsForm.css";
+@import "./components/AvatarModal/AvatarModal.css";
+
 .settings {
   width: 100%;
   height: 100vh;
@@ -87,39 +90,4 @@
 .settings__user-name {
   margin: 20px 0 0;
   font-size: 16px;
-}
-
-.settings__form {
-  margin-top: 60px;
-  width: 100%;
-  max-width: 510px;
-}
-
-.settings__button:not(:last-child) {
-  border-bottom: 1px solid var(--primary-border-color);
-}
-
-.settings__buttons {
-  margin-top: 60px;
-  width: 100%;
-  max-width: 510px;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-}
-
-.settings__button {
-  font-size: 13px;
-  width: 100%;
-  padding: 10px 0;
-  text-align: left;
-}
-
-.change-avatar-modal__input-file {
-  margin-top: 40px;
-}
-
-.change-avatar-modal__submit {
-  margin-top: 60px;
-  width: 100%;
 }

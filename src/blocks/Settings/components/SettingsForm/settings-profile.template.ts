@@ -49,7 +49,7 @@ export const settingsProfileTemplate = `
   />
 
   <div class="settings__buttons">
-    <my-button className="auth__primary-button" type="submit" text="Сохранить" />
+    <my-button className="settings__save-button" type="submit" text="Сохранить" />
   </div>
 
 </form>
