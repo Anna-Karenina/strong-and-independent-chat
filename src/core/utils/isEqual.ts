@@ -1,6 +1,4 @@
-const isObject = (maybeObject: unknown): boolean => {
-  return typeof maybeObject === 'object' && maybeObject !== null;
-};
+import {isPlainObject} from './isPlainObject.js';
 
 export const isEqual = (a: any, b: any): boolean => {
   if (Array.isArray(a) && Array.isArray(b)) {
@@ -10,7 +8,7 @@ export const isEqual = (a: any, b: any): boolean => {
     );
   }
 
-  if (isObject(a) && isObject(b)) {
+  if (isPlainObject(a) && isPlainObject(b)) {
     return (
       Object.keys(a).length === Object.keys(b).length &&
       Object.keys(a).every((key) => isEqual(a[key], b[key]))

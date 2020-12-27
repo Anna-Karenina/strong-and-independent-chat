@@ -1,3 +1,3 @@
-import Settings from './Settings.js';
+import SettingsController from './SettingsController.js';
 
-export default Settings;
+export default SettingsController;

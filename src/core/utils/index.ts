@@ -7,6 +7,9 @@ import {range} from './range.js';
 import {isEqual} from './isEqual.js';
 import {deepClone} from './deepClone.js';
 import {modal} from './modal.js';
+import {zip} from './zip.js';
+import {isPlainObject, PlainObject} from './isPlainObject.js';
+import {queryString} from './queryString.js';
 
 export {
   first,
@@ -18,4 +21,8 @@ export {
   isEqual,
   deepClone,
   modal,
+  zip,
+  isPlainObject,
+  queryString,
+  PlainObject,
 };

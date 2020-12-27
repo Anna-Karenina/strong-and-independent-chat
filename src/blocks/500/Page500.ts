@@ -1,21 +1,28 @@
+import Router from '../../core/router/index.js';
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import {template500} from './500.template.js';
 
 interface IPage500Props {};
 
+const templator = Templator.compile(template500);
+
 export default class Page500 extends Component {
-  private templator: Templator;
+  private router: Router;
 
   constructor(props: IPage500Props) {
     super(props);
+
+    this.router = new Router();
   }
 
-  componentDidMount() {
-    this.templator = new Templator(template500);
+  goToChats = () => {
+    this.router.go('/chats');
   }
 
   render() {
-    return this.templator.render(this.props);
+    return templator({
+      goToChats: this.goToChats,
+    });
   }
 };

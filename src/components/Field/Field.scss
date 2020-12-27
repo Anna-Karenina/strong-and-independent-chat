@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.field {
+  width: 100%;
+  padding-top: 9px;
+  position: relative;
+}
+
+.field__label {
+  font-size: 13px;
+  line-height: 13px;
+  color: $secondary-text-color;
+  position: absolute;
+  bottom: 7px;
+  left: 0;
+  transition: all .2s;
+}
+
+.field__input-wrapper {
+  position: relative;
+}
+
+.field__input {
+  width: 100%;
+  height: 27px;
+  border: none;
+  border-bottom: 1px solid $primary-color;
+  padding: 7px 0;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 13px;
+  color: $primary-text-color;
+  z-index: 2;
+  position: relative;
+
+  &:focus ~ .field__label,
+  &:not([value=""]) ~ .field__label {
+    transform: translateY(-20px);
+    font-size: 9px;
+  }
+
+  @include outline;
+}
+
+.field__error {
+  margin-top: 7px;
+}

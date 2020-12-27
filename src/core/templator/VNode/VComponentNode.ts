@@ -1,45 +1,44 @@
 import VNode, {NodeType} from './VNode.js';
-import {IProps, ComponentConstructor} from '../../component/index.js';
-import {getTagMeta, IMetaAttribute} from '../utils/meta.js';
-
-interface IMeta {
-  props: IMetaAttribute [],
-  [key: string]: any,
-};
+import Component, {ComponentConstructor} from '../../component/index.js';
+import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types/index.js';
+import {parseAttributes} from '../utils/attrs.js';
+import {renderComponent} from '../utils/render.js';
 
 export default class VComponentNode extends VNode {
-  meta: IMeta;
+  private componentClass: ComponentConstructor;
+  instance: Component | null = null;
+  $children: VNode[];
+  props: TAttrs;
 
-  private _Component: ComponentConstructor;
-
-  private _instance: any = null;
-
-  constructor(openTag: string, Component: ComponentConstructor) {
+  constructor(semanticNode: TSemanticNode, ctx: TCtx, children: VNode[] = []) {
     super(NodeType.ComponentNode);
+    this.componentClass = semanticNode.attrs.__componentClass as ComponentConstructor;
 
-    this.getMetaFromTag(openTag);
-    this._Component = Component;
+    this.$children = children;
+    this.props = parseAttributes(semanticNode.attrs, ctx);
   }
 
-  private getMetaFromTag(tag: string) {
-    const {attributes: props} = getTagMeta(tag);
-    this.meta.props = props;
+  render() {
+    this.instance = new this.componentClass({...this.props, $children: this.$children});
+    return renderComponent(this.instance as Component);
   }
 
-  render(ctx: object) {
-    const props: IProps = this.meta.props.reduce((acc: IProps, {name, value}) => {
-      return {...acc, [name]: this.setValuesFromContext(value, ctx)};
-    }, {});
-
-    if (!this._instance) {
-      this._instance = new this._Component(props);
-    } else {
-      this._instance.setProps(props);
-    }
-
-    return this._instance.getContent();
+  diff(newVNode: VComponentNode): TPatch {
+    return ($el) => {
+      newVNode.instance = this.instance;
+      newVNode.instance?.setProps({...newVNode.props, $children: newVNode.$children});
+      return $el;
+    };
   }
 
-  //maybe later...
-  setChildren() {}
+  isSimilar(newVNode: VComponentNode) {
+    return this.componentClass === newVNode.componentClass;
+  }
+
+  destroy() {
+    return ($el: HTMLElement) => {
+      this.instance?.destroy();
+      return $el;
+    };
+  }
 }
