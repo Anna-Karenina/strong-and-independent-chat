@@ -1,11 +1,11 @@
-export const signinTemplate = `
-  <main class="signin">
+export const registrationTemplate = `
+  <main class="registration">
     <div class="card">
-      <h2 class="card__title signin__title">Регистрация</h2>
-      <form class="signin-form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
+      <h2 class="card__title registration__title">Регистрация</h2>
+      <form class="registration-form" @submit="onSubmit" @input="onInput" @focusout="onFocusout">
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="text"
           label="Почта"
           name="email"
@@ -14,7 +14,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="text"
           label="Логин"
           name="login"
@@ -23,7 +23,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="text"
           label="Имя"
           name="first_name"
@@ -32,7 +32,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="text"
           label="Фамилия"
           name="second_name"
@@ -41,7 +41,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="tel"
           label="Телефон"
           name="phone"
@@ -50,7 +50,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="password"
           label="Пароль"
           name="password"
@@ -59,7 +59,7 @@ export const signinTemplate = `
         />
 
         <field
-          className="signin-form__field"
+          className="registration-form__field"
           type="password"
           label="Пароль (ещё раз)"
           name="password_twice"
@@ -67,9 +67,9 @@ export const signinTemplate = `
           :value="fields.password_twice"
         />
 
-        <div class="signin__action-buttons">
-          <my-button className="signin__primary-button" type="submit" text="Зарегистрироваться" />
-          <button @click="goToAuth" class="empty-button signin__empty-button" type="button">Войти</button>
+        <div class="registration__action-buttons">
+          <my-button className="registration__primary-button" type="submit" text="Зарегистрироваться" />
+          <button @click="goToAuth" class="empty-button registration__empty-button" type="button">Войти</button>
         </div>
 
       </form>

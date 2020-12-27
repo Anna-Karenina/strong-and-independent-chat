@@ -1,6 +1,6 @@
 import Router from './core/router/index.js';
 import AuthController from './blocks/Auth/index.js'
-import SigninController from './blocks/Signin/index.js'
+import RegistrationController from './blocks/Registration/index.js'
 import ChatsController from './blocks/Chats/index.js';
 import SettingsController from './blocks/Settings/index.js';
 import FallbackPage from './blocks/404/Page404.js';
@@ -22,7 +22,7 @@ authEvent.init({router});
 
 router
   .use("/auth", AuthController)
-  .use("/signin", SigninController)
+  .use("/registration", RegistrationController)
   .use("/chats", ChatsController)
   .use("/settings", SettingsController)
   .use("/500", ErrorPage)

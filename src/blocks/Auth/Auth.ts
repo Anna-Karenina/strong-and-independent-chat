@@ -37,7 +37,7 @@ export default class Auth extends Component {
   }
 
   goToRegistration = () => {
-    this.router.go('/signin');
+    this.router.go('/registration');
   }
 
   render() {

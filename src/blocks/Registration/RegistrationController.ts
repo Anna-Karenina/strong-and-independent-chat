@@ -8,12 +8,13 @@ import {
   passwordDuplicateScheme,
   IFormState,
 } from '../../core/validation/index.js';
-import Signin from './Signin.js';
+import Registration from './Registration.js';
 import {authAPI} from '../../core/api/index.js';
 import {bus} from '../../core/bus/index.js';
 
-interface ISigninControllerProps {};
-interface ISigninFields {
+interface IRegistrationControllerProps {};
+
+interface IRegistrationFields {
   email: string,
   login: string,
   first_name: string,
@@ -21,15 +22,16 @@ interface ISigninFields {
   phone: string,
   password: string,
   password_twice: string,
-}
-interface ISigninControllerState {
-  fields: ISigninFields,
+};
+
+interface IRegistrationControllerState {
+  fields: IRegistrationFields,
   formState: IFormState,
   fetching: boolean,
 };
 
 const templator = Templator.compile(
-  `<signin
+  `<registration
     :formState="formState"
     :fields="fields"
     :onSubmit="onSubmit"
@@ -37,14 +39,14 @@ const templator = Templator.compile(
     :onInput="onInput"
   />`,
   {
-    components: {signin: Signin},
+    components: {registration: Registration},
   }
 );
 
-export default class SigninController extends Component<ISigninControllerProps, ISigninControllerState> {
+export default class RegistrationController extends Component<IRegistrationControllerProps, IRegistrationControllerState> {
   private formValidator: FormValidator
 
-  constructor(props: ISigninControllerProps) {
+  constructor(props: IRegistrationControllerProps) {
     super(props);
 
     this.formValidator = new FormValidator({
