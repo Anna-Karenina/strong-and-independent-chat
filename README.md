@@ -15,23 +15,59 @@
 
 Страницы проекта:
 
-- [/pages/auth](https://angry-lumiere-c6bdd3.netlify.app/static/pages/auth/)
-- [/pages/signin](https://angry-lumiere-c6bdd3.netlify.app/static/pages/signin/)
-- [/pages/chats](https://angry-lumiere-c6bdd3.netlify.app/static/pages/chats/)
-- [/pages/settings](https://angry-lumiere-c6bdd3.netlify.app/static/pages/settings/)
-- [/pages/404](https://angry-lumiere-c6bdd3.netlify.app/static/pages/404/)
-- [/pages/500](https://angry-lumiere-c6bdd3.netlify.app/static/pages/500/)
+- [/auth](https://angry-lumiere-c6bdd3.netlify.app/auth)
+- [/registration](https://angry-lumiere-c6bdd3.netlify.app/registration)
+- [/chats](https://angry-lumiere-c6bdd3.netlify.app/chats)
+- [/settings](https://angry-lumiere-c6bdd3.netlify.app/settings)
+- [/500](https://angry-lumiere-c6bdd3.netlify.app/500)
+
+Все остальные пути ведут на страницу 404.
 
 ## Шаблонизатор
+### Атрибуты, события, вывод текст
 
-В проекте используется собственный шаблонизатор (немного схожий по синтаксису с шаблонизатором vue). Основной функционал:
+Имена динамических атрибутов начинается с `:`, а событий с `@`.
 
-1. Парсить строку html, выделяя теги, текстовые узлы и компоненты
-2. Подставлять значения из контекста в конструкцию вида: {{ some.data.from.ctx }}
-3. Добавлять слушатели из контекста в конструцию вида: @input="someHandlerFromCtx"
-4. Отрисовывать компоненты и прокидывать в них props
-5. Вносить изменения в DOM при изменении данных
+Для вывода текста необходимо использовать конструкцию `{{ text }}`.
 
-Необходимо реализовать:
-1. Сравнение старого и нового виртуального дома, для более точного контроля изменений. Это позволит удалять/заменять элементы и рендерить списки
-2. Рендеринг списоков элементов/компонентов
+    <div class="parent" @click="goBack">
+      <button :class="buttonClass">
+        {{ buttonText }}
+      </button>
+    </div>
+### Компоненты
+
+Чтобы использовать компоненты в шаблоне, необходимо зарегистрировать их, передав в `Templator.compile`.
+
+    const template = `
+      <div class="buttons">
+        <my-button className="button" text="Авторизоваться" :onClick="auth" />
+        <my-button className="button" text="Создать аккаунт" :onClick="goToRegistration" />
+      </div>
+     `;
+     
+    const templator = Templator.compile(template, {
+      components: {
+        'my-button': MyButton,
+      },
+    });
+### Children
+
+Для отрисовки вложенных в компонент элементов, используется конструкция `$children$`. У компонента может быть только один вложенный элемент.
+
+    <my-button>Click me!</my-button>
+    
+    //MyButton
+    <button>$children$</button>
+    
+### Отрисовка списка
+
+Для отрисовки списков используется атрибут `$each`.
+
+    <ul>
+      <li $each="chat in chats" class="chat-item" @click="chat.onClick">
+        <avatar :img="chat.avatar" />
+        <div class="chat-item__name">{{ chat.title }}</div>
+      </li>
+    </ul
+
