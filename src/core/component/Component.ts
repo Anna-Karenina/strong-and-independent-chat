@@ -15,8 +15,8 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
-    FLOW_RENDER: "flow:render",
     FLOW_CDU: "flow:component-did-update",
+    FLOW_BD: "flow:before-destroy",
   };
 
   props: P;
@@ -39,16 +39,35 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     eventBus.emit(Component.EVENTS.INIT);
   }
 
+  get element() {
+    return this._element;
+  }
+
+  set element(el) {
+    if (!this._element) {
+      this._element = el;
+      this.eventBus().emit(Component.EVENTS.FLOW_CDM);
+    } else {
+      this._element = el;
+    }
+  }
+
+  get virtualNode() {
+    return this._virtualNode;
+  }
+
+  set virtualNode(virtualNode) {
+    this._virtualNode = virtualNode;
+  }
+
   private registerEvents(eventBus: EventBus) {
     eventBus.on(Component.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Component.EVENTS.FLOW_BD, this.beforeDestroy.bind(this));
   }
 
-  private init() {
-    
-  }
+  private init() {}
 
   private _componentDidMount() {
     this.componentDidMount();
@@ -76,6 +95,17 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     return !isEqual(oldProps, this.props) || !isEqual(oldState, this.state);
   }
 
+  protected beforeDestroy() {}
+
+  destroy() {
+    this.eventBus().emit(Component.EVENTS.FLOW_BD);
+    
+    const clean = cleanerDom(this.virtualNode as VNode);
+    clean(this.element as HTMLElement);
+  }
+
+  abstract render(): VNode;
+
   //метод setProps вызывается только шаблонизатором. Поэтому он полностью перезатирает пропсы, чтобы не осталось прошлых
   setProps = (nextProps: P) => {
     if (!nextProps) {
@@ -97,31 +127,6 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     this.eventBus().emit(Component.EVENTS.FLOW_CDU, this.props, oldState);
   };
 
-  get element() {
-    return this._element;
-  }
-
-  set element(el) {
-    if (!this._element) {
-      this._element = el;
-      this.eventBus().emit(Component.EVENTS.FLOW_CDM);
-    } else {
-      this._element = el;
-    }
-  }
-
-  get virtualNode() {
-    return this._virtualNode;
-  }
-
-  set virtualNode(virtualNode) {
-    this._virtualNode = virtualNode;
-  }
-
-  _render() {}
-
-  abstract render(): VNode;
-
   private makePropsProxy(props: P) {
     return new Proxy(props, {
       deleteProperty() {
@@ -132,20 +137,11 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
 
   show() {
     if (!this._element) return;
-    // this._element.classList.remove('hidden');
+    (this._element as HTMLElement)?.classList.remove('hidden');
   }
 
   hide() {
     if (!this._element) return;
-    // this._element.classList.add('hidden');
-  }
-
-  beforeDestroy() {}
-
-  destroy() {
-    this.beforeDestroy();
-    
-    const clean = cleanerDom(this.virtualNode as VNode);
-    clean(this.element as HTMLElement);
+    (this._element as HTMLElement)?.classList.add('hidden');
   }
 }
