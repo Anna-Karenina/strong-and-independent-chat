@@ -7,6 +7,7 @@ export default class Router {
   routes: Route[];
   history: History;
   currentRoute: Route | null;
+  fallBackRoute: Route | null;
 
 
   constructor(rootQuery?: string) {
@@ -17,6 +18,7 @@ export default class Router {
     this.routes = [];
     this.history = window.history;
     this.currentRoute = null;
+    this.fallBackRoute = null;
     this.rootQuery = rootQuery || '';
 
     Router.__instance = this;
@@ -26,6 +28,11 @@ export default class Router {
     const route = new Route(pathname, component, {rootQuery: this.rootQuery});
     this.routes.push(route);
   
+    return this;
+  }
+
+  fallback(component: ComponentConstructor) {
+    this.fallBackRoute = new Route('/404', component, {rootQuery: this.rootQuery});
     return this;
   }
 
@@ -47,6 +54,9 @@ export default class Router {
     if (route) {
       this.currentRoute = route;
       route.render();
+    } else if (this.fallBackRoute) {
+      this.currentRoute = this.fallBackRoute;
+      this.fallBackRoute.render();
     }
   }
 

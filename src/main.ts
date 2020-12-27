@@ -25,7 +25,7 @@ router
   .use("/signin", SigninController)
   .use("/chats", ChatsController)
   .use("/settings", SettingsController)
-  .use("/404", FallbackPage)
   .use("/500", ErrorPage)
+  .fallback(FallbackPage)
   .start();
 
