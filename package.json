@@ -16,7 +16,7 @@
     "test": "jest",
     "start": "npm run build:dist && node server.js",
     "build": "npm i && npm run build:dist && npm run delete:ts",
-    "build:dist": "npm run create:dist && tsc --project tsconfig.json ",
+    "build:dist": "npm run create:dist && tsc --project tsconfig.json && npm run scss",
     "create:dist": "rm -rf ./dist && cp -r ./src ./dist",
     "delete:ts": "find ./dist/ -type f -name '*.ts' -delete",
     "scss:watch": "node-sass -w src -o dist",
