@@ -16,12 +16,6 @@
   transition: all .2s;
 }
 
-.field__input:focus ~ .field__label,
-.field__input:not([value=""]) ~ .field__label {
-  transform: translateY(-20px);
-  font-size: 9px;
-}
-
 .field__input-wrapper {
   position: relative;
 }
@@ -38,10 +32,16 @@
   color: $primary-text-color;
   z-index: 2;
   position: relative;
-}
 
-.field__input:focus {
-  outline: 2px solid $primary-outline-color;
+  &:focus ~ .field__label,
+  &:not([value=""]) ~ .field__label {
+    transform: translateY(-20px);
+    font-size: 9px;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
 }
 
 .field__error {

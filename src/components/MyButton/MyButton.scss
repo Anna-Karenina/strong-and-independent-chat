@@ -9,8 +9,8 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
-}
 
-.primary-button:focus {
-  outline: 2px solid $primary-outline-color;
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
 }

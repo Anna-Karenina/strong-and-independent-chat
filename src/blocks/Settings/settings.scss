@@ -18,10 +18,10 @@
   border-right: 1px solid $primary-border-color;
   cursor: pointer;
   transition: background .3s;
-}
 
-.settings__back:hover {
-  background-color: $primary-hover-color;
+  &:hover {
+    background-color: $primary-hover-color;
+  }
 }
 
 .settings__back-button {
@@ -35,10 +35,10 @@
   background-color: $primary-color;
   border: none;
   cursor: pointer;
-}
 
-.settings__back-button:focus {
-  outline: 2px solid $primary-outline-color;
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
 }
 
 .settings__content {
@@ -61,14 +61,14 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
+
+  &:hover .settings__avatar-change {
+    opacity: 1;
+  }
 }
 
 .settings__avatar-image {
   width: 100%;
-}
-
-.settings__avatar:hover .settings__avatar-change {
-  opacity: 1;
 }
 
 .settings__avatar-change {

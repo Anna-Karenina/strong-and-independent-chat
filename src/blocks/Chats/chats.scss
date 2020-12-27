@@ -36,10 +36,10 @@
   align-items: center;
   border: none;
   cursor: pointer;
-}
 
-.profile-button:focus {
-  outline: 2px solid $primary-outline-color;
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
 }
 
 .profile-button__icon {
@@ -75,10 +75,14 @@
   padding: 0 10px;
   cursor: pointer;
   transition: background .3s;
-}
 
-.chat-list__item:hover {
-  background-color: $primary-hover-color;
+  &:hover {
+    background-color: $primary-hover-color;
+  }
+
+  &:first-child .chat-list__item-content {
+    border-top: 1px solid $primary-border-color;
+  }
 }
 
 .chat-list__item-content {
@@ -87,10 +91,6 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid $primary-border-color;
-}
-
-.chat-list__item:first-child .chat-list__item-content {
-  border-top: 1px solid $primary-border-color;
 }
 
 .chat-list__avatar {

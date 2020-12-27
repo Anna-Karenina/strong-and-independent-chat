@@ -6,10 +6,6 @@
   max-width: 510px;
 }
 
-.settings__button:not(:last-child) {
-  border-bottom: 1px solid $primary-border-color;
-}
-
 .settings__buttons {
   margin-top: 60px;
   width: 100%;
@@ -24,6 +20,10 @@
   width: 100%;
   padding: 10px 0;
   text-align: left;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $primary-border-color;
+  }
 }
 
 .settings__save-button {

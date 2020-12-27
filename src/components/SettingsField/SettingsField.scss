@@ -2,16 +2,16 @@
 
 .settings-field {
   width: 100%;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $primary-border-color;
+  }
 }
 
 .settings-field-wrapper {
   width: 100%;
   display: flex;
   align-items: center;
-}
-
-.settings-field:not(:last-child) {
-  border-bottom: 1px solid $primary-border-color;
 }
 
 .settings-field__label {
@@ -26,8 +26,8 @@
   font-size: 13px;
   text-align: right;
   color: $secondary-text-color;
-}
 
-.settings-field__input:focus {
-  outline: 2px solid $primary-outline-color;
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
 }
