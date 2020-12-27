@@ -52,7 +52,8 @@ export default class HTTPTransport {
     const xhr = new XMLHttpRequest();
 
     if (method === METHODS.GET) {
-      requestPath += queryString(data);
+      const query = queryString(data);
+      requestPath += query ? `?${query}` : '';
     }
 
     xhr.open(method, requestPath);
