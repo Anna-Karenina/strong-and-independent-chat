@@ -10,14 +10,15 @@ import AddChatModal from './components/AddChatModal/AddChatModal.js';
 import {IChat} from '../../store.js';
 import {chatsTemplate} from './chats.template.js';
 import {ISearchData} from '../../core/api/index.js';
+import {IUser} from '../../types/index.js';
 
 interface IChatsProps {
   chats: IChat[],
   sendMessage: (e: Event) => any,
-  searchUser: (data: ISearchData) => any,
+  searchUser: (data: ISearchData) => Promise<IUser[]>,
   addNewUserInChat: (userId: number, chatId: number) => any,
   deleteUserFromChat: (userId: number, chatId: number) => any,
-  fetchChatUsers: (chatId: number) => any,
+  fetchChatUsers: (chatId: number) => Promise<IUser[]>,
   addChat: (title: string) => any,
   deleteChat: (chatId: number) => any,
 };
@@ -28,7 +29,7 @@ interface IChatsState {
   showDeleteUserModal: boolean,
   showAddChatModal: boolean,
   search: string,
-  users: Record<string, unknown>[],
+  users: IUser[],
   fetching: boolean,
 };
 
@@ -147,7 +148,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   openDeleteUserModal = () => {
     this.setState({showDeleteUserModal: true});
 
-    this.props.fetchChatUsers(this.selectedChatId).then((users: any[]) => {
+    this.props.fetchChatUsers(this.selectedChatId).then((users: IUser[]) => {
       this.setState({users});
     });
   }

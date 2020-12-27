@@ -7,13 +7,14 @@ import SettingsForm from './components/SettingsForm/SettingsForm.js';
 import {HOST} from '../../core/http/index.js'
 import {settingsTemplate} from './settings.template.js';
 import {TSettingsEditTarget} from './types/index.js';
+import {IUser} from '../../types/index.js';
 
 interface ISettingsProps {
   onLogout: Function,
   updateProfile: Function, 
   updatePassword: Function, 
   updateAvatar: Function, 
-  user: any,
+  user: IUser,
 };
 
 interface ISettingsState {

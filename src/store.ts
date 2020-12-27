@@ -1,4 +1,5 @@
 import {Store} from './core/store/index.js';
+import {IUser} from './types/index.js';
 
 export interface IChat {
   id: number,
@@ -8,7 +9,7 @@ export interface IChat {
 };
 export interface IStoreState {
   isAuthorized: boolean,
-  user: null | Record<string, any>;
+  user: IUser | null;
   chats: IChat[],
 };
 

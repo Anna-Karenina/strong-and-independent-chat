@@ -15,6 +15,7 @@ import {
   passwordDuplicateScheme,
   IFormState,
 } from '../../../../core/validation/index.js';
+import {IUser} from '../../../../types/index.js';
 
 interface ISettingsFormProps {
   onLogout: Function,
@@ -22,7 +23,7 @@ interface ISettingsFormProps {
   setEditTarget: (editTarget: TSettingsEditTarget) => void,
   updateProfile: (profile: IProfileFields) => any,
   updatePassword: (passwordDate: Omit<IPasswordFields, 'newPasswordTwice'>) => any,
-  user: null | Record<string, string | null>,
+  user: IUser,
 };
 
 interface IProfileFields {
@@ -136,7 +137,7 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
 
     const profileFields = Object
       .keys(this.state.profileFields)
-      .reduce((acc, field) => {
+      .reduce((acc, field: keyof IUser) => {
         const value = (user && user[field]) || '';
         return {...acc, [field]: value};
       }, {}) as IProfileFields;

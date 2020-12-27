@@ -4,13 +4,12 @@ import Settings from './Settings.js';
 import {bus} from '../../core/bus/index.js';
 import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '../../core/api/index.js';
 import {store} from '../../store.js';
+import {IUser} from '../../types/index.js';
 
 interface ISettingsControllerProps {};
 
-type TUser = null | Record<string, string | null>;
-
 interface ISettingsControllerState {
-  user: TUser,
+  user: IUser | null,
 };
 
 const templator = Templator.compile(
@@ -39,7 +38,7 @@ export default class SettingsController extends Component<ISettingsControllerPro
     this.unsubscribeStore = unsubscribe;
 
     this.state = {
-      user: state.user as TUser,
+      user: state.user as IUser | null,
     };
   }
 
