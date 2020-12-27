@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .field {
   width: 100%;
@@ -39,9 +40,7 @@
     font-size: 9px;
   }
 
-  &:focus {
-    outline: 2px solid $primary-outline-color;
-  }
+  @include outline;
 }
 
 .field__error {

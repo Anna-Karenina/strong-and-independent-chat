@@ -1,4 +1,5 @@
 @import "../../../../styles/variables.scss";
+@import "../../../../styles/mixins.scss";
 
 .chat {
   flex-grow: 1;
@@ -37,9 +38,7 @@
   border: none;
   cursor: pointer;
 
-  &:focus {
-    outline: 2px solid $primary-outline-color;
-  }
+  @include outline;
 
   &:hover {
     background-color: #F5F5F5;
@@ -85,9 +84,7 @@
   color: $secondary-text-color;
   border: none;
 
-  &:focus {
-    outline: 2px solid $primary-outline-color;
-  }
+  @include outline;
 }
 
 .send-message__submit {
@@ -102,9 +99,7 @@
   border: none;
   cursor: pointer;
 
-  &:focus {
-    outline: 2px solid $primary-outline-color;
-  }
+  @include outline;
 }
 
 .send-message__options {

@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .primary-button {
   padding: 12px;
@@ -10,7 +11,5 @@
   border: none;
   cursor: pointer;
 
-  &:focus {
-    outline: 2px solid $primary-outline-color;
-  }
+  @include outline;
 }
