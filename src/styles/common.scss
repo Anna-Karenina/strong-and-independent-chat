@@ -1,19 +1,11 @@
-:root {
-  --primary-text-color: #1E1E1E;
-  --secondary-text-color: #999999;
-  --primary-color: #3369F3;
-  --secondary-bg-color: #EFEFEF;
-  --primary-hover-color: #E4EDFD;
-  --primary-border-color: #EAEAEA;
-  --primary-outline-color: rgba(51, 105, 243, .7);
-}
+@import "./variables.scss";
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  color: var(--primary-text-color);
+  color: $primary-text-color;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   margin: 0;
@@ -47,14 +39,14 @@ body {
 .empty-button {
   padding: 0;
   background-color: transparent;
-  color: var(--primary-color);
+  color: $primary-color;
   font-size: 11px;
   border: none;
   cursor: pointer;
 }
 
 .empty-button:focus {
-  outline: 2px solid var(--primary-outline-color);
+  outline: 2px solid $primary-outline-color;
 }
 
 /* SEARCH */
@@ -65,7 +57,7 @@ body {
 
 .search__input {
   text-align: center;
-  background: var(--secondary-bg-color);
+  background: $secondary-bg-color;
   width: 100%;
   border-radius: 5px;
   padding: 10px;
@@ -73,12 +65,12 @@ body {
 }
 
 .search__input:focus {
-  outline: 2px solid var(--primary-outline-color);
+  outline: 2px solid $primary-outline-color;
 }
 
 .search__icon {
   position: absolute;
-  color: var(--secondary-text-color);
+  color: $secondary-text-color;
   top: 9.5px;
   left: 105px;
 }
@@ -114,12 +106,12 @@ body {
 }
 
 .options__item:hover {
-  background-color: var(--primary-hover-color);
+  background-color: $primary-hover-color;
 }
 
 .options__icon {
   font-size: 22px;
-  color: var(--primary-color);
+  color: $primary-color;
   margin-right: 15px;
 }
 
@@ -139,7 +131,7 @@ body {
   font-size: 12px;
   text-align: center;
   text-decoration-line: underline;
-  color: var(--primary-color);
+  color: $primary-color;
   cursor: pointer;
 }
 

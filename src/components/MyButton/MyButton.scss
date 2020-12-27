@@ -1,14 +1,16 @@
+@import "../../styles/variables.scss";
+
 .primary-button {
   padding: 12px;
   font-size: 13px;
   text-align: center;
   color: #FFFFFF;
-  background-color: var(--primary-color);
+  background-color: $primary-color;
   border-radius: 8px;
   border: none;
   cursor: pointer;
 }
 
 .primary-button:focus {
-  outline: 2px solid var(--primary-outline-color);
+  outline: 2px solid $primary-outline-color;
 }

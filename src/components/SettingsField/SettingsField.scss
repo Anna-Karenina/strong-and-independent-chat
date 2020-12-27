@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .settings-field {
   width: 100%;
 }
@@ -9,7 +11,7 @@
 }
 
 .settings-field:not(:last-child) {
-  border-bottom: 1px solid var(--primary-border-color);
+  border-bottom: 1px solid $primary-border-color;
 }
 
 .settings-field__label {
@@ -23,9 +25,9 @@
   background-color: transparent;
   font-size: 13px;
   text-align: right;
-  color: var(--secondary-text-color);
+  color: $secondary-text-color;
 }
 
 .settings-field__input:focus {
-  outline: 2px solid var(--primary-outline-color);
+  outline: 2px solid $primary-outline-color;
 }

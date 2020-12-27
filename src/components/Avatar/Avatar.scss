@@ -1,7 +1,9 @@
+@import "../../styles/variables.scss";
+
 .avatar {
   width: 47px;
   height: 47px;
-  background-color: var(--secondary-bg-color);
+  background-color: $secondary-bg-color;
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
