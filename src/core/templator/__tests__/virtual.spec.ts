@@ -1,5 +1,5 @@
 import Component from '../../component/index.js';
-import VNode, {NodeType} from '../VNode/VNode.js';
+import {NodeType} from '../VNode/VNode.js';
 import VTextNode from '../VNode/VTextNode.js';
 import VElementNode from '../VNode/VElementNode.js';
 import VComponentNode from '../VNode/VComponentNode.js';
@@ -21,9 +21,9 @@ class TextComponent extends Component<ITextComponentProps> {
 
     const [vNode] = buildVirtualTree(semanticNode, {
       text: this.props.text,
-    }) as VElementNode[];
+    });
 
-    return vNode as VNode;
+    return vNode;
   }
 }
 
