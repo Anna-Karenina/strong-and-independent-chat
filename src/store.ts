@@ -1,12 +1,5 @@
 import {Store} from './core/store/index.js';
-import {IUser} from './types/index.js';
-
-export interface IChat {
-  id: number,
-  title: string | null,
-  avatar: string,
-  created_by: number,
-};
+import {IUser, IChat} from './types/index.js';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
@@ -21,21 +14,21 @@ export const store = new Store<IStoreState>({
   },
 
   actions: {
-    setUser: (ctx, user) => {
+    setUser: (ctx, user: IUser) => {
       ctx.commit('setUser', user);
     },
 
-    setAuthorized: (ctx, value) => {
+    setAuthorized: (ctx, value: boolean) => {
       ctx.commit('setAuthorized', value);
     },
 
-    setChats: (ctx, chats) => {
+    setChats: (ctx, chats: IChat[]) => {
       ctx.commit('setChats', chats);
     },
   },
 
   mutations: {
-    setUser: (state, user) => {
+    setUser: (state, user: IUser) => {
       state.user = user;
     },
 

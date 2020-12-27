@@ -1,7 +1,7 @@
 import Component from '../../../../core/component/index.js';
 import Templator from '../../../../core/templator/index.js';
 import Avatar from '../../../../components/Avatar/index.js';
-import {IChat} from '../../../../store.js';
+import {IChat} from '../../../../types/index.js';
 import {chatTemplate} from './chat.template.js';
 
 interface IChatProps {

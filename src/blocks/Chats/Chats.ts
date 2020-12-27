@@ -7,10 +7,9 @@ import Field from '../../components/Field/index.js';
 import Avatar from '../../components/Avatar/index.js';
 import Chat from './components/Chat/Chat.js';
 import AddChatModal from './components/AddChatModal/AddChatModal.js';
-import {IChat} from '../../store.js';
 import {chatsTemplate} from './chats.template.js';
 import {ISearchData} from '../../core/api/index.js';
-import {IUser} from '../../types/index.js';
+import {IUser, IChat} from '../../types/index.js';
 
 interface IChatsProps {
   chats: IChat[],
