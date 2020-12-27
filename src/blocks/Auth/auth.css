@@ -1,6 +1,3 @@
-@import "/components/MyButton/MyButton.css";
-@import "/components/Field/Field.css";
-
 .auth {
   width: 100%;
   height: 100vh;

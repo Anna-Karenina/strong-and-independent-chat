@@ -123,35 +123,6 @@ body {
   margin-right: 15px;
 }
 
-/* MODAL */
-
-.modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, .4);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-  cursor: pointer;
-}
-
-.modal-show {
-  display: flex;
-}
-
-.modal__content {
-  position: relative;
-  cursor: auto;
-}
-
-.modal__title {
-  font-size: 15px;
-}
-
 /* INPUT FILE */
 
 .input-file {
