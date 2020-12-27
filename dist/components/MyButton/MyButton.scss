@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.primary-button {
+  padding: 12px;
+  font-size: 13px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: $primary-color;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  @include outline;
+}

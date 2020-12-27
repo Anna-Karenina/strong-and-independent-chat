@@ -1,3 +1,3 @@
-import Chats from './Chats.js';
-export default Chats;
+import ChatsController from './ChatsController.js';
+export default ChatsController;
 //# sourceMappingURL=index.js.map

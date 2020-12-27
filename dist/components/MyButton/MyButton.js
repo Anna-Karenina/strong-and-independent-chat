@@ -1,15 +1,21 @@
-import Component from '../../core/Component/index.js';
+import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js';
 import { template } from './my-button.template.js';
+;
+const templator = Templator.compile(template);
 export default class MyButton extends Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-        this.templator = new Templator(template);
-    }
+    emptyClickHandler() { }
     render() {
-        return this.templator.render(this.props);
+        const { text = '', className = '', type = '', onClick } = this.props;
+        return templator({
+            text,
+            type,
+            className: `primary-button ${className}`,
+            onClick: onClick || this.emptyClickHandler,
+        });
     }
 }
 //# sourceMappingURL=MyButton.js.map

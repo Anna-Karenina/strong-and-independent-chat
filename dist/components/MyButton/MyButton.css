@@ -3,12 +3,9 @@
   font-size: 13px;
   text-align: center;
   color: #FFFFFF;
-  background-color: var(--primary-color);
+  background-color: #3369F3;
   border-radius: 8px;
   border: none;
-  cursor: pointer;
-}
-
-.primary-button:focus {
-  outline: 2px solid var(--primary-outline-color);
-}
+  cursor: pointer; }
+  .primary-button:focus {
+    outline: 2px solid rgba(51, 105, 243, 0.7); }

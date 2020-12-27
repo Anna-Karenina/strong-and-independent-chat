@@ -7,5 +7,8 @@ import { range } from './range.js';
 import { isEqual } from './isEqual.js';
 import { deepClone } from './deepClone.js';
 import { modal } from './modal.js';
-export { first, identity, get, isEmpty, last, range, isEqual, deepClone, modal, };
+import { zip } from './zip.js';
+import { isPlainObject } from './isPlainObject.js';
+import { queryString } from './queryString.js';
+export { first, identity, get, isEmpty, last, range, isEqual, deepClone, modal, zip, isPlainObject, queryString, };
 //# sourceMappingURL=index.js.map

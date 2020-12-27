@@ -1,0 +1,5 @@
+@mixin outline {
+  &:focus {
+    outline: 2px solid $primary-outline-color;
+  }
+}

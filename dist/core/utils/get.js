@@ -7,6 +7,6 @@ export const get = (obj, path, defaultValue) => {
             return defaultValue;
         }
     }
-    return result ?? defaultValue;
+    return result !== null && result !== void 0 ? result : defaultValue;
 };
 //# sourceMappingURL=get.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/blocks/Auth/index.ts"],"names":[],"mappings":"AAAA,OAAO,IAAI,MAAM,WAAW,CAAC;AAE7B,eAAe,IAAI,CAAC"}
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/blocks/Auth/index.ts"],"names":[],"mappings":"AAAA,OAAO,cAAc,MAAM,qBAAqB,CAAC;AAEjD,eAAe,cAAc,CAAC"}

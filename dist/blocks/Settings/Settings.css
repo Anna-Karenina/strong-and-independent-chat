@@ -1,11 +1,38 @@
-@import "/components/MyButton/MyButton.css";
-@import "/components/SettingsField/SettingsField.css";
+.settings__form {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 510px; }
+
+.settings__buttons {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 510px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start; }
+
+.settings__button {
+  font-size: 13px;
+  width: 100%;
+  padding: 10px 0;
+  text-align: left; }
+  .settings__button:not(:last-child) {
+    border-bottom: 1px solid #EAEAEA; }
+
+.settings__save-button {
+  width: 100%; }
+
+.change-avatar-modal__input-file {
+  margin-top: 40px; }
+
+.change-avatar-modal__submit {
+  margin-top: 60px;
+  width: 100%; }
 
 .settings {
   width: 100%;
   height: 100vh;
-  display: flex;
-}
+  display: flex; }
 
 .settings__back {
   width: 64px;
@@ -14,14 +41,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: 1px solid var(--primary-border-color);
+  border-right: 1px solid #EAEAEA;
   cursor: pointer;
-  transition: background .3s;
-}
-
-.settings__back:hover {
-  background-color: var(--primary-hover-color);
-}
+  transition: background .3s; }
+  .settings__back:hover {
+    background-color: #E4EDFD; }
 
 .settings__back-button {
   width: 28px;
@@ -31,14 +55,11 @@
   align-items: center;
   border-radius: 50%;
   color: #FFFFFF;
-  background-color: var(--primary-color);
+  background-color: #3369F3;
   border: none;
-  cursor: pointer;
-}
-
-.settings__back-button:focus {
-  outline: 2px solid var(--primary-outline-color);
-}
+  cursor: pointer; }
+  .settings__back-button:focus {
+    outline: 2px solid rgba(51, 105, 243, 0.7); }
 
 .settings__content {
   padding-top: 60px;
@@ -46,8 +67,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  overflow-y: auto;
-}
+  overflow-y: auto; }
 
 .settings__avatar {
   min-height: 130px;
@@ -59,12 +79,12 @@
   font-size: 60px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
-}
+  cursor: pointer; }
+  .settings__avatar:hover .settings__avatar-change {
+    opacity: 1; }
 
-.settings__avatar:hover .settings__avatar-change {
-  opacity: 1;
-}
+.settings__avatar-image {
+  width: 100%; }
 
 .settings__avatar-change {
   position: absolute;
@@ -72,7 +92,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,45 +100,8 @@
   font-size: 13px;
   color: #FFFFFF;
   opacity: 0;
-  transition: opacity .3s;
-}
+  transition: opacity .3s; }
 
 .settings__user-name {
   margin: 20px 0 0;
-  font-size: 16px;
-}
-
-.settings__form {
-  margin-top: 60px;
-  width: 100%;
-  max-width: 510px;
-}
-
-.settings__button:not(:last-child) {
-  border-bottom: 1px solid var(--primary-border-color);
-}
-
-.settings__buttons {
-  margin-top: 60px;
-  width: 100%;
-  max-width: 510px;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-}
-
-.settings__button {
-  font-size: 13px;
-  width: 100%;
-  padding: 10px 0;
-  text-align: left;
-}
-
-.change-avatar-modal__input-file {
-  margin-top: 40px;
-}
-
-.change-avatar-modal__submit {
-  margin-top: 60px;
-  width: 100%;
-}
+  font-size: 16px; }

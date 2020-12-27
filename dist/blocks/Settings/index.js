@@ -1,3 +1,3 @@
-import Settings from './Settings.js';
-export default Settings;
+import SettingsController from './SettingsController.js';
+export default SettingsController;
 //# sourceMappingURL=index.js.map

@@ -18,6 +18,9 @@ export default class FormValidator {
     get invalid() {
         return !this.valid;
     }
+    clearState() {
+        this.initFormState();
+    }
     validate(fieldName, value, ...additionalArgs) {
         const scheme = this.validatorsMap[fieldName];
         if (!scheme) {

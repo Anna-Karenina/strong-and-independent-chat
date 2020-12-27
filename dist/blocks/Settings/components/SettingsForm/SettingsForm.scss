@@ -1,0 +1,31 @@
+@import "../../../../styles/variables.scss";
+
+.settings__form {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 510px;
+}
+
+.settings__buttons {
+  margin-top: 60px;
+  width: 100%;
+  max-width: 510px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.settings__button {
+  font-size: 13px;
+  width: 100%;
+  padding: 10px 0;
+  text-align: left;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $primary-border-color;
+  }
+}
+
+.settings__save-button {
+  width: 100%;
+}

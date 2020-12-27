@@ -1,29 +1,35 @@
 import VNode, { NodeType } from './VNode.js';
-import { getTagMeta } from '../utils/meta.js';
-;
+import { parseAttributes } from '../utils/attrs.js';
+import { renderComponent } from '../utils/render.js';
 export default class VComponentNode extends VNode {
-    constructor(openTag, Component) {
+    constructor(semanticNode, ctx, children = []) {
         super(NodeType.ComponentNode);
-        this._instance = null;
-        this.getMetaFromTag(openTag);
-        this._Component = Component;
+        this.instance = null;
+        this.componentClass = semanticNode.attrs.__componentClass;
+        this.$children = children;
+        this.props = parseAttributes(semanticNode.attrs, ctx);
     }
-    getMetaFromTag(tag) {
-        const { attributes: props } = getTagMeta(tag);
-        this.meta.props = props;
+    render() {
+        this.instance = new this.componentClass({ ...this.props, $children: this.$children });
+        return renderComponent(this.instance);
     }
-    render(ctx) {
-        const props = this.meta.props.reduce((acc, { name, value }) => {
-            return { ...acc, [name]: this.setValuesFromContext(value, ctx) };
-        }, {});
-        if (!this._instance) {
-            this._instance = new this._Component(props);
-        }
-        else {
-            this._instance.setProps(props);
-        }
-        return this._instance.getContent();
+    diff(newVNode) {
+        return ($el) => {
+            var _a;
+            newVNode.instance = this.instance;
+            (_a = newVNode.instance) === null || _a === void 0 ? void 0 : _a.setProps({ ...newVNode.props, $children: newVNode.$children });
+            return $el;
+        };
     }
-    setChildren() { }
+    isSimilar(newVNode) {
+        return this.componentClass === newVNode.componentClass;
+    }
+    destroy() {
+        return ($el) => {
+            var _a;
+            (_a = this.instance) === null || _a === void 0 ? void 0 : _a.destroy();
+            return $el;
+        };
+    }
 }
 //# sourceMappingURL=VComponentNode.js.map

@@ -1,20 +1,15 @@
 .settings-field {
-  width: 100%;
-}
+  width: 100%; }
+  .settings-field:not(:last-child) {
+    border-bottom: 1px solid #EAEAEA; }
 
 .settings-field-wrapper {
   width: 100%;
   display: flex;
-  align-items: center;
-}
-
-.settings-field:not(:last-child) {
-  border-bottom: 1px solid var(--primary-border-color);
-}
+  align-items: center; }
 
 .settings-field__label {
-  font-size: 13px;
-}
+  font-size: 13px; }
 
 .settings-field__input {
   flex-grow: 1;
@@ -23,9 +18,6 @@
   background-color: transparent;
   font-size: 13px;
   text-align: right;
-  color: var(--secondary-text-color);
-}
-
-.settings-field__input:focus {
-  outline: 2px solid var(--primary-outline-color);
-}
+  color: #999999; }
+  .settings-field__input:focus {
+    outline: 2px solid rgba(51, 105, 243, 0.7); }
