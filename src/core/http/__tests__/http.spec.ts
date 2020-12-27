@@ -1,16 +1,16 @@
 import {HTTPTransport, METHODS} from '../index.js';
 
-const mockOpen = jest.fn((method: METHODS, path: string) => ({method, path}));
+const open = jest.fn((method: METHODS, path: string) => ({method, path}));
 
-const mockSend = jest.fn((data: any) => data);
+const send = jest.fn((data: any) => data);
 
-const mockSetRequestHeader = jest.fn((key: string, value: string) => ({key, value}));
+const setRequestHeader = jest.fn((key: string, value: string) => ({key, value}));
 
 const mockFetch = (status: number, data?: { [key: string]: string }) => {
   const xhrMockObj = {
-    open: mockOpen,
-    send: mockSend,
-    setRequestHeader: mockSetRequestHeader,
+    open,
+    send,
+    setRequestHeader,
     readyState: 4,
     status,
     response: data,
@@ -36,7 +36,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').get('mock');
 
-      expect(getLastMockResult(mockOpen).value.method).toEqual(METHODS.GET);
+      expect(getLastMockResult(open).value.method).toEqual(METHODS.GET);
     });
 
     test('resolve data with status 200', async () => {
@@ -75,7 +75,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').get(path, {data: queryData});
       
-      expect(getLastMockResult(mockOpen).value.path).toEqual(path + queryStringify);
+      expect(getLastMockResult(open).value.path).toEqual(path + queryStringify);
     });
   });
 
@@ -84,7 +84,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').post('mock');
 
-      expect(getLastMockResult(mockOpen).value.method).toEqual(METHODS.POST);
+      expect(getLastMockResult(open).value.method).toEqual(METHODS.POST);
     });
 
     test('resolve data with status 200', async () => {
@@ -112,7 +112,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').post('mock', {data});
 
-      expect(getLastMockResult(mockSend).value).toEqual(JSON.stringify(data));
+      expect(getLastMockResult(send).value).toEqual(JSON.stringify(data));
     });
   });
 
@@ -121,7 +121,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').put('mock');
 
-      expect(getLastMockResult(mockOpen).value.method).toEqual(METHODS.PUT);
+      expect(getLastMockResult(open).value.method).toEqual(METHODS.PUT);
     });
 
     test('resolve data with status 200', async () => {
@@ -149,7 +149,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').put('mock', {data});
 
-      expect(getLastMockResult(mockSend).value).toEqual(JSON.stringify(data));
+      expect(getLastMockResult(send).value).toEqual(JSON.stringify(data));
     });
   });
 
@@ -158,7 +158,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').delete('mock');
 
-      expect(getLastMockResult(mockOpen).value.method).toEqual(METHODS.DELETE);
+      expect(getLastMockResult(open).value.method).toEqual(METHODS.DELETE);
     });
 
     test('resolve data with status 200', async () => {
@@ -186,7 +186,7 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').delete('mock', {data});
 
-      expect(getLastMockResult(mockSend).value).toEqual(JSON.stringify(data));
+      expect(getLastMockResult(send).value).toEqual(JSON.stringify(data));
     });
   });
 
@@ -204,12 +204,12 @@ describe('HTTPTransport', () => {
       mockFetch(200);
       await http('').post('mock', {headers})
 
-      const lastCallIdx = mockSetRequestHeader.mock.calls.length - 1;
-      expect(mockSetRequestHeader.mock.calls[lastCallIdx - 1]).toEqual([
+      const lastCallIdx = setRequestHeader.mock.calls.length - 1;
+      expect(setRequestHeader.mock.calls[lastCallIdx - 1]).toEqual([
         'Header 1',
         'Value 1',
       ]);
-      expect(mockSetRequestHeader.mock.calls[lastCallIdx]).toEqual([
+      expect(setRequestHeader.mock.calls[lastCallIdx]).toEqual([
         'Header 2',
         'Value 2',
       ]);
