@@ -1,4 +1,4 @@
-export enum EDIT_TARGET {
+export const enum EDIT_TARGET {
   PROFILE = 'profile',
   PASSWORD = 'password',
 };

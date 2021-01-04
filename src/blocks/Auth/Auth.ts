@@ -13,9 +13,9 @@ export interface IAuthFields {
 }
 
 interface IProps {
-  onSubmit: (e: Event) => any,
-  onFocusout: (e: Event) => any,
-  onInput: (e: Event) => any,
+  onSubmit: (e: Event) => void,
+  onFocusout: (e: Event) => void,
+  onInput: (e: Event) => void,
   formState: IFormState,
   fields: IAuthFields,
 };

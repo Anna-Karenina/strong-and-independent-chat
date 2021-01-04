@@ -47,7 +47,7 @@ export default class SettingsField extends Component {
     } = this.props;
     
     const errorClasses = ['error'];
-    const errorText: string = error || '';
+    const errorText = error || '';
     if (!errorText) {
       errorClasses.push('hidden');
     }

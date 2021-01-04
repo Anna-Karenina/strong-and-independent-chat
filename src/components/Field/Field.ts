@@ -44,7 +44,7 @@ export default class Field extends Component {
       error,
     } = this.props;
     const errorClasses = ['error', 'field__error'];
-    const errorText: string = error || '';
+    const errorText = error || '';
     if (!errorText) {
       errorClasses.push('hidden');
     }
