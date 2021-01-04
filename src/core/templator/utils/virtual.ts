@@ -6,7 +6,7 @@ import {TEXT_NODE_TYPE} from './semantic.js';
 import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
 import {pickServiceAttrs} from './attrs.js';
 import {each} from './each.js';
-import {zip} from '../../utils/index.js';
+import {zip, get, identity} from '../../utils/index.js';
 
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
 
@@ -21,6 +21,13 @@ const isComponentNode = (semanticNode: TSemanticNode) => {
 
 export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode[] => {
   const serviceAttrs = pickServiceAttrs(semanticNode.attrs);
+
+  if (serviceAttrs.if) {
+    const isExist = get(ctx, String(serviceAttrs.if), false);
+    const nodes =  isExist ? [createVirtualNode(semanticNode, ctx)] : [];
+
+    return nodes.filter(identity) as VNode[];
+  }
 
   if (!serviceAttrs.each) {
     const node = createVirtualNode(semanticNode, ctx);
