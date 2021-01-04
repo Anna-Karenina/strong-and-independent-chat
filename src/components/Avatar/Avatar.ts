@@ -20,11 +20,6 @@ export default class Avatar extends Component<IAvatarProps> {
     return img ? `${HOST}${img}` : '';
   }
 
-  get style() {
-    if (!this.imagePath) return '';
-    return `background-image: url("${this.imagePath}")`;
-  }
-
   get className() {
     const {className = ''} = this.props;
     return `avatar ${className}`;
@@ -32,7 +27,7 @@ export default class Avatar extends Component<IAvatarProps> {
 
   render() {
     return templator({
-      style: this.style,
+      avatar: this.imagePath,
       className: this.className,
     });
   }

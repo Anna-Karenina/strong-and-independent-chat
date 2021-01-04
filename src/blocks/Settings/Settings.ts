@@ -50,11 +50,6 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
     return avatar ? `${HOST}${avatar}` : avatar;
   }
 
-  get avatarStyle() {
-    if (!this.avatar) return '';
-    return `background-image: url("${this.avatar}")`;
-  }
-
   get avatarIconClass() {
     const defaultClass = 'fas fa-image';
     return this.avatar ? `${defaultClass} hidden` : defaultClass;
@@ -92,7 +87,7 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
       showAvatarModal: this.state.showAvatarModal,
       user: this.props.user,
       name: this.name,
-      avatarStyle: this.avatarStyle,
+      avatar: this.avatar,
       avatarIconClass: this.avatarIconClass,
       onLogout: this.props.onLogout,
       updateProfile: this.props.updateProfile,
