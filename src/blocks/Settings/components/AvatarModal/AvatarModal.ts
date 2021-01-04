@@ -3,6 +3,7 @@ import MyButton from '../../../../components/MyButton/index.js';
 import Modal from '../../../../components/Modal/index.js';
 import Templator from '../../../../core/templator/index.js'
 import {avatarModalTemplate} from './avatar-modal.template.js';
+import {classNames as cn} from '../../../../core/utils/index.js';
 
 interface IAvatarModalProps {
   show: boolean,
@@ -37,8 +38,7 @@ export default class AvatarModal extends Component<IAvatarModalProps, IAvatarMod
   }
 
   get labelClass() {
-    const defaultClass = 'input-file__label';
-    return this.state.file ? `${defaultClass} hidden` : defaultClass; 
+    return cn('input-file__label', {hidden: this.state.file});
   }
 
   onSubmit = (e: Event) => {

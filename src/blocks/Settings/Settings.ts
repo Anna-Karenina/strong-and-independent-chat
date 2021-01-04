@@ -8,6 +8,7 @@ import {HOST} from '../../core/http/index.js'
 import {settingsTemplate} from './settings.template.js';
 import {TSettingsEditTarget} from './types/index.js';
 import {IUser} from '../../types/index.js';
+import {classNames as cn} from '../../core/utils/index.js';
 
 interface ISettingsProps {
   onLogout: Function,
@@ -51,8 +52,7 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
   }
 
   get avatarIconClass() {
-    const defaultClass = 'fas fa-image';
-    return this.avatar ? `${defaultClass} hidden` : defaultClass;
+    return cn('fas', 'fa-image', {hidden: this.avatar});
   }
 
   get name() {

@@ -3,6 +3,7 @@ import Templator from '../../../../core/templator/index.js';
 import Avatar from '../../../../components/Avatar/index.js';
 import {IChat} from '../../../../types/index.js';
 import {chatTemplate} from './chat.template.js';
+import {classNames as cn} from '../../../../core/utils/index.js';
 
 interface IChatProps {
   chat: IChat | null,
@@ -48,12 +49,11 @@ export default class Chat extends Component<IChatProps, IChatState> {
   }
 
   get userOptionsClass() {
-    const defaultClass = 'options user-bar__options';
-    return this.state.showUserOptions ? defaultClass : `${defaultClass} hidden`;
+    return cn('options', 'user-bar__options', {hidden: !this.state.showUserOptions});
   }
 
   get chatClass() {
-    return this.props.chat ? 'chat' : 'chat hidden';
+    return cn('chat', {hidden: !this.props.chat});
   }
 
   get title() {
