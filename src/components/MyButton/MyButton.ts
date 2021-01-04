@@ -1,6 +1,7 @@
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js'
 import {template} from './my-button.template.js';
+import {classNames as cn} from '../../core/utils/index.js';
 
 interface IMyButtonProps {
   text?: string,
@@ -24,7 +25,7 @@ export default class MyButton extends Component {
     return templator({
       text,
       type,
-      className: `primary-button ${className}`,
+      className: cn('primary-button', className),
       onClick: onClick || this.emptyClickHandler,
     });
   }

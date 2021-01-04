@@ -1,6 +1,7 @@
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js'
 import {template} from './settings-field.template.js';
+import {classNames as cn} from '../../core/utils/index.js';
 
 interface ISettingsFieldProps {
   value: string,
@@ -46,11 +47,7 @@ export default class SettingsField extends Component {
       value,
     } = this.props;
     
-    const errorClasses = ['error'];
     const errorText = error || '';
-    if (!errorText) {
-      errorClasses.push('hidden');
-    }
 
     return templator({
       value,
@@ -59,8 +56,8 @@ export default class SettingsField extends Component {
       label,
       readonly,
       errorText,
-      errorClassName: errorClasses.join(' '),
-      className: ['settings-field', className].join(' ')
+      errorClassName: cn('error', {hidden: !errorText}),
+      className: cn('settings-field', className),
     });
   }
 }

@@ -2,6 +2,7 @@ import Component from '../../core/component/index.js';
 import VNode from '../../core/templator/VNode/VNode.js';
 import Templator from '../../core/templator/index.js'
 import {modalTemplate} from './modal.template.js';
+import {classNames as cn} from '../../core/utils/index.js';
 
 interface IModalProps {
   show: boolean,
@@ -24,15 +25,10 @@ export default class Modal extends Component<IModalProps> {
 
   render() {
     const {show} = this.props;
-    const classes = ['modal'];
-
-    if (show) {
-      classes.push('modal-show');
-    }
 
     return templator({
       $children: this.props.$children,
-      className: classes.join(' '),
+      className: cn('modal', {'modal-show': show}),
       onModalClick: this.onModalClick,
     });
   }

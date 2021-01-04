@@ -1,6 +1,7 @@
 import Component from '../../core/component/index.js';
 import Templator from '../../core/templator/index.js'
 import {template} from './field.template.js';
+import {classNames as cn} from '../../core/utils/index.js';
 
 interface IFieldProps {
   value: string,
@@ -43,20 +44,16 @@ export default class Field extends Component {
       label = '',
       error,
     } = this.props;
-    const errorClasses = ['error', 'field__error'];
     const errorText = error || '';
-    if (!errorText) {
-      errorClasses.push('hidden');
-    }
-
+    
     return templator({
       value,
       name,
       type,
       label,
       errorText,
-      errorClassName: errorClasses.join(' '),
-      className: ['field', className].join(' '),
+      errorClassName: cn('error', 'field__error', {hidden: !errorText}),
+      className: cn('field', className),
     });
   }
 }
