@@ -1,6 +1,6 @@
-import VNode, {NodeType} from './VNode.js';
-import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types/index.js';
-import {parseAttributes, parseListeners} from '../utils/attrs.js';
+import VNode, {NodeType} from './VNode';
+import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types/index';
+import {parseAttributes, parseListeners} from '../utils/attrs';
 
 export default class VElementNode extends VNode {
   tagName: string;

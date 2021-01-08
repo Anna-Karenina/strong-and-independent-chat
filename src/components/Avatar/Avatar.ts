@@ -1,8 +1,8 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js'
-import {avatarTemplate} from './avatar.template.js';
-import {HOST} from '../../core/http/index.js';
-import {classNames as cn} from '../../core/utils/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index'
+import {avatarTemplate} from './avatar.template';
+import {HOST} from '../../core/http/index';
+import {classNames as cn} from '../../core/utils/index';
 
 interface IAvatarProps {
   img: string | null,

@@ -1,4 +1,4 @@
-import EventBus from '../bus/index.js';
+import EventBus from '../bus/index';
 
 type TAction<T> = (ctx: Store<T>, payload: any) => any;
 type TMutation<T> = (state: T, payload: any) => any;

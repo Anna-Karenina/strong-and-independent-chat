@@ -1,7 +1,7 @@
-import Router from '../../core/router/index.js';
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import {template404} from './404.template.js';
+import Router from '../../core/router/index';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import {template404} from './404.template';
 
 interface IPage404Props {};
 

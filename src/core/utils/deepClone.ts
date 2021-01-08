@@ -1,4 +1,4 @@
-import {isPlainObject, PlainObject} from './isPlainObject.js';
+import {isPlainObject, PlainObject} from './isPlainObject';
 
 export const deepClone = <T>(target: T): T => {
   if (Array.isArray(target)) {

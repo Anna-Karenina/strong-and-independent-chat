@@ -1,11 +1,11 @@
-import ValidationScheme from './ValidationScheme.js';
-import FormValidator, {IFormState} from './FormValidator.js';
+import ValidationScheme from './ValidationScheme';
+import FormValidator, {IFormState} from './FormValidator';
 import {
   textFiledScheme,
   emailScheme,
   passwordDuplicateScheme,
   phoneScheme,
-} from './schemes/schemes.js';
+} from './schemes/schemes';
 
 export {
   ValidationScheme,

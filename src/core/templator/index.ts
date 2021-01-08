@@ -1,6 +1,6 @@
-import Templator from './Templator.js';
-import {render} from './utils/render.js';
-import {renderVirtualTree, diff, cleanerDom} from './utils/virtual.js';
+import Templator from './Templator';
+import {render} from './utils/render';
+import {renderVirtualTree, diff, cleanerDom} from './utils/virtual';
 
 export default Templator;
 

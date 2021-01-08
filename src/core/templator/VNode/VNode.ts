@@ -1,4 +1,4 @@
-import {TPatch} from '../types/index.js';
+import {TPatch} from '../types/index';
 
 export enum NodeType {
   TextNode = 1,

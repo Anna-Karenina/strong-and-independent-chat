@@ -1,3 +1,3 @@
-import RegistrationController from './RegistrationController.js';
+import RegistrationController from './RegistrationController';
 
 export default RegistrationController;

@@ -1,16 +1,16 @@
-import {first} from './first.js';
-import {identity} from './identity.js';
-import {get} from './get.js';
-import {isEmpty} from './isEmpty.js';
-import {last} from './last.js';
-import {range} from './range.js';
-import {isEqual} from './isEqual.js';
-import {deepClone} from './deepClone.js';
-import {modal} from './modal.js';
-import {zip} from './zip.js';
-import {isPlainObject, PlainObject} from './isPlainObject.js';
-import {queryString} from './queryString.js';
-import {classNames} from './classNames.js';
+import {first} from './first';
+import {identity} from './identity';
+import {get} from './get';
+import {isEmpty} from './isEmpty';
+import {last} from './last';
+import {range} from './range';
+import {isEqual} from './isEqual';
+import {deepClone} from './deepClone';
+import {modal} from './modal';
+import {zip} from './zip';
+import {isPlainObject, PlainObject} from './isPlainObject';
+import {queryString} from './queryString';
+import {classNames} from './classNames';
 
 export {
   first,

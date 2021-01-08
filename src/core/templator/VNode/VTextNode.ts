@@ -1,6 +1,6 @@
-import {get} from '../../utils/get.js';
-import VNode, {NodeType} from './VNode.js';
-import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
+import {get} from '../../utils/get';
+import VNode, {NodeType} from './VNode';
+import {TSemanticNode, TCtx, TPatch} from '../types/index';
 
 export default class VTextNode extends VNode {
   textContent: string = '';

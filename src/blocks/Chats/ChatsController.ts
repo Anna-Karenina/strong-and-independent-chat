@@ -1,9 +1,9 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import Chats from './Chats.js';
-import {store} from '../../store.js';
-import {chatsAPI, userAPI, ISearchData} from '../../core/api/index.js';
-import {IChat} from '../../types/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import Chats from './Chats';
+import {store} from '../../store';
+import {chatsAPI, userAPI, ISearchData} from '../../core/api/index';
+import {IChat} from '../../types/index';
 
 interface IChatsControllerProps {};
 

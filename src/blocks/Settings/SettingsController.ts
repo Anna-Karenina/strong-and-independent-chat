@@ -1,10 +1,10 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import Settings from './Settings.js';
-import {bus} from '../../core/bus/index.js';
-import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '../../core/api/index.js';
-import {store} from '../../store.js';
-import {IUser} from '../../types/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import Settings from './Settings';
+import {bus} from '../../core/bus/index';
+import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '../../core/api/index';
+import {store} from '../../store';
+import {IUser} from '../../types/index';
 
 interface ISettingsControllerProps {};
 

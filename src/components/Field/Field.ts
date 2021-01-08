@@ -1,7 +1,7 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js'
-import {template} from './field.template.js';
-import {classNames as cn} from '../../core/utils/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index'
+import {template} from './field.template';
+import {classNames as cn} from '../../core/utils/index';
 
 interface IFieldProps {
   value: string,

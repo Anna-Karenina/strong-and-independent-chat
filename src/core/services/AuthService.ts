@@ -1,8 +1,8 @@
-import Service from './Service.js';
-import {Store} from '../store/index.js';
-import {IStoreState} from '../../store.js';
-import {authAPI} from '../api/index.js'
-import {bus} from '../bus/index.js';
+import Service from './Service';
+import {Store} from '../store/index';
+import {IStoreState} from '../../store';
+import {authAPI} from '../api/index'
+import {bus} from '../bus/index';
 
 interface IConnectOptions {
   store: Store<IStoreState>,

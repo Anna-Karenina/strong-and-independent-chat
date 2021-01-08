@@ -1,7 +1,7 @@
-import EventBus from '../bus/index.js';
-import VNode from '../templator/VNode/VNode.js';
-import {diff, cleanerDom} from '../templator/index.js';
-import {isEqual, deepClone} from '../utils/index.js';
+import EventBus from '../bus/index';
+import VNode from '../templator/VNode/VNode';
+import {diff, cleanerDom} from '../templator/index';
+import {isEqual, deepClone} from '../utils/index';
 
 export interface IProps {
   [key: string]: any,

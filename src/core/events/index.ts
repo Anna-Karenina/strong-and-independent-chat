@@ -1,2 +1,2 @@
-export {authEvent} from './AuthEvent.js'
-export {default as Event} from './Event.js'
+export {authEvent} from './AuthEvent'
+export {default as Event} from './Event'

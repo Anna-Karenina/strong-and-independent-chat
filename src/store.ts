@@ -1,5 +1,5 @@
-import {Store} from './core/store/index.js';
-import {IUser, IChat} from './types/index.js';
+import {Store} from './core/store/index';
+import {IUser, IChat} from './types/index';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;

@@ -1,6 +1,6 @@
-import Event from './Event.js';
-import Router from '../router/index.js';
-import {bus} from '../bus/index.js';
+import Event from './Event';
+import Router from '../router/index';
+import {bus} from '../bus/index';
 
 interface IAuthEventOpts {
   router: Router,

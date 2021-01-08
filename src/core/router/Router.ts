@@ -1,5 +1,5 @@
-import {ComponentConstructor} from '../component/index.js'
-import Route from './Route.js';
+import {ComponentConstructor} from '../component/index'
+import Route from './Route';
 
 export default class Router {
   static __instance: Router;

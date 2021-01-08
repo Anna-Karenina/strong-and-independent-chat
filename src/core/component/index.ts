@@ -1,4 +1,4 @@
-import Component, {IProps, IState} from './Component.js';
+import Component, {IProps, IState} from './Component';
 
 interface ComponentConstructor {
   new (props: IProps): Component;

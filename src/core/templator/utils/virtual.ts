@@ -1,12 +1,12 @@
-import VTextNode from '../VNode/VTextNode.js';
-import VElementNode from '../VNode/VElementNode.js';
-import VComponentNode from '../VNode/VComponentNode.js';
-import VNode, {NodeType} from '../VNode/VNode.js';
-import {TEXT_NODE_TYPE} from './semantic.js';
-import {TSemanticNode, TCtx, TPatch} from '../types/index.js';
-import {pickServiceAttrs} from './attrs.js';
-import {each} from './each.js';
-import {zip, get, identity} from '../../utils/index.js';
+import VTextNode from '../VNode/VTextNode';
+import VElementNode from '../VNode/VElementNode';
+import VComponentNode from '../VNode/VComponentNode';
+import VNode, {NodeType} from '../VNode/VNode';
+import {TEXT_NODE_TYPE} from './semantic';
+import {TSemanticNode, TCtx, TPatch} from '../types/index';
+import {pickServiceAttrs} from './attrs';
+import {each} from './each';
+import {zip, get, identity} from '../../utils/index';
 
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
 

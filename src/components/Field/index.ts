@@ -1,3 +1,3 @@
-import Field from './Field.js';
+import Field from './Field';
 
 export default Field;

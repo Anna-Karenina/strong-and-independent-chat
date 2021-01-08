@@ -1,4 +1,4 @@
-import {isPlainObject} from './isPlainObject.js';
+import {isPlainObject} from './isPlainObject';
 
 export const isEqual = (a: any, b: any): boolean => {
   if (Array.isArray(a) && Array.isArray(b)) {

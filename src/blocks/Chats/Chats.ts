@@ -1,15 +1,15 @@
-import Router from '../../core/router/index.js';
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import MyButton from '../../components/MyButton/index.js';
-import Modal from '../../components/Modal/index.js';
-import Field from '../../components/Field/index.js';
-import Avatar from '../../components/Avatar/index.js';
-import Chat from './components/Chat/Chat.js';
-import AddChatModal from './components/AddChatModal/AddChatModal.js';
-import {chatsTemplate} from './chats.template.js';
-import {ISearchData} from '../../core/api/index.js';
-import {IUser, IChat} from '../../types/index.js';
+import Router from '../../core/router/index';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import MyButton from '../../components/MyButton/index';
+import Modal from '../../components/Modal/index';
+import Field from '../../components/Field/index';
+import Avatar from '../../components/Avatar/index';
+import Chat from './components/Chat/Chat';
+import AddChatModal from './components/AddChatModal/AddChatModal';
+import {chatsTemplate} from './chats.template';
+import {ISearchData} from '../../core/api/index';
+import {IUser, IChat} from '../../types/index';
 
 interface IChatsProps {
   chats: IChat[],

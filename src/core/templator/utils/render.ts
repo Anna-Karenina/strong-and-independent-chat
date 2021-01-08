@@ -1,5 +1,5 @@
-import Component from '../../component/index.js';
-import {renderVirtualTree} from './virtual.js';
+import Component from '../../component/index';
+import {renderVirtualTree} from './virtual';
 
 export const render = (query: string, component: Component): Element | null => {
   const root = document.querySelector(query);

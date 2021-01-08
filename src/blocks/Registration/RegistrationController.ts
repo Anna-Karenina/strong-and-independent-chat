@@ -1,5 +1,5 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
 import {
   FormValidator,
   textFiledScheme,
@@ -7,10 +7,10 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
   IFormState,
-} from '../../core/validation/index.js';
-import Registration from './Registration.js';
-import {authAPI} from '../../core/api/index.js';
-import {bus} from '../../core/bus/index.js';
+} from '../../core/validation/index';
+import Registration from './Registration';
+import {authAPI} from '../../core/api/index';
+import {bus} from '../../core/bus/index';
 
 interface IRegistrationControllerProps {};
 

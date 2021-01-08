@@ -1,4 +1,4 @@
-import ValidationScheme, {IValidatorResult} from './ValidationScheme.js';
+import ValidationScheme, {IValidatorResult} from './ValidationScheme';
 
 interface IValidatorsMap {
   [fieldName: string]: ValidationScheme,

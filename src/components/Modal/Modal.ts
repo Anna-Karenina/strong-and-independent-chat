@@ -1,8 +1,8 @@
-import Component from '../../core/component/index.js';
-import VNode from '../../core/templator/VNode/VNode.js';
-import Templator from '../../core/templator/index.js'
-import {modalTemplate} from './modal.template.js';
-import {classNames as cn} from '../../core/utils/index.js';
+import Component from '../../core/component/index';
+import VNode from '../../core/templator/VNode/VNode';
+import Templator from '../../core/templator/index'
+import {modalTemplate} from './modal.template';
+import {classNames as cn} from '../../core/utils/index';
 
 interface IModalProps {
   show: boolean,

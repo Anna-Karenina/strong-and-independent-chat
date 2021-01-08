@@ -1,5 +1,5 @@
-import {queryString, isPlainObject} from '../utils/index.js';
-import {METHODS} from './constants.js';
+import {queryString, isPlainObject} from '../utils/index';
+import {METHODS} from './constants';
 
 type TRequestHeaders = Record<string, string>;
 

@@ -1,5 +1,5 @@
-import {TAttrs, TListeners, TCtx} from '../types/index.js';
-import {get} from '../../utils/index.js';
+import {TAttrs, TListeners, TCtx} from '../types/index';
+import {get} from '../../utils/index';
 
 const ATTRIBUTES_REGEXP = /(\S*?)="(.*?)"/;
 

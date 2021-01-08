@@ -1,7 +1,7 @@
-import {buildSemanticTree} from './utils/semantic.js';
-import {buildVirtualTree} from './utils/virtual.js';
-import {ComponentConstructor} from '../component/index.js';
-import {TSemanticNode, TCtx} from './types/index.js';
+import {buildSemanticTree} from './utils/semantic';
+import {buildVirtualTree} from './utils/virtual';
+import {ComponentConstructor} from '../component/index';
+import {TSemanticNode, TCtx} from './types/index';
 
 interface IComponents {
   [key: string]: ComponentConstructor,

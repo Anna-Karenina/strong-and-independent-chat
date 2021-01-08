@@ -1,3 +1,3 @@
-import AuthController from './AuthController.js';
+import AuthController from './AuthController';
 
 export default AuthController;

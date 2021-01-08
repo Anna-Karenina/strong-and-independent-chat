@@ -1,7 +1,7 @@
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js'
-import {template} from './my-button.template.js';
-import {classNames as cn} from '../../core/utils/index.js';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index'
+import {template} from './my-button.template';
+import {classNames as cn} from '../../core/utils/index';
 
 interface IMyButtonProps {
   text?: string,

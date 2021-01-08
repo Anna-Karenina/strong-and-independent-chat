@@ -1,9 +1,9 @@
-import Component from '../../../../core/component/index.js';
-import MyButton from '../../../../components/MyButton/index.js';
-import Modal from '../../../../components/Modal/index.js';
-import Templator from '../../../../core/templator/index.js'
-import {avatarModalTemplate} from './avatar-modal.template.js';
-import {classNames as cn} from '../../../../core/utils/index.js';
+import Component from '../../../../core/component/index';
+import MyButton from '../../../../components/MyButton/index';
+import Modal from '../../../../components/Modal/index';
+import Templator from '../../../../core/templator/index'
+import {avatarModalTemplate} from './avatar-modal.template';
+import {classNames as cn} from '../../../../core/utils/index';
 
 interface IAvatarModalProps {
   show: boolean,

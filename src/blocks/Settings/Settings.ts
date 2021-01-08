@@ -1,14 +1,14 @@
-import Router from '../../core/router/index.js';
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import MyButton from '../../components/MyButton/index.js';
-import AvatarModal from './components/AvatarModal/AvatarModal.js';
-import SettingsForm from './components/SettingsForm/SettingsForm.js';
-import {HOST} from '../../core/http/index.js'
-import {settingsTemplate} from './settings.template.js';
-import {TSettingsEditTarget} from './types/index.js';
-import {IUser} from '../../types/index.js';
-import {classNames as cn} from '../../core/utils/index.js';
+import Router from '../../core/router/index';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import MyButton from '../../components/MyButton/index';
+import AvatarModal from './components/AvatarModal/AvatarModal';
+import SettingsForm from './components/SettingsForm/SettingsForm';
+import {HOST} from '../../core/http/index'
+import {settingsTemplate} from './settings.template';
+import {TSettingsEditTarget} from './types/index';
+import {IUser} from '../../types/index';
+import {classNames as cn} from '../../core/utils/index';
 
 interface ISettingsProps {
   onLogout: Function,

@@ -1,9 +1,9 @@
-import Component from '../../../../core/component/index.js';
-import Templator from '../../../../core/templator/index.js';
-import Avatar from '../../../../components/Avatar/index.js';
-import {IChat} from '../../../../types/index.js';
-import {chatTemplate} from './chat.template.js';
-import {classNames as cn} from '../../../../core/utils/index.js';
+import Component from '../../../../core/component/index';
+import Templator from '../../../../core/templator/index';
+import Avatar from '../../../../components/Avatar/index';
+import {IChat} from '../../../../types/index';
+import {chatTemplate} from './chat.template';
+import {classNames as cn} from '../../../../core/utils/index';
 
 interface IChatProps {
   chat: IChat | null,

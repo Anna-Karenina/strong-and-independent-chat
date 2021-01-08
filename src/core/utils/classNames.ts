@@ -1,5 +1,5 @@
-import {isPlainObject} from './isPlainObject.js';
-import {identity} from './identity.js';
+import {isPlainObject} from './isPlainObject';
+import {identity} from './identity';
 
 const classReducer = (rawClass: unknown): string => {
   if (!rawClass) return '';

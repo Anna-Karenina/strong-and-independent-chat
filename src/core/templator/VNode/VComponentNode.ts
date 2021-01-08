@@ -1,8 +1,8 @@
-import VNode, {NodeType} from './VNode.js';
-import Component, {ComponentConstructor} from '../../component/index.js';
-import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types/index.js';
-import {parseAttributes} from '../utils/attrs.js';
-import {renderComponent} from '../utils/render.js';
+import VNode, {NodeType} from './VNode';
+import Component, {ComponentConstructor} from '../../component/index';
+import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types/index';
+import {parseAttributes} from '../utils/attrs';
+import {renderComponent} from '../utils/render';
 
 export default class VComponentNode extends VNode {
   private componentClass: ComponentConstructor;

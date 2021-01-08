@@ -1,3 +1,3 @@
-import SettingsField from './SettingsField.js';
+import SettingsField from './SettingsField';
 
 export default SettingsField;

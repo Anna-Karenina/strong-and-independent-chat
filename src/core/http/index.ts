@@ -1,5 +1,5 @@
-import {METHODS, HOST} from './constants.js';
-import HTTPTransport from './http.js';
+import {METHODS, HOST} from './constants';
+import HTTPTransport from './http';
 
 const http = new HTTPTransport(`${HOST}/api/v2`);
 

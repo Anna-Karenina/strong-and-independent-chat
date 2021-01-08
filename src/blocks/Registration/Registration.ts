@@ -1,10 +1,10 @@
-import Router from '../../core/router/index.js';
-import Component from '../../core/component/index.js';
-import Templator from '../../core/templator/index.js';
-import MyButton from '../../components/MyButton/index.js';
-import Field from '../../components/Field/index.js';
-import {IFormState} from '../../core/validation/index.js';
-import {registrationTemplate} from './registration.template.js';
+import Router from '../../core/router/index';
+import Component from '../../core/component/index';
+import Templator from '../../core/templator/index';
+import MyButton from '../../components/MyButton/index';
+import Field from '../../components/Field/index';
+import {IFormState} from '../../core/validation/index';
+import {registrationTemplate} from './registration.template';
 
 interface IProps {
   onSubmit: (e: Event) => any,
