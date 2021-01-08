@@ -1,4 +1,4 @@
-import {HTTPTransport, METHODS} from '../index.js';
+import {HTTPTransport, METHODS} from '../index';
 
 const open = jest.fn((method: METHODS, path: string) => ({method, path}));
 

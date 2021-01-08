@@ -1,7 +1,7 @@
-import Component, {IProps} from '../../component/index.js';
-import Templator from '../Templator.js';
-import {TSemanticNode} from '../types/index.js';
-import {buildSemanticTree, TEXT_NODE_TYPE} from '../utils/semantic.js';
+import Component, {IProps} from '../../component/index';
+import Templator from '../Templator';
+import {TSemanticNode} from '../types/index';
+import {buildSemanticTree, TEXT_NODE_TYPE} from '../utils/semantic';
 
 const simpleTemplator = Templator.compile('<div>I am a simple!</div>');
 

@@ -1,8 +1,8 @@
-import Component from '../../component/index.js';
-import VNode from '../VNode/VNode.js';
-import {TSemanticNode} from '../types/index.js';
-import {buildSemanticTree} from '../utils/semantic.js';
-import {buildVirtualTree, renderVirtualTree, diff, cleanerDom} from '../utils/virtual.js';
+import Component from '../../component/index';
+import VNode from '../VNode/VNode';
+import {TSemanticNode} from '../types/index';
+import {buildSemanticTree} from '../utils/semantic';
+import {buildVirtualTree, renderVirtualTree, diff, cleanerDom} from '../utils/virtual';
 
 interface IButtonProps {
   onClick: Function,

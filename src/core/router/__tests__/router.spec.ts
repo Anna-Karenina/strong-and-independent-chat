@@ -1,6 +1,6 @@
-import Router from '../Router.js';
-import Component from '../../component/Component.js';
-import Templator from '../../templator/Templator.js';
+import Router from '../Router';
+import Component from '../../component/Component';
+import Templator from '../../templator/Templator';
 
 class Auth extends Component {
   constructor (props: any) {

@@ -1,6 +1,6 @@
-import Component from '../Component.js';
-import Templator from '../../templator/index.js';
-import {renderComponent} from '../../templator/utils/render.js';
+import Component from '../Component';
+import Templator from '../../templator/index';
+import {renderComponent} from '../../templator/utils/render';
 
 interface ICounterProps {
   title: string,

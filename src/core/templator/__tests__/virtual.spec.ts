@@ -1,11 +1,11 @@
-import Component from '../../component/index.js';
-import {NodeType} from '../VNode/VNode.js';
-import VTextNode from '../VNode/VTextNode.js';
-import VElementNode from '../VNode/VElementNode.js';
-import VComponentNode from '../VNode/VComponentNode.js';
-import {TSemanticNode} from '../types/index.js';
-import {buildSemanticTree} from '../utils/semantic.js';
-import {buildVirtualTree} from '../utils/virtual.js';
+import Component from '../../component/index';
+import {NodeType} from '../VNode/VNode';
+import VTextNode from '../VNode/VTextNode';
+import VElementNode from '../VNode/VElementNode';
+import VComponentNode from '../VNode/VComponentNode';
+import {TSemanticNode} from '../types/index';
+import {buildSemanticTree} from '../utils/semantic';
+import {buildVirtualTree} from '../utils/virtual';
 
 interface ITextComponentProps {
   text: string,
