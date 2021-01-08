@@ -5,6 +5,8 @@ import Templator from '../../../../core/templator/index'
 import {avatarModalTemplate} from './avatar-modal.template';
 import {classNames as cn} from '../../../../core/utils/index';
 
+import './AvatarModal.scss';
+
 interface IAvatarModalProps {
   show: boolean,
   onClose: Function,

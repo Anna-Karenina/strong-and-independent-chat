@@ -3,6 +3,8 @@ import Templator from '../../core/templator/index'
 import {template} from './field.template';
 import {classNames as cn} from '../../core/utils/index';
 
+import './Field.scss';
+
 interface IFieldProps {
   value: string,
   type?: string,

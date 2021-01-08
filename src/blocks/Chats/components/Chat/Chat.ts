@@ -5,6 +5,8 @@ import {IChat} from '../../../../types/index';
 import {chatTemplate} from './chat.template';
 import {classNames as cn} from '../../../../core/utils/index';
 
+import './Chat.scss';
+
 interface IChatProps {
   chat: IChat | null,
   sendMessage: (e: Event) => any,

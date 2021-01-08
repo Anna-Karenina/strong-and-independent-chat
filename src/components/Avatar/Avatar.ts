@@ -4,6 +4,8 @@ import {avatarTemplate} from './avatar.template';
 import {HOST} from '../../core/http/index';
 import {classNames as cn} from '../../core/utils/index';
 
+import './Avatar.scss';
+
 interface IAvatarProps {
   img: string | null,
   className?: string,

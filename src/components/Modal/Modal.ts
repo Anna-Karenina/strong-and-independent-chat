@@ -4,6 +4,8 @@ import Templator from '../../core/templator/index'
 import {modalTemplate} from './modal.template';
 import {classNames as cn} from '../../core/utils/index';
 
+import './Modal.scss';
+
 interface IModalProps {
   show: boolean,
   onClose: Function,

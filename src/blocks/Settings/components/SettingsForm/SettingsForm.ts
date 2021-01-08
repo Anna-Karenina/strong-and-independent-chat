@@ -17,6 +17,8 @@ import {
 } from '../../../../core/validation/index';
 import {IUser} from '../../../../types/index';
 
+import './SettingsForm.scss';
+
 interface ISettingsFormProps {
   onLogout: Function,
   editTarget: TSettingsEditTarget,

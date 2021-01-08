@@ -6,6 +6,8 @@ import Field from '../../components/Field/index';
 import {IFormState} from '../../core/validation/index';
 import {registrationTemplate} from './registration.template';
 
+import './registration.scss';
+
 interface IProps {
   onSubmit: (e: Event) => any,
   onFocusout: (e: Event) => any,

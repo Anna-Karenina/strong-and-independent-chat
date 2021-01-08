@@ -3,6 +3,8 @@ import Templator from '../../core/templator/index'
 import {template} from './settings-field.template';
 import {classNames as cn} from '../../core/utils/index';
 
+import './SettingsField.scss';
+
 interface ISettingsFieldProps {
   value: string,
   type?: string,

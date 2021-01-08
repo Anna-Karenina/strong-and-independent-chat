@@ -3,6 +3,8 @@ import Templator from '../../core/templator/index'
 import {template} from './my-button.template';
 import {classNames as cn} from '../../core/utils/index';
 
+import './MyButton.scss';
+
 interface IMyButtonProps {
   text?: string,
   className?: string,

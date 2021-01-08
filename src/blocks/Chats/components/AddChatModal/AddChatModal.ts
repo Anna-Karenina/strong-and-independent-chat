@@ -10,6 +10,8 @@ import {
   IFormState,
 } from '../../../../core/validation/index';
 
+import './AddChatModal.scss';
+
 interface IAddChatModalProps {
   show: boolean,
   onClose: () => void,

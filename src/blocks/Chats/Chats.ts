@@ -11,6 +11,8 @@ import {chatsTemplate} from './chats.template';
 import {ISearchData} from '../../core/api/index';
 import {IUser, IChat} from '../../types/index';
 
+import './chats.scss';
+
 interface IChatsProps {
   chats: IChat[],
   sendMessage: (e: Event) => any,

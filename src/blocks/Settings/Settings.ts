@@ -10,6 +10,8 @@ import {TSettingsEditTarget} from './types/index';
 import {IUser} from '../../types/index';
 import {classNames as cn} from '../../core/utils/index';
 
+import './settings.scss';
+
 interface ISettingsProps {
   onLogout: Function,
   updateProfile: Function, 
