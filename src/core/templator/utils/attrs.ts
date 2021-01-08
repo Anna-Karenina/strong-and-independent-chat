@@ -1,5 +1,5 @@
-import {TAttrs, TListeners, TCtx} from '../types/index';
-import {get} from '../../utils/index';
+import {TAttrs, TListeners, TCtx} from '../types';
+import {get} from '@core/utils';
 
 const ATTRIBUTES_REGEXP = /(\S*?)="(.*?)"/;
 

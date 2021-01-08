@@ -1,4 +1,4 @@
-import {queryString, isPlainObject} from '../utils/index';
+import {queryString, isPlainObject} from '@core/utils';
 import {METHODS} from './constants';
 
 type TRequestHeaders = Record<string, string>;

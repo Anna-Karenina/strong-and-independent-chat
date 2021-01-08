@@ -1,5 +1,5 @@
-import Component, {ComponentConstructor} from '../component/index'
-import {render} from '../templator/index';
+import Component, {ComponentConstructor} from '@core/component'
+import {render} from '@core/templator';
 
 interface IRouteProps {
   rootQuery: string,

@@ -1,7 +1,7 @@
 import {buildSemanticTree} from './utils/semantic';
 import {buildVirtualTree} from './utils/virtual';
-import {ComponentConstructor} from '../component/index';
-import {TSemanticNode, TCtx} from './types/index';
+import {ComponentConstructor} from '@core/component';
+import {TSemanticNode, TCtx} from './types';
 
 interface IComponents {
   [key: string]: ComponentConstructor,

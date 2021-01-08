@@ -1,4 +1,4 @@
-import {ComponentConstructor} from '../../component/index';
+import {ComponentConstructor} from '@core/component';
 
 export type TTemplatorComponents = Record<string, ComponentConstructor>;
 

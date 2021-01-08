@@ -1,4 +1,4 @@
-import Component from '../../component/index';
+import Component from '@core/component';
 import {renderVirtualTree} from './virtual';
 
 export const render = (query: string, component: Component): Element | null => {

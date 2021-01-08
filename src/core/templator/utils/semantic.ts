@@ -1,4 +1,4 @@
-import {TTemplatorComponents, TSemanticNode, TAttrs} from '../types/index';
+import {TTemplatorComponents, TSemanticNode, TAttrs} from '../types';
 import {getAttrs} from './attrs';
 
 type TCutResult = [TSemanticNode, string];

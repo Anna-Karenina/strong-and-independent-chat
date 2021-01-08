@@ -1,6 +1,6 @@
 import Event from './Event';
-import Router from '../router/index';
-import {bus} from '../bus/index';
+import Router from '@core/router';
+import {bus} from '@core/bus';
 
 interface IAuthEventOpts {
   router: Router,

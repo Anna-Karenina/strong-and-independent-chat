@@ -1,4 +1,4 @@
-import {TPatch} from '../types/index';
+import {TPatch} from '../types';
 
 export enum NodeType {
   TextNode = 1,

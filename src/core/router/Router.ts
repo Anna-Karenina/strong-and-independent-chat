@@ -1,4 +1,4 @@
-import {ComponentConstructor} from '../component/index'
+import {ComponentConstructor} from '@core/component'
 import Route from './Route';
 
 export default class Router {

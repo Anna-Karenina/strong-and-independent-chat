@@ -3,10 +3,10 @@ import VElementNode from '../VNode/VElementNode';
 import VComponentNode from '../VNode/VComponentNode';
 import VNode, {NodeType} from '../VNode/VNode';
 import {TEXT_NODE_TYPE} from './semantic';
-import {TSemanticNode, TCtx, TPatch} from '../types/index';
+import {TSemanticNode, TCtx, TPatch} from '../types';
 import {pickServiceAttrs} from './attrs';
 import {each} from './each';
-import {zip, get, identity} from '../../utils/index';
+import {zip, get, identity} from '@core/utils';
 
 const isTextNode = (semanticNode: TSemanticNode) => semanticNode.type === TEXT_NODE_TYPE;
 

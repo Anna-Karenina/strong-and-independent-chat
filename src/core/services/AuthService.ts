@@ -1,8 +1,8 @@
 import Service from './Service';
-import {Store} from '../store/index';
-import {IStoreState} from '../../store';
-import {authAPI} from '../api/index'
-import {bus} from '../bus/index';
+import {Store} from '@core/store';
+import {IStoreState} from '@/store';
+import {authAPI} from '@core/api'
+import {bus} from '@core/bus';
 
 interface IConnectOptions {
   store: Store<IStoreState>,

@@ -1,6 +1,6 @@
 import VNode, {NodeType} from './VNode';
-import Component, {ComponentConstructor} from '../../component/index';
-import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types/index';
+import Component, {ComponentConstructor} from '@core/component';
+import {TSemanticNode, TAttrs, TCtx, TPatch} from '../types';
 import {parseAttributes} from '../utils/attrs';
 import {renderComponent} from '../utils/render';
 

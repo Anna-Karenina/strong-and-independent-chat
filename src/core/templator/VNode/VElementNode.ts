@@ -1,5 +1,5 @@
 import VNode, {NodeType} from './VNode';
-import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types/index';
+import {TSemanticNode, TAttrs, TListeners, TCtx, TPatch} from '../types';
 import {parseAttributes, parseListeners} from '../utils/attrs';
 
 export default class VElementNode extends VNode {
