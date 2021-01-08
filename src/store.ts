@@ -1,5 +1,5 @@
-import {Store} from './core/store/index';
-import {IUser, IChat} from './types/index';
+import {Store} from '@core/store';
+import {IUser, IChat} from '@/types';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
