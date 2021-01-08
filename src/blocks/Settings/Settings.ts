@@ -1,14 +1,14 @@
-import Router from '../../core/router/index';
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
-import MyButton from '../../components/MyButton/index';
+import Router from '@core/router';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import MyButton from '@components/MyButton';
 import AvatarModal from './components/AvatarModal/AvatarModal';
 import SettingsForm from './components/SettingsForm/SettingsForm';
-import {HOST} from '../../core/http/index'
+import {HOST} from '@core/http'
 import {settingsTemplate} from './settings.template';
-import {TSettingsEditTarget} from './types/index';
-import {IUser} from '../../types/index';
-import {classNames as cn} from '../../core/utils/index';
+import {TSettingsEditTarget} from './types';
+import {IUser} from '@/types';
+import {classNames as cn} from '@core/utils';
 
 import './settings.scss';
 

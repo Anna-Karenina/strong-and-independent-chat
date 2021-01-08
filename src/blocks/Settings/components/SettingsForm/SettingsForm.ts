@@ -1,12 +1,12 @@
-import Component from '../../../../core/component/index';
-import Templator from '../../../../core/templator/index';
-import MyButton from '../../../../components/MyButton/index';
-import SettingsField from '../../../../components/SettingsField/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import MyButton from '@components/MyButton';
+import SettingsField from '@components/SettingsField';
 import {settingsPreviewTemplate} from './settings-preview.template';
 import {settingsProfileTemplate} from './settings-profile.template';
 import {settingsPasswordTemplate} from './settings-password.template';
-import {EDIT_TARGET, TSettingsEditTarget} from '../../types/index';
-import {isEqual} from '../../../../core/utils/index';
+import {EDIT_TARGET, TSettingsEditTarget} from '../../types';
+import {isEqual} from '@core/utils';
 import {
   FormValidator,
   textFiledScheme,
@@ -14,8 +14,8 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
   IFormState,
-} from '../../../../core/validation/index';
-import {IUser} from '../../../../types/index';
+} from '@core/validation';
+import {IUser} from '@/types';
 
 import './SettingsForm.scss';
 

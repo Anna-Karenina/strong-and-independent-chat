@@ -1,5 +1,5 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
 import {
   FormValidator,
   textFiledScheme,
@@ -7,10 +7,10 @@ import {
   phoneScheme,
   passwordDuplicateScheme,
   IFormState,
-} from '../../core/validation/index';
+} from '@core/validation';
 import Registration from './Registration';
-import {authAPI} from '../../core/api/index';
-import {bus} from '../../core/bus/index';
+import {authAPI} from '@core/api';
+import {bus} from '@core/bus';
 
 interface IRegistrationControllerProps {};
 

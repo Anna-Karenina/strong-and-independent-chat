@@ -1,15 +1,15 @@
-import Router from '../../core/router/index';
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
-import MyButton from '../../components/MyButton/index';
-import Modal from '../../components/Modal/index';
-import Field from '../../components/Field/index';
-import Avatar from '../../components/Avatar/index';
+import Router from '@core/router';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import MyButton from '@components/MyButton';
+import Modal from '@components/Modal';
+import Field from '@components/Field';
+import Avatar from '@components/Avatar';
 import Chat from './components/Chat/Chat';
 import AddChatModal from './components/AddChatModal/AddChatModal';
 import {chatsTemplate} from './chats.template';
-import {ISearchData} from '../../core/api/index';
-import {IUser, IChat} from '../../types/index';
+import {ISearchData} from '@core/api';
+import {IUser, IChat} from '@/types';
 
 import './chats.scss';
 

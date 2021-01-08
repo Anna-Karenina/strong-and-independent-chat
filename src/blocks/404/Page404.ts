@@ -1,6 +1,6 @@
-import Router from '../../core/router/index';
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
+import Router from '@core/router';
+import Component from '@core/component';
+import Templator from '@core/templator';
 import {template404} from './404.template';
 
 interface IPage404Props {};

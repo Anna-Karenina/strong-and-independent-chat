@@ -1,9 +1,9 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
 import Chats from './Chats';
-import {store} from '../../store';
-import {chatsAPI, userAPI, ISearchData} from '../../core/api/index';
-import {IChat} from '../../types/index';
+import {store} from '@/store';
+import {chatsAPI, userAPI, ISearchData} from '@core/api';
+import {IChat} from '@/types';
 
 interface IChatsControllerProps {};
 

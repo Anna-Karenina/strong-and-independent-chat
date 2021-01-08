@@ -1,9 +1,9 @@
-import Component from '../../../../core/component/index';
-import MyButton from '../../../../components/MyButton/index';
-import Modal from '../../../../components/Modal/index';
-import Templator from '../../../../core/templator/index'
+import Component from '@core/component';
+import MyButton from '@components/MyButton';
+import Modal from '@components/Modal';
+import Templator from '@core/templator'
 import {avatarModalTemplate} from './avatar-modal.template';
-import {classNames as cn} from '../../../../core/utils/index';
+import {classNames as cn} from '@core/utils';
 
 import './AvatarModal.scss';
 

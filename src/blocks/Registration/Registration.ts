@@ -1,9 +1,9 @@
-import Router from '../../core/router/index';
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
-import MyButton from '../../components/MyButton/index';
-import Field from '../../components/Field/index';
-import {IFormState} from '../../core/validation/index';
+import Router from '@core/router';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import MyButton from '@components/MyButton';
+import Field from '@components/Field';
+import {IFormState} from '@core/validation';
 import {registrationTemplate} from './registration.template';
 
 import './registration.scss';

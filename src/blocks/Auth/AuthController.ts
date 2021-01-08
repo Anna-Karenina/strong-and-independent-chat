@@ -1,9 +1,9 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
-import {FormValidator, textFiledScheme, IFormState} from '../../core/validation/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import {FormValidator, textFiledScheme, IFormState} from '@core/validation';
 import Auth, {IAuthFields} from './Auth';
-import {authAPI} from '../../core/api/index';
-import {bus} from '../../core/bus/index';
+import {authAPI} from '@core/api';
+import {bus} from '@core/bus';
 
 interface IAuthControllerProps {};
 

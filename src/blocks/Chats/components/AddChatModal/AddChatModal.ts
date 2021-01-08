@@ -1,14 +1,14 @@
-import Component from '../../../../core/component/index';
-import MyButton from '../../../../components/MyButton/index';
-import Field from '../../../../components/Field/index';
-import Modal from '../../../../components/Modal/index';
-import Templator from '../../../../core/templator/index'
+import Component from '@core/component';
+import MyButton from '@components/MyButton';
+import Field from '@components/Field';
+import Modal from '@components/Modal';
+import Templator from '@core/templator'
 import {addChatModalTemplate} from './add-chat-modal.template';
 import {
   FormValidator,
   textFiledScheme,
   IFormState,
-} from '../../../../core/validation/index';
+} from '@core/validation';
 
 import './AddChatModal.scss';
 

@@ -1,9 +1,9 @@
-import Component from '../../../../core/component/index';
-import Templator from '../../../../core/templator/index';
-import Avatar from '../../../../components/Avatar/index';
-import {IChat} from '../../../../types/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
+import Avatar from '@components/Avatar';
+import {IChat} from '@/types';
 import {chatTemplate} from './chat.template';
-import {classNames as cn} from '../../../../core/utils/index';
+import {classNames as cn} from '@core/utils';
 
 import './Chat.scss';
 

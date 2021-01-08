@@ -1,10 +1,10 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index';
+import Component from '@core/component';
+import Templator from '@core/templator';
 import Settings from './Settings';
-import {bus} from '../../core/bus/index';
-import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '../../core/api/index';
-import {store} from '../../store';
-import {IUser} from '../../types/index';
+import {bus} from '@core/bus';
+import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '@core/api';
+import {store} from '@/store';
+import {IUser} from '@/types';
 
 interface ISettingsControllerProps {};
 
