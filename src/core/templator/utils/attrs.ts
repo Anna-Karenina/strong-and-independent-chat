@@ -38,7 +38,7 @@ export const parseAttributes = (attrs: TAttrs, ctx:TCtx) => {
     }
 
     if (key.startsWith(':')) {
-      const attrValue = get(ctx, String(value), null) as unknown;
+      const attrValue = get(ctx, String(value), null);
       parsedAttrs[key.slice(1)] = attrValue;
     } else {
       parsedAttrs[key] = String(value);

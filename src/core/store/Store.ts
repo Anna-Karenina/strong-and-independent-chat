@@ -1,7 +1,7 @@
 import EventBus from '@core/bus';
 
-type TAction<T> = (ctx: Store<T>, payload: any) => any;
-type TMutation<T> = (state: T, payload: any) => any;
+type TAction<T> = (ctx: Store<T>, payload: unknown) => void;
+type TMutation<T> = (state: T, payload: unknown) => void;
 
 type TActions<T> = Record<string, TAction<T>>;
 type TMutations<T> = Record<string, TMutation<T>>;
@@ -46,7 +46,7 @@ export default class Store<T extends Record<string, any>> {
     this.state = this.makeStateProxy(params.state);
   }
 
-  dispatch(actionKey: string, payload: any) {    
+  dispatch(actionKey: string, payload: unknown) {    
     if(typeof this.actions[actionKey] !== 'function') {
       console.error(`Action "${actionKey} doesn't exist.`);
       return false;
@@ -58,7 +58,7 @@ export default class Store<T extends Record<string, any>> {
     return true;
   }
 
-  commit(mutationKey: string, payload: any) {    
+  commit(mutationKey: string, payload: unknown) {    
     if(typeof this.mutations[mutationKey] !== 'function') {
       console.log(`Mutation "${mutationKey}" doesn't exist`);
       return false;
@@ -70,7 +70,7 @@ export default class Store<T extends Record<string, any>> {
     return true;
   }
 
-  subscribe(fn: (state: T) => any) {
+  subscribe(fn: (state: T) => void) {
     this.storeBus().on('update$state', fn);
 
     return () => {
@@ -78,17 +78,17 @@ export default class Store<T extends Record<string, any>> {
     };
   }
 
-  select(fields: string[], fn: (field: string, value: any) => any): ISelectResult<T> {
+  select(fields: string[], fn: (field: string, value: unknown) => void): ISelectResult<T> {
     const partialState = fields.reduce(
       (acc, field) => ({...acc, [field]: this.state[field] as unknown}),
       {}
     );
 
-    const subscriptions: {event: string, callback: (...args: unknown[]) => any}[] = [];
+    const subscriptions: {event: string, callback: (...args: unknown[]) => void}[] = [];
 
     fields.forEach((field) => {
       const event = `update:${field}`;
-      const callback = (value: any) => {fn(field, value)};
+      const callback = (value: unknown) => {fn(field, value)};
 
       this.storeBus().on(event, callback);
       subscriptions.push({event, callback});

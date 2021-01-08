@@ -38,7 +38,7 @@ export default class FormValidator {
     this.initFormState();
   }
 
-  validate(fieldName: string, value: string, ...additionalArgs: any[]) {
+  validate(fieldName: string, value: string, ...additionalArgs: unknown[]) {
     const scheme = this.validatorsMap[fieldName];
     if (!scheme) {
       throw new Error(`Отсутствует валидатор для поля ${fieldName}`);
@@ -48,7 +48,7 @@ export default class FormValidator {
     this.formState = {...this.formState, [fieldName]: result};
   }
 
-  validateAll(fieldsMap: {[key: string]: any}, additionalArgsMap: {[key: string]: any[]} = {}) {
+  validateAll<T>(fieldsMap: T, additionalArgsMap: {[key: string]: unknown[]} = {}) {
     Object.entries(fieldsMap).forEach(([field, value]) => {
       const additionalArgs = additionalArgsMap[field] || [];
       this.validate(field, String(value), ...additionalArgs);

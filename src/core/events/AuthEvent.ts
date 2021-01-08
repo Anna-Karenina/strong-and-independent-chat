@@ -6,7 +6,7 @@ interface IAuthEventOpts {
   router: Router,
 }
 
-class AuthEvent extends Event {
+class AuthEvent extends Event<IAuthEventOpts> {
   private router: Router;
 
   init(opts: IAuthEventOpts) {

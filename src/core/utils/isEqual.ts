@@ -1,6 +1,6 @@
 import {isPlainObject} from './isPlainObject';
 
-export const isEqual = (a: any, b: any): boolean => {
+export const isEqual = (a: unknown, b: unknown): boolean => {
   if (Array.isArray(a) && Array.isArray(b)) {
     return (
       a.length === b.length &&

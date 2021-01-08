@@ -89,6 +89,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     }
   }
   
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(_oldProps: P, _oldState: S) {}
 
   protected componentShouldUpdate(oldProps: P, oldState: S): boolean {

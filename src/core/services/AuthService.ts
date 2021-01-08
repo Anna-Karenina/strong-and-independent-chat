@@ -8,7 +8,7 @@ interface IConnectOptions {
   store: Store<IStoreState>,
 }
 
-class AuthService extends Service {
+class AuthService extends Service<IConnectOptions> {
   private store: Store<IStoreState>
 
   connect(opts: IConnectOptions): void {

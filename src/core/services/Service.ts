@@ -1,5 +1,3 @@
-type TServiceOptions = Record<string, any>;
-
-export default abstract class Service {
-  abstract connect(opts: TServiceOptions): void;
+export default abstract class Service<T> {
+  abstract connect(opts: T): void;
 }
