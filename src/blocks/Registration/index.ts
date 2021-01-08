@@ -1,3 +1,1 @@
-import RegistrationController from './RegistrationController';
-
-export default RegistrationController;
+export {default as default} from './RegistrationController';

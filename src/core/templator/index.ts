@@ -1,14 +1,4 @@
-import Templator from './Templator';
-import {render} from './utils/render';
-import {renderVirtualTree, diff, cleanerDom} from './utils/virtual';
-import VNode from './VNode/VNode';
-
-export default Templator;
-
-export {
-  render,
-  renderVirtualTree,
-  diff,
-  cleanerDom,
-  VNode,
-}
+export {default as default} from './Templator';
+export {render} from './utils/render';
+export {renderVirtualTree, diff, cleanerDom} from './utils/virtual';
+export {default as VNode} from './VNode/VNode';

@@ -1,13 +1,13 @@
-import Router from '@core/router/index';
-import AuthController from '@/blocks/Auth/index'
-import RegistrationController from '@/blocks/Registration/index'
-import ChatsController from '@/blocks/Chats/index';
-import SettingsController from '@/blocks/Settings/index';
-import FallbackPage from '@/blocks/404/Page404';
-import ErrorPage from '@/blocks/500/Page500';
-import {deepClone} from '@core/utils/index';
-import {authEvent} from '@core/events/index';
-import {authService} from '@core/services/index';
+import Router from '@core/router';
+import AuthController from '@/blocks/Auth'
+import RegistrationController from '@/blocks/Registration'
+import ChatsController from '@/blocks/Chats';
+import SettingsController from '@/blocks/Settings';
+import FallbackPage from '@/blocks/404';
+import ErrorPage from '@/blocks/500';
+import {deepClone} from '@core/utils';
+import {authEvent} from '@core/events';
+import {authService} from '@core/services';
 import {store} from '@/store';
 
 import '@/styles/common.scss';

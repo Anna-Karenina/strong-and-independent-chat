@@ -1,3 +1,1 @@
-import ChatsController from './ChatsController';
-
-export default ChatsController;
+export {default as default} from './ChatsController';

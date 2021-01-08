@@ -1,3 +1,1 @@
-import SettingsController from './SettingsController';
-
-export default SettingsController;
+export {default as default} from './SettingsController';
