@@ -1,8 +1,8 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index'
+import Component from '@core/component';
+import Templator from '@core/templator/index'
 import {avatarTemplate} from './avatar.template';
-import {HOST} from '../../core/http/index';
-import {classNames as cn} from '../../core/utils/index';
+import {HOST} from '@core/http/index';
+import {classNames as cn} from '@core/utils/index';
 
 import './Avatar.scss';
 

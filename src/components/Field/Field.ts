@@ -1,7 +1,7 @@
-import Component from '../../core/component/index';
-import Templator from '../../core/templator/index'
+import Component from '@core/component';
+import Templator from '@core/templator'
 import {template} from './field.template';
-import {classNames as cn} from '../../core/utils/index';
+import {classNames as cn} from '@core/utils';
 
 import './Field.scss';
 

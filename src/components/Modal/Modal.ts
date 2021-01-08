@@ -1,8 +1,8 @@
-import Component from '../../core/component/index';
-import VNode from '../../core/templator/VNode/VNode';
-import Templator from '../../core/templator/index'
+import Component from '@core/component';
+import VNode from '@core/templator/VNode/VNode';
+import Templator from '@core/templator'
 import {modalTemplate} from './modal.template';
-import {classNames as cn} from '../../core/utils/index';
+import {classNames as cn} from '@core/utils';
 
 import './Modal.scss';
 
