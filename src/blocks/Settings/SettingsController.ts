@@ -6,11 +6,11 @@ import {authAPI, userProfileAPI, IProfileUpdateData, IPasswordUpdateData} from '
 import {store} from '@/store';
 import {IUser} from '@/types';
 
-interface ISettingsControllerProps {};
+interface ISettingsControllerProps {}
 
 interface ISettingsControllerState {
   user: IUser | null,
-};
+}
 
 const templator = Templator.compile(
   `<settings
@@ -31,7 +31,7 @@ export default class SettingsController extends Component<ISettingsControllerPro
   constructor(props: ISettingsControllerProps) {
     super(props);
 
-    const {state, unsubscribe} = store.select(['user'], (field, value) => {
+    const {state, unsubscribe} = store.select(['user'], (field, value: unknown) => {
       this.setState({[field]: value});
     });
 
@@ -47,7 +47,7 @@ export default class SettingsController extends Component<ISettingsControllerPro
   }
 
   onLogout = () => {
-    authAPI
+    return authAPI
       .logout()
       .then(() => bus.emit('auth:logout'));
   };
@@ -82,4 +82,4 @@ export default class SettingsController extends Component<ISettingsControllerPro
       updateAvatar: this.updateAvatar,
     });
   }
-};
+}

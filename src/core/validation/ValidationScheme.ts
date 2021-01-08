@@ -5,7 +5,7 @@ const MAX_LENGTH_ERROR  = 'Максимальная длина';
 export interface IValidatorResult {
   valid: boolean,
   error: null | string,
-};
+}
 
 type TValidator = (value: string, ...additionalArgs: any[]) => IValidatorResult;
 
@@ -74,4 +74,4 @@ export default class ValidationScheme {
 
     return {valid: true, error: null};
   }
-};
+}

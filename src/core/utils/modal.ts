@@ -1,6 +1,6 @@
 interface IModal {
   open: () => void,
-};
+}
 
 export const modal = (selector: string): IModal => {
   const $modal: HTMLElement | null = document.querySelector(selector);

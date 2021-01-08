@@ -5,11 +5,11 @@ import {isEqual, deepClone} from '@core/utils';
 
 export interface IProps {
   [key: string]: any,
-};
+}
 
 export interface IState {
   [key: string]: any,
-};
+}
 
 export default abstract class Component<P extends IProps = IProps, S extends IState = IState> {
   static EVENTS = {
@@ -73,7 +73,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     this.componentDidMount();
   }
 
-  protected componentDidMount() {};
+  protected componentDidMount() {}
 
   private _componentDidUpdate(oldProps: P, oldState: S) {
     const response = this.componentShouldUpdate(oldProps, oldState);
@@ -89,7 +89,7 @@ export default abstract class Component<P extends IProps = IProps, S extends ISt
     }
   }
   
-  protected componentDidUpdate(_oldProps: P, _oldState: S) {};
+  protected componentDidUpdate(_oldProps: P, _oldState: S) {}
 
   protected componentShouldUpdate(oldProps: P, oldState: S): boolean {
     return !isEqual(oldProps, this.props) || !isEqual(oldState, this.state);

@@ -15,14 +15,14 @@ import './chats.scss';
 
 interface IChatsProps {
   chats: IChat[],
-  sendMessage: (e: Event) => any,
+  sendMessage: (e: Event) => void,
   searchUser: (data: ISearchData) => Promise<IUser[]>,
-  addNewUserInChat: (userId: number, chatId: number) => any,
-  deleteUserFromChat: (userId: number, chatId: number) => any,
+  addNewUserInChat: (userId: number, chatId: number) => Promise<unknown>,
+  deleteUserFromChat: (userId: number, chatId: number) => Promise<unknown>,
   fetchChatUsers: (chatId: number) => Promise<IUser[]>,
-  addChat: (title: string) => any,
-  deleteChat: (chatId: number) => any,
-};
+  addChat: (title: string) => Promise<unknown>,
+  deleteChat: (chatId: number) => Promise<unknown>,
+}
 
 interface IChatsState {
   selectedChat: IChat | null,
@@ -32,7 +32,7 @@ interface IChatsState {
   search: string,
   users: IUser[],
   fetching: boolean,
-};
+}
 
 const templator = Templator.compile(chatsTemplate, {
   components: {
@@ -99,8 +99,8 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   get users() {
     return this.state.users.map((user) => ({
       ...user,
-      add: this.createAddUserHandler(user.id as number),
-      remove: this.createRemoveUserHandler(user.id as number),
+      add: this.createAddUserHandler(user.id ),
+      remove: this.createRemoveUserHandler(user.id ),
     }));
   }
 
@@ -109,7 +109,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   }
 
   createAddUserHandler(userId: number) {
-    if (!this.selectedChatId) return () => {};
+    if (!this.selectedChatId) return (v: unknown) => v;
 
     return () => {
       if (this.state.fetching) return;
@@ -122,7 +122,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   }
 
   createRemoveUserHandler(userId: number) {
-    if (!this.selectedChatId) return () => {};
+    if (!this.selectedChatId) return (v: unknown) => v;
 
     return () => {
       if (this.state.fetching) return;
@@ -149,9 +149,8 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   openDeleteUserModal = () => {
     this.setState({showDeleteUserModal: true});
 
-    this.props.fetchChatUsers(this.selectedChatId).then((users: IUser[]) => {
-      this.setState({users});
-    });
+    return this.props.fetchChatUsers(this.selectedChatId)
+      .then((users: IUser[]) => this.setState({users}));
   }
 
   closeAddChatModal = () => {
@@ -198,4 +197,4 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       onSearch: this.onSearch,
     });
   }
-};
+}

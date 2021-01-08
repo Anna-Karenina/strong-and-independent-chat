@@ -13,17 +13,17 @@ import {classNames as cn} from '@core/utils';
 import './settings.scss';
 
 interface ISettingsProps {
-  onLogout: Function,
-  updateProfile: Function, 
-  updatePassword: Function, 
-  updateAvatar: Function, 
+  onLogout: () => Promise<unknown>,
+  updateProfile: () => Promise<unknown>, 
+  updatePassword: () => Promise<unknown>, 
+  updateAvatar: () => Promise<unknown>, 
   user: IUser,
-};
+}
 
 interface ISettingsState {
   editTarget: TSettingsEditTarget,
   showAvatarModal: boolean,
-};
+}
 
 const templator = Templator.compile(settingsTemplate, {
   components: {
@@ -101,4 +101,4 @@ export default class Settings extends Component<ISettingsProps, ISettingsState> 
       goBack: this.goBack,
     });
   }
-};
+}

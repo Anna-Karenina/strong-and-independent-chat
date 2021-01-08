@@ -19,7 +19,7 @@ interface IProps {
   onInput: (e: Event) => void,
   formState: IFormState,
   fields: IAuthFields,
-};
+}
 
 const templator = Templator.compile(authTemplate, {
   components: {
@@ -47,4 +47,4 @@ export default class Auth extends Component {
       goToRegistration: this.goToRegistration,
     });
   }
-};
+}

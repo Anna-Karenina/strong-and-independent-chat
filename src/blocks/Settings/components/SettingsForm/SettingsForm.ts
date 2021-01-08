@@ -20,13 +20,13 @@ import {IUser} from '@/types';
 import './SettingsForm.scss';
 
 interface ISettingsFormProps {
-  onLogout: Function,
+  onLogout: () => Promise<unknown>,
   editTarget: TSettingsEditTarget,
   setEditTarget: (editTarget: TSettingsEditTarget) => void,
-  updateProfile: (profile: IProfileFields) => any,
-  updatePassword: (passwordDate: Omit<IPasswordFields, 'newPasswordTwice'>) => any,
+  updateProfile: (profile: IProfileFields) => Promise<unknown>,
+  updatePassword: (passwordDate: Omit<IPasswordFields, 'newPasswordTwice'>) => Promise<unknown>,
   user: IUser,
-};
+}
 
 interface IProfileFields {
   email: string,
@@ -48,7 +48,7 @@ interface ISettingsFormState {
   passwordFields: IPasswordFields,
   formState: IFormState,
   fetching: boolean,
-};
+}
 
 const previewTemplator = Templator.compile(settingsPreviewTemplate, {
   components: {
@@ -200,7 +200,7 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
     this.setState({formState: this.validator.formState});
     
     if (this.validator.valid) {
-      this.updateProfileOrPassword();
+      return this.updateProfileOrPassword();
     }
   };
 
@@ -248,4 +248,4 @@ export default class SettingsForm extends Component<ISettingsFormProps, ISetting
         onSubmit: this.onSubmit,
       });
   }
-};
+}

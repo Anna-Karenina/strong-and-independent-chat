@@ -14,7 +14,7 @@ interface IProps {
   onInput: (e: Event) => any,
   formState: IFormState,
   fields: {[key: string]: string},
-};
+}
 
 const templator = Templator.compile(registrationTemplate, {
   components: {
@@ -42,4 +42,4 @@ export default class Registration extends Component {
       goToAuth: this.goToAuth,
     });
   }
-};
+}

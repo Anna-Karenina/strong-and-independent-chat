@@ -5,11 +5,11 @@ import {store} from '@/store';
 import {chatsAPI, userAPI, ISearchData} from '@core/api';
 import {IChat} from '@/types';
 
-interface IChatsControllerProps {};
+interface IChatsControllerProps {}
 
 interface IChatsControllerState {
   chats: IChat[]
-};
+}
 
 const templator = Templator.compile(
   `<chats
@@ -33,7 +33,7 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
   constructor(props: IChatsControllerProps) {
     super(props);
 
-    const {state, unsubscribe} = store.select(['chats'], (field, value) => {
+    const {state, unsubscribe} = store.select(['chats'], (field, value: unknown) => {
       this.setState({[field]: value});
     });
 
@@ -45,15 +45,15 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
   }
 
   componentDidMount() {
-    this.fetchChats();
+    return this.fetchChats();
   }
 
   beforeDestroy() {
     this.unsubscribeStore();
   }
 
-  fetchChats() {
-    chatsAPI.getChats()
+  fetchChats = () => {
+    return chatsAPI.getChats()
       .then((chats) => store.dispatch('setChats', chats))
   }
   
@@ -106,4 +106,4 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
       deleteChat: this.deleteChat,
     });
   }
-};
+}

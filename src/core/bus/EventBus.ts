@@ -1,28 +1,29 @@
+type IHandler = (...args: unknown[]) => void;
 export interface IListeners {
-  [key: string]: Function[],
+  [key: string]: IHandler[],
 }
 
 export interface IEventBus {
   listeners: IListeners
 
-  on: (event: string, cb: Function) => void,
+  on: (event: string, cb: IHandler) => void,
 
-  off: (event: string, cb: Function) => void,
+  off: (event: string, cb: IHandler) => void,
 
-  emit: (event: string, ...args: any[]) => void,
+  emit: (event: string, ...args: unknown[]) => void,
 }
 
 export default class EventBus implements IEventBus {
   listeners: IListeners = {}
 
-  on(event: string, callback: Function) {
+  on(event: string, callback: IHandler) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
     this.listeners[event].push(callback);
   }
 
-  off(event: string, callback: Function) {
+  off(event: string, callback: IHandler) {
     if (!this.listeners[event]) {
       throw new Error(`unknown event: ${event}`);
     }
@@ -31,7 +32,7 @@ export default class EventBus implements IEventBus {
     );
   }
 
-  emit(event: string, ...args: any[]) {
+  emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
       throw new Error(`unknown event: ${event}`);
     }

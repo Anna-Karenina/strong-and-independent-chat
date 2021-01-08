@@ -5,10 +5,10 @@ import {TSemanticNode, TCtx} from './types';
 
 interface IComponents {
   [key: string]: ComponentConstructor,
-};
+}
 interface IOptions {
   components?: IComponents,
-};
+}
 
 export default class Templator {
   static compile(template: string, opts: IOptions = {}) {

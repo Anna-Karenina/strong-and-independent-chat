@@ -5,13 +5,13 @@ import Auth, {IAuthFields} from './Auth';
 import {authAPI} from '@core/api';
 import {bus} from '@core/bus';
 
-interface IAuthControllerProps {};
+interface IAuthControllerProps {}
 
 interface IAuthControllerState {
   fields: IAuthFields,
   formState: IFormState,
   fetching: boolean,
-};
+}
 
 const templator = Templator.compile(
   `<auth
@@ -94,4 +94,4 @@ export default class AuthController extends Component<IAuthControllerProps, IAut
 
     return templator(ctx);
   }
-};
+}

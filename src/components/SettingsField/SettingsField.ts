@@ -13,11 +13,11 @@ interface ISettingsFieldProps {
   label?: string,
   readonly?: boolean,
   error?: string | null,
-};
+}
 
 const templator = Templator.compile(template)
 
-export default class SettingsField extends Component {
+export default class SettingsField extends Component<ISettingsFieldProps> {
   private inputRef: HTMLInputElement | null;
 
   constructor(props: ISettingsFieldProps) {

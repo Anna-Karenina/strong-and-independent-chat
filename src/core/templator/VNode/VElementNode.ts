@@ -122,4 +122,4 @@ export default class VElementNode extends VNode {
       patches.forEach((patch) => patch($el));
     };
   }
-};
+}

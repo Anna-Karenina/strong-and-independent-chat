@@ -3,6 +3,6 @@ export enum METHODS {
 	POST = 'POST',
 	PUT = 'PUT',
 	DELETE = 'DELETE',
-};
+}
 
 export const HOST = 'https://ya-praktikum.tech';

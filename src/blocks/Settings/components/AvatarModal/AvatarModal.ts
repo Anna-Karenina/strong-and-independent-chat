@@ -9,14 +9,14 @@ import './AvatarModal.scss';
 
 interface IAvatarModalProps {
   show: boolean,
-  onClose: Function,
-  updateAvatar: (formData: FormData) => any,
-};
+  onClose: () => void,
+  updateAvatar: (formData: FormData) => Promise<unknown>,
+}
 
 interface IAvatarModalState {
   file: File | null,
   fetching: boolean,
-};
+}
 
 const templator = Templator.compile(avatarModalTemplate, {
   components: {

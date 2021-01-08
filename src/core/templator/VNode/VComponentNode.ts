@@ -20,7 +20,7 @@ export default class VComponentNode extends VNode {
 
   render() {
     this.instance = new this.componentClass({...this.props, $children: this.$children});
-    return renderComponent(this.instance as Component);
+    return renderComponent(this.instance );
   }
 
   diff(newVNode: VComponentNode): TPatch {

@@ -9,17 +9,15 @@ interface IMyButtonProps {
   text?: string,
   className?: string,
   type?: string,
-  onClick?: Function,
-};
+  onClick?: () => void,
+}
 
 const templator = Templator.compile(template);
 
-export default class MyButton extends Component {
+export default class MyButton extends Component<IMyButtonProps> {
   constructor(props: IMyButtonProps) {
     super(props);
   }
-
-  emptyClickHandler() {}
 
   render() {
     const {text = '', className = '', type = '', onClick} = this.props;
@@ -28,7 +26,7 @@ export default class MyButton extends Component {
       text,
       type,
       className: cn('primary-button', className),
-      onClick: onClick || this.emptyClickHandler,
+      onClick,
     });
   }
 }

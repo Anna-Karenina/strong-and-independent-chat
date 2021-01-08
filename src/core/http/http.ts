@@ -11,7 +11,7 @@ interface IRequestOptions<T extends IRequestData> {
   data?: T,
   timeout?: number,
   withCredentials?: boolean,
-};
+}
 
 type PartialRequestOptions<T extends IRequestData> = Partial<IRequestOptions<T>>;
 

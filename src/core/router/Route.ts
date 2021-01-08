@@ -45,7 +45,6 @@ export default class Route {
   update() {
     if (!this.component) return;
     
-    const {rootQuery, ...restProps} = this.props;
-    this.component.setProps(restProps);
+    this.component.setProps(this.props);
   }
 }

@@ -32,13 +32,13 @@ export const parseAttributes = (attrs: TAttrs, ctx:TCtx) => {
   const parsedAttrs: TAttrs = {};
   const attrsEntries = Object.entries(attrs);
 
-  for (let [key, value] of attrsEntries) {
+  for (const [key, value] of attrsEntries) {
     if (skipAttribute(key)) {
       continue;
     }
 
     if (key.startsWith(':')) {
-      const attrValue = get(ctx, String(value), null);
+      const attrValue = get(ctx, String(value), null) as unknown;
       parsedAttrs[key.slice(1)] = attrValue;
     } else {
       parsedAttrs[key] = String(value);
@@ -52,12 +52,12 @@ export const parseListeners = (attrs: TAttrs, ctx: TCtx) => {
   const parsedLesteners: TListeners = {};
   const attrsEntries = Object.entries(attrs);
 
-  for (let [key, value] of attrsEntries) {
+  for (const [key, value] of attrsEntries) {
     if (!key.startsWith('@')) {
       continue;
     }
     
-    parsedLesteners[key.slice(1)] = get(ctx, String(value), () => {});
+    parsedLesteners[key.slice(1)] = get(ctx, String(value), () => {}) as (...args: unknown[]) => void;
   }
 
   return parsedLesteners;

@@ -1,11 +1,14 @@
-export const get = (obj: object, path: string, defaultValue?: any) => {
+import {PlainObject} from './isPlainObject';
+
+export const get = (obj: PlainObject, path: string, defaultValue?: any) => {
   const keys = path.split('.');
 
   let result: {[key: string]: any} = obj;
-  for (let key of keys) {
-    result = result[key];
+  for (const key of keys) {
+    result = result[key] as PlainObject;
 
     if (result === undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return defaultValue;        
     }
   }

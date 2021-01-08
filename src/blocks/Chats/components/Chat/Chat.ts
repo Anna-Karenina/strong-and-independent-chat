@@ -9,21 +9,16 @@ import './Chat.scss';
 
 interface IChatProps {
   chat: IChat | null,
-  sendMessage: (e: Event) => any,
+  sendMessage: (e: Event) => void,
   openAddUserModal: () => void,
   openDeleteUserModal: () => void,
-  deleteChat: (chatId: number) => any,
-};
+  deleteChat: (chatId: number) => Promise<unknown>,
+}
 
 interface IChatState {
   showUserOptions: boolean,
   fetching: boolean,
-};
-
-interface IChatProps {
-  chat: IChat | null,
-  sendMessage: (e: Event) => any,
-};
+}
 
 const templator = Templator.compile(chatTemplate, {
   components: {
@@ -108,4 +103,4 @@ export default class Chat extends Component<IChatProps, IChatState> {
       sendMessage: this.props.sendMessage,
     });
   }
-};
+}

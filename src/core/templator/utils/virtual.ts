@@ -23,7 +23,7 @@ export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode[
   const serviceAttrs = pickServiceAttrs(semanticNode.attrs);
 
   if (serviceAttrs.if) {
-    const isExist = get(ctx, String(serviceAttrs.if), false);
+    const isExist = get(ctx, String(serviceAttrs.if), false) as boolean;
     const nodes =  isExist ? [createVirtualNode(semanticNode, ctx)] : [];
 
     return nodes.filter(identity) as VNode[];
@@ -36,7 +36,7 @@ export const buildVirtualTree = (semanticNode: TSemanticNode, ctx: TCtx): VNode[
 
   return each(String(serviceAttrs.each), ctx)
     .map((newCtx: TCtx) => createVirtualNode(semanticNode, newCtx))
-    .filter((node: VNode | null) => node);
+    .filter((node: VNode | null) => node) as VNode[];
 };
 
 export const createVirtualNode = (semanticNode: TSemanticNode, ctx: TCtx): VNode | null => {
@@ -44,6 +44,7 @@ export const createVirtualNode = (semanticNode: TSemanticNode, ctx: TCtx): VNode
 
   switch(true) {
     case isChildrenNode(semanticNode):
+      // eslint-disable-next-line no-case-declarations
       const [$child] = ctx.$children as VNode[] || []
       return $child || null;
 
@@ -69,7 +70,7 @@ export const renderVirtualTree = (virtualNode: VNode): HTMLElement | Text => {
   const $children = children.map((child) => renderVirtualTree(child));
 
   $children.forEach(($child) => {
-    $el?.appendChild($child as HTMLElement | Text);
+    $el?.appendChild($child );
   });
 
   return $el as HTMLElement | Text;

@@ -15,7 +15,7 @@ const classReducer = (rawClass: unknown): string => {
   }
 
   if (Array.isArray(rawClass)) {
-    return classNames.apply(null, rawClass);
+    return classNames(...rawClass);
   }
 
   return '';

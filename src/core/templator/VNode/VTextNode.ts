@@ -3,7 +3,7 @@ import VNode, {NodeType} from './VNode';
 import {TSemanticNode, TCtx, TPatch} from '../types';
 
 export default class VTextNode extends VNode {
-  textContent: string = '';
+  textContent = '';
 
   constructor(semanticNode: TSemanticNode, ctx: TCtx) {
     super(NodeType.TextNode);
@@ -20,7 +20,7 @@ export default class VTextNode extends VNode {
     while ((key = TEMPLATE_REGEXP.exec(result))) {
       if (key && key[1]) {
         const tmplValue = key[1].trim();
-        const data = get(ctx, tmplValue, '');
+        const data = get(ctx, tmplValue, '') as string;
         
         result = result.replace(new RegExp(key[0], "gi"), String(data));
       }

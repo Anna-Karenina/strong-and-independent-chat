@@ -6,17 +6,18 @@ import {bus} from '@core/bus';
 
 interface IConnectOptions {
   store: Store<IStoreState>,
-};
+}
 
 class AuthService extends Service {
   private store: Store<IStoreState>
 
-  async connect(opts: IConnectOptions) {
+  connect(opts: IConnectOptions): void {
     this.store = opts.store;
-
+   
     this.fetchUser();
-
+    
     bus.on('auth:logout', this.onLogout);
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     bus.on('auth:login', this.onLogin);
   }
 
@@ -37,8 +38,8 @@ class AuthService extends Service {
   }
 
   private onLogin = () => {
-    this.fetchUser();
+    return this.fetchUser();
   }
-};
+}
 
 export const authService = new AuthService();

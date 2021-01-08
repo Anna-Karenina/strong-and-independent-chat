@@ -1,5 +1,6 @@
 import ValidationScheme from '../ValidationScheme';
 
+// eslint-disable-next-line no-useless-escape
 const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEXP = /^((\+7|7|8)-?((\(\d{3}\))|\d{3})-?\d{3}-?\d{2}-?\d{2})$/;
 

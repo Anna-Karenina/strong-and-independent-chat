@@ -4,7 +4,7 @@ export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
   chats: IChat[],
-};
+}
 
 export const store = new Store<IStoreState>({
   state: {

@@ -25,7 +25,7 @@ export const queryString = (data: StringIndexed): string | never => {
       return `${parent}=`;
     }
 
-    return `${parent}=${data}`;
+    return `${parent}=${String(data)}`;
   };
 
   return Object

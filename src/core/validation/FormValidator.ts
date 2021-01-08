@@ -2,11 +2,11 @@ import ValidationScheme, {IValidatorResult} from './ValidationScheme';
 
 interface IValidatorsMap {
   [fieldName: string]: ValidationScheme,
-};
+}
 
 export interface IFormState {
   [fieldName: string]: IValidatorResult,
-};
+}
 
 export default class FormValidator {
   private validatorsMap: IValidatorsMap;
@@ -54,4 +54,4 @@ export default class FormValidator {
       this.validate(field, String(value), ...additionalArgs);
     });
   }
-};
+}

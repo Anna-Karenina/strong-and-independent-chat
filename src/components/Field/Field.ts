@@ -12,11 +12,11 @@ interface IFieldProps {
   name?: string,
   label?: string,
   error?: string | null,
-};
+}
 
 const templator = Templator.compile(template);
 
-export default class Field extends Component {
+export default class Field extends Component<IFieldProps> {
   private inputRef: HTMLInputElement | null;
   
   constructor(props: IFieldProps) {

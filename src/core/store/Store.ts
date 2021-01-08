@@ -10,7 +10,7 @@ enum StoreStatus {
   RESTING,
   MUTATION,
   ACTION,
-};
+}
 
 interface IStore<T extends Record<string, any>> {
   state: T,
@@ -21,7 +21,7 @@ interface IStore<T extends Record<string, any>> {
 interface ISelectResult<T> {
   state: Partial<T>,
   unsubscribe: () => void,
-};
+}
 
 export default class Store<T extends Record<string, any>> {
   state: T;
@@ -80,15 +80,15 @@ export default class Store<T extends Record<string, any>> {
 
   select(fields: string[], fn: (field: string, value: any) => any): ISelectResult<T> {
     const partialState = fields.reduce(
-      (acc, field) => ({...acc, [field]: this.state[field]}),
+      (acc, field) => ({...acc, [field]: this.state[field] as unknown}),
       {}
     );
 
-    const subscriptions: {event: string, callback: Function}[] = [];
+    const subscriptions: {event: string, callback: (...args: unknown[]) => any}[] = [];
 
     fields.forEach((field) => {
       const event = `update:${field}`;
-      const callback = (value: any) => fn(field, value);
+      const callback = (value: any) => {fn(field, value)};
 
       this.storeBus().on(event, callback);
       subscriptions.push({event, callback});
@@ -106,9 +106,9 @@ export default class Store<T extends Record<string, any>> {
 
   private makeStateProxy(state: T) {
     return new Proxy((state), {
-      set: (state, key, value) => {
+      set: (state, key, value: unknown) => {
         
-        (state as any)[String(key)] = value;
+        (state as Record<string, unknown>)[String(key)] = value;
         
         if (this.storeBus().listeners[`update:${String(key)}`]) {
           this.storeBus().emit(`update:${String(key)}`, value);

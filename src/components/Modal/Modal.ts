@@ -8,9 +8,9 @@ import './Modal.scss';
 
 interface IModalProps {
   show: boolean,
-  onClose: Function,
+  onClose: () => void,
   $children: VNode[],
-};
+}
 
 const templator = Templator.compile(modalTemplate);
 

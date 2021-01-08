@@ -3,7 +3,7 @@ import Component from '@core/component';
 import Templator from '@core/templator';
 import {template404} from './404.template';
 
-interface IPage404Props {};
+interface IPage404Props {}
 
 const templator = Templator.compile(template404);
 
@@ -25,4 +25,4 @@ export default class Page404 extends Component {
       goToChats: this.goToChats,
     });
   }
-};
+}

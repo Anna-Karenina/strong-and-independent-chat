@@ -1,4 +1,6 @@
-type TValue = null | object | string | (number | string | object[])
+import {PlainObject} from './isPlainObject';
+
+type TValue = null | PlainObject | string | (number | string | PlainObject[])
 
 export const isEmpty = (value: TValue) => {
   if (!value) return true;

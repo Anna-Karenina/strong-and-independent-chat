@@ -15,14 +15,14 @@ import './AddChatModal.scss';
 interface IAddChatModalProps {
   show: boolean,
   onClose: () => void,
-  addChat: (title: string) => any,
-};
+  addChat: (title: string) => Promise<unknown>,
+}
 
 interface IAddChatModalState {
   title: string,
   formState: IFormState,
   fetching: boolean,
-};
+}
 
 const templator = Templator.compile(addChatModalTemplate, {
   components: {

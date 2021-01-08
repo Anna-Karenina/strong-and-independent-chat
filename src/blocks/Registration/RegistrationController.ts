@@ -12,7 +12,7 @@ import Registration from './Registration';
 import {authAPI} from '@core/api';
 import {bus} from '@core/bus';
 
-interface IRegistrationControllerProps {};
+interface IRegistrationControllerProps {}
 
 interface IRegistrationFields {
   email: string,
@@ -22,13 +22,13 @@ interface IRegistrationFields {
   phone: string,
   password: string,
   password_twice: string,
-};
+}
 
 interface IRegistrationControllerState {
   fields: IRegistrationFields,
   formState: IFormState,
   fetching: boolean,
-};
+}
 
 const templator = Templator.compile(
   `<registration
@@ -121,4 +121,4 @@ export default class RegistrationController extends Component<IRegistrationContr
 
     return templator(ctx);
   }
-};
+}

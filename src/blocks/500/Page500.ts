@@ -3,7 +3,7 @@ import Component from '@core/component';
 import Templator from '@core/templator';
 import {template500} from './500.template';
 
-interface IPage500Props {};
+interface IPage500Props {}
 
 const templator = Templator.compile(template500);
 
@@ -25,4 +25,4 @@ export default class Page500 extends Component {
       goToChats: this.goToChats,
     });
   }
-};
+}

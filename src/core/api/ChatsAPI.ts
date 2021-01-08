@@ -4,15 +4,15 @@ import BaseAPI from './BaseAPI';
 export interface IUsersData {
   users: number[],
   chatId: number,
-};
+}
 
 export interface IDeleteChatData {
   chatId: number,
-};
+}
 
 export interface ICreateChatData {
   title: string,
-};
+}
 
 export default class ChatsAPI extends BaseAPI {
   getChats() {
