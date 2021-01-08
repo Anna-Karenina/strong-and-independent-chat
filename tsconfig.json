@@ -14,7 +14,12 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "lib": ["DOM", "ES2019", "DOM.Iterable"],
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"],
+      "@core/*": ["core/*"],
+      "@components/*": ["components/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.spec.ts"]
