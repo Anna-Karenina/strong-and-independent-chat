@@ -49,9 +49,9 @@ export const settingsPreviewTemplate = `
   />
 
   <div class="settings__buttons">
-    <button class="settings__button empty-button" type="button" @click="editProfile">Изменить данные</button>
-    <button class="settings__button empty-button" type="button" @click="editPassword">Изменить пароль</button>
-    <button class="settings__button empty-button color-danger" type="button" @click="onLogout">Выйти</button>
+    <button class="empty-button settings__button" type="button" @click="editProfile">Изменить данные</button>
+    <button class="empty-button settings__button" type="button" @click="editPassword">Изменить пароль</button>
+    <button class="empty-button settings__button color-danger" type="button" @click="onLogout">Выйти</button>
   </div>
 
 </form>
