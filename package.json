@@ -41,12 +41,12 @@
     "lint:fix": "npx eslint 'src/**/*?(.*).ts?(x)' --fix",
     "stylelint": "npx stylelint '**/*.scss'",
     "stylelint:fix": "npx stylelint '**/*.scss' --fix",
-    "lint:all": "npm-run-all lint stylelint",
+    "lint:all": "npm-run-all --parallel lint stylelint",
     "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all"
+      "pre-commit": "npm-run-all --parallel test lint:all"
     }
   },
   "repository": {
