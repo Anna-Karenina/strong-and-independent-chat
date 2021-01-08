@@ -56,7 +56,18 @@ module.exports = {
   devServer: {
     port: 4000,
     hot: true,
-    // https: true,
+    historyApiFallback: true,
+    proxy: [
+      {
+        context: ['/proxy-api/**'],
+        target: 'https://proxy-api/api/',
+        pathRewrite: { '^/api/': '/' },
+        secure: false,
+        onProxyReq: proxyReq => {
+          proxyReq.setHeader('Host', 'my-custom-host');
+        },
+      },
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({
