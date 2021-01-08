@@ -7,7 +7,7 @@
 
 body {
   color: $primary-text-color;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   margin: 0;
   padding: 0;
@@ -18,7 +18,7 @@ body {
 .card {
   min-width: 340px;
   padding: 50px 30px 30px;
-  background: #FFFFFF;
+  background: #fff;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
 }
@@ -31,7 +31,7 @@ body {
 /* ERROR */
 
 .error {
-  color: #FF2F2F;
+  color: #ff2f2f;
   font-size: 8px;
 }
 
@@ -52,6 +52,13 @@ body {
 
 .search {
   position: relative;
+}
+
+.search__icon {
+  position: absolute;
+  color: $secondary-text-color;
+  top: 9.5px;
+  left: 105px;
 }
 
 .search__input {
@@ -75,23 +82,16 @@ body {
   }
 }
 
-.search__icon {
-  position: absolute;
-  color: $secondary-text-color;
-  top: 9.5px;
-  left: 105px;
-}
-
 /* OPTIONS */
 
 .options {
-  background-color: #FFFFFF;
+  background-color: #fff;
   margin: 0;
   padding: 0;
   font-size: 12px;
   list-style: none;
   border-radius: 12px;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
   overflow: hidden;
 }
 
@@ -137,7 +137,7 @@ body {
   font-size: 14px;
   line-height: 16px;
   text-align: center;
-  color: #8D8D8D;
+  color: #8d8d8d;
   max-width: 200px;
   margin: 0 auto;
   word-break: break-all;
@@ -174,7 +174,7 @@ body {
 /* OTHERS */
 
 .color-danger {
-  color: #FF0000;
+  color: #f00;
 }
 
 .hidden {

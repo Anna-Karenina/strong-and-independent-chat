@@ -12,7 +12,6 @@
     "cross-env": "7.0.3",
     "css-loader": "5.0.1",
     "eslint": "7.17.0",
-    "eslint-loader": "4.0.2",
     "express": "4.17.1",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "4.5.1",
@@ -21,6 +20,9 @@
     "node-sass": "5.0.0",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "sass-loader": "10.1.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
     "terser-webpack-plugin": "5.0.3",
     "ts-jest": "26.4.4",
     "ts-loader": "8.0.14",
@@ -34,6 +36,9 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack serve --mode development --env development",
     "lint": "npx eslint 'src/**/*?(.*).ts?(x)'",
+    "lint:fix": "npx eslint 'src/**/*?(.*).ts?(x)' --fix",
+    "stylelint": "npx stylelint '**/*.scss'",
+    "stylelint:fix": "npx stylelint '**/*.scss' --fix",
     "test": "jest"
   },
   "repository": {

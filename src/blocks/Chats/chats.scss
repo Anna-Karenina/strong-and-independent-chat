@@ -12,7 +12,7 @@
 .chat-select {
   min-width: 310px;
   height: 100%;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   border-right: 1px solid $primary-border-color;
   padding: 20px 0 0;
   display: flex;
@@ -55,32 +55,12 @@
   list-style: none;
   width: 100%;
   flex-grow: 1;
+  overflow: -moz-scrollbars-none;
   overflow-y: auto;
-}
-
-.chat-list::-webkit-scrollbar {
-  width: 0 !important
-}
-
-.chat-list { 
-  overflow: -moz-scrollbars-none; 
-}
-
-.chat-list {
   -ms-overflow-style: none;
-}
 
-.chat-list__item {
-  padding: 0 10px;
-  cursor: pointer;
-  transition: background .3s;
-
-  &:hover {
-    background-color: $primary-hover-color;
-  }
-
-  &:first-child .chat-list__item-content {
-    border-top: 1px solid $primary-border-color;
+  &::-webkit-scrollbar {
+    width: 0 !important;
   }
 }
 
@@ -90,6 +70,20 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid $primary-border-color;
+}
+
+.chat-list__item {
+  padding: 0 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: $primary-hover-color;
+  }
+
+  &:first-child .chat-list__item-content {
+    border-top: 1px solid $primary-border-color;
+  }
 }
 
 .chat-list__avatar {
@@ -117,7 +111,7 @@
 }
 
 .chat-list__sender {
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 
 .chat-list__sending-time {
@@ -137,7 +131,7 @@
   border-radius: 50%;
   background-color: $primary-color;
   font-size: 11px;
-  color: #FFFFFF;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,5 +172,5 @@
 }
 
 .user-modal__remove-icon {
-  color: #FF0000;
+  color: #f00;
 }

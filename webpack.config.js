@@ -35,19 +35,14 @@ const cssLoaders = (...additive) => [
   ...additive,
 ];
 
-const scriptLoaders = () => {
-  const loaders = [
-    {
-      loader: 'ts-loader',
-      options: {
-        configFile: path.resolve(__dirname, 'tsconfig.json'),
-      },
+const scriptLoaders = () => [
+  {
+    loader: 'ts-loader',
+    options: {
+      configFile: path.resolve(__dirname, 'tsconfig.json'),
     },
-  ];
-
-  if (isDev) loaders.push('eslint-loader');
-  return loaders;
-}
+  },
+];
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
