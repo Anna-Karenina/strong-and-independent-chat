@@ -10,7 +10,7 @@ import {TSettingsEditTarget} from './types';
 import {IUser} from '@/types';
 import {classNames as cn} from '@core/utils';
 
-import './settings.scss';
+import './Settings.scss';
 
 interface ISettingsProps {
   onLogout: () => Promise<unknown>,

@@ -11,7 +11,7 @@ import {chatsTemplate} from './chats.template';
 import {ISearchData} from '@core/api';
 import {IUser, IChat} from '@/types';
 
-import './chats.scss';
+import './Chats.scss';
 
 interface IChatsProps {
   chats: IChat[],

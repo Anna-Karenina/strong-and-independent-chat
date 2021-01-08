@@ -6,7 +6,7 @@ import Field from '@components/Field';
 import {IFormState} from '@core/validation';
 import {authTemplate} from './auth.template';
 
-import './auth.scss';
+import './Auth.scss';
 
 export interface IAuthFields {
   login: string,

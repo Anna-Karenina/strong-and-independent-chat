@@ -6,7 +6,7 @@ import Field from '@components/Field';
 import {IFormState} from '@core/validation';
 import {registrationTemplate} from './registration.template';
 
-import './registration.scss';
+import './Registration.scss';
 
 interface IProps {
   onSubmit: (e: Event) => void,
