@@ -8,6 +8,7 @@ export {isEqual} from './isEqual';
 export {deepClone} from './deepClone';
 export {modal} from './modal';
 export {zip} from './zip';
+export {omit} from './omit';
 export {isPlainObject, PlainObject} from './isPlainObject';
 export {queryString} from './queryString';
 export {classNames} from './classNames';
