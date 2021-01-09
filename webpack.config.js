@@ -61,7 +61,7 @@ module.exports = {
     }
   },
   optimization: optimization(),
-  devtool: isDev ? 'source-map' : '',
+  devtool: isDev ? 'source-map' : 'nosources-source-map',
   devServer: {
     port: 4000,
     hot: true,
