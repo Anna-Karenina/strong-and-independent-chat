@@ -32,10 +32,18 @@ export default class EventBus implements IEventBus {
     );
   }
 
+  offAll() {
+    this.listeners = {};
+  }
+
   emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
       throw new Error(`unknown event: ${event}`);
     }
     this.listeners[event].forEach((cb) => cb(...args));
+  }
+
+  hasEvent(event: string) {
+    return !!this.listeners[event];
   }
 }
