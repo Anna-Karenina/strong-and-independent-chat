@@ -34,7 +34,14 @@ export const chatTemplate = `
         <i class="fas fa-paperclip"></i>
       </div>
 
-      <input type="text" class="send-message__input" value="" placeholder="Сообщение" name="message">
+      <input
+        type="text"
+        class="send-message__input"
+        placeholder="Сообщение"
+        name="message"
+        :value="message"
+        @input="onInputMessage"
+      >
 
       <button class="send-message__submit" type="submit">
         <i class="fas fa-arrow-right"></i>

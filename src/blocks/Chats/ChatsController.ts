@@ -4,6 +4,7 @@ import Chats from './Chats';
 import {store} from '@/store';
 import {chatsAPI, userAPI, ISearchData} from '@core/api';
 import {IChat} from '@/types';
+import {messageService} from '@core/services';
 
 interface IChatsControllerProps {}
 
@@ -57,11 +58,8 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
       .then((chats) => store.dispatch('setChats', chats))
   }
   
-  sendMessage = (e: Event) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const aggregatedFormData = Object.fromEntries(formData.entries());
-    console.log(aggregatedFormData);
+  sendMessage = (chatId: number, message: string) => {
+    messageService.sendMessage(chatId, message);
   };
 
   searchUser = (data: ISearchData) => {

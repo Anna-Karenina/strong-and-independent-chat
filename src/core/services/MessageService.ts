@@ -24,6 +24,18 @@ class MessageService extends Service<IConnectOptions> {
     });
   }
 
+  sendMessage(chatId: number, message: string) {
+    const channel = this.channels[chatId];
+    if (!channel) {
+      throw new Error(`No channel for chat ${chatId}`);
+    }
+
+    channel.send(JSON.stringify({
+      content: message,
+      type: 'message',
+    }));
+  }
+
   private async onChatsUpdate(chats: IChat[], userId: number) {
     await Promise.all(
       chats

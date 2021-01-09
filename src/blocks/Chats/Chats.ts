@@ -15,7 +15,7 @@ import './Chats.scss';
 
 interface IChatsProps {
   chats: IChat[],
-  sendMessage: (e: Event) => void,
+  sendMessage: (chatId: number, message: string) => void,
   searchUser: (data: ISearchData) => Promise<IUser[]>,
   addNewUserInChat: (userId: number, chatId: number) => Promise<unknown>,
   deleteUserFromChat: (userId: number, chatId: number) => Promise<unknown>,

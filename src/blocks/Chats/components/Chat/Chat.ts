@@ -9,13 +9,14 @@ import './Chat.scss';
 
 interface IChatProps {
   chat: IChat | null,
-  sendMessage: (e: Event) => void,
+  sendMessage: (chatId: number, message: string) => void,
   openAddUserModal: () => void,
   openDeleteUserModal: () => void,
   deleteChat: (chatId: number) => Promise<unknown>,
 }
 
 interface IChatState {
+  message: string,
   showUserOptions: boolean,
   fetching: boolean,
 }
@@ -27,11 +28,13 @@ const templator = Templator.compile(chatTemplate, {
 });
 
 export default class Chat extends Component<IChatProps, IChatState> {
+  private messageInputRef: HTMLInputElement | null = null;
 
   constructor(props: IChatProps) {
     super(props);
 
     this.state = {
+      message: '',
       showUserOptions: false,
       fetching: false,
     }
@@ -39,6 +42,13 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
   componentDidMount() {
     document.body.addEventListener('click', this.userOptionsOutsideClick);
+    this.messageInputRef = (this.element as HTMLElement).querySelector('.send-message__input');
+  }
+
+  componentDidUpdate() {
+    if (this.messageInputRef) {
+      this.messageInputRef.value = this.state.message;
+    }
   }
 
   beforeDestroy() {
@@ -90,17 +100,36 @@ export default class Chat extends Component<IChatProps, IChatState> {
       .finally(() => this.setState({fetching: false}));
   }
 
+  onInputMessage = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+
+    this.setState({message: target.value});
+  }
+
+  sendMessage = (e: Event) => {
+    e.preventDefault();
+    const message = this.state.message.trim();
+    if (!message) return;
+
+    const chatId = this.props.chat?.id || 0;
+    
+    this.props.sendMessage(chatId, message);
+    this.setState({message: ''});
+  }
+
   render() {
     return templator({
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,
       avatar: this.avatar,
+      message: this.state.message,
       deleteChat: this.deleteChat,
       openAddUserModal: this.openAddUserModal,
       openDeleteUserModal: this.openDeleteUserModal,
       openUserOptions: this.openUserOptions,
-      sendMessage: this.props.sendMessage,
+      sendMessage: this.sendMessage,
+      onInputMessage: this.onInputMessage,
     });
   }
 }
