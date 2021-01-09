@@ -4,13 +4,20 @@ export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
   chats: IChat[],
+  chatMessages: Record<string, any[]>
+}
+
+interface IChatMessagesPayload {
+  chatId: number,
+  messages: any[],
 }
 
 export const store = new Store<IStoreState>({
   state: {
     user: null,
     isAuthorized: false,
-    chats: []
+    chats: [],
+    chatMessages: {},
   },
 
   actions: {
@@ -25,6 +32,10 @@ export const store = new Store<IStoreState>({
     setChats: (ctx, chats: IChat[]) => {
       ctx.commit('setChats', chats);
     },
+
+    setChatMessages: (ctx, payload: IChatMessagesPayload) => {
+      ctx.commit('setChatMessages', payload);
+    }
   },
 
   mutations: {
@@ -38,6 +49,11 @@ export const store = new Store<IStoreState>({
 
     setChats: (state, chats: IChat[]) => {
       state.chats = chats;
+    },
+
+    setChatMessages: (state, payload: IChatMessagesPayload) => {
+      const {chatId, messages} = payload;
+      state.chatMessages[chatId] = messages;
     },
   }
 });
