@@ -7,7 +7,7 @@ import FallbackPage from '@/blocks/404';
 import ErrorPage from '@/blocks/500';
 import {deepClone} from '@core/utils';
 import {authEvent} from '@core/events';
-import {authService} from '@core/services';
+import {authService, messageService} from '@core/services';
 import {store} from '@/store';
 
 import '@/styles/common.scss';
@@ -19,6 +19,7 @@ store.subscribe((newState) => {
 const router = new Router("#app");
 
 authService.connect({store});
+messageService.connect({store});
 
 authEvent.init({router});
 

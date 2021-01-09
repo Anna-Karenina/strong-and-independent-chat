@@ -20,12 +20,12 @@ export default class Channel {
     this.ws.addEventListener('message', this.onMessage);
   }
 
-  private removeListeners() {
-    this.ws.removeEventListener('open', this.onOpen);
-    this.ws.removeEventListener('error', this.onError);
-    this.ws.removeEventListener('close', this.onClose);
-    this.ws.removeEventListener('message', this.onMessage);
-  }
+  // private removeListeners() {
+  //   this.ws.removeEventListener('open', this.onOpen);
+  //   this.ws.removeEventListener('error', this.onError);
+  //   this.ws.removeEventListener('close', this.onClose);
+  //   this.ws.removeEventListener('message', this.onMessage);
+  // }
 
   private onOpen = () => {
     console.log('[open] Connection is established');
@@ -53,9 +53,13 @@ export default class Channel {
     this.bus().on('message', cb);
   }
 
+  send(data: any) {
+    return this.ws.send(data);
+  }
+
   disconnect() {
-    this.removeListeners();
-    this.bus().offAll();
     this.ws.close();
+    this.bus().offAll();
+    // this.removeListeners();
   }
 }
