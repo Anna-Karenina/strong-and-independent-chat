@@ -12,3 +12,4 @@ export {omit} from './omit';
 export {isPlainObject, PlainObject} from './isPlainObject';
 export {queryString} from './queryString';
 export {classNames} from './classNames';
+export {default as Queue} from './Queue';
