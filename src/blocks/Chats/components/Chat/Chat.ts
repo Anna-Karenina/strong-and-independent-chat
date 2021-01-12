@@ -1,14 +1,17 @@
 import Component from '@core/component';
 import Templator from '@core/templator';
 import Avatar from '@components/Avatar';
-import {IChat} from '@/types';
+import Message from '../Message/Message';
+import {IChat, IMessage} from '@/types';
 import {chatTemplate} from './chat.template';
 import {classNames as cn} from '@core/utils';
 
 import './Chat.scss';
 
 interface IChatProps {
+  userId: number,
   chat: IChat | null,
+  messages: IMessage[],
   sendMessage: (chatId: number, message: string) => void,
   openAddUserModal: () => void,
   openDeleteUserModal: () => void,
@@ -24,6 +27,7 @@ interface IChatState {
 const templator = Templator.compile(chatTemplate, {
   components: {
     'avatar': Avatar,
+    'message': Message,
   }
 });
 
@@ -119,6 +123,8 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
   render() {
     return templator({
+      userId: this.props.userId,
+      messages: this.props.messages,
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,

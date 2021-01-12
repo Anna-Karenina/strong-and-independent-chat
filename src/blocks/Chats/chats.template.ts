@@ -34,7 +34,9 @@ export const chatsTemplate = `
       </div>
 
       <chat
+        :userId="userId"
         :chat="selectedChat"
+        :messages="messages"
         :sendMessage="sendMessage"
         :deleteChat="deleteChat"
         :openAddUserModal="openAddUserModal"

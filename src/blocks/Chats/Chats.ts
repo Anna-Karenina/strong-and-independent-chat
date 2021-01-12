@@ -9,12 +9,14 @@ import Chat from './components/Chat/Chat';
 import AddChatModal from './components/AddChatModal/AddChatModal';
 import {chatsTemplate} from './chats.template';
 import {ISearchData} from '@core/api';
-import {IUser, IChat} from '@/types';
+import {IUser, IChat, IMessage} from '@/types';
 
 import './Chats.scss';
 
 interface IChatsProps {
+  userId: number,
   chats: IChat[],
+  chatMessages: Record<string, IMessage[]>,
   sendMessage: (chatId: number, message: string) => void,
   searchUser: (data: ISearchData) => Promise<IUser[]>,
   addNewUserInChat: (userId: number, chatId: number) => Promise<unknown>,
@@ -87,6 +89,10 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
 
   get selectedChatId() {
     return this.state.selectedChat?.id || 0;
+  }
+
+  get messages() {
+    return this.props.chatMessages[this.selectedChatId] || [];
   }
 
   get chats() {
@@ -171,7 +177,9 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
 
   render() {
     return templator({
+      userId: this.props.userId,
       chats: this.chats,
+      messages: this.messages,
       selectedChat: this.state.selectedChat,
 
       showAddUserModal: this.state.showAddUserModal,

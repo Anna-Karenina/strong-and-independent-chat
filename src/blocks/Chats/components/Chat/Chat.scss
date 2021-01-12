@@ -128,14 +128,7 @@
   display: flex;
   flex-flow: column;
   list-style: none;
-}
-
-.messages__list-sender-interlocutor {
   align-items: flex-start;
-}
-
-.messages__list-sender-me {
-  align-items: flex-end;
 }
 
 .message {
@@ -166,6 +159,7 @@
 .message-sender-me {
   background-color: $primary-hover-color;
   border-bottom-right-radius: 0;
+  align-self: flex-end;
 
   .message-meta {
     color: $primary-color;

@@ -3,18 +3,22 @@ import Templator from '@core/templator';
 import Chats from './Chats';
 import {store} from '@/store';
 import {chatsAPI, userAPI, ISearchData} from '@core/api';
-import {IChat} from '@/types';
+import {IChat, IMessage, IUser} from '@/types';
 import {messageService} from '@core/services';
 
 interface IChatsControllerProps {}
 
 interface IChatsControllerState {
-  chats: IChat[]
+  chats: IChat[],
+  user: IUser,
+  chatMessages: Record<string, IMessage[]>
 }
 
 const templator = Templator.compile(
   `<chats
+    :userId="userId"
     :chats="chats"
+    :chatMessages="chatMessages"
     :sendMessage="sendMessage",
     :searchUser="searchUser",
     :addNewUserInChat="addNewUserInChat",
@@ -34,15 +38,22 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
   constructor(props: IChatsControllerProps) {
     super(props);
 
-    const {state, unsubscribe} = store.select(['chats'], (field, value: unknown) => {
-      this.setState({[field]: value});
-    });
+    const {state, unsubscribe} = store.select(
+      ['chats', 'chatMessages', 'user'],
+      (field, value: unknown) => this.setState({[field]: value})
+    );
 
     this.unsubscribeStore = unsubscribe;
 
     this.state = {
       chats: state.chats as IChat[],
+      user: state.user as IUser,
+      chatMessages: state.chatMessages as Record<string, IMessage[]>,
     };
+  }
+
+  get userId() {
+    return this.state.user?.id || 0;
   }
 
   componentDidMount() {
@@ -94,7 +105,9 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
 
   render() {
     return templator({
+      userId: this.userId,
       chats: this.state.chats,
+      chatMessages: this.state.chatMessages,
       sendMessage: this.sendMessage,
       searchUser: this.searchUser,
       addNewUserInChat: this.addNewUserInChat,

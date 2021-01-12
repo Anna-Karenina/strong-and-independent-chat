@@ -27,7 +27,11 @@ export const chatTemplate = `
       </ul>
     </div>
 
-    <div class="messages"></div>
+    <div class="messages">
+      <ul class="messages__list">
+        <message $each="message in messages" :message="message" :userId="userId" />
+      </ul>
+    </div>
 
     <form class="send-message" @submit="sendMessage">
       <div class="send-message__attachments-button">
