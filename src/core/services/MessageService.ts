@@ -4,7 +4,7 @@ import {IStoreState} from '@/store';
 import {Channel, WEBSOCKET_CHATS_URL} from '@core/http';
 import {chatMessagesAPI} from '@core/api'
 import {omit} from '@core/utils'
-import {IChat} from '@/types';
+import {IChat, IMessage} from '@/types';
 
 interface IConnectOptions {
   store: Store<IStoreState>,
@@ -57,6 +57,25 @@ class MessageService extends Service<IConnectOptions> {
 
     const channel = new Channel(wsUrl);
     this.channels[chatId] = channel;
+
+    this.initChatListeners(chatId)
+  }
+
+  private initChatListeners(chatId: number) {
+    const channel = this.channels[chatId];
+
+    channel.subscribe('message', (json: string) => {
+      const data = JSON.parse(json) as IMessage | IMessage[];
+
+      if (Array.isArray(data)) {
+        this.store.dispatch('setChatMessages', {chatId, messages: data.reverse()});
+      }
+    });
+
+    channel.send(JSON.stringify({
+      content: '0',
+      type: 'get old',
+    }));
   }
 
   private removeChatChannel(chatId: string) {

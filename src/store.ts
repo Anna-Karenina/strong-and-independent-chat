@@ -1,15 +1,15 @@
 import {Store} from '@core/store';
-import {IUser, IChat} from '@/types';
+import {IUser, IChat, IMessage} from '@/types';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
   chats: IChat[],
-  chatMessages: Record<string, any[]>
+  chatMessages: Record<string, IMessage[]>
 }
 
 interface IChatMessagesPayload {
   chatId: number,
-  messages: any[],
+  messages: IMessage[],
 }
 
 export const store = new Store<IStoreState>({
@@ -53,7 +53,9 @@ export const store = new Store<IStoreState>({
 
     setChatMessages: (state, payload: IChatMessagesPayload) => {
       const {chatId, messages} = payload;
-      state.chatMessages[chatId] = messages;
+      const newChatMessages = {...state.chatMessages, [chatId]: messages};
+
+      state.chatMessages = newChatMessages;
     },
   }
 });

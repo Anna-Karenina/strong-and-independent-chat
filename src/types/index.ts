@@ -15,3 +15,11 @@ export interface IChat {
   avatar: string,
   created_by: number,
 }
+
+export interface IMessage {
+  id: number,
+  chat_id: number,
+  user_id: number,
+  content: string,
+  time: string,
+}
