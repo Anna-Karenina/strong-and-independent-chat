@@ -23,3 +23,9 @@ export interface IMessage {
   content: string,
   time: string,
 }
+
+export interface IServerError {
+  reason: string,
+}
+
+export type IError = IServerError | Error;

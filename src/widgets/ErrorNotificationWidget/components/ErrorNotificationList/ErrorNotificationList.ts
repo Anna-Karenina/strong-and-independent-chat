@@ -1,13 +1,16 @@
 import Component from '@core/component';
 import Templator from '@core/templator'
+import {IError, IServerError} from '@/types';
 import {template} from './error-notification-list.template';
-// import {classNames as cn} from '@core/utils';
 
 import './ErrorNotificationList.scss';
 
 interface IErrorNotificationListProps {
-  errors: any[],
+  errors: IError[],
+  removeError: (error: IError) => void;
 }
+
+const isServerError = (error: IError): error is IServerError => error.hasOwnProperty('reason');
 
 const templator = Templator.compile(template);
 
@@ -16,9 +19,30 @@ export default class ErrorNotificationList extends Component<IErrorNotificationL
     super(props);
   }
 
+  get errors() {
+    return this.props.errors.map((error) => ({
+      text: this.getErrorMessage(error),
+      remove: () => this.props.removeError(error),
+    }))
+  }
+
+  getErrorMessage(error: IError) {
+    if (isServerError(error)) {
+      return error.reason;
+    } else if (error.message) {
+      return error.message;
+    }
+
+    try {
+      return JSON.stringify(error);
+    } catch (e) {
+      return String(error);
+    }
+  }
+
   render() {
     return templator({
-      errors: this.props.errors,
+      errors: this.errors,
     });
   }
 }

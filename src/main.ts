@@ -7,7 +7,7 @@ import FallbackPage from '@/blocks/404';
 import ErrorPage from '@/blocks/500';
 import ErrorNotificationWidget from '@/widgets/ErrorNotificationWidget';
 import {deepClone} from '@core/utils';
-import {authEvent} from '@core/events';
+import {authEvent, errorEvent} from '@core/events';
 import {authService, messageService} from '@core/services';
 import {store} from '@/store';
 
@@ -26,6 +26,7 @@ authService.connect({store});
 messageService.connect({store});
 
 authEvent.init({router});
+errorEvent.init({store});
 
 router
   .use("/auth", AuthController)

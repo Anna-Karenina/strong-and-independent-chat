@@ -1,10 +1,11 @@
 import {Store} from '@core/store';
-import {IUser, IChat, IMessage} from '@/types';
+import {IUser, IChat, IMessage, IError} from '@/types';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
   chats: IChat[],
-  chatMessages: Record<string, IMessage[]>
+  chatMessages: Record<string, IMessage[]>,
+  errors: IError[],
 }
 
 interface IChatMessagesPayload {
@@ -18,6 +19,7 @@ export const store = new Store<IStoreState>({
     isAuthorized: false,
     chats: [],
     chatMessages: {},
+    errors: [],
   },
 
   actions: {
@@ -35,6 +37,18 @@ export const store = new Store<IStoreState>({
 
     setChatMessages: (ctx, payload: IChatMessagesPayload) => {
       ctx.commit('setChatMessages', payload);
+    },
+
+    pushError: (ctx, error: IError) => {
+      ctx.commit('pushError', error);
+
+      setTimeout(() => {
+        ctx.commit('removeError', error);
+      }, 5000);
+    },
+
+    removeError: (ctx, error: IError) => {
+      ctx.commit('removeError', error);
     }
   },
 
@@ -57,5 +71,13 @@ export const store = new Store<IStoreState>({
 
       state.chatMessages = newChatMessages;
     },
+
+    pushError: (state, error: IError) => {
+      state.errors = [...state.errors, error];
+    },
+
+    removeError: (state, error: IError) => {
+      state.errors = state.errors.filter((_error) => _error !== error);
+    }
   }
 });
