@@ -5,6 +5,7 @@ import ChatsController from '@/blocks/Chats';
 import SettingsController from '@/blocks/Settings';
 import FallbackPage from '@/blocks/404';
 import ErrorPage from '@/blocks/500';
+import ErrorNotificationWidget from '@/widgets/ErrorNotificationWidget';
 import {deepClone} from '@core/utils';
 import {authEvent} from '@core/events';
 import {authService, messageService} from '@core/services';
@@ -15,6 +16,9 @@ import '@/styles/common.scss';
 store.subscribe((newState) => {
   console.log('storeUpdate', deepClone(newState));
 });
+
+const errorNotificationWidget = new ErrorNotificationWidget({store});
+errorNotificationWidget.start('#errors');
 
 const router = new Router("#app");
 
@@ -31,4 +35,3 @@ router
   .use("/500", ErrorPage)
   .fallback(FallbackPage)
   .start();
-

@@ -1,0 +1,42 @@
+$error-notification-primary: rgb(241, 115, 115);
+
+.error-notification-list {
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  list-style: none;
+  z-index: 9000;
+}
+
+.error-notification-list__item {
+  background-color: #fff;
+  width: 300px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2.5px solid $error-notification-primary;
+  border-radius: 10px;
+  font-size: 16px;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+.error-notification-list__text {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.error-notification-list__attention-icon {
+  font-size: 25px;
+  color: $error-notification-primary;
+}
+
+.error-notification-list-item__close-icon {
+  font-size: 14px;
+  cursor: pointer;
+}
