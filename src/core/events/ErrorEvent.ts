@@ -16,6 +16,19 @@ class ErrorEvent extends Event<IErrorEventOpts> {
     bus.on('notification:error', (error) => {
       this.store.dispatch('pushError', error);
     });
+
+    window.onerror = this.onError;
+    window.onunhandledrejection = this.onPromiseReject;
+  }
+
+  private onError = (error: any) => {
+    bus.emit('notification:error', error);
+    return false;
+  }
+
+  private onPromiseReject = (error: PromiseRejectionEvent) => {
+    bus.emit('notification:error', error.reason);
+    return false;
   }
 }
 

@@ -28,4 +28,4 @@ export interface IServerError {
   reason: string,
 }
 
-export type IError = IServerError | Error;
+export type IError = IServerError | Error | null;

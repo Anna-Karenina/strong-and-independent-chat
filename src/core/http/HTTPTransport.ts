@@ -65,15 +65,18 @@ export default class HTTPTransport {
     Object.entries(headers).forEach(([key, val]) => xhr.setRequestHeader(key, val));
 
     return new Promise((resolve, reject) => {
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      const errorHandler = () => reject(xhr.response);
+
+      xhr.onabort = errorHandler;
+      xhr.onerror = errorHandler;
+      xhr.ontimeout = errorHandler;
 
       xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
           resolve(xhr.response);
         }
-        reject(xhr.response);
+        
+        errorHandler();
       };
 
       if (method === METHODS.GET) {

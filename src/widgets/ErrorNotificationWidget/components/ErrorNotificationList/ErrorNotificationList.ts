@@ -10,7 +10,13 @@ interface IErrorNotificationListProps {
   removeError: (error: IError) => void;
 }
 
-const isServerError = (error: IError): error is IServerError => error.hasOwnProperty('reason');
+const isServerError = (error: IError): error is IServerError => {
+  return (
+    !!error &&
+    typeof error === 'object' &&
+    error.hasOwnProperty('reason')
+  );
+}
 
 const templator = Templator.compile(template);
 
@@ -27,6 +33,9 @@ export default class ErrorNotificationList extends Component<IErrorNotificationL
   }
 
   getErrorMessage(error: IError) {
+    if (!error) {
+      return 'Что-то пошло не так :('
+    }
     if (isServerError(error)) {
       return error.reason;
     } else if (error.message) {
