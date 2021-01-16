@@ -3,11 +3,16 @@ import {Store} from '@core/store';
 import {IStoreState} from '@/store';
 import {Channel, WEBSOCKET_CHATS_URL} from '@core/http';
 import {chatMessagesAPI} from '@core/api'
-import {omit} from '@core/utils'
+import {omit, PlainObject} from '@core/utils'
 import {IChat, IMessage} from '@/types';
 
 interface IConnectOptions {
   store: Store<IStoreState>,
+}
+
+interface INewMessage extends Omit<IMessage, 'user_id' | 'chat_id'> {
+  type: string,
+  userId: number
 }
 
 class MessageService extends Service<IConnectOptions> {
@@ -65,10 +70,13 @@ class MessageService extends Service<IConnectOptions> {
     const channel = this.channels[chatId];
 
     channel.subscribe('message', (json: string) => {
-      const data = JSON.parse(json) as IMessage | IMessage[];
+      const data = JSON.parse(json) as PlainObject<any> | PlainObject<any>[];
 
       if (Array.isArray(data)) {
         this.store.dispatch('setChatMessages', {chatId, messages: data.reverse()});
+      } else if (data.type === 'message') {
+        const processedMessage = processNewMessage(data as INewMessage, chatId)
+        this.store.dispatch('pushNewMessage', {message: processedMessage, chatId});
       }
     });
 
@@ -91,3 +99,15 @@ const getChatWsUrl = (chatId: number, userId: number, token: string) => {
 }
 
 export const messageService = new MessageService();
+
+const processNewMessage = (message: INewMessage, chatId: number): IMessage => {
+  const {userId, content, id, time} = message;
+
+  return {
+    user_id: userId,
+    chat_id: chatId,
+    content,
+    id,
+    time,
+  };
+};

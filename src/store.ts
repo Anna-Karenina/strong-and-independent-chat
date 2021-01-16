@@ -13,6 +13,11 @@ interface IChatMessagesPayload {
   messages: IMessage[],
 }
 
+interface INewMessagePayload {
+  chatId: number,
+  message: IMessage,
+}
+
 export const store = new Store<IStoreState>({
   state: {
     user: null,
@@ -37,6 +42,10 @@ export const store = new Store<IStoreState>({
 
     setChatMessages: (ctx, payload: IChatMessagesPayload) => {
       ctx.commit('setChatMessages', payload);
+    },
+
+    pushNewMessage: (ctx, payload: INewMessagePayload) => {
+      ctx.commit('pushNewMessage', payload);
     },
 
     pushError: (ctx, error: IError) => {
@@ -70,6 +79,13 @@ export const store = new Store<IStoreState>({
       const newChatMessages = {...state.chatMessages, [chatId]: messages};
 
       state.chatMessages = newChatMessages;
+    },
+
+    pushNewMessage: (state, payload: INewMessagePayload) => {
+      const {chatId, message} = payload;
+      const messages = state.chatMessages[chatId] || [];
+
+      state.chatMessages = {...state.chatMessages, [chatId]: [...messages, message]};
     },
 
     pushError: (state, error: IError) => {
