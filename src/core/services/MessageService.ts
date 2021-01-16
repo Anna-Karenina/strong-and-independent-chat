@@ -41,6 +41,21 @@ class MessageService extends Service<IConnectOptions> {
     }));
   }
 
+  getOldMessages(chatId: number) {
+    const channel = this.channels[chatId];
+    if (!channel) {
+      throw new Error(`No channel for chat ${chatId}`);
+    }
+
+    const messages = this.store.state.chatMessages[chatId] || [];
+    const {id} = messages[0] || {id: 0};
+
+    channel.send(JSON.stringify({
+      content: String(id),
+      type: 'get old',
+    }));
+  }
+
   private async onChatsUpdate(chats: IChat[], userId: number) {
     await Promise.all(
       chats
@@ -73,7 +88,7 @@ class MessageService extends Service<IConnectOptions> {
       const data = JSON.parse(json) as PlainObject<any> | PlainObject<any>[];
 
       if (Array.isArray(data)) {
-        this.store.dispatch('setChatMessages', {chatId, messages: data.reverse()});
+        this.store.dispatch('pushOldMessages', {chatId, messages: data});
       } else if (data.type === 'message') {
         const processedMessage = processNewMessage(data as INewMessage, chatId)
         this.store.dispatch('pushNewMessage', {message: processedMessage, chatId});

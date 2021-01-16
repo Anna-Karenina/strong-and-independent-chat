@@ -24,6 +24,7 @@ interface IChatsProps {
   fetchChatUsers: (chatId: number) => Promise<IUser[]>,
   addChat: (title: string) => Promise<unknown>,
   deleteChat: (chatId: number) => Promise<unknown>,
+  getOldMessages: (chatId: number) => void,
 }
 
 interface IChatsState {
@@ -199,6 +200,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       openAddChatModal: this.openAddChatModal,
       
       sendMessage: this.props.sendMessage,
+      getOldMessages: this.props.getOldMessages,
       deleteChat: this.props.deleteChat,
       addChat: this.props.addChat,
       goToProfile: this.goToProfile,

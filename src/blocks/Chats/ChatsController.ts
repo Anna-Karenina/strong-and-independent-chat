@@ -26,6 +26,7 @@ const templator = Templator.compile(
     :fetchChatUsers="fetchChatUsers",
     :addChat="addChat",
     :deleteChat="deleteChat",
+    :getOldMessages="getOldMessages"
   />`,
   {
     components: {chats: Chats},
@@ -73,6 +74,10 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
     messageService.sendMessage(chatId, message);
   };
 
+  getOldMessages = (chatId: number) => {
+    messageService.getOldMessages(chatId);
+  };
+
   searchUser = (data: ISearchData) => {
     return userAPI.search(data);
   }
@@ -115,6 +120,7 @@ export default class ChatsController extends Component<IChatsControllerProps, IC
       fetchChatUsers: this.fetchChatUsers,
       addChat: this.addChat,
       deleteChat: this.deleteChat,
+      getOldMessages: this.getOldMessages,
     });
   }
 }

@@ -13,6 +13,7 @@ interface IChatProps {
   chat: IChat | null,
   messages: IMessage[],
   sendMessage: (chatId: number, message: string) => void,
+  getOldMessages: (chatId: number) => void,
   openAddUserModal: () => void,
   openDeleteUserModal: () => void,
   deleteChat: (chatId: number) => Promise<unknown>,
@@ -59,7 +60,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
       this.messageInputRef.value = this.state.message;
     }
 
-    this.maybeScrollBottom(oldProps)
+    this.maybeScrollBottom(oldProps);
   }
 
   beforeDestroy() {
@@ -86,25 +87,52 @@ export default class Chat extends Component<IChatProps, IChatState> {
   maybeScrollBottom(oldProps: IChatProps) {
     if (!this.messagesRef) return;
 
+    if (this.chatIdHasChanging(oldProps)) {
+      this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+    } else if (this.isViewPortNextToNewMessages(oldProps)) {
+      this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+    } else {
+      this.maybeReturnScroll(oldProps);
+    }
+  }
+
+  chatIdHasChanging(oldProps: IChatProps) {
     const oldChatId = oldProps.chat?.id;
     const chatId = this.props.chat?.id;
+
+    return oldChatId !== chatId;
+  }
+
+  isViewPortNextToNewMessages(oldProps: IChatProps) {
+    if (!this.messagesRef) return false;
 
     const oldMessagesLength = oldProps.messages.length;
     const messagesLength = this.props.messages.length;
 
-    if (oldChatId !== chatId) {
-      this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
-    }
-    
     const hasNewMessages = messagesLength > oldMessagesLength;
+    if (!hasNewMessages) return false;
 
-    if (hasNewMessages) {
-      const {scrollHeight, scrollTop, clientHeight} = this.messagesRef;
-      const viewPortNextToNewMessages = scrollHeight - (scrollTop + clientHeight) <= 150;
+    const {scrollHeight, scrollTop, clientHeight} = this.messagesRef;
+    return scrollHeight - (scrollTop + clientHeight) <= 150;
+  }
 
-      if (viewPortNextToNewMessages) {
-        this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
-      }
+  maybeReturnScroll(oldProps: IChatProps) {
+    if (!this.messagesRef) return;
+
+    const oldFirstMessageId = oldProps.messages[0]?.id || 0;
+    const positionInNewMessages = this.props.messages.findIndex(({id}) => id === oldFirstMessageId);
+
+    if (positionInNewMessages > 0) {
+      const prevMessageId = this.props.messages[positionInNewMessages - 1].id;
+      const prevMessageSelector = `li[data-message-id="${prevMessageId}"]`;
+
+      const $prevMessage = this.messagesRef.querySelector(prevMessageSelector);
+      if (!$prevMessage) return;
+
+      const prevMessageBox = $prevMessage.getBoundingClientRect();
+      const messagesBox = this.messagesRef.getBoundingClientRect();
+      
+      this.messagesRef.scrollTop = prevMessageBox.top - messagesBox.top;
     }
   }
 
@@ -153,6 +181,15 @@ export default class Chat extends Component<IChatProps, IChatState> {
     this.setState({message: ''});
   }
 
+  onScrollChat = (event: Event) => {
+    const target = event.target as HTMLElement;
+
+    if (!target.scrollTop) {
+      const chatId = this.props.chat?.id || 0;
+      this.props.getOldMessages(chatId);
+    }
+  }
+
   render() {
     return templator({
       userId: this.props.userId,
@@ -168,6 +205,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
       openUserOptions: this.openUserOptions,
       sendMessage: this.sendMessage,
       onInputMessage: this.onInputMessage,
+      onScrollChat: this.onScrollChat,
     });
   }
 }

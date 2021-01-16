@@ -27,7 +27,7 @@ export const chatTemplate = `
       </ul>
     </div>
 
-    <div class="messages">
+    <div class="messages" @scroll="onScrollChat">
       <ul class="messages__list">
         <message $each="message in messages" :message="message" :userId="userId" />
       </ul>

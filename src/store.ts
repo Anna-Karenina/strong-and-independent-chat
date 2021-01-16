@@ -1,5 +1,6 @@
 import {Store} from '@core/store';
 import {IUser, IChat, IMessage, IError} from '@/types';
+import {uniqBy} from '@core/utils';
 export interface IStoreState {
   isAuthorized: boolean,
   user: IUser | null;
@@ -40,8 +41,8 @@ export const store = new Store<IStoreState>({
       ctx.commit('setChats', chats);
     },
 
-    setChatMessages: (ctx, payload: IChatMessagesPayload) => {
-      ctx.commit('setChatMessages', payload);
+    pushOldMessages: (ctx, payload: IChatMessagesPayload) => {
+      ctx.commit('pushOldMessages', payload);
     },
 
     pushNewMessage: (ctx, payload: INewMessagePayload) => {
@@ -74,11 +75,13 @@ export const store = new Store<IStoreState>({
       state.chats = chats;
     },
 
-    setChatMessages: (state, payload: IChatMessagesPayload) => {
+    pushOldMessages: (state, payload: IChatMessagesPayload) => {
       const {chatId, messages} = payload;
-      const newChatMessages = {...state.chatMessages, [chatId]: messages};
+      const currentMessages = state.chatMessages[chatId] || [];
 
-      state.chatMessages = newChatMessages;
+      const unionMessages = messages.reverse().concat(currentMessages);
+
+      state.chatMessages = {...state.chatMessages, [chatId]: uniqBy<IMessage>(unionMessages, 'id')};
     },
 
     pushNewMessage: (state, payload: INewMessagePayload) => {

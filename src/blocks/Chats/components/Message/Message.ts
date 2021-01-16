@@ -42,6 +42,7 @@ export default class Message extends Component<IMessageProps> {
     return templator({
       content: this.content,
       time: this.time,
+      id: this.props.message.id,
       className: this.className,
     });
   }
