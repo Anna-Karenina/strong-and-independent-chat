@@ -1,4 +1,4 @@
-# [Strong and independent chat](https://angry-lumiere-c6bdd3.netlify.app/)
+# [Strong and independent chat](https://strong-chat.herokuapp.com/)
 
 Добро пожаловать в мой учебный проект. В нем я разрабатываю чат без использования сторонних библиотек и фреймворков.
 
@@ -15,11 +15,11 @@
 
 Страницы проекта:
 
-- [/auth](https://angry-lumiere-c6bdd3.netlify.app/auth)
-- [/registration](https://angry-lumiere-c6bdd3.netlify.app/registration)
-- [/chats](https://angry-lumiere-c6bdd3.netlify.app/chats)
-- [/settings](https://angry-lumiere-c6bdd3.netlify.app/settings)
-- [/500](https://angry-lumiere-c6bdd3.netlify.app/500)
+- [/auth](https://strong-chat.herokuapp.com/auth)
+- [/registration](https://strong-chat.herokuapp.com/registration)
+- [/chats](https://strong-chat.herokuapp.com/chats)
+- [/settings](https://strong-chat.herokuapp.com/settings)
+- [/500](https://strong-chat.herokuapp.com/500)
 
 Все остальные пути ведут на страницу 404.
 
