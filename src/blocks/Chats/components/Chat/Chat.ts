@@ -34,6 +34,8 @@ const templator = Templator.compile(chatTemplate, {
 export default class Chat extends Component<IChatProps, IChatState> {
   private messageInputRef: HTMLInputElement | null = null;
 
+  private messagesRef: HTMLInputElement | null = null;
+
   constructor(props: IChatProps) {
     super(props);
 
@@ -46,13 +48,18 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
   componentDidMount() {
     document.body.addEventListener('click', this.userOptionsOutsideClick);
+
     this.messageInputRef = (this.element as HTMLElement).querySelector('.send-message__input');
+
+    this.messagesRef = (this.element as HTMLElement).querySelector('.messages');
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(oldProps: IChatProps) {
     if (this.messageInputRef) {
       this.messageInputRef.value = this.state.message;
     }
+
+    this.maybeScrollBottom(oldProps)
   }
 
   beforeDestroy() {
@@ -74,6 +81,31 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
   get avatar() {
     return this.props.chat?.avatar;
+  }
+
+  maybeScrollBottom(oldProps: IChatProps) {
+    if (!this.messagesRef) return;
+
+    const oldChatId = oldProps.chat?.id;
+    const chatId = this.props.chat?.id;
+
+    const oldMessagesLength = oldProps.messages.length;
+    const messagesLength = this.props.messages.length;
+
+    if (oldChatId !== chatId) {
+      this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+    }
+    
+    const hasNewMessages = messagesLength > oldMessagesLength;
+
+    if (hasNewMessages) {
+      const {scrollHeight, scrollTop, clientHeight} = this.messagesRef;
+      const viewPortNextToNewMessages = scrollHeight - (scrollTop + clientHeight) <= 150;
+
+      if (viewPortNextToNewMessages) {
+        this.messagesRef.scrollTop = this.messagesRef.scrollHeight;
+      }
+    }
   }
 
   userOptionsOutsideClick = (e: Event) => {
