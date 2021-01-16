@@ -84,6 +84,23 @@ export default class Chat extends Component<IChatProps, IChatState> {
     return this.props.chat?.avatar;
   }
 
+  get messageGroups() {
+    const groups = this.props.messages.reduce((acc: Record<string, IMessage[]>, message) => {
+      const [date] = message.time.split('T');
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      acc[date].push(message);
+
+      return acc;
+    }, {});
+
+    return Object.entries(groups).map(([date, messages]) => ({
+      date: new Date(date).toDateString(),
+      messages
+    }));
+  }
+
   maybeScrollBottom(oldProps: IChatProps) {
     if (!this.messagesRef) return;
 
@@ -193,7 +210,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
   render() {
     return templator({
       userId: this.props.userId,
-      messages: this.props.messages,
+      messageGroups: this.messageGroups,
       title: this.title,
       chatClass: this.chatClass,
       userOptionsClass: this.userOptionsClass,

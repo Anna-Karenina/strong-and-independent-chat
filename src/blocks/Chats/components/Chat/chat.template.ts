@@ -28,9 +28,13 @@ export const chatTemplate = `
     </div>
 
     <div class="messages" @scroll="onScrollChat">
-      <ul class="messages__list">
-        <message $each="message in messages" :message="message" :userId="userId" />
-      </ul>
+      <div $each="group in messageGroups">
+        <div class="messages__datetime">{{ group.date }}</div>
+
+        <ul class="messages__list">
+          <message $each="message in group.messages" :message="message" :userId="userId" />
+        </ul>
+      </div>
     </div>
 
     <form class="send-message" @submit="sendMessage">
