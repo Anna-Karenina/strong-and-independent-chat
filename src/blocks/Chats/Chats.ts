@@ -99,6 +99,7 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
   get chats() {
     return this.props.chats.map((chat) => ({
       ...chat,
+      ...this.getLastMessageInfo(chat.id),
       onClick: () => this.setState({selectedChat: chat})
     }));
   }
@@ -109,6 +110,20 @@ export default class Chats extends Component<IChatsProps, IChatsState> {
       add: this.createAddUserHandler(user.id ),
       remove: this.createRemoveUserHandler(user.id ),
     }));
+  }
+
+  getLastMessageInfo(chatId: number) {
+    const messages = this.props.chatMessages[chatId] || [];
+    const lastMessage = messages[messages.length - 1];
+
+    const text = lastMessage?.content || '';
+    const isOwn = lastMessage?.user_id === this.props.userId;
+    const sender = isOwn ? 'Вы: ' : '';
+
+    return {
+      lastMessageText: text.slice(0, 30),
+      lastMessageSender: sender,
+    };
   }
 
   goToProfile = () => {

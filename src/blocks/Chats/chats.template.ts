@@ -18,6 +18,10 @@ export const chatsTemplate = `
               <avatar :img="chat.avatar" className="chat-list__avatar" />
               <div class="chat-list__info">
                 <div class="chat-list__name">{{ chat.title }}</div>
+                <div class="chat-list__message">
+                  <span class="chat-list__sender">{{ chat.lastMessageSender }}</span>
+                  {{ chat.lastMessageText }}
+                </div>
               </div>
             </div>
           </li>
