@@ -1,4 +1,4 @@
-# [Strong and independent chat](https://strong-chat.herokuapp.com/)
+# [Strong and independent chat](https://strong-chat.herokuapp.com/auth)
 
 Добро пожаловать в мой учебный проект. В нем я разрабатываю чат без использования сторонних библиотек и фреймворков.
 
